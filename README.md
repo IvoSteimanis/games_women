@@ -56,6 +56,7 @@ This script processes the raw data from the game intervention as well as the bas
 -	"2023_03_Survey_Long.dta" includes the merged baseline and follow-up survey data in a long format to merge them with the intervention data.
 -	"2023_03_Survey&Game_Long.dta” includes the merged survey and intervention data in a long format. Our analysis is based on tis final data set. 
 -	"2023_03_Survey&Game_Wide.dta" includes the merged survey and intervention data in a wide format.<br>
+
 __02_analysis.do__
 This script estimates regression models in Stata, creates figures and tables, saving them to results/figures and results/tables
 
