@@ -1,6 +1,6 @@
 # Replication Package
 This repository contains the raw data and code that replicates tables and figures for the following paper:: <br>
-__Title:__ PChanging the Game: The Role of Women in Experiential Learning  <br>
+__Title:__ Changing the Game: The Role of Women in Experiential Learning  <br>
 __Authors:__ Thomas Falk<sup>1,2,*</sup>, Lara Bartels<sup>3</sup> Ivo Steimanis<sup>2</sup>, Vishwambhar Duche<sup>4</sup> & Björn Vollan<sup>2</sup> <br>
 __Affiliations:__ <sup>1</sup> Department of Economics, Philipps University Marburg, 35032 Marburg, Germany <br>
 __*Correspondence to:__ homas Falk T.Falk@cgiar.org <br>
