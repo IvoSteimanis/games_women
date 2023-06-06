@@ -25,7 +25,7 @@ All analysis were done in Stata version 16:
 - Input file: Overview_games_intervention_control.xls
 - "2022_06_Mandla_Census.dta" includes the Census 2011 data of the sample villages.
 -	Input file: Zensus_Mandla.xls
--	“2022_06_Mandla_Game_raw.dta” includes the raw data on the game intervention.
+-	“2022_06_Mandla_Game_raw.dta” includes the raw data on the game intervention.<br>
 Input files…. 
 -	"2022_06_Mandla_Game.dta" includes the cleaned game intervention data.
 -	"Data_Facilitators.dta" includes information on the interventions’ facilitator teams and the intervention dates. 
@@ -55,7 +55,7 @@ This script processes the raw data from the game intervention as well as the bas
 -	"2023_03_Survey_Wide.dta" includes the merged baseline and follow-up survey data.
 -	"2023_03_Survey_Long.dta" includes the merged baseline and follow-up survey data in a long format to merge them with the intervention data.
 -	"2023_03_Survey&Game_Long.dta” includes the merged survey and intervention data in a long format. Our analysis is based on tis final data set. 
--	"2023_03_Survey&Game_Wide.dta" includes the merged survey and intervention data in a wide format.
+-	"2023_03_Survey&Game_Wide.dta" includes the merged survey and intervention data in a wide format.<br>
 __02_analysis.do__
 This script estimates regression models in Stata, creates figures and tables, saving them to results/figures and results/tables
 
