@@ -10,6 +10,7 @@ __*Correspondence to:__ homas Falk T.Falk@cgiar.org <br>
 __ORCID:__ Falk: 0000-0002-2200-3048, Bartels: 0000-0002-1426-6892, Steimanis: 0000-0002-8550-4675, Vollan: 0000-0002-5592-4185 <br>
 __Classification:__ Social Sciences, Economic Sciences <br>
 __Keywords:__ India, water management, social dilemma, social learning, games <br>
+__DOI:__ [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8009659.svg)](https://doi.org/10.5281/zenodo.8009659)
 
 ## License
 The data are licensed under a Creative Commons Attribution 4.0 International Public License. The code is licensed under a Modified BSD License. See LICENSE.txt for details.
