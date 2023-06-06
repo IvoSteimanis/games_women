@@ -21,24 +21,24 @@ All analysis were done in Stata version 16:
 3.	Run the master script __‘run.do’__  to replicate the analysis and generate all tables and figures reported in the paper and supplementary online materials
 
 ## Datasets
-‒	"2022_09_identifier_included_excluded.dta" includes organizational information on the villages such as their allocation to control and treated.
-o	Input file: Overview_games_intervention_control.xls
-‒	"2022_06_Mandla_Census.dta" includes the Census 2011 data of the sample villages.
-o	Input file: Zensus_Mandla.xls
-‒	“2022_06_Mandla_Game_raw.dta” includes the raw data on the game intervention.
-o	Input files…. 
-‒	"2022_06_Mandla_Game.dta" includes the cleaned game intervention data.
-‒	"Data_Facilitators.dta" includes information on the interventions’ facilitator teams and the intervention dates. 
-o	Input file: Facilitators_MP_sites.xls
-‒	"2022_06_Mandla_Game_village_long.dta" matched the clean game intervention data with the facilitator data and transformed the individual intervention data to data at the village level to merge them with the survey data.
-‒	"2023_03_Survey_Baseline.dta” includes the baseline survey data.
-o	Input file: MP_suvey_data_short.xls
-‒	"2023_03_Survey_Endline.dta” includes the follow-up survey data.
-o	Input file: MP_suvey_data_short.xls
-‒	"2023_03_Survey_Wide.dta" includes the merged baseline and follow-up survey data.
-‒	"2023_03_Survey_Long.dta" includes the merged baseline and follow-up survey data in a long format to merge them with the intervention data.
-‒	"2023_03_Survey&Game_Long.dta” includes the merged survey and intervention data in a long format. Our analysis is based on tis final data set. 
-‒	"2023_03_Survey&Game_Wide.dta" includes the merged survey and intervention data in a wide format.
+-	"2022_09_identifier_included_excluded.dta" includes organizational information on the villages such as their allocation to control and treated.
+- Input file: Overview_games_intervention_control.xls
+- "2022_06_Mandla_Census.dta" includes the Census 2011 data of the sample villages.
+-	Input file: Zensus_Mandla.xls
+-	“2022_06_Mandla_Game_raw.dta” includes the raw data on the game intervention.
+Input files…. 
+-	"2022_06_Mandla_Game.dta" includes the cleaned game intervention data.
+-	"Data_Facilitators.dta" includes information on the interventions’ facilitator teams and the intervention dates. 
+-	Input file: Facilitators_MP_sites.xls
+-	"2022_06_Mandla_Game_village_long.dta" matched the clean game intervention data with the facilitator data and transformed the individual intervention data to data at the village level to merge them with the survey data.
+-	"2023_03_Survey_Baseline.dta” includes the baseline survey data.
+-	Input file: MP_suvey_data_short.xls
+-	"2023_03_Survey_Endline.dta” includes the follow-up survey data.
+-	Input file: MP_suvey_data_short.xls
+-	"2023_03_Survey_Wide.dta" includes the merged baseline and follow-up survey data.
+-	"2023_03_Survey_Long.dta" includes the merged baseline and follow-up survey data in a long format to merge them with the intervention data.
+-	"2023_03_Survey&Game_Long.dta” includes the merged survey and intervention data in a long format. Our analysis is based on tis final data set. 
+-	"2023_03_Survey&Game_Wide.dta" includes the merged survey and intervention data in a wide format.
 
 
 ## Descriptions of scripts
