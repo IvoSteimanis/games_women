@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Birsingh;2;7;1;1;0;M;40;5;NO;NO;NO;0;NO;3;1;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Birsingh;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+2;Belkali;2;6;1;2;0;F;35;6;YES;SHG MEMBER;NO;0;NO;6;2;w;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Belkali;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+3;Pramila;2;5;1;3;0;F;26;5;NO;NO;YES;0;NO;2;1;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Pramila;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+4;Sarla;1;4;1;4;0;F;28;8;NO;NO;YES;0;NO;8;3;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Sarla;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+5;Somsay;1;3;1;5;0;M;45;8;NO;NO;NO;0;NO;11;2,5;g;1;0;0;0;0;0;1;0;0;0;0;0;0;0;Somsay;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+6;Narbadiya;1;2;1;6;0;F;30;5;NO;NO;NO;0;NO;12;2;w;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Narbadiya;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+7;Mohabalsingh;1;1;1;7;0;M;40;5;NO;NO;NO;0;NO;16;2;g;0;0;0;0;0;0;0;0;1;0;0;1;0;0;Mohabalsingh;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+8;Rambai;1;7;2;1;0;F;26;8;YES;SHG SECRETARY;YES;0;NO;1;1,5;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Rambai;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+9;Lalsingh;1;6;2;2;0;M;36;8;NO;NO;NO;0;NO;13;1,5;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Lalsingh;1;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+10;Ramprasad;1;5;2;3;0;M;50;5;NO;NO;YES;0;NO;10;1,5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Ramprasad;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+11;Nainwati;2;4;2;4;0;F;23;10;NO;NO;NO;0;NO;10;2;w;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Nainwati;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+12;Harishchandra;2;3;2;5;0;M;35;10;NO;NO;NO;0;NO;11;2,5;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Harishchandra;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+13;Kalawati;2;2;2;6;0;F;36;8;YES;SHG PRESIDENT;NO;0;NO;4;5;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Kalawati;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14
+14;Santoshi;2;1;2;7;0;F;28;8;NO;NO;YES;0;NO;5;3;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Santoshi;0;0;Khalaudi_FV;22/5/2017;Radha, Shivraj, Rajesh, Duche;14

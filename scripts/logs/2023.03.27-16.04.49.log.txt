@@ -1,0 +1,1360 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2023.03.27-16.04.49.log.txt
+  log type:  text
+ opened on:  27 Mar 2023, 16:04:49
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 27 Mar 2023 16:04:49
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;
+> lmatasp;lmatasvy;lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50" reduces transpar
+> ency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/2023_03_Survey&Game_Wide.dta", clear
+
+. 
+. *drop variables with all missings
+. dropmiss
+(game_av_inv_vill_R6_10 survey_CWRgroup_already_FS survey_CWRgroup_new_FS survey_activity_any_FS survey_activity_earthwall_BS survey_activity_earthwall_FS
+survey_activity_mainwall_BS survey_activity_mainwall_FS survey_activity_silt_BS survey_activity_silt_FS survey_activity_sluicegate_BS survey_activity_sluicegate_FS
+survey_activity_vege_BS survey_activity_vege_FS survey_benefit_agri_BS survey_change_benefit_FS survey_collact_new_FS survey_compay_community_FS
+survey_compay_equal_FS survey_compay_leader_FS survey_compay_otheruser_FS survey_cwr_bori_FS survey_cwr_dam_FS survey_cwr_other_FS survey_cwr_pond_FS
+survey_indipay_comm_FS survey_indipay_equally_FS survey_indipay_other_FS survey_indipayn_notspent_FS survey_interview_others_BS survey_interview_others_FS
+survey_interview_waterua_BS survey_interview_waterua_FS survey_rules_alloc_BS survey_rules_alloc_FS survey_rules_extr_alloc_BS survey_rules_extr_alloc_FS
+survey_rules_extr_opre_BS survey_rules_extr_opre_FS survey_rules_extr_other_BS survey_rules_extr_other_FS survey_rules_old_all_BS survey_rules_old_alloc_BS
+survey_rules_old_maint_BS survey_rules_old_oper_BS survey_rules_old_other_BS survey_rules_oper_BS survey_rules_oper_FS survey_rules_other_BS survey_rules_other_FS
+dropped)
+
+. drop if treatment_BS==0
+(28 observations deleted)
+
+. *----------------------------------------------------------------------
+. 
+. alpha game_propose_rule game_agree_rule game_reject_rule
+
+Test scale = mean(unstandardized items)
+
+Average interitem covariance:     32.60909
+Number of items in the scale:            3
+Scale reliability coefficient:      0.5822
+
+. egen total_rule_communication = rowtotal(game_propose_rule game_agree_rule game_reject_rule) if treatment==1
+
+. egen z_rule_communication = std(total_rule_communication)
+
+. alpha survey_share_exp_vc_meet_FS survey_share_exp_others_FS survey_share_exp_friends_FS survey_share_exp_family_FS survey_share_exp_comm_meet_FS,
+
+Test scale = mean(unstandardized items)
+Reversed items:  survey_share_exp_vc_meet_FS survey_share_exp_others_FS survey_share_exp_comm_meet_FS
+
+Average interitem covariance:     .0591246
+Number of items in the scale:            5
+Scale reliability coefficient:      0.6929
+
+. egen survey_conflicts_any_FS = rowmax(survey_conflict_alloc_FS survey_conflict_maint_FS survey_conflict_oper_FS)
+
+. egen participants_primary_only = rowtotal(game_edu_fem_prim_vill game_edu_male_prim_vill)
+
+. gen share_participants_primary = (participants_primary_only/14)*10
+
+. replace game_share_illit_vill = game_share_illit_vill*10
+(23 real changes made)
+
+. 
+. gen exp_shared_formal = 0 if treatment==1
+
+. replace exp_shared_formal = 1 if survey_share_exp_comm_meet_FS==1 | survey_share_exp_vc_meet_FS==1
+(24 real changes made)
+
+. 
+. gen exp_shared_informal = 0 if treatment==1
+
+. replace exp_shared_informal = 1 if survey_share_exp_family_FS==1 | survey_share_exp_friends_FS==1 | survey_share_exp_others_FS==1
+(35 real changes made)
+
+. 
+. 
+. *
+. egen number_educated_women = rowmax(game_edu_fem_sec_vill game_edu_fem_uni_vill)
+
+. gen share_educated_women = (number_educated_women / 14)*100
+
+. tab share_educated_women
+
+share_educa |
+  ted_women |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         18       32.14       32.14
+   7.142857 |         23       41.07       73.21
+   14.28571 |          9       16.07       89.29
+   21.42857 |          3        5.36       94.64
+   28.57143 |          1        1.79       96.43
+   35.71429 |          1        1.79       98.21
+         50 |          1        1.79      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. 
+. 
+. * Setting globals
+. global village                  No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS 
+
+. global participants             share_female_percent3_BS leader2_2_BS leader2_3_BS share_participants_primary
+
+. global participants2    share_female_percent2_BS leader2_2_BS leader2_3_BS share_participants_primary
+
+. global game                     game_count_intervention game_almost_opt_inv_r9_10 z_rule_communication  exp_shared_formal exp_shared_informal
+
+. 
+. 
+. gen leader_present = 0 if leader2_1_BS==1
+(30 missing values generated)
+
+. replace leader_present = 1 if leader2_2_BS==1
+(17 real changes made)
+
+. replace leader_present = 2 if leader2_3_BS==1
+(13 real changes made)
+
+. lab def leader_lab2 0 "None" 1 "Only male" 2 "Only female or both", replace
+
+. lab val leader_present2 leader_lab2
+
+. tab leader_present2
+
+ 0 leader_present2_ |      Freq.     Percent        Cum.
+--------------------+-----------------------------------
+               None |         26       46.43       46.43
+          Only male |         17       30.36       76.79
+Only female or both |         13       23.21      100.00
+--------------------+-----------------------------------
+              Total |         56      100.00
+
+. 
+. lab var FES_site "NGO active in village (=1)"
+
+. lab var share_female_percent3_BS "Non-leader female participants (in 10%)"
+
+. lab var leader2_2_BS "Only male leader participated (=1)"
+
+. lab var leader2_3_BS "Female leader participated (=1)"
+
+. lab var share_participants_primary "Share of participants with only primary education (in 10%)"
+
+. lab var game_almost_opt_inv_r9_10 "Social optimal play in last two rounds (=1)"
+
+. lab var exp_shared_formal "Experience shared in formal meetings (=1)"
+
+. lab var exp_shared_informal "Experience shared informally (=1)"
+
+. lab var game_count_intervention "Number of workshops conducted by facilitation team"
+
+. lab var z_rule_communication "Communication about rules (std.)"
+
+. *main outcome variables
+. 
+. 
+. *SEM
+. sort game_date_intervention
+
+. gen sequenc=[_n]
+
+. gen seq_split= 0
+
+. replace seq_split=1 if sequence>28
+sequence not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 02_analysis.do
+. * PURPOSE: replicates most tables and figures and saves the results
+. *--------------------------------------------------------------------
+. 
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/2023_03_Survey&Game_Wide.dta", clear
+
+. 
+. *drop variables with all missings
+. dropmiss
+(game_av_inv_vill_R6_10 survey_CWRgroup_already_FS survey_CWRgroup_new_FS survey_activity_any_FS survey_activity_earthwall_BS survey_activity_earthwall_FS
+survey_activity_mainwall_BS survey_activity_mainwall_FS survey_activity_silt_BS survey_activity_silt_FS survey_activity_sluicegate_BS survey_activity_sluicegate_FS
+survey_activity_vege_BS survey_activity_vege_FS survey_benefit_agri_BS survey_change_benefit_FS survey_collact_new_FS survey_compay_community_FS
+survey_compay_equal_FS survey_compay_leader_FS survey_compay_otheruser_FS survey_cwr_bori_FS survey_cwr_dam_FS survey_cwr_other_FS survey_cwr_pond_FS
+survey_indipay_comm_FS survey_indipay_equally_FS survey_indipay_other_FS survey_indipayn_notspent_FS survey_interview_others_BS survey_interview_others_FS
+survey_interview_waterua_BS survey_interview_waterua_FS survey_rules_alloc_BS survey_rules_alloc_FS survey_rules_extr_alloc_BS survey_rules_extr_alloc_FS
+survey_rules_extr_opre_BS survey_rules_extr_opre_FS survey_rules_extr_other_BS survey_rules_extr_other_FS survey_rules_old_all_BS survey_rules_old_alloc_BS
+survey_rules_old_maint_BS survey_rules_old_oper_BS survey_rules_old_other_BS survey_rules_oper_BS survey_rules_oper_FS survey_rules_other_BS survey_rules_other_FS
+dropped)
+
+. drop if treatment_BS==0
+(28 observations deleted)
+
+. *----------------------------------------------------------------------
+. 
+. alpha game_propose_rule game_agree_rule game_reject_rule
+
+Test scale = mean(unstandardized items)
+
+Average interitem covariance:     32.60909
+Number of items in the scale:            3
+Scale reliability coefficient:      0.5822
+
+. egen total_rule_communication = rowtotal(game_propose_rule game_agree_rule game_reject_rule) if treatment==1
+
+. egen z_rule_communication = std(total_rule_communication)
+
+. alpha survey_share_exp_vc_meet_FS survey_share_exp_others_FS survey_share_exp_friends_FS survey_share_exp_family_FS survey_share_exp_comm_meet_FS,
+
+Test scale = mean(unstandardized items)
+Reversed items:  survey_share_exp_vc_meet_FS survey_share_exp_others_FS survey_share_exp_comm_meet_FS
+
+Average interitem covariance:     .0591246
+Number of items in the scale:            5
+Scale reliability coefficient:      0.6929
+
+. egen survey_conflicts_any_FS = rowmax(survey_conflict_alloc_FS survey_conflict_maint_FS survey_conflict_oper_FS)
+
+. egen participants_primary_only = rowtotal(game_edu_fem_prim_vill game_edu_male_prim_vill)
+
+. gen share_participants_primary = (participants_primary_only/14)*10
+
+. replace game_share_illit_vill = game_share_illit_vill*10
+(23 real changes made)
+
+. 
+. gen exp_shared_formal = 0 if treatment==1
+
+. replace exp_shared_formal = 1 if survey_share_exp_comm_meet_FS==1 | survey_share_exp_vc_meet_FS==1
+(24 real changes made)
+
+. 
+. gen exp_shared_informal = 0 if treatment==1
+
+. replace exp_shared_informal = 1 if survey_share_exp_family_FS==1 | survey_share_exp_friends_FS==1 | survey_share_exp_others_FS==1
+(35 real changes made)
+
+. 
+. 
+. *
+. egen number_educated_women = rowmax(game_edu_fem_sec_vill game_edu_fem_uni_vill)
+
+. gen share_educated_women = (number_educated_women / 14)*100
+
+. tab share_educated_women
+
+share_educa |
+  ted_women |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         18       32.14       32.14
+   7.142857 |         23       41.07       73.21
+   14.28571 |          9       16.07       89.29
+   21.42857 |          3        5.36       94.64
+   28.57143 |          1        1.79       96.43
+   35.71429 |          1        1.79       98.21
+         50 |          1        1.79      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. 
+. 
+. * Setting globals
+. global village                  No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS 
+
+. global participants             share_female_percent3_BS leader2_2_BS leader2_3_BS share_participants_primary
+
+. global participants2    share_female_percent2_BS leader2_2_BS leader2_3_BS share_participants_primary
+
+. global game                     game_count_intervention game_almost_opt_inv_r9_10 z_rule_communication  exp_shared_formal exp_shared_informal
+
+. 
+. 
+. gen leader_present = 0 if leader2_1_BS==1
+(30 missing values generated)
+
+. replace leader_present = 1 if leader2_2_BS==1
+(17 real changes made)
+
+. replace leader_present = 2 if leader2_3_BS==1
+(13 real changes made)
+
+. lab def leader_lab2 0 "None" 1 "Only male" 2 "Only female or both", replace
+
+. lab val leader_present2 leader_lab2
+
+. tab leader_present2
+
+ 0 leader_present2_ |      Freq.     Percent        Cum.
+--------------------+-----------------------------------
+               None |         26       46.43       46.43
+          Only male |         17       30.36       76.79
+Only female or both |         13       23.21      100.00
+--------------------+-----------------------------------
+              Total |         56      100.00
+
+. 
+. lab var FES_site "NGO active in village (=1)"
+
+. lab var share_female_percent3_BS "Non-leader female participants (in 10%)"
+
+. lab var leader2_2_BS "Only male leader participated (=1)"
+
+. lab var leader2_3_BS "Female leader participated (=1)"
+
+. lab var share_participants_primary "Share of participants with only primary education (in 10%)"
+
+. lab var game_almost_opt_inv_r9_10 "Social optimal play in last two rounds (=1)"
+
+. lab var exp_shared_formal "Experience shared in formal meetings (=1)"
+
+. lab var exp_shared_informal "Experience shared informally (=1)"
+
+. lab var game_count_intervention "Number of workshops conducted by facilitation team"
+
+. lab var z_rule_communication "Communication about rules (std.)"
+
+. *main outcome variables
+. 
+. 
+. *SEM
+. sort game_date_intervention
+
+. gen sequence=[_n]
+
+. gen seq_split= 0
+
+. replace seq_split=1 if sequence>28
+(28 real changes made)
+
+. ttest game_no_leader_fem_vill, by(seq_split)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      28    2.535714    .3654458    1.933757    1.785881    3.285547
+       1 |      28    4.321429    .4961587    2.625425    3.303395    5.339462
+---------+--------------------------------------------------------------------
+combined |      56    3.428571    .3281759    2.455844    2.770892    4.086251
+---------+--------------------------------------------------------------------
+    diff |           -1.785714    .6162176               -3.021156   -.5502724
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -2.8979
+Ho: diff = 0                                     degrees of freedom =       54
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0027         Pr(|T| > |t|) = 0.0054          Pr(T > t) = 0.9973
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. probit survey_maint_2017_FS survey_maint_12m_BS survey_maint_rule_FS seq_split $village if treatment == 1, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -33.503097  
+Iteration 1:   log pseudolikelihood = -26.011226  
+Iteration 2:   log pseudolikelihood = -25.626973  
+Iteration 3:   log pseudolikelihood =  -25.62496  
+Iteration 4:   log pseudolikelihood =  -25.62496  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(8)      =      14.91
+                                                Prob > chi2       =     0.0609
+Log pseudolikelihood =  -25.62496               Pseudo R2         =     0.2351
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_2017_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .0588512   .4072264     0.14   0.885    -.7392978    .8570003
+        survey_maint_rule_FS |   1.249081     .46743     2.67   0.008     .3329348    2.165227
+                   seq_split |   .9043297   .4178594     2.16   0.030     .0853402    1.723319
+                       No_HH |   .0000304   .0024745     0.01   0.990    -.0048195    .0048802
+                    FES_site |    .302831   .4486576     0.67   0.500    -.5765218    1.182184
+                    Shar_Lit |   .0525396   .0300105     1.75   0.080      -.00628    .1113591
+                   Shar_SCST |  -.0054114   .0117566    -0.46   0.645    -.0284538    .0176311
+survey_dam_for_irrigation_FS |   .6942982    .430441     1.61   0.107    -.1493506    1.537947
+                       _cons |  -2.845157    2.11757    -1.34   0.179    -6.995518    1.305203
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_2017_FS), predict()
+dy/dx w.r.t. : survey_maint_12m_BS survey_maint_rule_FS seq_split No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .0150176   .1040628     0.14   0.885    -.1889418    .2189769
+        survey_maint_rule_FS |   .3187383   .1110094     2.87   0.004     .1011639    .5363127
+                   seq_split |   .2307653   .1012075     2.28   0.023     .0324023    .4291283
+                       No_HH |   7.75e-06   .0006313     0.01   0.990    -.0012296    .0012451
+                    FES_site |   .0772759   .1116117     0.69   0.489     -.141479    .2960307
+                    Shar_Lit |    .013407   .0071247     1.88   0.060    -.0005573    .0273712
+                   Shar_SCST |  -.0013809   .0029785    -0.46   0.643    -.0072185    .0044568
+survey_dam_for_irrigation_FS |   .1771698   .1021546     1.73   0.083    -.0230494    .3773891
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. 
+. probit survey_maint_2017_FS survey_maint_12m_BS survey_maint_rule_FS seq_split $participants $village if treatment == 1, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -33.503097  
+Iteration 1:   log pseudolikelihood = -24.953598  
+Iteration 2:   log pseudolikelihood = -24.298965  
+Iteration 3:   log pseudolikelihood = -24.288668  
+Iteration 4:   log pseudolikelihood = -24.288659  
+Iteration 5:   log pseudolikelihood = -24.288659  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(12)     =      13.95
+                                                Prob > chi2       =     0.3038
+Log pseudolikelihood = -24.288659               Pseudo R2         =     0.2750
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_2017_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .2896018   .4387354     0.66   0.509    -.5703037    1.149507
+        survey_maint_rule_FS |   1.211848   .5266108     2.30   0.021     .1797096    2.243986
+                   seq_split |   1.157047   .5072267     2.28   0.023     .1629006    2.151193
+    share_female_percent3_BS |   .1172533   .1762863     0.67   0.506    -.2282616    .4627681
+                leader2_2_BS |   .0953692   .5169202     0.18   0.854    -.9177757    1.108514
+                leader2_3_BS |  -.3067693   .5402614    -0.57   0.570    -1.365662    .7521235
+  share_participants_primary |  -.2174533   .1286614    -1.69   0.091    -.4696249    .0347184
+                       No_HH |  -.0000861      .0024    -0.04   0.971      -.00479    .0046178
+                    FES_site |   .4235047   .4272782     0.99   0.322    -.4139451    1.260955
+                    Shar_Lit |   .0568037   .0322479     1.76   0.078     -.006401    .1200084
+                   Shar_SCST |  -.0054188   .0147992    -0.37   0.714    -.0344247     .023587
+survey_dam_for_irrigation_FS |   .6210144   .4219115     1.47   0.141    -.2059169    1.447946
+                       _cons |  -2.186844   2.295411    -0.95   0.341    -6.685767    2.312078
+----------------------------------------------------------------------------------------------
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_2017_FS), predict()
+dy/dx w.r.t. : survey_maint_12m_BS survey_maint_rule_FS seq_split share_female_percent3_BS leader2_2_BS leader2_3_BS share_participants_primary No_HH FES_site
+               Shar_Lit Shar_SCST survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .0704341   .1067535     0.66   0.509     -.138799    .2796671
+        survey_maint_rule_FS |   .2947335     .11291     2.61   0.009     .0734339    .5160331
+                   seq_split |   .2814053   .1158846     2.43   0.015     .0542756    .5085349
+    share_female_percent3_BS |   .0285172   .0423926     0.67   0.501    -.0545709    .1116052
+                leader2_2_BS |   .0231947   .1253522     0.19   0.853     -.222491    .2688805
+                leader2_3_BS |  -.0746094   .1303076    -0.57   0.567    -.3300075    .1807888
+  share_participants_primary |  -.0528868   .0296139    -1.79   0.074     -.110929    .0051554
+                       No_HH |  -.0000209   .0005838    -0.04   0.971    -.0011652    .0011233
+                    FES_site |   .1030006   .1003547     1.03   0.305     -.093691    .2996921
+                    Shar_Lit |   .0138152   .0072328     1.91   0.056    -.0003608    .0279912
+                   Shar_SCST |  -.0013179   .0035702    -0.37   0.712    -.0083154    .0056796
+survey_dam_for_irrigation_FS |   .1510369   .0951118     1.59   0.112    -.0353789    .3374527
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. *Determinants of female participation in games
+. global baseline_characteristics survey_maint_12m_BS survey_maint_rule_BS
+
+. global leading_example leader2_2_BS leader2_3_BS
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. eststo fem1: reg game_no_leader_fem_vill  $village, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(5, 50)          =       0.95
+                                                Prob > F          =     0.4564
+                                                R-squared         =     0.0995
+                                                Root MSE          =     2.4442
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+     game_no_leader_fem_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                       No_HH |   .0036796   .0039717     0.93   0.359    -.0042977     .011657
+                    FES_site |   .0761439   .7322727     0.10   0.918    -1.394669    1.546957
+                    Shar_Lit |   .0562163   .0476676     1.18   0.244    -.0395269    .1519596
+                   Shar_SCST |   .0195957   .0243247     0.81   0.424     -.029262    .0684533
+survey_dam_for_irrigation_FS |  -1.184474   .6707473    -1.77   0.084    -2.531709     .162762
+                       _cons |   -1.13979   3.262106    -0.35   0.728    -7.691923    5.412343
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. local F1 = r(p)
+
+. estadd scalar F1= `F1'
+
+added scalar:
+                 e(F1) =  .
+
+. 
+. eststo fem2: reg game_no_leader_fem_vill $baseline_characteristics, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(2, 53)          =       0.83
+                                                Prob > F          =     0.4421
+                                                R-squared         =     0.0144
+                                                Root MSE          =     2.4837
+
+--------------------------------------------------------------------------------------
+                     |               Robust
+game_no_leader_fem~l |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------------+----------------------------------------------------------------
+ survey_maint_12m_BS |  -.1324201   .6783201    -0.20   0.846    -1.492958    1.228118
+survey_maint_rule_BS |   .7876712   .6809403     1.16   0.253     -.578122    2.153464
+               _cons |   3.386986   .5361728     6.32   0.000      2.31156    4.462413
+--------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. testparm $baseline_characteristics
+
+ ( 1)  survey_maint_12m_BS = 0
+ ( 2)  survey_maint_rule_BS = 0
+
+       F(  2,    53) =    0.83
+            Prob > F =    0.4421
+
+. local F2 = r(p)
+
+. estadd scalar F2= `F2'
+
+added scalar:
+                 e(F2) =  .44205216
+
+. 
+. eststo fem3: reg game_no_leader_fem_vill seq_split $leading_example, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(3, 52)          =       5.32
+                                                Prob > F          =     0.0029
+                                                R-squared         =     0.3078
+                                                Root MSE          =     2.1013
+
+------------------------------------------------------------------------------
+             |               Robust
+game_no_le.. |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+   seq_split |    1.53015   .5446995     2.81   0.007     .4371307     2.62317
+leader2_2_BS |   .0535653   .5879785     0.09   0.928      -1.1263     1.23343
+leader2_3_BS |   2.438829   .8011624     3.04   0.004     .8311789    4.046479
+       _cons |   2.081079   .4656204     4.47   0.000     1.146743    3.015414
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. testparm $leading_example
+
+ ( 1)  leader2_2_BS = 0
+ ( 2)  leader2_3_BS = 0
+
+       F(  2,    52) =    5.23
+            Prob > F =    0.0086
+
+. local F3 = r(p)
+
+. estadd scalar F3= `F3'
+
+added scalar:
+                 e(F3) =  .00855368
+
+. 
+. eststo fem4:  reg game_no_leader_fem_vill seq_split $village $baseline_characteristics $leading_example, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(10, 45)         =       4.27
+                                                Prob > F          =     0.0003
+                                                R-squared         =     0.3963
+                                                Root MSE          =     2.1095
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+     game_no_leader_fem_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                   seq_split |   1.848938    .584692     3.16   0.003     .6713082    3.026568
+                       No_HH |   .0008445   .0035975     0.23   0.815    -.0064012    .0080902
+                    FES_site |  -.3810018   .7143633    -0.53   0.596    -1.819803      1.0578
+                    Shar_Lit |    .052123   .0406761     1.28   0.207    -.0298028    .1340488
+                   Shar_SCST |   .0087489   .0229954     0.38   0.705    -.0375663    .0550641
+survey_dam_for_irrigation_FS |  -.8059856   .6070084    -1.33   0.191    -2.028563    .4165921
+         survey_maint_12m_BS |  -.1952217   .6296923    -0.31   0.758    -1.463487    1.073044
+        survey_maint_rule_BS |   1.470213   .6219351     2.36   0.022     .2175711    2.722854
+                leader2_2_BS |   .0913093   .6394858     0.14   0.887    -1.196681      1.3793
+                leader2_3_BS |   2.050444   .7769427     2.64   0.011     .4856014    3.615287
+                       _cons |  -.9915693   3.129738    -0.32   0.753    -7.295186    5.312047
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. eststo fem4:  reg game_no_leader_fem_vill  $village $baseline_characteristics seq_split $leading_example, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(10, 45)         =       4.27
+                                                Prob > F          =     0.0003
+                                                R-squared         =     0.3963
+                                                Root MSE          =     2.1095
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+     game_no_leader_fem_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                       No_HH |   .0008445   .0035975     0.23   0.815    -.0064012    .0080902
+                    FES_site |  -.3810018   .7143633    -0.53   0.596    -1.819803      1.0578
+                    Shar_Lit |    .052123   .0406761     1.28   0.207    -.0298028    .1340488
+                   Shar_SCST |   .0087489   .0229954     0.38   0.705    -.0375663    .0550641
+survey_dam_for_irrigation_FS |  -.8059856   .6070084    -1.33   0.191    -2.028563    .4165921
+         survey_maint_12m_BS |  -.1952217   .6296923    -0.31   0.758    -1.463487    1.073044
+        survey_maint_rule_BS |   1.470213   .6219351     2.36   0.022     .2175711    2.722854
+                   seq_split |   1.848938    .584692     3.16   0.003     .6713082    3.026568
+                leader2_2_BS |   .0913093   .6394858     0.14   0.887    -1.196681      1.3793
+                leader2_3_BS |   2.050444   .7769427     2.64   0.011     .4856014    3.615287
+                       _cons |  -.9915693   3.129738    -0.32   0.753    -7.295186    5.312047
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. global baseline_characteristics survey_maint_12m_BS survey_maint_rule_BS
+
+. global leading_example leader2_2_BS leader2_3_BS
+
+. 
+. eststo fem1: reg game_no_leader_fem_vill  $village, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(5, 50)          =       0.95
+                                                Prob > F          =     0.4564
+                                                R-squared         =     0.0995
+                                                Root MSE          =     2.4442
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+     game_no_leader_fem_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                       No_HH |   .0036796   .0039717     0.93   0.359    -.0042977     .011657
+                    FES_site |   .0761439   .7322727     0.10   0.918    -1.394669    1.546957
+                    Shar_Lit |   .0562163   .0476676     1.18   0.244    -.0395269    .1519596
+                   Shar_SCST |   .0195957   .0243247     0.81   0.424     -.029262    .0684533
+survey_dam_for_irrigation_FS |  -1.184474   .6707473    -1.77   0.084    -2.531709     .162762
+                       _cons |   -1.13979   3.262106    -0.35   0.728    -7.691923    5.412343
+----------------------------------------------------------------------------------------------
+
+. testparm $village
+
+ ( 1)  No_HH = 0
+ ( 2)  FES_site = 0
+ ( 3)  Shar_Lit = 0
+ ( 4)  Shar_SCST = 0
+ ( 5)  survey_dam_for_irrigation_FS = 0
+
+       F(  5,    50) =    0.95
+            Prob > F =    0.4564
+
+. local F1 = r(p)
+
+. estadd scalar F1= `F1'
+
+added scalar:
+                 e(F1) =  .45642395
+
+. 
+. eststo fem2: reg game_no_leader_fem_vill $baseline_characteristics, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(2, 53)          =       0.83
+                                                Prob > F          =     0.4421
+                                                R-squared         =     0.0144
+                                                Root MSE          =     2.4837
+
+--------------------------------------------------------------------------------------
+                     |               Robust
+game_no_leader_fem~l |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------------+----------------------------------------------------------------
+ survey_maint_12m_BS |  -.1324201   .6783201    -0.20   0.846    -1.492958    1.228118
+survey_maint_rule_BS |   .7876712   .6809403     1.16   0.253     -.578122    2.153464
+               _cons |   3.386986   .5361728     6.32   0.000      2.31156    4.462413
+--------------------------------------------------------------------------------------
+
+. testparm $baseline_characteristics
+
+ ( 1)  survey_maint_12m_BS = 0
+ ( 2)  survey_maint_rule_BS = 0
+
+       F(  2,    53) =    0.83
+            Prob > F =    0.4421
+
+. local F2 = r(p)
+
+. estadd scalar F2= `F2'
+
+added scalar:
+                 e(F2) =  .44205216
+
+. 
+. eststo fem3: reg game_no_leader_fem_vill seq_split $leading_example, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(3, 52)          =       5.32
+                                                Prob > F          =     0.0029
+                                                R-squared         =     0.3078
+                                                Root MSE          =     2.1013
+
+------------------------------------------------------------------------------
+             |               Robust
+game_no_le.. |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+   seq_split |    1.53015   .5446995     2.81   0.007     .4371307     2.62317
+leader2_2_BS |   .0535653   .5879785     0.09   0.928      -1.1263     1.23343
+leader2_3_BS |   2.438829   .8011624     3.04   0.004     .8311789    4.046479
+       _cons |   2.081079   .4656204     4.47   0.000     1.146743    3.015414
+------------------------------------------------------------------------------
+
+. testparm $leading_example
+
+ ( 1)  leader2_2_BS = 0
+ ( 2)  leader2_3_BS = 0
+
+       F(  2,    52) =    5.23
+            Prob > F =    0.0086
+
+. local F3 = r(p)
+
+. estadd scalar F3= `F3'
+
+added scalar:
+                 e(F3) =  .00855368
+
+. 
+. eststo fem4:  reg game_no_leader_fem_vill  $village $baseline_characteristics seq_split $leading_example, robust
+
+Linear regression                               Number of obs     =         56
+                                                F(10, 45)         =       4.27
+                                                Prob > F          =     0.0003
+                                                R-squared         =     0.3963
+                                                Root MSE          =     2.1095
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+     game_no_leader_fem_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                       No_HH |   .0008445   .0035975     0.23   0.815    -.0064012    .0080902
+                    FES_site |  -.3810018   .7143633    -0.53   0.596    -1.819803      1.0578
+                    Shar_Lit |    .052123   .0406761     1.28   0.207    -.0298028    .1340488
+                   Shar_SCST |   .0087489   .0229954     0.38   0.705    -.0375663    .0550641
+survey_dam_for_irrigation_FS |  -.8059856   .6070084    -1.33   0.191    -2.028563    .4165921
+         survey_maint_12m_BS |  -.1952217   .6296923    -0.31   0.758    -1.463487    1.073044
+        survey_maint_rule_BS |   1.470213   .6219351     2.36   0.022     .2175711    2.722854
+                   seq_split |   1.848938    .584692     3.16   0.003     .6713082    3.026568
+                leader2_2_BS |   .0913093   .6394858     0.14   0.887    -1.196681      1.3793
+                leader2_3_BS |   2.050444   .7769427     2.64   0.011     .4856014    3.615287
+                       _cons |  -.9915693   3.129738    -0.32   0.753    -7.295186    5.312047
+----------------------------------------------------------------------------------------------
+
+. testparm $village
+
+ ( 1)  No_HH = 0
+ ( 2)  FES_site = 0
+ ( 3)  Shar_Lit = 0
+ ( 4)  Shar_SCST = 0
+ ( 5)  survey_dam_for_irrigation_FS = 0
+
+       F(  5,    45) =    0.56
+            Prob > F =    0.7310
+
+. local F1 = r(p)
+
+. testparm $baseline_characteristics
+
+ ( 1)  survey_maint_12m_BS = 0
+ ( 2)  survey_maint_rule_BS = 0
+
+       F(  2,    45) =    3.53
+            Prob > F =    0.0377
+
+. local F2 = r(p)
+
+. testparm $leading_example
+
+ ( 1)  leader2_2_BS = 0
+ ( 2)  leader2_3_BS = 0
+
+       F(  2,    45) =    4.47
+            Prob > F =    0.0169
+
+. local F3 = r(p)
+
+. estadd scalar F1= `F1'
+
+added scalar:
+                 e(F1) =  .73104776
+
+. estadd scalar F2= `F2'
+
+added scalar:
+                 e(F2) =  .03766731
+
+. estadd scalar F3= `F3'
+
+added scalar:
+                 e(F3) =  .01692552
+
+. testparm leader2_2 leader2_3, equal
+
+ ( 1)  - leader2_2_BS + leader2_3_BS = 0
+
+       F(  1,    45) =    7.62
+            Prob > F =    0.0083
+
+. 
+. esttab fem1 fem2 fem3 fem4 using "$working_ANALYSIS\results\Tables\female_participation.rtf", se transform(ln*: exp(@) exp(@)) mgroups("Number of non-leader fema
+> le participants" "" "" "") b(%4.2f)label stats(N r2_a F1 F2 F3, labels("N" "Adj. R-squared" "F-Test: Village characteristics" "F-Test: Baseline " "F-Test: Leader
+> s") fmt(%4.0f %4.2f)) star(* 0.10 ** 0.05 *** 0.01) varlabels(,elist(weight:_cons "{break}{hline @width}"))  nonotes addnotes("Notes: Estimates are from OLS regr
+> essions with robust standard errors in brackets. * p<0.1, ** p<0.05, *** p<0.01") replace 
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\Tables\female_participation.rtf)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. reg seq_split $village
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(5, 50)        =      0.95
+       Model |  1.21035485         5  .242070971   Prob > F        =    0.4595
+    Residual |  12.7896451        50  .255792903   R-squared       =    0.0865
+-------------+----------------------------------   Adj R-squared   =   -0.0049
+       Total |          14        55  .254545455   Root MSE        =    .50576
+
+----------------------------------------------------------------------------------------------
+                   seq_split |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                       No_HH |   .0008794   .0008208     1.07   0.289    -.0007692     .002528
+                    FES_site |   .2775753   .1600669     1.73   0.089    -.0439285    .5990791
+                    Shar_Lit |  -.0041534   .0084478    -0.49   0.625    -.0211213    .0128145
+                   Shar_SCST |  -.0000611   .0043208    -0.01   0.989    -.0087396    .0086175
+survey_dam_for_irrigation_FS |  -.1374318   .1397061    -0.98   0.330    -.4180398    .1431762
+                       _cons |   .4389551   .6397385     0.69   0.496    -.8459975    1.723908
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. probit survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS seq_split $participants $village, vce(robust)
+
+outcome = survey_maint_rule_FS > 0 predicts data perfectly
+r(2000);
+
+end of do-file
+
+r(2000);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. probit survey_maint_rule_FS survey_maint_rule_BS seq_split $participants $village, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -28.492377  
+Iteration 2:   log pseudolikelihood = -28.386208  
+Iteration 3:   log pseudolikelihood = -28.385812  
+Iteration 4:   log pseudolikelihood = -28.385812  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(11)     =      18.70
+                                                Prob > chi2       =     0.0668
+Log pseudolikelihood = -28.385812               Pseudo R2         =     0.1928
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_rule_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+        survey_maint_rule_BS |   -.007052   .5826531    -0.01   0.990    -1.149031    1.134927
+                   seq_split |  -.1471649   .4243935    -0.35   0.729    -.9789608     .684631
+    share_female_percent3_BS |   .3304499   .1214305     2.72   0.007     .0924505    .5684492
+                leader2_2_BS |   .5044652   .4215524     1.20   0.231    -.3217623    1.330693
+                leader2_3_BS |   .1048938   .4958227     0.21   0.832    -.8669009    1.076688
+  share_participants_primary |   .0678102   .1160091     0.58   0.559    -.1595634    .2951838
+                       No_HH |  -.0022629   .0027945    -0.81   0.418      -.00774    .0032143
+                    FES_site |   .4791546   .4277108     1.12   0.263    -.3591431    1.317452
+                    Shar_Lit |    -.02346   .0227926    -1.03   0.303    -.0681326    .0212126
+                   Shar_SCST |  -.0143455   .0138722    -1.03   0.301    -.0415346    .0128436
+survey_dam_for_irrigation_FS |  -.4108426    .422241    -0.97   0.331     -1.23842    .4167346
+                       _cons |   .6700446   2.012407     0.33   0.739    -3.274201     4.61429
+----------------------------------------------------------------------------------------------
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_rule_FS), predict()
+dy/dx w.r.t. : survey_maint_rule_BS seq_split share_female_percent3_BS leader2_2_BS leader2_3_BS share_participants_primary No_HH FES_site Shar_Lit Shar_SCST
+               survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+        survey_maint_rule_BS |  -.0020208   .1669451    -0.01   0.990    -.3292271    .3251856
+                   seq_split |  -.0421703   .1216985    -0.35   0.729    -.2806949    .1963544
+    share_female_percent3_BS |   .0946907   .0299232     3.16   0.002     .0360424    .1533391
+                leader2_2_BS |    .144555     .12019     1.20   0.229    -.0910131    .3801231
+                leader2_3_BS |   .0300574   .1427744     0.21   0.833    -.2497753    .3098901
+  share_participants_primary |   .0194311   .0333624     0.58   0.560     -.045958    .0848201
+                       No_HH |  -.0006484   .0007762    -0.84   0.404    -.0021698    .0008729
+                    FES_site |   .1373022    .116996     1.17   0.241    -.0920058    .3666102
+                    Shar_Lit |  -.0067225   .0065977    -1.02   0.308    -.0196538    .0062088
+                   Shar_SCST |  -.0041107   .0039812    -1.03   0.302    -.0119137    .0036923
+survey_dam_for_irrigation_FS |  -.1177274    .117829    -1.00   0.318     -.348668    .1132133
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. probit survey_maint_2017_FS survey_maint_12m_BS survey_maint_rule_FS seq_split leader2_2_BS leader2_3_BS $village, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -33.503097  
+Iteration 1:   log pseudolikelihood = -25.754674  
+Iteration 2:   log pseudolikelihood = -25.352573  
+Iteration 3:   log pseudolikelihood = -25.349748  
+Iteration 4:   log pseudolikelihood = -25.349747  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      15.20
+                                                Prob > chi2       =     0.1250
+Log pseudolikelihood = -25.349747               Pseudo R2         =     0.2434
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_2017_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .0534204    .407975     0.13   0.896    -.7461958    .8530366
+        survey_maint_rule_FS |   1.188152   .4582113     2.59   0.010     .2900741    2.086229
+                   seq_split |   .9971745   .4199248     2.37   0.018      .174137    1.820212
+                leader2_2_BS |   .3529136   .4991544     0.71   0.480    -.6254111    1.331238
+                leader2_3_BS |  -.0217897   .5213359    -0.04   0.967    -1.043589     1.00001
+                       No_HH |   .0000162    .002491     0.01   0.995     -.004866    .0048985
+                    FES_site |   .2875036   .4457536     0.64   0.519    -.5861575    1.161165
+                    Shar_Lit |   .0558354   .0293758     1.90   0.057      -.00174    .1134109
+                   Shar_SCST |  -.0068794   .0129436    -0.53   0.595    -.0322483    .0184896
+survey_dam_for_irrigation_FS |   .6573533   .4297173     1.53   0.126    -.1848771    1.499584
+                       _cons |  -2.985597   2.103847    -1.42   0.156    -7.109061    1.137868
+----------------------------------------------------------------------------------------------
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_2017_FS), predict()
+dy/dx w.r.t. : survey_maint_12m_BS survey_maint_rule_FS seq_split leader2_2_BS leader2_3_BS No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .0134728   .1031174     0.13   0.896    -.1886336    .2155793
+        survey_maint_rule_FS |   .2996565   .1043909     2.87   0.004     .0950542    .5042589
+                   seq_split |   .2514914   .1008862     2.49   0.013     .0537581    .4492246
+                leader2_2_BS |   .0890062   .1247768     0.71   0.476    -.1555517    .3335642
+                leader2_3_BS |  -.0054954   .1314688    -0.04   0.967    -.2631695    .2521786
+                       No_HH |   4.10e-06   .0006282     0.01   0.995    -.0012271    .0012353
+                    FES_site |   .0725095    .109843     0.66   0.509    -.1427787    .2877978
+                    Shar_Lit |   .0140819   .0069149     2.04   0.042     .0005291    .0276348
+                   Shar_SCST |   -.001735   .0032289    -0.54   0.591    -.0080636    .0045936
+survey_dam_for_irrigation_FS |   .1657871   .1015818     1.63   0.103    -.0333096    .3648837
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. probit survey_maint_rule_FS survey_maint_rule_BS seq_split leader2_2_BS leader2_3_BS $village, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -31.236709  
+Iteration 2:   log pseudolikelihood = -31.208455  
+Iteration 3:   log pseudolikelihood = -31.208446  
+Iteration 4:   log pseudolikelihood = -31.208446  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(9)      =       7.70
+                                                Prob > chi2       =     0.5651
+Log pseudolikelihood = -31.208446               Pseudo R2         =     0.1125
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_rule_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+        survey_maint_rule_BS |   .1682286    .505335     0.33   0.739    -.8222098    1.158667
+                   seq_split |   .2792641    .386748     0.72   0.470    -.4787479    1.037276
+                leader2_2_BS |   .3840681   .4186574     0.92   0.359    -.4364854    1.204622
+                leader2_3_BS |    .541106   .4667756     1.16   0.246    -.3737573    1.455969
+                       No_HH |  -.0019341   .0026235    -0.74   0.461     -.007076    .0032078
+                    FES_site |   .4681502   .3963248     1.18   0.238    -.3086321    1.244933
+                    Shar_Lit |  -.0096847    .023935    -0.40   0.686    -.0565966    .0372271
+                   Shar_SCST |  -.0084998   .0121884    -0.70   0.486    -.0323887    .0153892
+survey_dam_for_irrigation_FS |   -.578574    .428687    -1.35   0.177    -1.418785    .2616371
+                       _cons |   .4651473   1.841452     0.25   0.801    -3.144033    4.074327
+----------------------------------------------------------------------------------------------
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_rule_FS), predict()
+dy/dx w.r.t. : survey_maint_rule_BS seq_split leader2_2_BS leader2_3_BS No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+        survey_maint_rule_BS |   .0533966    .159091     0.34   0.737    -.2584161    .3652093
+                   seq_split |   .0886398   .1201899     0.74   0.461     -.146928    .3242076
+                leader2_2_BS |   .1219051   .1306985     0.93   0.351    -.1342592    .3780694
+                leader2_3_BS |   .1717497   .1487863     1.15   0.248     -.119866    .4633655
+                       No_HH |  -.0006139   .0008092    -0.76   0.448    -.0021998    .0009721
+                    FES_site |   .1485932   .1223912     1.21   0.225    -.0912892    .3884756
+                    Shar_Lit |   -.003074   .0076388    -0.40   0.687    -.0180457    .0118978
+                   Shar_SCST |  -.0026979   .0038323    -0.70   0.481     -.010209    .0048133
+survey_dam_for_irrigation_FS |  -.1836423   .1277639    -1.44   0.151     -.434055    .0667705
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. 
+. twoway (scatter game_no_leader_fem_vill sequence) (qfitci game_no_leader_fem_vill sequence)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpoly game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:} Houses damaged") xtitle("") ytitle("Sha
+> re") bwidth(10)  xla(0(20)120) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpoly game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitle(
+> "") ytitle("Number Women") bwidth(10)  xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpoly game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitle(
+> "") ytitle("Number Women") bwidth(5)  xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpoly game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitle(
+> "Village sequence") ytitle("Number Women") bwidth(5)  xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpoly game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitle(
+> "Village sequence") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. lpolyci game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitl
+> e("Village sequence") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+command lpolyci is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. help lpolyci
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (lpolyci game_no_leader_fem_vill sequence), lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participant
+> s") xtitle("Village sequence") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+option lineopts() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (lpolyci game_no_leader_fem_vill sequence), msize(medlarge) mcolor(*.5) legend(off)title("{bf: A:}Non-leader female participants") xtitle("Village sequenc
+> e") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+option msize() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (lpolyci game_no_leader_fem_vill sequence, lineopts(lwidth(medthick)) msize(medlarge) mcolor(*.5) ), legend(off)title("{bf: A:}Non-leader female participa
+> nts") xtitle("Village sequence") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+option lineopts() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (lpolyci game_no_leader_fem_vill sequence,  msize(medlarge) mcolor(*.5) ), legend(off)title("{bf: A:}Non-leader female participants") xtitle("Village sequ
+> ence") ytitle("Number Women") bwidth(5) yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+option bwidth() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (lpolyci game_no_leader_fem_vill sequence,  bwidth(5) msize(medlarge) mcolor(*.5) ), legend(off)title("{bf: A:}Non-leader female participants") xtitle("Vi
+> llage sequence") ytitle("Number Women") yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (scatter game_no_leader_fem_vill sequence, msymbol(O) mlcolor(none) mcolor(%10)) ///
+>  (lpolyci game_no_leader_fem_vill sequence, bwidth(5) level(95) fcolor(%50) alwidth(none)), title("{bf: A:} Non-leader female participants ") xtitle("Interventio
+> n sequence") ytitle("Number Women") legend(off) ///
+>         yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. gr save  "$working_ANALYSIS\results\intermediate\figure4_a.gph", replace
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure4_a.gph not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure4_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (scatter game_no_leader_fem_vill sequence, msymbol(O) mlcolor(none) mcolor(%60)) ///
+>  (lpolyci game_no_leader_fem_vill sequence, bwidth(5) level(95) fcolor(%50) alwidth(none)), title("{bf: A:} Non-leader female participants ") xtitle("Interventio
+> n sequence") ytitle("Number Women") legend(off) ///
+>         yla(0(2)14) xla(0(5)60) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. gr save  "$working_ANALYSIS\results\intermediate\figure4_a.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure4_a.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (scatter game_no_leader_fem_vill sequence, msymbol(O) mlcolor(none) mcolor(%60)) ///
+>  (lpolyci game_no_leader_fem_vill sequence, bwidth(5) level(95) fcolor(%50) alwidth(none)), title("{bf: A:} Non-leader female participants ") xtitle("Interventio
+> n sequence") ytitle("Number Women") legend(off) ///
+>         yla(0(2)14) xla(0(4)56) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. gr save  "$working_ANALYSIS\results\intermediate\figure4_a.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure4_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. twoway (scatter game_no_leader_fem_vill sequence, msymbol(O) mlcolor(none) mcolor(%60)) ///
+>  (lpolyci game_no_leader_fem_vill sequence, bwidth(5) level(95) fcolor(%50) alwidth(none)), title("{bf: A:} Non-leader female participants over time") xtitle("In
+> tervention number") ytitle("Female participants") legend(off) ///
+>         yla(0(2)14) xla(0(4)56) note("") scale(1.2) xsize(3.165) ysize(2)
+
+. gr save  "$working_ANALYSIS\results\intermediate\figure4_a.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure4_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD6810_000000.tmp"
+
+. *--------------------------------------------------
+. * Set global Working Directory
+. *--------------------------------------------------
+. * Define this global macro to point where the replication folder is saved locally that includes this run.do script
+. global working_ANALYSIS "C:\Users\istei\HESSENBOX\2-Projekte (Björn Vollan)\BOSCH\4-Paper\Endogenous Preferences Haiyan\analysis"
+
+. 
+. 
+. *--------------------------------------------------
+. * Program Setup
+. *--------------------------------------------------
+. * Initialize log and record system parameters
+. clear
+
+. set more off
+
+. cap mkdir "$working_ANALYSIS/scripts/logs"
+
+. cap log close

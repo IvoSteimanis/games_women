@@ -1,0 +1,425 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2023.03.31-09.01.18.log.txt
+  log type:  text
+ opened on:  31 Mar 2023, 09:01:18
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 31 Mar 2023 09:01:18
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;
+> lmatasp;lmatasvy;lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50" reduces transpar
+> ency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD3d38_000000.tmp"
+
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/2023_03_Survey&Game_Wide.dta", clear
+
+. 
+. *drop variables with all missings
+. dropmiss
+(game_av_inv_vill_R6_10 survey_CWRgroup_already_FS survey_CWRgroup_new_FS survey_activity_any_FS survey_activity_earthwall_BS survey_activity_earthwall_FS
+survey_activity_mainwall_BS survey_activity_mainwall_FS survey_activity_silt_BS survey_activity_silt_FS survey_activity_sluicegate_BS survey_activity_sluicegate_FS
+survey_activity_vege_BS survey_activity_vege_FS survey_benefit_agri_BS survey_change_benefit_FS survey_collact_new_FS survey_compay_community_FS
+survey_compay_equal_FS survey_compay_leader_FS survey_compay_otheruser_FS survey_cwr_bori_FS survey_cwr_dam_FS survey_cwr_other_FS survey_cwr_pond_FS
+survey_indipay_comm_FS survey_indipay_equally_FS survey_indipay_other_FS survey_indipayn_notspent_FS survey_interview_others_BS survey_interview_others_FS
+survey_interview_waterua_BS survey_interview_waterua_FS survey_rules_alloc_BS survey_rules_alloc_FS survey_rules_extr_alloc_BS survey_rules_extr_alloc_FS
+survey_rules_extr_opre_BS survey_rules_extr_opre_FS survey_rules_extr_other_BS survey_rules_extr_other_FS survey_rules_old_all_BS survey_rules_old_alloc_BS
+survey_rules_old_maint_BS survey_rules_old_oper_BS survey_rules_old_other_BS survey_rules_oper_BS survey_rules_oper_FS survey_rules_other_BS survey_rules_other_FS
+dropped)
+
+. drop if treatment_BS==0
+(28 observations deleted)
+
+. *----------------------------------------------------------------------
+. sort game_date_intervention
+
+. gen sequence=[_n]
+
+. gen seq_split= 0
+
+. replace seq_split=1 if sequence>28
+(28 real changes made)
+
+. 
+. 
+. lab var FES_site "NGO active in village (=1)"
+
+. lab var share_female_percent3_BS "Non-leader female participants (in 10%)"
+
+. lab var leader2_2_BS "Only male leader participated (=1)"
+
+. lab var leader2_3_BS "Female leader participated (=1)"
+
+. lab var sequence "Sequence of game interventions (1 to 56)"
+
+. lab var survey_dam_for_irrigation_FS "Dam used for irrigation (=1)"
+
+. lab var survey_maint_2017_FS "Endline: Maintenance (=1)"
+
+. lab var survey_maint_12m_BS "Baseline: Maintenance (=1)"
+
+. lab var survey_maint_rule_FS "Endline: Maintenance rule (=1)"
+
+. lab var survey_maint_rule_BS "Baseline: Maintenance rule (=1)"
+
+. 
+. *-----------------------------------------
+. * 1) ANALYSIS MAIN MANUSCRIPT
+. *-----------------------------------------
+. * Setting globals
+. global village  No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD3d38_000000.tmp"
+
+. sem (leader2_3_BS sequence $village -> share_female_percent3_BS, )(leader2_3_BS share_female_percent3_BS survey_maint_12m_BS survey_maint_rule_FS $village -> sur
+> vey_maint_2017_FS, ) (leader2_3_BS share_female_percent3_BS survey_maint_rule_BS $village -> survey_maint_rule_FS, ), vce(robust) nocapslatent
+
+Endogenous variables
+
+Observed:  share_female_percent3_BS survey_maint_rule_FS survey_maint_2017_FS
+
+Exogenous variables
+
+Observed:  leader2_3_BS sequence No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS survey_maint_12m_BS survey_maint_rule_BS
+
+Fitting target model:
+
+Iteration 0:   log pseudolikelihood = -1303.9322  
+Iteration 1:   log pseudolikelihood = -1303.9322  
+
+Structural equation model                       Number of obs     =         56
+Estimation method    = ml
+Log pseudolikelihood = -1303.9322
+
+------------------------------------------------------------------------------------------------
+                               |               Robust
+                               |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------------------------+----------------------------------------------------------------
+Structural                     |
+  share_female_percent3_BS     |
+                  leader2_3_BS |     1.4667   .4361627     3.36   0.001     .6118365    2.321563
+                      sequence |   .0401192   .0132749     3.02   0.003     .0141009    .0661375
+                         No_HH |   -.000875   .0022406    -0.39   0.696    -.0052664    .0035165
+                      FES_site |  -.3553535   .4463803    -0.80   0.426    -1.230243    .5195357
+                      Shar_Lit |   .0453721   .0269041     1.69   0.092     -.007359    .0981033
+                     Shar_SCST |   .0083391   .0152386     0.55   0.584    -.0215281    .0382063
+  survey_dam_for_irrigation_FS |  -.2586125   .3580406    -0.72   0.470    -.9603592    .4431342
+                         _cons |  -1.513233   2.319178    -0.65   0.514    -6.058738    3.032272
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_rule_FS         |
+      share_female_percent3_BS |   .0984611   .0315147     3.12   0.002     .0366935    .1602288
+                  leader2_3_BS |  -.0490874   .1575887    -0.31   0.755    -.3579557    .2597808
+                         No_HH |  -.0007113   .0007893    -0.90   0.368    -.0022583    .0008357
+                      FES_site |   .1632504    .116572     1.40   0.161    -.0652266    .3917273
+                      Shar_Lit |  -.0070133   .0061729    -1.14   0.256    -.0191119    .0050854
+                     Shar_SCST |  -.0024439   .0038073    -0.64   0.521    -.0099061    .0050184
+  survey_dam_for_irrigation_FS |  -.1121161   .1245392    -0.90   0.368    -.3562085    .1319762
+          survey_maint_rule_BS |   -.003165   .1699549    -0.02   0.985    -.3362705    .3299404
+                         _cons |   .6944957   .5793969     1.20   0.231    -.4411014    1.830093
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_2017_FS         |
+      share_female_percent3_BS |   .0350463   .0298397     1.17   0.240    -.0234385    .0935312
+          survey_maint_rule_FS |   .2517777   .1163678     2.16   0.030     .0237011    .4798544
+                  leader2_3_BS |  -.0985917    .134111    -0.74   0.462    -.3614443     .164261
+                         No_HH |   .0003171   .0008083     0.39   0.695    -.0012671    .0019014
+                      FES_site |   .1661181   .1454955     1.14   0.254    -.1190479    .4512841
+                      Shar_Lit |   .0094157   .0073716     1.28   0.201    -.0050323    .0238637
+                     Shar_SCST |  -.0021449   .0039659    -0.54   0.589    -.0099178     .005628
+  survey_dam_for_irrigation_FS |   .1689281   .1076548     1.57   0.117    -.0420715    .3799277
+           survey_maint_12m_BS |   .0324682   .1176961     0.28   0.783    -.1982118    .2631483
+                         _cons |   -.001821    .630043    -0.00   0.998    -1.236683    1.233041
+-------------------------------+----------------------------------------------------------------
+var(e.share_female_percent3_BS)|   1.946461   .4293975                      1.263185    2.999331
+    var(e.survey_maint_rule_FS)|   .1721073   .0272441                      .1261992    .2347156
+    var(e.survey_maint_2017_FS)|   .1628929   .0245646                      .1212102    .2189098
+------------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. estat teffect
+
+
+Direct effects
+------------------------------------------------------------------------------------------------
+                               |               Robust
+                               |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------------------------+----------------------------------------------------------------
+Structural                     |
+  share_female_percent3_BS     |
+                  leader2_3_BS |     1.4667   .4361627     3.36   0.001     .6118365    2.321563
+                      sequence |   .0401192   .0132749     3.02   0.003     .0141009    .0661375
+                         No_HH |   -.000875   .0022406    -0.39   0.696    -.0052664    .0035165
+                      FES_site |  -.3553535   .4463803    -0.80   0.426    -1.230243    .5195357
+                      Shar_Lit |   .0453721   .0269041     1.69   0.092     -.007359    .0981033
+                     Shar_SCST |   .0083391   .0152386     0.55   0.584    -.0215281    .0382063
+  survey_dam_for_irrigation_FS |  -.2586125   .3580406    -0.72   0.470    -.9603592    .4431342
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_rule_FS         |
+      share_female_percent3_BS |   .0984611   .0315147     3.12   0.002     .0366935    .1602288
+                  leader2_3_BS |  -.0490874   .1575887    -0.31   0.755    -.3579557    .2597808
+                      sequence |          0  (no path)
+                         No_HH |  -.0007113   .0007893    -0.90   0.368    -.0022583    .0008357
+                      FES_site |   .1632504    .116572     1.40   0.161    -.0652266    .3917273
+                      Shar_Lit |  -.0070133   .0061729    -1.14   0.256    -.0191119    .0050854
+                     Shar_SCST |  -.0024439   .0038073    -0.64   0.521    -.0099061    .0050184
+  survey_dam_for_irrigation_FS |  -.1121161   .1245392    -0.90   0.368    -.3562085    .1319762
+          survey_maint_rule_BS |   -.003165   .1699549    -0.02   0.985    -.3362705    .3299404
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_2017_FS         |
+      share_female_percent3_BS |   .0350463   .0298397     1.17   0.240    -.0234385    .0935312
+          survey_maint_rule_FS |   .2517777   .1163678     2.16   0.030     .0237011    .4798544
+                  leader2_3_BS |  -.0985917    .134111    -0.74   0.462    -.3614443     .164261
+                      sequence |          0  (no path)
+                         No_HH |   .0003171   .0008083     0.39   0.695    -.0012671    .0019014
+                      FES_site |   .1661181   .1454955     1.14   0.254    -.1190479    .4512841
+                      Shar_Lit |   .0094157   .0073716     1.28   0.201    -.0050323    .0238637
+                     Shar_SCST |  -.0021449   .0039659    -0.54   0.589    -.0099178     .005628
+  survey_dam_for_irrigation_FS |   .1689281   .1076548     1.57   0.117    -.0420715    .3799277
+           survey_maint_12m_BS |   .0324682   .1176961     0.28   0.783    -.1982118    .2631483
+          survey_maint_rule_BS |          0  (no path)
+------------------------------------------------------------------------------------------------
+
+
+Indirect effects
+------------------------------------------------------------------------------------------------
+                               |               Robust
+                               |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------------------------+----------------------------------------------------------------
+Structural                     |
+  share_female_percent3_BS     |
+                  leader2_3_BS |          0  (no path)
+                      sequence |          0  (no path)
+                         No_HH |          0  (no path)
+                      FES_site |          0  (no path)
+                      Shar_Lit |          0  (no path)
+                     Shar_SCST |          0  (no path)
+  survey_dam_for_irrigation_FS |          0  (no path)
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_rule_FS         |
+      share_female_percent3_BS |          0  (no path)
+                  leader2_3_BS |   .1444129   .0686097     2.10   0.035     .0099403    .2788855
+                      sequence |   .0039502   .0019031     2.08   0.038     .0002202    .0076802
+                         No_HH |  -.0000861   .0002245    -0.38   0.701    -.0005261    .0003538
+                      FES_site |  -.0349885   .0464264    -0.75   0.451    -.1259827    .0560057
+                      Shar_Lit |   .0044674   .0032132     1.39   0.164    -.0018303    .0107651
+                     Shar_SCST |   .0008211    .001459     0.56   0.574    -.0020384    .0036806
+  survey_dam_for_irrigation_FS |  -.0254633   .0377957    -0.67   0.500    -.0995415     .048615
+          survey_maint_rule_BS |          0  (no path)
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_2017_FS         |
+      share_female_percent3_BS |   .0247903   .0130383     1.90   0.057    -.0007643     .050345
+          survey_maint_rule_FS |          0  (no path)
+                  leader2_3_BS |   .0754033   .0544755     1.38   0.166    -.0313666    .1821732
+                      sequence |   .0024006   .0014595     1.64   0.100    -.0004599    .0052611
+                         No_HH |  -.0002314   .0002523    -0.92   0.359    -.0007259     .000263
+                      FES_site |   .0198396   .0378996     0.52   0.601    -.0544422    .0941215
+                      Shar_Lit |   .0009491   .0030581     0.31   0.756    -.0050446    .0069428
+                     Shar_SCST |  -.0001163   .0015454    -0.08   0.940    -.0031452    .0029125
+  survey_dam_for_irrigation_FS |  -.0437029   .0388123    -1.13   0.260    -.1197736    .0323678
+           survey_maint_12m_BS |          0  (no path)
+          survey_maint_rule_BS |  -.0007969   .0428308    -0.02   0.985    -.0847438      .08315
+------------------------------------------------------------------------------------------------
+
+
+Total effects
+------------------------------------------------------------------------------------------------
+                               |               Robust
+                               |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------------------------+----------------------------------------------------------------
+Structural                     |
+  share_female_percent3_BS     |
+                  leader2_3_BS |     1.4667   .4361627     3.36   0.001     .6118365    2.321563
+                      sequence |   .0401192   .0132749     3.02   0.003     .0141009    .0661375
+                         No_HH |   -.000875   .0022406    -0.39   0.696    -.0052664    .0035165
+                      FES_site |  -.3553535   .4463803    -0.80   0.426    -1.230243    .5195357
+                      Shar_Lit |   .0453721   .0269041     1.69   0.092     -.007359    .0981033
+                     Shar_SCST |   .0083391   .0152386     0.55   0.584    -.0215281    .0382063
+  survey_dam_for_irrigation_FS |  -.2586125   .3580406    -0.72   0.470    -.9603592    .4431342
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_rule_FS         |
+      share_female_percent3_BS |   .0984611   .0315147     3.12   0.002     .0366935    .1602288
+                  leader2_3_BS |   .0953255   .1603279     0.59   0.552    -.2189113    .4095623
+                      sequence |   .0039502   .0019031     2.08   0.038     .0002202    .0076802
+                         No_HH |  -.0007974   .0008272    -0.96   0.335    -.0024187    .0008239
+                      FES_site |   .1282619   .1187186     1.08   0.280    -.1044223     .360946
+                      Shar_Lit |  -.0025459   .0079262    -0.32   0.748     -.018081    .0129892
+                     Shar_SCST |  -.0016228   .0043391    -0.37   0.708    -.0101274    .0068818
+  survey_dam_for_irrigation_FS |  -.1375794   .1282102    -1.07   0.283    -.3888669     .113708
+          survey_maint_rule_BS |   -.003165   .1699549    -0.02   0.985    -.3362705    .3299404
+  -----------------------------+----------------------------------------------------------------
+  survey_maint_2017_FS         |
+      share_female_percent3_BS |   .0598367   .0286502     2.09   0.037     .0036833    .1159901
+          survey_maint_rule_FS |   .2517777   .1163678     2.16   0.030     .0237011    .4798544
+                  leader2_3_BS |  -.0231884   .1336644    -0.17   0.862    -.2851658     .238789
+                      sequence |   .0024006   .0014595     1.64   0.100    -.0004599    .0052611
+                         No_HH |   .0000857   .0008115     0.11   0.916    -.0015048    .0016762
+                      FES_site |   .1859577   .1494571     1.24   0.213    -.1069728    .4788882
+                      Shar_Lit |   .0103648   .0071042     1.46   0.145    -.0035591    .0242888
+                     Shar_SCST |  -.0022612   .0036988    -0.61   0.541    -.0095107    .0049882
+  survey_dam_for_irrigation_FS |   .1252252   .1125662     1.11   0.266    -.0954004    .3458508
+           survey_maint_12m_BS |   .0324682   .1176961     0.28   0.783    -.1982118    .2631483
+          survey_maint_rule_BS |  -.0007969   .0428308    -0.02   0.985    -.0847438      .08315
+------------------------------------------------------------------------------------------------
+
+. do "C:\Users\istei\AppData\Local\Temp\STD3d38_000000.tmp"
+
+. reg survey_maint_2017_FS leader2_3_BS share_female_percent3_BS survey_maint_12m_BS survey_maint_rule_FS $village sequence
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(10, 45)       =      1.50
+       Model |   2.8533742        10   .28533742   Prob > F        =    0.1719
+    Residual |  8.57519723        45  .190559938   R-squared       =    0.2497
+-------------+----------------------------------   Adj R-squared   =    0.0829
+       Total |  11.4285714        55  .207792208   Root MSE        =    .43653
+
+----------------------------------------------------------------------------------------------
+        survey_maint_2017_FS |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                leader2_3_BS |  -.0938001   .1603214    -0.59   0.561    -.4167041    .2291038
+    share_female_percent3_BS |   .0030643   .0454961     0.07   0.947    -.0885697    .0946982
+         survey_maint_12m_BS |  -.0211025   .1285636    -0.16   0.870    -.2800428    .2378378
+        survey_maint_rule_FS |   .2919109   .1460219     2.00   0.052    -.0021923    .5860141
+                       No_HH |   .0001255    .000762     0.16   0.870    -.0014093    .0016603
+                    FES_site |   .0968108   .1483777     0.65   0.517    -.2020372    .3956587
+                    Shar_Lit |   .0132188   .0078327     1.69   0.098    -.0025571    .0289946
+                   Shar_SCST |  -.0012959   .0038588    -0.34   0.739     -.009068    .0064762
+survey_dam_for_irrigation_FS |   .2293763   .1313579     1.75   0.088    -.0351921    .4939446
+                    sequence |   .0078804   .0046521     1.69   0.097    -.0014894    .0172503
+                       _cons |  -.3411395   .6022669    -0.57   0.574    -1.554167    .8718884
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD3d38_000000.tmp"
+
+. reg survey_maint_2017_FS leader2_3_BS share_female_percent3_BS survey_maint_12m_BS survey_maint_rule_FS $village 
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(9, 46)        =      1.29
+       Model |  2.30656712         9  .256285235   Prob > F        =    0.2670
+    Residual |  9.12200431        46  .198304442   R-squared       =    0.2018
+-------------+----------------------------------   Adj R-squared   =    0.0457
+       Total |  11.4285714        55  .207792208   Root MSE        =    .44531
+
+----------------------------------------------------------------------------------------------
+        survey_maint_2017_FS |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+                leader2_3_BS |  -.0985917   .1635213    -0.60   0.550     -.427743    .2305597
+    share_female_percent3_BS |   .0350463   .0422265     0.83   0.411    -.0499511    .1200438
+         survey_maint_12m_BS |   .0324682   .1271203     0.26   0.800    -.2234116     .288348
+        survey_maint_rule_FS |   .2517777   .1469858     1.71   0.093    -.0440893    .5476448
+                       No_HH |   .0003171   .0007687     0.41   0.682    -.0012303    .0018645
+                    FES_site |   .1661181   .1454945     1.14   0.259    -.1267471    .4589832
+                    Shar_Lit |   .0094157    .007655     1.23   0.225     -.005993    .0248245
+                   Shar_SCST |  -.0021449   .0039031    -0.55   0.585    -.0100015    .0057117
+survey_dam_for_irrigation_FS |   .1689281   .1289612     1.31   0.197    -.0906574    .4285135
+                       _cons |   -.001821   .5794061    -0.00   0.998    -1.168105    1.164463
+----------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. tab
+varlist required
+r(100);
+
+. tab game_leader_fem_vill
+
+     Sum of |
+     female |
+    leaders |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         36       64.29       64.29
+          1 |         17       30.36       94.64
+          2 |          3        5.36      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. exit, clear

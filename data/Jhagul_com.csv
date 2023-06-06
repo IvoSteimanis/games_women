@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;sohan s;1;;;;;;;;;;Jhagul
+6;punaram;2;2;;;;;;;;;Jhagul
+6;asaram;3;;;;;;;;;;Jhagul
+6;chatram;4;;;;;;;;;;Jhagul
+6;lakhan;5;;;;;;;;;;Jhagul
+6;sukhram;6;;;;;;;;;;Jhagul
+6;RAMKUMAR;7;;;;;;;;;;Jhagul
+6;mohan s;8;;;;;;;;;;Jhagul
+6;topsing;9;3;;;;;;;;;Jhagul
+6;sukhdev;10;;3;;;;;;;;Jhagul
+6;sumran;11;;;;;;;1;;;Jhagul
+6;ansuiya;12;;;;1;;;;;;Jhagul
+6;bhansing;13;;;;;1;;;;;Jhagul
+6;ramkishor;14;;;;;;;;;;Jhagul
+7;sohan s;1;;;;;;;;;;Jhagul
+7;punaram;2;;;;;;;;;;Jhagul
+7;asaram;3;;3;;;;;;;;Jhagul
+7;chatram;4;;;;;;;;;;Jhagul
+7;lakhan;5;;;;;;;2;;;Jhagul
+7;sukhram;6;2;;;;;;;;;Jhagul
+7;RAMKUMAR;7;;;;;2;;;;;Jhagul
+7;mohan s;8;;;;;;;;;;Jhagul
+7;topsing;9;4;;;;;;;;;Jhagul
+7;sukhdev;10;;4;;;;;;;;Jhagul
+7;sumran;11;;;1;;;;;;;Jhagul
+7;ansuiya;12;;;;;;;;1;;Jhagul
+7;bhansing;13;;;;;;;1;;;Jhagul
+7;ramkishor;14;;;;;;1;;;;Jhagul
+8;sohan s;1;;;;;;;;;;Jhagul
+8;punaram;2;;;;;;;;;;Jhagul
+8;asaram;3;3;;;1;;;;;;Jhagul
+8;chatram;4;;;;;;;2;;;Jhagul
+8;lakhan;5;2;;;;;;;;;Jhagul
+8;sukhram;6;;;;;;;;;;Jhagul
+8;RAMKUMAR;7;;5;;;;;;;;Jhagul
+8;mohan s;8;;;;;;1;;;;Jhagul
+8;topsing;9;;;;;;;;;;Jhagul
+8;sukhdev;10;5;;;;;;;;;Jhagul
+8;sumran;11;;4;;;;;;;;Jhagul
+8;ansuiya;12;;;;1;;;;;;Jhagul
+8;bhansing;13;;;1;;;;;;;Jhagul
+8;ramkishor;14;;;;;1;1;;;;Jhagul
+9;sohan s;1;3;;;;;;;;;Jhagul
+9;punaram;2;;;;;;;;;;Jhagul
+9;asaram;3;;;;;;;;;;Jhagul
+9;chatram;4;;;;;;;;;;Jhagul
+9;lakhan;5;;;;;2;;;;;Jhagul
+9;sukhram;6;;;;;;;;;;Jhagul
+9;RAMKUMAR;7;;2;;;;;;;;Jhagul
+9;mohan s;8;;;;1;;;;;;Jhagul
+9;topsing;9;5;;;;;;;;;Jhagul
+9;sukhdev;10;;5;;;;;;;;Jhagul
+9;sumran;11;;;;;;1;;;;Jhagul
+9;ansuiya;12;;;;;;;2;;;Jhagul
+9;bhansing;13;;;;;;;;3;;Jhagul
+9;ramkishor;14;;;;;1;;;;;Jhagul
+10;sohan s;1;;;;;;;;;;Jhagul
+10;punaram;2;;;;;;;;;;Jhagul
+10;asaram;3;;;;;;;;;;Jhagul
+10;chatram;4;;;;;;;;;;Jhagul
+10;lakhan;5;;;;;;;;;;Jhagul
+10;sukhram;6;;;;;;;;;;Jhagul
+10;RAMKUMAR;7;;;;;;;;;;Jhagul
+10;mohan s;8;;;;;;;;;;Jhagul
+10;topsing;9;;;;;;;;;;Jhagul
+10;sukhdev;10;;;;;;;;;;Jhagul
+10;sumran;11;;;;;;;;;;Jhagul
+10;ansuiya;12;;;;;;;;;;Jhagul
+10;bhansing;13;;;;;;;;;;Jhagul
+10;ramkishor;14;;;;;;;;;;Jhagul
+11;sohan s;1;;;;;;;;;;Jhagul
+11;punaram;2;;;;;;;;;;Jhagul
+11;asaram;3;;;;;;;;;;Jhagul
+11;chatram;4;;;;;;;;;;Jhagul
+11;lakhan;5;;;;;;;;;;Jhagul
+11;sukhram;6;;;;;;;;;;Jhagul
+11;RAMKUMAR;7;;;;;;;;;;Jhagul
+11;mohan s;8;;;;;;;;;;Jhagul
+11;topsing;9;;;;;;;;;;Jhagul
+11;sukhdev;10;;;;;;;;;;Jhagul
+11;sumran;11;;;;;;;;;;Jhagul
+11;ansuiya;12;;;;;;;;;;Jhagul
+11;bhansing;13;;;;;;;;;;Jhagul
+11;ramkishor;14;;;;;;;;;;Jhagul
+12;sohan s;1;;;;;;;;;;Jhagul
+12;punaram;2;;;;;;;;;;Jhagul
+12;asaram;3;;;;;;;;;;Jhagul
+12;chatram;4;;;;;;;;;;Jhagul
+12;lakhan;5;;;;;;;;;;Jhagul
+12;sukhram;6;;;;;;;;;;Jhagul
+12;RAMKUMAR;7;;;;;;;;;;Jhagul
+12;mohan s;8;;;;;;;;;;Jhagul
+12;topsing;9;;;;;;;;;;Jhagul
+12;sukhdev;10;;;;;;;;;;Jhagul
+12;sumran;11;;;;;;;;;;Jhagul
+12;ansuiya;12;;;;;;;;;;Jhagul
+12;bhansing;13;;;;;;;;;;Jhagul
+12;ramkishor;14;;;;;;;;;;Jhagul
+13;sohan s;1;;;;;;;;;;Jhagul
+13;punaram;2;;;;;;;;;;Jhagul
+13;asaram;3;;;;;;;;;;Jhagul
+13;chatram;4;;;;;;;;;;Jhagul
+13;lakhan;5;;;;;;;;;;Jhagul
+13;sukhram;6;;;;;;;;;;Jhagul
+13;RAMKUMAR;7;;;;;;;;;;Jhagul
+13;mohan s;8;;;;;;;;;;Jhagul
+13;topsing;9;;;;;;;;;;Jhagul
+13;sukhdev;10;;;;;;;;;;Jhagul
+13;sumran;11;;;;;;;;;;Jhagul
+13;ansuiya;12;;;;;;;;;;Jhagul
+13;bhansing;13;;;;;;;;;;Jhagul
+13;ramkishor;14;;;;;;;;;;Jhagul
+14;sohan s;1;;;;;;;;;;Jhagul
+14;punaram;2;;;;;;;;;;Jhagul
+14;asaram;3;;;;;;;;;;Jhagul
+14;chatram;4;;;;;;;;;;Jhagul
+14;lakhan;5;;;;;;;;;;Jhagul
+14;sukhram;6;;;;;;;;;;Jhagul
+14;RAMKUMAR;7;;;;;;;;;;Jhagul
+14;mohan s;8;;;;;;;;;;Jhagul
+14;topsing;9;;;;;;;;;;Jhagul
+14;sukhdev;10;;;;;;;;;;Jhagul
+14;sumran;11;;;;;;;;;;Jhagul
+14;ansuiya;12;;;;;;;;;;Jhagul
+14;bhansing;13;;;;;;;;;;Jhagul
+14;ramkishor;14;;;;;;;;;;Jhagul
+15;sohan s;1;;;;;;;;;;Jhagul
+15;punaram;2;;;;;;;;;;Jhagul
+15;asaram;3;;;;;;;;;;Jhagul
+15;chatram;4;;;;;;;;;;Jhagul
+15;lakhan;5;;;;;;;;;;Jhagul
+15;sukhram;6;;;;;;;;;;Jhagul
+15;RAMKUMAR;7;;;;;;;;;;Jhagul
+15;mohan s;8;;;;;;;;;;Jhagul
+15;topsing;9;;;;;;;;;;Jhagul
+15;sukhdev;10;;;;;;;;;;Jhagul
+15;sumran;11;;;;;;;;;;Jhagul
+15;ansuiya;12;;;;;;;;;;Jhagul
+15;bhansing;13;;;;;;;;;;Jhagul
+15;ramkishor;14;;;;;;;;;;Jhagul
+16;sohan s;1;;;;;;;;;;Jhagul
+16;punaram;2;;;;;;;;;;Jhagul
+16;asaram;3;;;;;;;;;;Jhagul
+16;chatram;4;;;;;;;;;;Jhagul
+16;lakhan;5;;;;;;;;;;Jhagul
+16;sukhram;6;;;;;;;;;;Jhagul
+16;RAMKUMAR;7;;;;;;;;;;Jhagul
+16;mohan s;8;;;;;;;;;;Jhagul
+16;topsing;9;;;;;;;;;;Jhagul
+16;sukhdev;10;;;;;;;;;;Jhagul
+16;sumran;11;;;;;;;;;;Jhagul
+16;ansuiya;12;;;;;;;;;;Jhagul
+16;bhansing;13;;;;;;;;;;Jhagul
+16;ramkishor;14;;;;;;;;;;Jhagul
+17;sohan s;1;;;;;;;;;;Jhagul
+17;punaram;2;;;;;;;;;;Jhagul
+17;asaram;3;;;;;;;;;;Jhagul
+17;chatram;4;;;;;;;;;;Jhagul
+17;lakhan;5;;;;;;;;;;Jhagul
+17;sukhram;6;;;;;;;;;;Jhagul
+17;RAMKUMAR;7;;;;;;;;;;Jhagul
+17;mohan s;8;;;;;;;;;;Jhagul
+17;topsing;9;;;;;;;;;;Jhagul
+17;sukhdev;10;;;;;;;;;;Jhagul
+17;sumran;11;;;;;;;;;;Jhagul
+17;ansuiya;12;;;;;;;;;;Jhagul
+17;bhansing;13;;;;;;;;;;Jhagul
+17;ramkishor;14;;;;;;;;;;Jhagul
+18;sohan s;1;;;;;;;;;;Jhagul
+18;punaram;2;;;;;;;;;;Jhagul
+18;asaram;3;;;;;;;;;;Jhagul
+18;chatram;4;;;;;;;;;;Jhagul
+18;lakhan;5;;;;;;;;;;Jhagul
+18;sukhram;6;;;;;;;;;;Jhagul
+18;RAMKUMAR;7;;;;;;;;;;Jhagul
+18;mohan s;8;;;;;;;;;;Jhagul
+18;topsing;9;;;;;;;;;;Jhagul
+18;sukhdev;10;;;;;;;;;;Jhagul
+18;sumran;11;;;;;;;;;;Jhagul
+18;ansuiya;12;;;;;;;;;;Jhagul
+18;bhansing;13;;;;;;;;;;Jhagul
+18;ramkishor;14;;;;;;;;;;Jhagul
+19;sohan s;1;;;;;;;;;;Jhagul
+19;punaram;2;;;;;;;;;;Jhagul
+19;asaram;3;;;;;;;;;;Jhagul
+19;chatram;4;;;;;;;;;;Jhagul
+19;lakhan;5;;;;;;;;;;Jhagul
+19;sukhram;6;;;;;;;;;;Jhagul
+19;RAMKUMAR;7;;;;;;;;;;Jhagul
+19;mohan s;8;;;;;;;;;;Jhagul
+19;topsing;9;;;;;;;;;;Jhagul
+19;sukhdev;10;;;;;;;;;;Jhagul
+19;sumran;11;;;;;;;;;;Jhagul
+19;ansuiya;12;;;;;;;;;;Jhagul
+19;bhansing;13;;;;;;;;;;Jhagul
+19;ramkishor;14;;;;;;;;;;Jhagul
+20;sohan s;1;;;;;;;;;;Jhagul
+20;punaram;2;;;;;;;;;;Jhagul
+20;asaram;3;;;;;;;;;;Jhagul
+20;chatram;4;;;;;;;;;;Jhagul
+20;lakhan;5;;;;;;;;;;Jhagul
+20;sukhram;6;;;;;;;;;;Jhagul
+20;RAMKUMAR;7;;;;;;;;;;Jhagul
+20;mohan s;8;;;;;;;;;;Jhagul
+20;topsing;9;;;;;;;;;;Jhagul
+20;sukhdev;10;;;;;;;;;;Jhagul
+20;sumran;11;;;;;;;;;;Jhagul
+20;ansuiya;12;;;;;;;;;;Jhagul
+20;bhansing;13;;;;;;;;;;Jhagul
+20;ramkishor;14;;;;;;;;;;Jhagul

@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Eshwar;2;7;1;1;0;M;35;6;NO;NO;NO;0;NO;1;1;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Eshwar;0;0;Dharampuri_Mal;17.05.2017;0;14
+2;Bisen;2;6;1;2;0;M;22;10;NO;NO;YES;0;NO;1;1;w;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Bisen;0;0;Dharampuri_Mal;17.05.2017;0;14
+3;Ramprakash;2;5;1;3;0;M;22;10;NO;NO;NO;0;NO;8;1;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Ramprakash;0;0;Dharampuri_Mal;17.05.2017;0;14
+4;Sukhdin;1;4;1;4;0;M;23;8;NO;NO;NO;0;NO;9;0,5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Sukhdin;0;0;Dharampuri_Mal;17.05.2017;0;14
+5;Jagat;1;3;1;5;0;M;32;7;NO;NO;NO;0;NO;20;5;w;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Jagat;0;0;Dharampuri_Mal;17.05.2017;0;14
+6;Savita;1;2;1;6;0;F;22;12;NO;NO;NO;0;NO;1;0,5;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Savita;0;0;Dharampuri_Mal;17.05.2017;0;14
+7;Keman;1;1;1;7;0;M;20;12;NO;NO;NO;0;NO;1;0,5;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Keman;0;0;Dharampuri_Mal;17.05.2017;0;14
+8;Dhansingh;1;7;2;1;0;M;40;10;NO;NO;YES;0;NO;1;5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Dhansingh;1;0;Dharampuri_Mal;17.05.2017;0;14
+9;Arjun;1;6;2;2;0;M;22;10;YES;NAV YUVAK SAMMITTE MEMBER;YES;0;NO;2;6;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Arjun;0;0;Dharampuri_Mal;17.05.2017;0;14
+10;Sukhman;1;5;2;3;0;M;33;9;NO;NO;NO;0;NO;3;2;g;0;0;0;0;0;0;0;0;0;0;1;0;0;0;Sukhman;0;0;Dharampuri_Mal;17.05.2017;0;14
+11;Manoj;2;4;2;4;0;M;24;10;NO;NO;NO;0;NO;1;2;w;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Manoj;0;0;Dharampuri_Mal;17.05.2017;0;14
+12;Sanesh;2;3;2;5;0;M;25;14;NO;NO;NO;0;NO;4;3;w;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Sanesh;0;0;Dharampuri_Mal;17.05.2017;0;14
+13;Ajit;2;2;2;6;0;M;20;5;NO;NO;NO;0;NO;1;8;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Ajit;0;0;Dharampuri_Mal;17.05.2017;0;14
+14;Sukalsingh;2;1;2;7;0;M;34;10;NO;NO;NO;0;NO;2;0,5;w;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Sukalsingh;0;0;Dharampuri_Mal;17.05.2017;0;14

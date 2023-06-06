@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;PURSHOTTAM SINGH;1;1;1;;2;1;;;;;Rata
+6;KAMLESH;2;;1;;1;;;;;;Rata
+6;SANTRAM SINGH ;3;1;1;;2;;;;;;Rata
+6;SIMSON SINGH ;4;;;;;;;;;;Rata
+6;MULCHAND ;5;1;1;;1;1;;;;;Rata
+6;DHAAL SINGH ;6;1;1;;3;2;;;;;Rata
+6;SANTOSH;7;1;1;;2;;;;;;Rata
+6;AAM SINGH RAJPUT;8;;;;;;;;2;;Rata
+6;CHANDRAPAL;9;;;;3;;;;;;Rata
+6;RAMGOPAL SIRSAO;10;;2;;;;;;;;Rata
+6;BALKRISHNA PARIHAR ;11;3;;;;;;;;;Rata
+6;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+6;JAIPAL ;13;;;2;;;;;;;Rata
+6;SUNDAR LAL;14;;;;;;;3;;;Rata
+7;PURSHOTTAM SINGH;1;1;4;;2;1;;;;;Rata
+7;KAMLESH;2;;1;;;;;;;;Rata
+7;SANTRAM SINGH ;3;1;;;;2;;;;;Rata
+7;SIMSON SINGH ;4;;1;;1;;;;;;Rata
+7;MULCHAND ;5;1;1;;1;1;;;;;Rata
+7;DHAAL SINGH ;6;;2;;;;;;;;Rata
+7;SANTOSH;7;1;2;;;;;;;;Rata
+7;AAM SINGH RAJPUT;8;;;2;;;;;;;Rata
+7;CHANDRAPAL;9;3;;;;;;;;;Rata
+7;RAMGOPAL SIRSAO;10;;;;2;;;;;;Rata
+7;BALKRISHNA PARIHAR ;11;;;;;3;;;;;Rata
+7;PRADEEP KUMAR ;12;;2;;;;;;;;Rata
+7;JAIPAL ;13;;;;;;2;;;;Rata
+7;SUNDAR LAL;14;;;;;;;;2;;Rata
+8;PURSHOTTAM SINGH;1;;2;;2;2;;;;;Rata
+8;KAMLESH;2;;;;1;1;;;;;Rata
+8;SANTRAM SINGH ;3;2;2;;1;;;;;;Rata
+8;SIMSON SINGH ;4;;;;3;;;;;;Rata
+8;MULCHAND ;5;;;;;;;;;;Rata
+8;DHAAL SINGH ;6;2;2;;;;;;;;Rata
+8;SANTOSH;7;;2;;3;1;;;;;Rata
+8;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+8;CHANDRAPAL;9;;3;;;;;;2;;Rata
+8;RAMGOPAL SIRSAO;10;;;;;3;;;;;Rata
+8;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+8;PRADEEP KUMAR ;12;;;;3;;;;;;Rata
+8;JAIPAL ;13;;1;;;;;;;;Rata
+8;SUNDAR LAL;14;3;;;;;;;;;Rata
+9;PURSHOTTAM SINGH;1;;2;;;;;;;;Rata
+9;KAMLESH;2;1;;;2;1;;;;;Rata
+9;SANTRAM SINGH ;3;;3;;;1;;;;;Rata
+9;SIMSON SINGH ;4;;;;;;;;;;Rata
+9;MULCHAND ;5;;1;;;;;;;;Rata
+9;DHAAL SINGH ;6;;3;;;1;;;;;Rata
+9;SANTOSH;7;1;;;;;;;;;Rata
+9;AAM SINGH RAJPUT;8;;;;3;;;;;;Rata
+9;CHANDRAPAL;9;;2;;;;;;;;Rata
+9;RAMGOPAL SIRSAO;10;3;;;;;;;;;Rata
+9;BALKRISHNA PARIHAR ;11;;;;;3;;;;;Rata
+9;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+9;JAIPAL ;13;;;;2;;;;;;Rata
+9;SUNDAR LAL;14;;;;;;;;3;;Rata
+10;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+10;KAMLESH;2;;;;;;;;;;Rata
+10;SANTRAM SINGH ;3;;;;;;;;;;Rata
+10;SIMSON SINGH ;4;;;;;;;;;;Rata
+10;MULCHAND ;5;;;;;;;;;;Rata
+10;DHAAL SINGH ;6;;;;;;;;;;Rata
+10;SANTOSH;7;;;;;;;;;;Rata
+10;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+10;CHANDRAPAL;9;;;;;;;;;;Rata
+10;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+10;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+10;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+10;JAIPAL ;13;;;;;;;;;;Rata
+10;SUNDAR LAL;14;;;;;;;;;;Rata
+11;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+11;KAMLESH;2;;;;;;;;;;Rata
+11;SANTRAM SINGH ;3;;;;;;;;;;Rata
+11;SIMSON SINGH ;4;;;;;;;;;;Rata
+11;MULCHAND ;5;;;;;;;;;;Rata
+11;DHAAL SINGH ;6;;;;;;;;;;Rata
+11;SANTOSH;7;;;;;;;;;;Rata
+11;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+11;CHANDRAPAL;9;;;;;;;;;;Rata
+11;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+11;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+11;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+11;JAIPAL ;13;;;;;;;;;;Rata
+11;SUNDAR LAL;14;;;;;;;;;;Rata
+12;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+12;KAMLESH;2;;;;;;;;;;Rata
+12;SANTRAM SINGH ;3;;;;;;;;;;Rata
+12;SIMSON SINGH ;4;;;;;;;;;;Rata
+12;MULCHAND ;5;;;;;;;;;;Rata
+12;DHAAL SINGH ;6;;;;;;;;;;Rata
+12;SANTOSH;7;;;;;;;;;;Rata
+12;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+12;CHANDRAPAL;9;;;;;;;;;;Rata
+12;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+12;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+12;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+12;JAIPAL ;13;;;;;;;;;;Rata
+12;SUNDAR LAL;14;;;;;;;;;;Rata
+13;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+13;KAMLESH;2;;;;;;;;;;Rata
+13;SANTRAM SINGH ;3;;;;;;;;;;Rata
+13;SIMSON SINGH ;4;;;;;;;;;;Rata
+13;MULCHAND ;5;;;;;;;;;;Rata
+13;DHAAL SINGH ;6;;;;;;;;;;Rata
+13;SANTOSH;7;;;;;;;;;;Rata
+13;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+13;CHANDRAPAL;9;;;;;;;;;;Rata
+13;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+13;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+13;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+13;JAIPAL ;13;;;;;;;;;;Rata
+13;SUNDAR LAL;14;;;;;;;;;;Rata
+14;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+14;KAMLESH;2;;;;;;;;;;Rata
+14;SANTRAM SINGH ;3;;;;;;;;;;Rata
+14;SIMSON SINGH ;4;;;;;;;;;;Rata
+14;MULCHAND ;5;;;;;;;;;;Rata
+14;DHAAL SINGH ;6;;;;;;;;;;Rata
+14;SANTOSH;7;;;;;;;;;;Rata
+14;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+14;CHANDRAPAL;9;;;;;;;;;;Rata
+14;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+14;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+14;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+14;JAIPAL ;13;;;;;;;;;;Rata
+14;SUNDAR LAL;14;;;;;;;;;;Rata
+15;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+15;KAMLESH;2;;;;;;;;;;Rata
+15;SANTRAM SINGH ;3;;;;;;;;;;Rata
+15;SIMSON SINGH ;4;;;;;;;;;;Rata
+15;MULCHAND ;5;;;;;;;;;;Rata
+15;DHAAL SINGH ;6;;;;;;;;;;Rata
+15;SANTOSH;7;;;;;;;;;;Rata
+15;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+15;CHANDRAPAL;9;;;;;;;;;;Rata
+15;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+15;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+15;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+15;JAIPAL ;13;;;;;;;;;;Rata
+15;SUNDAR LAL;14;;;;;;;;;;Rata
+16;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+16;KAMLESH;2;;;;;;;;;;Rata
+16;SANTRAM SINGH ;3;;;;;;;;;;Rata
+16;SIMSON SINGH ;4;;;;;;;;;;Rata
+16;MULCHAND ;5;;;;;;;;;;Rata
+16;DHAAL SINGH ;6;;;;;;;;;;Rata
+16;SANTOSH;7;;;;;;;;;;Rata
+16;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+16;CHANDRAPAL;9;;;;;;;;;;Rata
+16;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+16;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+16;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+16;JAIPAL ;13;;;;;;;;;;Rata
+16;SUNDAR LAL;14;;;;;;;;;;Rata
+17;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+17;KAMLESH;2;;;;;;;;;;Rata
+17;SANTRAM SINGH ;3;;;;;;;;;;Rata
+17;SIMSON SINGH ;4;;;;;;;;;;Rata
+17;MULCHAND ;5;;;;;;;;;;Rata
+17;DHAAL SINGH ;6;;;;;;;;;;Rata
+17;SANTOSH;7;;;;;;;;;;Rata
+17;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+17;CHANDRAPAL;9;;;;;;;;;;Rata
+17;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+17;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+17;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+17;JAIPAL ;13;;;;;;;;;;Rata
+17;SUNDAR LAL;14;;;;;;;;;;Rata
+18;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+18;KAMLESH;2;;;;;;;;;;Rata
+18;SANTRAM SINGH ;3;;;;;;;;;;Rata
+18;SIMSON SINGH ;4;;;;;;;;;;Rata
+18;MULCHAND ;5;;;;;;;;;;Rata
+18;DHAAL SINGH ;6;;;;;;;;;;Rata
+18;SANTOSH;7;;;;;;;;;;Rata
+18;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+18;CHANDRAPAL;9;;;;;;;;;;Rata
+18;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+18;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+18;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+18;JAIPAL ;13;;;;;;;;;;Rata
+18;SUNDAR LAL;14;;;;;;;;;;Rata
+19;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+19;KAMLESH;2;;;;;;;;;;Rata
+19;SANTRAM SINGH ;3;;;;;;;;;;Rata
+19;SIMSON SINGH ;4;;;;;;;;;;Rata
+19;MULCHAND ;5;;;;;;;;;;Rata
+19;DHAAL SINGH ;6;;;;;;;;;;Rata
+19;SANTOSH;7;;;;;;;;;;Rata
+19;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+19;CHANDRAPAL;9;;;;;;;;;;Rata
+19;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+19;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+19;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+19;JAIPAL ;13;;;;;;;;;;Rata
+19;SUNDAR LAL;14;;;;;;;;;;Rata
+20;PURSHOTTAM SINGH;1;;;;;;;;;;Rata
+20;KAMLESH;2;;;;;;;;;;Rata
+20;SANTRAM SINGH ;3;;;;;;;;;;Rata
+20;SIMSON SINGH ;4;;;;;;;;;;Rata
+20;MULCHAND ;5;;;;;;;;;;Rata
+20;DHAAL SINGH ;6;;;;;;;;;;Rata
+20;SANTOSH;7;;;;;;;;;;Rata
+20;AAM SINGH RAJPUT;8;;;;;;;;;;Rata
+20;CHANDRAPAL;9;;;;;;;;;;Rata
+20;RAMGOPAL SIRSAO;10;;;;;;;;;;Rata
+20;BALKRISHNA PARIHAR ;11;;;;;;;;;;Rata
+20;PRADEEP KUMAR ;12;;;;;;;;;;Rata
+20;JAIPAL ;13;;;;;;;;;;Rata
+20;SUNDAR LAL;14;;;;;;;;;;Rata

@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Mishrulal;1;;1;;;;;;;;Khuksar_RF
+6;Umed Singh;2;;;;;;;;;;Khuksar_RF
+6;Panju Padwar;3;2;2;;3;;;;;;Khuksar_RF
+6;Nevendra Kumar;4;1;1;;2;1;;;;;Khuksar_RF
+6;Bhangi Das;5;1;1;;2;1;;;;;Khuksar_RF
+6;Hiralal Salam;6;;1;;;;;;;;Khuksar_RF
+6;Shiv Kumar;7;1;;;;;;;;;Khuksar_RF
+6;Mistar Singh;8;1;;;;;;;;;Khuksar_RF
+6;Shuklal;9;;;;;1;1;1;;;Khuksar_RF
+6;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+6;Anil Kuhmar;11;;;;;;1;;;;Khuksar_RF
+6;Kamlesh Vayam;12;1;;;;;;;;;Khuksar_RF
+6;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+6;Pradeep Kumar;14;1;;1;;;;;;;Khuksar_RF
+7;Mishrulal;1;;1;;;;;;;;Khuksar_RF
+7;Umed Singh;2;;;;1;;;;;;Khuksar_RF
+7;Panju Padwar;3;;1;;1;2;;;;;Khuksar_RF
+7;Nevendra Kumar;4;;;;;1;;;;;Khuksar_RF
+7;Bhangi Das;5;;;;2;2;;;;;Khuksar_RF
+7;Hiralal Salam;6;;1;;;;;;;;Khuksar_RF
+7;Shiv Kumar;7;1;;;;;;;;;Khuksar_RF
+7;Mistar Singh;8;;1;;;;;;;;Khuksar_RF
+7;Shuklal;9;;;;;;;;;;Khuksar_RF
+7;Fatte Singh;10;;;;1;;;;;;Khuksar_RF
+7;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+7;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+7;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+7;Pradeep Kumar;14;;;;;;;;1;;Khuksar_RF
+8;Mishrulal;1;;;;1;2;;;;;Khuksar_RF
+8;Umed Singh;2;;1;;;;;;;;Khuksar_RF
+8;Panju Padwar;3;1;;;;2;;;;;Khuksar_RF
+8;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+8;Bhangi Das;5;;;;;1;;;;;Khuksar_RF
+8;Hiralal Salam;6;1;;;2;;;;;;Khuksar_RF
+8;Shiv Kumar;7;;1;;1;;;;;;Khuksar_RF
+8;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+8;Shuklal;9;;1;;2;1;2;;;;Khuksar_RF
+8;Fatte Singh;10;1;1;;;;;;;;Khuksar_RF
+8;Anil Kuhmar;11;1;;1;;;;;;;Khuksar_RF
+8;Kamlesh Vayam;12;;;;;;;1;;;Khuksar_RF
+8;Pahar Singh;13;;;1;2;;;;;;Khuksar_RF
+8;Pradeep Kumar;14;1;;;;;;1;;;Khuksar_RF
+9;Mishrulal;1;1;;;;;;;;;Khuksar_RF
+9;Umed Singh;2;;;;1;;;;;;Khuksar_RF
+9;Panju Padwar;3;1;;;;3;;;;;Khuksar_RF
+9;Nevendra Kumar;4;;;;1;2;;;;;Khuksar_RF
+9;Bhangi Das;5;;1;;;2;;;;;Khuksar_RF
+9;Hiralal Salam;6;;1;;;;;;;;Khuksar_RF
+9;Shiv Kumar;7;1;;;;;;;;;Khuksar_RF
+9;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+9;Shuklal;9;;;;;;1;;;;Khuksar_RF
+9;Fatte Singh;10;;1;;;1;;;;;Khuksar_RF
+9;Anil Kuhmar;11;;;;1;;;;;;Khuksar_RF
+9;Kamlesh Vayam;12;;1;;;;1;;;;Khuksar_RF
+9;Pahar Singh;13;1;1;;1;;;;;;Khuksar_RF
+9;Pradeep Kumar;14;3;;;;;1;;;;Khuksar_RF
+10;Mishrulal;1;;;;;;;;;;Khuksar_RF
+10;Umed Singh;2;;;;;;;;;;Khuksar_RF
+10;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+10;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+10;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+10;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+10;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+10;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+10;Shuklal;9;;;;;;;;;;Khuksar_RF
+10;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+10;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+10;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+10;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+10;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+11;Mishrulal;1;;;;;;;;;;Khuksar_RF
+11;Umed Singh;2;;;;;;;;;;Khuksar_RF
+11;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+11;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+11;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+11;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+11;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+11;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+11;Shuklal;9;;;;;;;;;;Khuksar_RF
+11;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+11;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+11;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+11;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+11;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+12;Mishrulal;1;;;;;;;;;;Khuksar_RF
+12;Umed Singh;2;;;;;;;;;;Khuksar_RF
+12;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+12;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+12;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+12;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+12;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+12;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+12;Shuklal;9;;;;;;;;;;Khuksar_RF
+12;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+12;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+12;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+12;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+12;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+13;Mishrulal;1;;;;;;;;;;Khuksar_RF
+13;Umed Singh;2;;;;;;;;;;Khuksar_RF
+13;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+13;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+13;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+13;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+13;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+13;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+13;Shuklal;9;;;;;;;;;;Khuksar_RF
+13;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+13;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+13;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+13;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+13;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+14;Mishrulal;1;;;;;;;;;;Khuksar_RF
+14;Umed Singh;2;;;;;;;;;;Khuksar_RF
+14;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+14;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+14;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+14;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+14;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+14;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+14;Shuklal;9;;;;;;;;;;Khuksar_RF
+14;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+14;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+14;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+14;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+14;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+15;Mishrulal;1;;;;;;;;;;Khuksar_RF
+15;Umed Singh;2;;;;;;;;;;Khuksar_RF
+15;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+15;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+15;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+15;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+15;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+15;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+15;Shuklal;9;;;;;;;;;;Khuksar_RF
+15;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+15;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+15;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+15;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+15;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+16;Mishrulal;1;;;;;;;;;;Khuksar_RF
+16;Umed Singh;2;;;;;;;;;;Khuksar_RF
+16;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+16;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+16;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+16;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+16;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+16;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+16;Shuklal;9;;;;;;;;;;Khuksar_RF
+16;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+16;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+16;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+16;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+16;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+17;Mishrulal;1;;;;;;;;;;Khuksar_RF
+17;Umed Singh;2;;;;;;;;;;Khuksar_RF
+17;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+17;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+17;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+17;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+17;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+17;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+17;Shuklal;9;;;;;;;;;;Khuksar_RF
+17;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+17;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+17;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+17;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+17;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+18;Mishrulal;1;;;;;;;;;;Khuksar_RF
+18;Umed Singh;2;;;;;;;;;;Khuksar_RF
+18;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+18;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+18;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+18;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+18;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+18;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+18;Shuklal;9;;;;;;;;;;Khuksar_RF
+18;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+18;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+18;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+18;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+18;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+19;Mishrulal;1;;;;;;;;;;Khuksar_RF
+19;Umed Singh;2;;;;;;;;;;Khuksar_RF
+19;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+19;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+19;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+19;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+19;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+19;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+19;Shuklal;9;;;;;;;;;;Khuksar_RF
+19;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+19;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+19;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+19;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+19;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF
+20;Mishrulal;1;;;;;;;;;;Khuksar_RF
+20;Umed Singh;2;;;;;;;;;;Khuksar_RF
+20;Panju Padwar;3;;;;;;;;;;Khuksar_RF
+20;Nevendra Kumar;4;;;;;;;;;;Khuksar_RF
+20;Bhangi Das;5;;;;;;;;;;Khuksar_RF
+20;Hiralal Salam;6;;;;;;;;;;Khuksar_RF
+20;Shiv Kumar;7;;;;;;;;;;Khuksar_RF
+20;Mistar Singh;8;;;;;;;;;;Khuksar_RF
+20;Shuklal;9;;;;;;;;;;Khuksar_RF
+20;Fatte Singh;10;;;;;;;;;;Khuksar_RF
+20;Anil Kuhmar;11;;;;;;;;;;Khuksar_RF
+20;Kamlesh Vayam;12;;;;;;;;;;Khuksar_RF
+20;Pahar Singh;13;;;;;;;;;;Khuksar_RF
+20;Pradeep Kumar;14;;;;;;;;;;Khuksar_RF

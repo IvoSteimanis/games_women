@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Laxman V;1;;;;1;1;;;;;Dungaria
+6;Ganesh M;2;1;1;;1;;;;;;Dungaria
+6;Bihari M;3;;;;1;;;;;;Dungaria
+6;Jagatsingh U;4;1;1;;1;1;;;;;Dungaria
+6;Vishnu M ;5;;1;;2;;;;;;Dungaria
+6;Laxman V;6;;;;;;;;;;Dungaria
+6;Satish U;7;2;2;;2;1;1;;;;Dungaria
+6;Khoobchand M;8;2;;;;;;;;;Dungaria
+6;Suresh U;9;;4;;;;;;;;Dungaria
+6;Radha P;10;;;;;;;;;;Dungaria
+6;Rita;11;;;;;;;;;;Dungaria
+6;Pardeshi M;12;;;;;;;;;;Dungaria
+6;Ramlal S;13;;;1;;;;;;2;Dungaria
+6;Lakshamaniya U;14;;;;;;;;;;Dungaria
+7;Laxman V;1;2;1;;1;;;;;;Dungaria
+7;Ganesh M;2;1;;;;;;;;;Dungaria
+7;Bihari M;3;1;1;;;1;;;;;Dungaria
+7;Jagatsingh U;4;;2;;2;;;;;;Dungaria
+7;Vishnu M ;5;1;;;2;;;;;;Dungaria
+7;Laxman V;6;1;1;;;;;;;;Dungaria
+7;Satish U;7;1;1;;2;1;;;;;Dungaria
+7;Khoobchand M;8;;;;;;;;;;Dungaria
+7;Suresh U;9;2;2;;;;;;;;Dungaria
+7;Radha P;10;;;;;;;;;;Dungaria
+7;Rita;11;;;;;;;;;;Dungaria
+7;Pardeshi M;12;;;;;;;;;3;Dungaria
+7;Ramlal S;13;;2;;;;;;;;Dungaria
+7;Lakshamaniya U;14;;;;;;;;;;Dungaria
+8;Laxman V;1;1;;;3;;;;;;Dungaria
+8;Ganesh M;2;1;;;;;;;;;Dungaria
+8;Bihari M;3;1;;;;;;;;;Dungaria
+8;Jagatsingh U;4;1;;;;;;;;;Dungaria
+8;Vishnu M ;5;;;;;;;;;;Dungaria
+8;Laxman V;6;1;;;;;;;;;Dungaria
+8;Satish U;7;1;;;;;;;;;Dungaria
+8;Khoobchand M;8;;;;;;;;;;Dungaria
+8;Suresh U;9;;4;;;;1;;;;Dungaria
+8;Radha P;10;;;;1;;;;;;Dungaria
+8;Rita;11;;;;;;;;;;Dungaria
+8;Pardeshi M;12;;;;;;;;;;Dungaria
+8;Ramlal S;13;;;1;;;1;;;2;Dungaria
+8;Lakshamaniya U;14;;;;;;;;;;Dungaria
+9;Laxman V;1;;;;3;;;;;;Dungaria
+9;Ganesh M;2;1;1;;;;;;;;Dungaria
+9;Bihari M;3;1;1;;;;;;;;Dungaria
+9;Jagatsingh U;4;;;;1;;;;;;Dungaria
+9;Vishnu M ;5;1;1;;;;;;;;Dungaria
+9;Laxman V;6;1;1;;;;;;;;Dungaria
+9;Satish U;7;;;;3;;;;;;Dungaria
+9;Khoobchand M;8;;;3;;;;;;;Dungaria
+9;Suresh U;9;2;;;;;;;;;Dungaria
+9;Radha P;10;;;;;;;;;;Dungaria
+9;Rita;11;;;;;;;1;;;Dungaria
+9;Pardeshi M;12;;;;;;;;;;Dungaria
+9;Ramlal S;13;;;;3;;;;;;Dungaria
+9;Lakshamaniya U;14;;;;;;;;;3;Dungaria
+10;Laxman V;1;;;;;;;;;;Dungaria
+10;Ganesh M;2;;;;;;;;;;Dungaria
+10;Bihari M;3;;;;;;;;;;Dungaria
+10;Jagatsingh U;4;;;;;;;;;;Dungaria
+10;Vishnu M ;5;;;;;;;;;;Dungaria
+10;Laxman V;6;;;;;;;;;;Dungaria
+10;Satish U;7;;;;;;;;;;Dungaria
+10;Khoobchand M;8;;;;;;;;;;Dungaria
+10;Suresh U;9;;;;;;;;;;Dungaria
+10;Radha P;10;;;;;;;;;;Dungaria
+10;Rita;11;;;;;;;;;;Dungaria
+10;Pardeshi M;12;;;;;;;;;;Dungaria
+10;Ramlal S;13;;;;;;;;;;Dungaria
+10;Lakshamaniya U;14;;;;;;;;;;Dungaria
+11;Laxman V;1;;;;;;;;;;Dungaria
+11;Ganesh M;2;;;;;;;;;;Dungaria
+11;Bihari M;3;;;;;;;;;;Dungaria
+11;Jagatsingh U;4;;;;;;;;;;Dungaria
+11;Vishnu M ;5;;;;;;;;;;Dungaria
+11;Laxman V;6;;;;;;;;;;Dungaria
+11;Satish U;7;;;;;;;;;;Dungaria
+11;Khoobchand M;8;;;;;;;;;;Dungaria
+11;Suresh U;9;;;;;;;;;;Dungaria
+11;Radha P;10;;;;;;;;;;Dungaria
+11;Rita;11;;;;;;;;;;Dungaria
+11;Pardeshi M;12;;;;;;;;;;Dungaria
+11;Ramlal S;13;;;;;;;;;;Dungaria
+11;Lakshamaniya U;14;;;;;;;;;;Dungaria
+12;Laxman V;1;;;;;;;;;;Dungaria
+12;Ganesh M;2;;;;;;;;;;Dungaria
+12;Bihari M;3;;;;;;;;;;Dungaria
+12;Jagatsingh U;4;;;;;;;;;;Dungaria
+12;Vishnu M ;5;;;;;;;;;;Dungaria
+12;Laxman V;6;;;;;;;;;;Dungaria
+12;Satish U;7;;;;;;;;;;Dungaria
+12;Khoobchand M;8;;;;;;;;;;Dungaria
+12;Suresh U;9;;;;;;;;;;Dungaria
+12;Radha P;10;;;;;;;;;;Dungaria
+12;Rita;11;;;;;;;;;;Dungaria
+12;Pardeshi M;12;;;;;;;;;;Dungaria
+12;Ramlal S;13;;;;;;;;;;Dungaria
+12;Lakshamaniya U;14;;;;;;;;;;Dungaria
+13;Laxman V;1;;;;;;;;;;Dungaria
+13;Ganesh M;2;;;;;;;;;;Dungaria
+13;Bihari M;3;;;;;;;;;;Dungaria
+13;Jagatsingh U;4;;;;;;;;;;Dungaria
+13;Vishnu M ;5;;;;;;;;;;Dungaria
+13;Laxman V;6;;;;;;;;;;Dungaria
+13;Satish U;7;;;;;;;;;;Dungaria
+13;Khoobchand M;8;;;;;;;;;;Dungaria
+13;Suresh U;9;;;;;;;;;;Dungaria
+13;Radha P;10;;;;;;;;;;Dungaria
+13;Rita;11;;;;;;;;;;Dungaria
+13;Pardeshi M;12;;;;;;;;;;Dungaria
+13;Ramlal S;13;;;;;;;;;;Dungaria
+13;Lakshamaniya U;14;;;;;;;;;;Dungaria
+14;Laxman V;1;;;;;;;;;;Dungaria
+14;Ganesh M;2;;;;;;;;;;Dungaria
+14;Bihari M;3;;;;;;;;;;Dungaria
+14;Jagatsingh U;4;;;;;;;;;;Dungaria
+14;Vishnu M ;5;;;;;;;;;;Dungaria
+14;Laxman V;6;;;;;;;;;;Dungaria
+14;Satish U;7;;;;;;;;;;Dungaria
+14;Khoobchand M;8;;;;;;;;;;Dungaria
+14;Suresh U;9;;;;;;;;;;Dungaria
+14;Radha P;10;;;;;;;;;;Dungaria
+14;Rita;11;;;;;;;;;;Dungaria
+14;Pardeshi M;12;;;;;;;;;;Dungaria
+14;Ramlal S;13;;;;;;;;;;Dungaria
+14;Lakshamaniya U;14;;;;;;;;;;Dungaria
+15;Laxman V;1;;;;;;;;;;Dungaria
+15;Ganesh M;2;;;;;;;;;;Dungaria
+15;Bihari M;3;;;;;;;;;;Dungaria
+15;Jagatsingh U;4;;;;;;;;;;Dungaria
+15;Vishnu M ;5;;;;;;;;;;Dungaria
+15;Laxman V;6;;;;;;;;;;Dungaria
+15;Satish U;7;;;;;;;;;;Dungaria
+15;Khoobchand M;8;;;;;;;;;;Dungaria
+15;Suresh U;9;;;;;;;;;;Dungaria
+15;Radha P;10;;;;;;;;;;Dungaria
+15;Rita;11;;;;;;;;;;Dungaria
+15;Pardeshi M;12;;;;;;;;;;Dungaria
+15;Ramlal S;13;;;;;;;;;;Dungaria
+15;Lakshamaniya U;14;;;;;;;;;;Dungaria
+16;Laxman V;1;;;;;;;;;;Dungaria
+16;Ganesh M;2;;;;;;;;;;Dungaria
+16;Bihari M;3;;;;;;;;;;Dungaria
+16;Jagatsingh U;4;;;;;;;;;;Dungaria
+16;Vishnu M ;5;;;;;;;;;;Dungaria
+16;Laxman V;6;;;;;;;;;;Dungaria
+16;Satish U;7;;;;;;;;;;Dungaria
+16;Khoobchand M;8;;;;;;;;;;Dungaria
+16;Suresh U;9;;;;;;;;;;Dungaria
+16;Radha P;10;;;;;;;;;;Dungaria
+16;Rita;11;;;;;;;;;;Dungaria
+16;Pardeshi M;12;;;;;;;;;;Dungaria
+16;Ramlal S;13;;;;;;;;;;Dungaria
+16;Lakshamaniya U;14;;;;;;;;;;Dungaria
+17;Laxman V;1;;;;;;;;;;Dungaria
+17;Ganesh M;2;;;;;;;;;;Dungaria
+17;Bihari M;3;;;;;;;;;;Dungaria
+17;Jagatsingh U;4;;;;;;;;;;Dungaria
+17;Vishnu M ;5;;;;;;;;;;Dungaria
+17;Laxman V;6;;;;;;;;;;Dungaria
+17;Satish U;7;;;;;;;;;;Dungaria
+17;Khoobchand M;8;;;;;;;;;;Dungaria
+17;Suresh U;9;;;;;;;;;;Dungaria
+17;Radha P;10;;;;;;;;;;Dungaria
+17;Rita;11;;;;;;;;;;Dungaria
+17;Pardeshi M;12;;;;;;;;;;Dungaria
+17;Ramlal S;13;;;;;;;;;;Dungaria
+17;Lakshamaniya U;14;;;;;;;;;;Dungaria
+18;Laxman V;1;;;;;;;;;;Dungaria
+18;Ganesh M;2;;;;;;;;;;Dungaria
+18;Bihari M;3;;;;;;;;;;Dungaria
+18;Jagatsingh U;4;;;;;;;;;;Dungaria
+18;Vishnu M ;5;;;;;;;;;;Dungaria
+18;Laxman V;6;;;;;;;;;;Dungaria
+18;Satish U;7;;;;;;;;;;Dungaria
+18;Khoobchand M;8;;;;;;;;;;Dungaria
+18;Suresh U;9;;;;;;;;;;Dungaria
+18;Radha P;10;;;;;;;;;;Dungaria
+18;Rita;11;;;;;;;;;;Dungaria
+18;Pardeshi M;12;;;;;;;;;;Dungaria
+18;Ramlal S;13;;;;;;;;;;Dungaria
+18;Lakshamaniya U;14;;;;;;;;;;Dungaria
+19;Laxman V;1;;;;;;;;;;Dungaria
+19;Ganesh M;2;;;;;;;;;;Dungaria
+19;Bihari M;3;;;;;;;;;;Dungaria
+19;Jagatsingh U;4;;;;;;;;;;Dungaria
+19;Vishnu M ;5;;;;;;;;;;Dungaria
+19;Laxman V;6;;;;;;;;;;Dungaria
+19;Satish U;7;;;;;;;;;;Dungaria
+19;Khoobchand M;8;;;;;;;;;;Dungaria
+19;Suresh U;9;;;;;;;;;;Dungaria
+19;Radha P;10;;;;;;;;;;Dungaria
+19;Rita;11;;;;;;;;;;Dungaria
+19;Pardeshi M;12;;;;;;;;;;Dungaria
+19;Ramlal S;13;;;;;;;;;;Dungaria
+19;Lakshamaniya U;14;;;;;;;;;;Dungaria
+20;Laxman V;1;;;;;;;;;;Dungaria
+20;Ganesh M;2;;;;;;;;;;Dungaria
+20;Bihari M;3;;;;;;;;;;Dungaria
+20;Jagatsingh U;4;;;;;;;;;;Dungaria
+20;Vishnu M ;5;;;;;;;;;;Dungaria
+20;Laxman V;6;;;;;;;;;;Dungaria
+20;Satish U;7;;;;;;;;;;Dungaria
+20;Khoobchand M;8;;;;;;;;;;Dungaria
+20;Suresh U;9;;;;;;;;;;Dungaria
+20;Radha P;10;;;;;;;;;;Dungaria
+20;Rita;11;;;;;;;;;;Dungaria
+20;Pardeshi M;12;;;;;;;;;;Dungaria
+20;Ramlal S;13;;;;;;;;;;Dungaria
+20;Lakshamaniya U;14;;;;;;;;;;Dungaria

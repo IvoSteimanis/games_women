@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Ramnath;1;;;;;1;;;;;Dungravt
+6;Uma;2;;;;;;;1;;;Dungravt
+6;Umesh Janghela;3;;;;1;;;;;;Dungravt
+6;Ratna;4;;;;;;;1;;;Dungravt
+6;Sukvati;5;;;;;;;;;;Dungravt
+6;Basant;6;4;;;;;;;;;Dungravt
+6;Shankarlal Janghela;7;;4;;;;;;;;Dungravt
+6;Shambhuprasad Janghela;8;2;;;;;;;;;Dungravt
+6;Lalchand Janghela;9;;;;;;;;;;Dungravt
+6;Sagar;10;;5;;;;;;;;Dungravt
+6;Suraj Janghela;11;;;;;;;;;;Dungravt
+6;Shalandra;12;;;;;2;;;;;Dungravt
+6;Omkar ;13;;;;1;;;;;;Dungravt
+6;Omprakash Janghela;14;;;;;;;1;;;Dungravt
+7;Ramnath;1;;4;;;;;;;;Dungravt
+7;Uma;2;;;;;;;;;;Dungravt
+7;Umesh Janghela;3;;;;;1;;;;;Dungravt
+7;Ratna;4;;;1;;;;;;;Dungravt
+7;Sukvati;5;;;;;;;1;;;Dungravt
+7;Basant;6;5;;;;;;;;;Dungravt
+7;Shankarlal Janghela;7;;;;;;;;1;;Dungravt
+7;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+7;Lalchand Janghela;9;2;;;;;;;;;Dungravt
+7;Sagar;10;;;;;;;1;;;Dungravt
+7;Suraj Janghela;11;;;;;;;;;;Dungravt
+7;Shalandra;12;;5;;;;;;;;Dungravt
+7;Omkar ;13;;;;1;;;;;;Dungravt
+7;Omprakash Janghela;14;;;;;1;;;;;Dungravt
+8;Ramnath;1;;4;;;;;;;;Dungravt
+8;Uma;2;;;;;;;;;;Dungravt
+8;Umesh Janghela;3;;;;;1;;;;;Dungravt
+8;Ratna;4;;;1;;;;;;;Dungravt
+8;Sukvati;5;;;;;;;1;;;Dungravt
+8;Basant;6;5;;;;;;;;;Dungravt
+8;Shankarlal Janghela;7;;;;;;;;1;;Dungravt
+8;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+8;Lalchand Janghela;9;1;;;;;;;;;Dungravt
+8;Sagar;10;;5;;;;;;;;Dungravt
+8;Suraj Janghela;11;;;;;;;;;;Dungravt
+8;Shalandra;12;;;;;;;1;;;Dungravt
+8;Omkar ;13;;;;;;;;;;Dungravt
+8;Omprakash Janghela;14;;;;1;;;;;;Dungravt
+9;Ramnath;1;5;;;;;;;;;Dungravt
+9;Uma;2;;;;;;1;;;;Dungravt
+9;Umesh Janghela;3;;;;;;;1;;;Dungravt
+9;Ratna;4;;5;;;;;;;;Dungravt
+9;Sukvati;5;;;;2;;;;;;Dungravt
+9;Basant;6;;;;;;;;1;;Dungravt
+9;Shankarlal Janghela;7;;;;;;;;;1;Dungravt
+9;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+9;Lalchand Janghela;9;3;;;;;;;;;Dungravt
+9;Sagar;10;;4;;;;;;;;Dungravt
+9;Suraj Janghela;11;;;;;;;;;1;Dungravt
+9;Shalandra;12;;;;;;;;;;Dungravt
+9;Omkar ;13;;;;;;;;;;Dungravt
+9;Omprakash Janghela;14;;;;;;;;;;Dungravt
+10;Ramnath;1;;;;2;;;;;;Dungravt
+10;Uma;2;;;;;;2;;;;Dungravt
+10;Umesh Janghela;3;;;;;;;;2;;Dungravt
+10;Ratna;4;5;;;;;;;;;Dungravt
+10;Sukvati;5;;5;;;;;;;;Dungravt
+10;Basant;6;;;;;2;;;;;Dungravt
+10;Shankarlal Janghela;7;;;;;;;2;;;Dungravt
+10;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+10;Lalchand Janghela;9;;;;;;;;;;Dungravt
+10;Sagar;10;;;;;;;;;;Dungravt
+10;Suraj Janghela;11;;;;;;;;;;Dungravt
+10;Shalandra;12;;;;;;;;;;Dungravt
+10;Omkar ;13;;;;;;;;;;Dungravt
+10;Omprakash Janghela;14;;;;;;;;;;Dungravt
+11;Ramnath;1;;;;;;;;;;Dungravt
+11;Uma;2;;;;;;;;;;Dungravt
+11;Umesh Janghela;3;;;;;;;;;;Dungravt
+11;Ratna;4;;;;;;;;;;Dungravt
+11;Sukvati;5;;;;;;;;;;Dungravt
+11;Basant;6;;;;;;;;;;Dungravt
+11;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+11;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+11;Lalchand Janghela;9;;;;;;;;;;Dungravt
+11;Sagar;10;;;;;;;;;;Dungravt
+11;Suraj Janghela;11;;;;;;;;;;Dungravt
+11;Shalandra;12;;;;;;;;;;Dungravt
+11;Omkar ;13;;;;;;;;;;Dungravt
+11;Omprakash Janghela;14;;;;;;;;;;Dungravt
+12;Ramnath;1;;;;;;;;;;Dungravt
+12;Uma;2;;;;;;;;;;Dungravt
+12;Umesh Janghela;3;;;;;;;;;;Dungravt
+12;Ratna;4;;;;;;;;;;Dungravt
+12;Sukvati;5;;;;;;;;;;Dungravt
+12;Basant;6;;;;;;;;;;Dungravt
+12;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+12;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+12;Lalchand Janghela;9;;;;;;;;;;Dungravt
+12;Sagar;10;;;;;;;;;;Dungravt
+12;Suraj Janghela;11;;;;;;;;;;Dungravt
+12;Shalandra;12;;;;;;;;;;Dungravt
+12;Omkar ;13;;;;;;;;;;Dungravt
+12;Omprakash Janghela;14;;;;;;;;;;Dungravt
+13;Ramnath;1;;;;;;;;;;Dungravt
+13;Uma;2;;;;;;;;;;Dungravt
+13;Umesh Janghela;3;;;;;;;;;;Dungravt
+13;Ratna;4;;;;;;;;;;Dungravt
+13;Sukvati;5;;;;;;;;;;Dungravt
+13;Basant;6;;;;;;;;;;Dungravt
+13;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+13;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+13;Lalchand Janghela;9;;;;;;;;;;Dungravt
+13;Sagar;10;;;;;;;;;;Dungravt
+13;Suraj Janghela;11;;;;;;;;;;Dungravt
+13;Shalandra;12;;;;;;;;;;Dungravt
+13;Omkar ;13;;;;;;;;;;Dungravt
+13;Omprakash Janghela;14;;;;;;;;;;Dungravt
+14;Ramnath;1;;;;;;;;;;Dungravt
+14;Uma;2;;;;;;;;;;Dungravt
+14;Umesh Janghela;3;;;;;;;;;;Dungravt
+14;Ratna;4;;;;;;;;;;Dungravt
+14;Sukvati;5;;;;;;;;;;Dungravt
+14;Basant;6;;;;;;;;;;Dungravt
+14;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+14;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+14;Lalchand Janghela;9;;;;;;;;;;Dungravt
+14;Sagar;10;;;;;;;;;;Dungravt
+14;Suraj Janghela;11;;;;;;;;;;Dungravt
+14;Shalandra;12;;;;;;;;;;Dungravt
+14;Omkar ;13;;;;;;;;;;Dungravt
+14;Omprakash Janghela;14;;;;;;;;;;Dungravt
+15;Ramnath;1;;;;;;;;;;Dungravt
+15;Uma;2;;;;;;;;;;Dungravt
+15;Umesh Janghela;3;;;;;;;;;;Dungravt
+15;Ratna;4;;;;;;;;;;Dungravt
+15;Sukvati;5;;;;;;;;;;Dungravt
+15;Basant;6;;;;;;;;;;Dungravt
+15;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+15;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+15;Lalchand Janghela;9;;;;;;;;;;Dungravt
+15;Sagar;10;;;;;;;;;;Dungravt
+15;Suraj Janghela;11;;;;;;;;;;Dungravt
+15;Shalandra;12;;;;;;;;;;Dungravt
+15;Omkar ;13;;;;;;;;;;Dungravt
+15;Omprakash Janghela;14;;;;;;;;;;Dungravt
+16;Ramnath;1;;;;;;;;;;Dungravt
+16;Uma;2;;;;;;;;;;Dungravt
+16;Umesh Janghela;3;;;;;;;;;;Dungravt
+16;Ratna;4;;;;;;;;;;Dungravt
+16;Sukvati;5;;;;;;;;;;Dungravt
+16;Basant;6;;;;;;;;;;Dungravt
+16;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+16;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+16;Lalchand Janghela;9;;;;;;;;;;Dungravt
+16;Sagar;10;;;;;;;;;;Dungravt
+16;Suraj Janghela;11;;;;;;;;;;Dungravt
+16;Shalandra;12;;;;;;;;;;Dungravt
+16;Omkar ;13;;;;;;;;;;Dungravt
+16;Omprakash Janghela;14;;;;;;;;;;Dungravt
+17;Ramnath;1;;;;;;;;;;Dungravt
+17;Uma;2;;;;;;;;;;Dungravt
+17;Umesh Janghela;3;;;;;;;;;;Dungravt
+17;Ratna;4;;;;;;;;;;Dungravt
+17;Sukvati;5;;;;;;;;;;Dungravt
+17;Basant;6;;;;;;;;;;Dungravt
+17;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+17;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+17;Lalchand Janghela;9;;;;;;;;;;Dungravt
+17;Sagar;10;;;;;;;;;;Dungravt
+17;Suraj Janghela;11;;;;;;;;;;Dungravt
+17;Shalandra;12;;;;;;;;;;Dungravt
+17;Omkar ;13;;;;;;;;;;Dungravt
+17;Omprakash Janghela;14;;;;;;;;;;Dungravt
+18;Ramnath;1;;;;;;;;;;Dungravt
+18;Uma;2;;;;;;;;;;Dungravt
+18;Umesh Janghela;3;;;;;;;;;;Dungravt
+18;Ratna;4;;;;;;;;;;Dungravt
+18;Sukvati;5;;;;;;;;;;Dungravt
+18;Basant;6;;;;;;;;;;Dungravt
+18;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+18;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+18;Lalchand Janghela;9;;;;;;;;;;Dungravt
+18;Sagar;10;;;;;;;;;;Dungravt
+18;Suraj Janghela;11;;;;;;;;;;Dungravt
+18;Shalandra;12;;;;;;;;;;Dungravt
+18;Omkar ;13;;;;;;;;;;Dungravt
+18;Omprakash Janghela;14;;;;;;;;;;Dungravt
+19;Ramnath;1;;;;;;;;;;Dungravt
+19;Uma;2;;;;;;;;;;Dungravt
+19;Umesh Janghela;3;;;;;;;;;;Dungravt
+19;Ratna;4;;;;;;;;;;Dungravt
+19;Sukvati;5;;;;;;;;;;Dungravt
+19;Basant;6;;;;;;;;;;Dungravt
+19;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+19;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+19;Lalchand Janghela;9;;;;;;;;;;Dungravt
+19;Sagar;10;;;;;;;;;;Dungravt
+19;Suraj Janghela;11;;;;;;;;;;Dungravt
+19;Shalandra;12;;;;;;;;;;Dungravt
+19;Omkar ;13;;;;;;;;;;Dungravt
+19;Omprakash Janghela;14;;;;;;;;;;Dungravt
+20;Ramnath;1;;;;;;;;;;Dungravt
+20;Uma;2;;;;;;;;;;Dungravt
+20;Umesh Janghela;3;;;;;;;;;;Dungravt
+20;Ratna;4;;;;;;;;;;Dungravt
+20;Sukvati;5;;;;;;;;;;Dungravt
+20;Basant;6;;;;;;;;;;Dungravt
+20;Shankarlal Janghela;7;;;;;;;;;;Dungravt
+20;Shambhuprasad Janghela;8;;;;;;;;;;Dungravt
+20;Lalchand Janghela;9;;;;;;;;;;Dungravt
+20;Sagar;10;;;;;;;;;;Dungravt
+20;Suraj Janghela;11;;;;;;;;;;Dungravt
+20;Shalandra;12;;;;;;;;;;Dungravt
+20;Omkar ;13;;;;;;;;;;Dungravt
+20;Omprakash Janghela;14;;;;;;;;;;Dungravt

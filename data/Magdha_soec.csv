@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Sunil;2;7;1;1;0;M;18;7;NO;NO;NO;0;NO;6;5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Sunil;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+2;Priya;2;6;1;2;0;F;21;8;NO;NO;NO;0;NO;2;1;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Priya;0;20;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+3;Prahlad;2;5;1;3;0;M;27;10;YES;FES CRP;NO;0;YES;5;7;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Prahlad;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+4;Sunita;1;4;1;4;0;F;23;8;NO;NO;NO;0;NO;2;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Sunita;0;20;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+5;Krishna Kumar;1;3;1;5;0;M;23;0;NO;NO;NO;0;NO;1;4;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Krishna Kumar;0;60;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+6;SUMIT;1;2;1;6;0;M;22;7;NO;NO;NO;0;NO;10;2;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;SUMIT;0;40;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+7;Sukhram;1;1;1;7;0;M;35;5;NO;NO;NO;0;NO;6;5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Sukhram;1;20;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+8;Nandlal;1;7;2;1;0;M;24;8;NO;NO;NO;0;NO;4;3;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Nandlal;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+9;Shyamlal;1;6;2;2;0;M;22;7;YES;COMMUNITY MEMBER;NO;0;NO;5;3;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Shyamlal;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+10;MANISH;1;5;2;3;0;M;22;12;NO;NO;NO;0;NO;6;2;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;MANISH;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+11;Shrichand;2;4;2;4;0;M;42;5;YES;COMMUNITY MEMBER;NO;0;NO;7;3;g;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Shrichand;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+12;Mukesh;2;3;2;5;0;M;18;8;NO;NO;NO;0;NO;6;3;w;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Mukesh;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+13;Harishchand;2;2;2;6;0;M;27;8;YES;PANCHAYAT MEMBER;NO;0;NO;5;1;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Harishchand;0;10;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14
+14;Lakhan;2;1;2;7;0;M;35;3;YES;COMMUNITY MEMBER;NO;0;NO;5;5;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Lakhan;0;30;Magdha;24.4.17;Duche, Chahandras, Shivraj, Sonja;14

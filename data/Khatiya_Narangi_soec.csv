@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Lachhi;2;7;1;1;0;m;62;0;n;n;n;n;y;5;1;w;0;0;1;0;0;0;0;0;0;0;0;1;0;0;Lachhi;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+2;Sasikanta;2;6;1;2;0;f;44;10;y;anganwasi worker;n;n;n;7;4;g;0;0;0;1;0;0;0;0;0;1;0;0;0;0;Sasikanta;1;170;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+3;Champa;2;5;1;3;0;f;27;5;n;n;20;n;n;7;1;g;0;0;0;0;0;0;0;0;0;0;0;1;0;1;Champa;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+4;Sohan;1;4;1;4;0;m;29;10;y;ward member;2;200;n;3;1,5;g;0;0;0;0;0;0;0;1;0;0;1;0;0;0;Sohan;0;30;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+5;Jasoda;1;3;1;5;0;f;41;12;y;society secretary;n;n;n;4;1;w;0;0;0;0;0;0;1;0;0;0;0;0;1;0;Jasoda;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+6;Manju;1;2;1;6;0;f;32;10;n;n;n;n;n;5;1;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Manju;0;10;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+7;Ankit;1;1;1;7;0;m;17;12;n;n;n;n;n;4;1;w;0;0;0;1;0;0;0;1;0;0;0;0;0;0;Ankit;0;10;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+8;Rajesh;1;7;2;1;0;m;31;12;y;ward member;3;300;n;3;12;g;0;0;0;1;0;0;1;0;0;0;0;0;0;0;Rajesh;0;30;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+9;Mohan Lal;1;6;2;2;0;m;53;6;n;n;2;200;n;4;2,5;g;1;0;0;0;0;0;0;0;0;0;1;0;0;0;Mohan Lal;0;10;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+10;Visakha;1;5;2;3;0;f;38;10;y;anganwadi worker;n;n;n;4;3;g;0;1;0;0;0;1;0;0;0;0;0;0;0;0;Visakha;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+11;Ramcharam;2;4;2;4;0;m;42;5;n;n;n;n;n;3;3,5;w;0;0;0;0;0;0;1;1;0;0;0;0;0;0;Ramcharam;0;10;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+12;Jeevan;2;3;2;5;0;m;23;8;n;n;n;n;n;4;4;w;1;0;0;0;0;0;0;1;0;0;0;0;0;0;Jeevan;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+13;Mona;2;2;2;6;0;f;21;12;n;n;n;n;n;8;1;g;0;0;0;0;0;1;0;0;0;0;0;1;0;0;Mona;0;10;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14
+14;Ram Prasad;2;1;2;7;0;m;23;6;n;n;n;n;n;5;3;w;0;0;1;0;0;0;0;0;0;0;0;1;0;0;Ram Prasad;0;20;Khatiya_Narangi;18.04.2017;Sonja, Prasoon, Shivraj, Abhisek, Rajiv, Lara, Rada;14

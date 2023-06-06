@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Mukesh;1;;1;;;;;;;;Atariya
+6;Laxman;2;;1;;;;;;;;Atariya
+6;Nainsingh;3;1;3;;1;1;;;;;Atariya
+6;Rambhajan;4;1;2;;;1;;;;;Atariya
+6;Sukhdev;5;;2;;;;;;;;Atariya
+6;Sushila R Durve;6;;1;;;;;;;;Atariya
+6;Kamal;7;;1;1;;;;;;;Atariya
+6;Rampyari;8;;;;;;;;;2;Atariya
+6;Sushila N Durve;9;;;;;;;;;;Atariya
+6;Jagat;10;;4;;;;;;;;Atariya
+6;Kanhaiya;11;;;;;;;;;;Atariya
+6;Santoh;12;;;;;;;1;;;Atariya
+6;Chamrulal;13;;;;;;;;;;Atariya
+6;Rambai;14;2;;;;;;;;;Atariya
+7;Mukesh;1;;2;;1;1;;;;;Atariya
+7;Laxman;2;;2;;;;;;;;Atariya
+7;Nainsingh;3;2;1;;1;;;;;;Atariya
+7;Rambhajan;4;1;2;;;1;;;;;Atariya
+7;Sukhdev;5;;2;1;;;;;;;Atariya
+7;Sushila R Durve;6;;1;;;;;;;;Atariya
+7;Kamal;7;1;;;;;;;;;Atariya
+7;Rampyari;8;;;;;;;;;;Atariya
+7;Sushila N Durve;9;;;;;;;;;;Atariya
+7;Jagat;10;2;;;;;;;;;Atariya
+7;Kanhaiya;11;;5;;;;;;;;Atariya
+7;Santoh;12;;;;;;;;;;Atariya
+7;Chamrulal;13;;;;;;;;;;Atariya
+7;Rambai;14;;;;;;1;;;;Atariya
+8;Mukesh;1;;1;;;;;;;;Atariya
+8;Laxman;2;;2;;;1;;;;;Atariya
+8;Nainsingh;3;1;1;;;;;;;;Atariya
+8;Rambhajan;4;1;2;;1;1;;;;;Atariya
+8;Sukhdev;5;;1;;;;;;;;Atariya
+8;Sushila R Durve;6;;2;;;;;;;;Atariya
+8;Kamal;7;;1;;;;;;;;Atariya
+8;Rampyari;8;;;;;;;;;;Atariya
+8;Sushila N Durve;9;;4;;;;;;;;Atariya
+8;Jagat;10;;;;;;;1;;;Atariya
+8;Kanhaiya;11;;;;;;;;;;Atariya
+8;Santoh;12;;;;;;2;;;;Atariya
+8;Chamrulal;13;;;;;;;;;;Atariya
+8;Rambai;14;2;;;;;;;;;Atariya
+9;Mukesh;1;;1;;;;;;;;Atariya
+9;Laxman;2;;1;;;;;;;;Atariya
+9;Nainsingh;3;2;2;;;3;;;;;Atariya
+9;Rambhajan;4;2;2;;;2;;;;;Atariya
+9;Sukhdev;5;;3;;;;;;;;Atariya
+9;Sushila R Durve;6;;1;;;;;;;;Atariya
+9;Kamal;7;;1;;;;;;;;Atariya
+9;Rampyari;8;;;;;;;;;1;Atariya
+9;Sushila N Durve;9;;;;;;;;;;Atariya
+9;Jagat;10;;;;;2;;;;;Atariya
+9;Kanhaiya;11;;;;;;;;;;Atariya
+9;Santoh;12;2;;;;;;;;;Atariya
+9;Chamrulal;13;;;;1;;;;;;Atariya
+9;Rambai;14;;5;;;;;;;;Atariya
+10;Mukesh;1;;;;;;;;;;Atariya
+10;Laxman;2;;;;;;;;;;Atariya
+10;Nainsingh;3;;;;;;;;;;Atariya
+10;Rambhajan;4;;;;;;;;;;Atariya
+10;Sukhdev;5;;;;;;;;;;Atariya
+10;Sushila R Durve;6;;;;;;;;;;Atariya
+10;Kamal;7;;;;;;;;;;Atariya
+10;Rampyari;8;;;;;;;;;;Atariya
+10;Sushila N Durve;9;;;;;;;;;;Atariya
+10;Jagat;10;;;;;;;;;;Atariya
+10;Kanhaiya;11;;;;;;;;;;Atariya
+10;Santoh;12;;;;;;;;;;Atariya
+10;Chamrulal;13;;;;;;;;;;Atariya
+10;Rambai;14;;;;;;;;;;Atariya
+11;Mukesh;1;;;;;;;;;;Atariya
+11;Laxman;2;;;;;;;;;;Atariya
+11;Nainsingh;3;;;;;;;;;;Atariya
+11;Rambhajan;4;;;;;;;;;;Atariya
+11;Sukhdev;5;;;;;;;;;;Atariya
+11;Sushila R Durve;6;;;;;;;;;;Atariya
+11;Kamal;7;;;;;;;;;;Atariya
+11;Rampyari;8;;;;;;;;;;Atariya
+11;Sushila N Durve;9;;;;;;;;;;Atariya
+11;Jagat;10;;;;;;;;;;Atariya
+11;Kanhaiya;11;;;;;;;;;;Atariya
+11;Santoh;12;;;;;;;;;;Atariya
+11;Chamrulal;13;;;;;;;;;;Atariya
+11;Rambai;14;;;;;;;;;;Atariya
+12;Mukesh;1;;;;;;;;;;Atariya
+12;Laxman;2;;;;;;;;;;Atariya
+12;Nainsingh;3;;;;;;;;;;Atariya
+12;Rambhajan;4;;;;;;;;;;Atariya
+12;Sukhdev;5;;;;;;;;;;Atariya
+12;Sushila R Durve;6;;;;;;;;;;Atariya
+12;Kamal;7;;;;;;;;;;Atariya
+12;Rampyari;8;;;;;;;;;;Atariya
+12;Sushila N Durve;9;;;;;;;;;;Atariya
+12;Jagat;10;;;;;;;;;;Atariya
+12;Kanhaiya;11;;;;;;;;;;Atariya
+12;Santoh;12;;;;;;;;;;Atariya
+12;Chamrulal;13;;;;;;;;;;Atariya
+12;Rambai;14;;;;;;;;;;Atariya
+13;Mukesh;1;;;;;;;;;;Atariya
+13;Laxman;2;;;;;;;;;;Atariya
+13;Nainsingh;3;;;;;;;;;;Atariya
+13;Rambhajan;4;;;;;;;;;;Atariya
+13;Sukhdev;5;;;;;;;;;;Atariya
+13;Sushila R Durve;6;;;;;;;;;;Atariya
+13;Kamal;7;;;;;;;;;;Atariya
+13;Rampyari;8;;;;;;;;;;Atariya
+13;Sushila N Durve;9;;;;;;;;;;Atariya
+13;Jagat;10;;;;;;;;;;Atariya
+13;Kanhaiya;11;;;;;;;;;;Atariya
+13;Santoh;12;;;;;;;;;;Atariya
+13;Chamrulal;13;;;;;;;;;;Atariya
+13;Rambai;14;;;;;;;;;;Atariya
+14;Mukesh;1;;;;;;;;;;Atariya
+14;Laxman;2;;;;;;;;;;Atariya
+14;Nainsingh;3;;;;;;;;;;Atariya
+14;Rambhajan;4;;;;;;;;;;Atariya
+14;Sukhdev;5;;;;;;;;;;Atariya
+14;Sushila R Durve;6;;;;;;;;;;Atariya
+14;Kamal;7;;;;;;;;;;Atariya
+14;Rampyari;8;;;;;;;;;;Atariya
+14;Sushila N Durve;9;;;;;;;;;;Atariya
+14;Jagat;10;;;;;;;;;;Atariya
+14;Kanhaiya;11;;;;;;;;;;Atariya
+14;Santoh;12;;;;;;;;;;Atariya
+14;Chamrulal;13;;;;;;;;;;Atariya
+14;Rambai;14;;;;;;;;;;Atariya
+15;Mukesh;1;;;;;;;;;;Atariya
+15;Laxman;2;;;;;;;;;;Atariya
+15;Nainsingh;3;;;;;;;;;;Atariya
+15;Rambhajan;4;;;;;;;;;;Atariya
+15;Sukhdev;5;;;;;;;;;;Atariya
+15;Sushila R Durve;6;;;;;;;;;;Atariya
+15;Kamal;7;;;;;;;;;;Atariya
+15;Rampyari;8;;;;;;;;;;Atariya
+15;Sushila N Durve;9;;;;;;;;;;Atariya
+15;Jagat;10;;;;;;;;;;Atariya
+15;Kanhaiya;11;;;;;;;;;;Atariya
+15;Santoh;12;;;;;;;;;;Atariya
+15;Chamrulal;13;;;;;;;;;;Atariya
+15;Rambai;14;;;;;;;;;;Atariya
+16;Mukesh;1;;;;;;;;;;Atariya
+16;Laxman;2;;;;;;;;;;Atariya
+16;Nainsingh;3;;;;;;;;;;Atariya
+16;Rambhajan;4;;;;;;;;;;Atariya
+16;Sukhdev;5;;;;;;;;;;Atariya
+16;Sushila R Durve;6;;;;;;;;;;Atariya
+16;Kamal;7;;;;;;;;;;Atariya
+16;Rampyari;8;;;;;;;;;;Atariya
+16;Sushila N Durve;9;;;;;;;;;;Atariya
+16;Jagat;10;;;;;;;;;;Atariya
+16;Kanhaiya;11;;;;;;;;;;Atariya
+16;Santoh;12;;;;;;;;;;Atariya
+16;Chamrulal;13;;;;;;;;;;Atariya
+16;Rambai;14;;;;;;;;;;Atariya
+17;Mukesh;1;;;;;;;;;;Atariya
+17;Laxman;2;;;;;;;;;;Atariya
+17;Nainsingh;3;;;;;;;;;;Atariya
+17;Rambhajan;4;;;;;;;;;;Atariya
+17;Sukhdev;5;;;;;;;;;;Atariya
+17;Sushila R Durve;6;;;;;;;;;;Atariya
+17;Kamal;7;;;;;;;;;;Atariya
+17;Rampyari;8;;;;;;;;;;Atariya
+17;Sushila N Durve;9;;;;;;;;;;Atariya
+17;Jagat;10;;;;;;;;;;Atariya
+17;Kanhaiya;11;;;;;;;;;;Atariya
+17;Santoh;12;;;;;;;;;;Atariya
+17;Chamrulal;13;;;;;;;;;;Atariya
+17;Rambai;14;;;;;;;;;;Atariya
+18;Mukesh;1;;;;;;;;;;Atariya
+18;Laxman;2;;;;;;;;;;Atariya
+18;Nainsingh;3;;;;;;;;;;Atariya
+18;Rambhajan;4;;;;;;;;;;Atariya
+18;Sukhdev;5;;;;;;;;;;Atariya
+18;Sushila R Durve;6;;;;;;;;;;Atariya
+18;Kamal;7;;;;;;;;;;Atariya
+18;Rampyari;8;;;;;;;;;;Atariya
+18;Sushila N Durve;9;;;;;;;;;;Atariya
+18;Jagat;10;;;;;;;;;;Atariya
+18;Kanhaiya;11;;;;;;;;;;Atariya
+18;Santoh;12;;;;;;;;;;Atariya
+18;Chamrulal;13;;;;;;;;;;Atariya
+18;Rambai;14;;;;;;;;;;Atariya
+19;Mukesh;1;;;;;;;;;;Atariya
+19;Laxman;2;;;;;;;;;;Atariya
+19;Nainsingh;3;;;;;;;;;;Atariya
+19;Rambhajan;4;;;;;;;;;;Atariya
+19;Sukhdev;5;;;;;;;;;;Atariya
+19;Sushila R Durve;6;;;;;;;;;;Atariya
+19;Kamal;7;;;;;;;;;;Atariya
+19;Rampyari;8;;;;;;;;;;Atariya
+19;Sushila N Durve;9;;;;;;;;;;Atariya
+19;Jagat;10;;;;;;;;;;Atariya
+19;Kanhaiya;11;;;;;;;;;;Atariya
+19;Santoh;12;;;;;;;;;;Atariya
+19;Chamrulal;13;;;;;;;;;;Atariya
+19;Rambai;14;;;;;;;;;;Atariya
+20;Mukesh;1;;;;;;;;;;Atariya
+20;Laxman;2;;;;;;;;;;Atariya
+20;Nainsingh;3;;;;;;;;;;Atariya
+20;Rambhajan;4;;;;;;;;;;Atariya
+20;Sukhdev;5;;;;;;;;;;Atariya
+20;Sushila R Durve;6;;;;;;;;;;Atariya
+20;Kamal;7;;;;;;;;;;Atariya
+20;Rampyari;8;;;;;;;;;;Atariya
+20;Sushila N Durve;9;;;;;;;;;;Atariya
+20;Jagat;10;;;;;;;;;;Atariya
+20;Kanhaiya;11;;;;;;;;;;Atariya
+20;Santoh;12;;;;;;;;;;Atariya
+20;Chamrulal;13;;;;;;;;;;Atariya
+20;Rambai;14;;;;;;;;;;Atariya

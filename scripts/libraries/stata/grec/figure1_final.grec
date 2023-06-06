@@ -1,0 +1,45 @@
+StataFileTM:00001:01100:GREC:                          :
+00007:00007:00001:
+*! classname: combinegraph_g
+*! family: combine
+*! date: 20 Jun 2022
+*! time: 16:05:03
+*! graph_scheme: _GRSTYLE_
+*! naturallywhite: 1
+*! end
+
+// File created by Graph Editor Recorder.
+// Edit only if you know what you are doing.
+
+.style.editstyle margin(zero) editcopy
+// Graph margin
+
+.gmetric_mult = 1.1
+// Graph edits
+
+.gmetric_mult = 1.2
+// Graph edits
+
+.plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(6-pt) editcopy
+// editor text[1] size
+
+.plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+// editor text[1] size
+
+.plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(small) editcopy
+// editor text[1] size
+
+.plotregion1.graph2.plotregion1.added_text[1].DragBy .0192344756311785 .3714312066533156
+// editor text[1] reposition
+
+.plotregion1.graph1.xaxis1.title.DragBy .1083514229419924 -8.234708143591391
+// title reposition
+
+.plotregion1.graph1.xaxis1.title.DragBy 0 3.033839842375797
+// title reposition
+
+.plotregion1.graph2.style.editstyle boxstyle(shadestyle(color(none))) editcopy
+// graph2 color
+
+
+// <end>

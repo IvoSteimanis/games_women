@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;SURESH YADAV;1;;1;;1;;1;;;;Gunegaon
+6;BIHARILAL MARAVI;2;;1;;;;1;;;;Gunegaon
+6;MOTILAL PARATE;3;;1;;1;;;;;;Gunegaon
+6;RAJU YADHAV;4;;1;;;;;;;;Gunegaon
+6;ARJUN YADAV;5;;1;;;;;2;;;Gunegaon
+6;LALARAM MARAVI;6;4;1;;1;;;;;;Gunegaon
+6;SANTOSHKUMAR PARATE;7;;3;;;;;;;;Gunegaon
+6;DHANESHWARI;8;;1;;;;;;;;Gunegaon
+6;PREMLAL PANDRU;9;1;2;1;1;;1;;;;Gunegaon
+6;CHAMARSINGH;10;;;;;;1;;;;Gunegaon
+6;DEVSINGH VALAKE;11;;1;;;;;;;;Gunegaon
+6;KISHORILAL YADHAV;12;1;2;;;;;;;;Gunegaon
+6;ASHOKKUMAR VALAKE;13;2;;1;1;;;;;;Gunegaon
+6;MUNALAL PUSAM;14;2;1;;;;;;;;Gunegaon
+7;SURESH YADAV;1;;1;;;2;;;;;Gunegaon
+7;BIHARILAL MARAVI;2;;1;;;;2;;;;Gunegaon
+7;MOTILAL PARATE;3;;1;;;;;;;;Gunegaon
+7;RAJU YADHAV;4;;1;;;;;3;;;Gunegaon
+7;ARJUN YADAV;5;2;;;;;;;;;Gunegaon
+7;LALARAM MARAVI;6;1;1;;;2;;;;;Gunegaon
+7;SANTOSHKUMAR PARATE;7;;1;;;;;;;;Gunegaon
+7;DHANESHWARI;8;;1;;;;;;;1;Gunegaon
+7;PREMLAL PANDRU;9;2;;;1;1;;;;;Gunegaon
+7;CHAMARSINGH;10;1;;1;1;;1;1;;;Gunegaon
+7;DEVSINGH VALAKE;11;;;;;;;;;1;Gunegaon
+7;KISHORILAL YADHAV;12;;;;1;;;;;;Gunegaon
+7;ASHOKKUMAR VALAKE;13;1;;;;;;;;;Gunegaon
+7;MUNALAL PUSAM;14;2;;1;;;;;;;Gunegaon
+8;SURESH YADAV;1;;1;;;;;;;;Gunegaon
+8;BIHARILAL MARAVI;2;2;;;;;;;;;Gunegaon
+8;MOTILAL PARATE;3;;1;;;;;;;;Gunegaon
+8;RAJU YADHAV;4;1;3;;;;;;;;Gunegaon
+8;ARJUN YADAV;5;;1;;;;;3;;;Gunegaon
+8;LALARAM MARAVI;6;1;1;;;;2;;;;Gunegaon
+8;SANTOSHKUMAR PARATE;7;;4;;;;;;;;Gunegaon
+8;DHANESHWARI;8;;1;;;;;;;;Gunegaon
+8;PREMLAL PANDRU;9;2;1;1;1;1;;;;;Gunegaon
+8;CHAMARSINGH;10;2;1;;;1;1;;;;Gunegaon
+8;DEVSINGH VALAKE;11;1;2;;;;;;;;Gunegaon
+8;KISHORILAL YADHAV;12;1;2;;;;;;;;Gunegaon
+8;ASHOKKUMAR VALAKE;13;;2;;;;;;;;Gunegaon
+8;MUNALAL PUSAM;14;1;2;;;;;;;;Gunegaon
+9;SURESH YADAV;1;;1;;;1;;;;;Gunegaon
+9;BIHARILAL MARAVI;2;;5;;;;;;;;Gunegaon
+9;MOTILAL PARATE;3;;1;;;1;;;;;Gunegaon
+9;RAJU YADHAV;4;;1;1;1;;;;;;Gunegaon
+9;ARJUN YADAV;5;3;;;;;;;;;Gunegaon
+9;LALARAM MARAVI;6;1;;;;;;;2;;Gunegaon
+9;SANTOSHKUMAR PARATE;7;;3;;;;;;;;Gunegaon
+9;DHANESHWARI;8;;2;1;;;;;;1;Gunegaon
+9;PREMLAL PANDRU;9;4;2;1;;;;;;;Gunegaon
+9;CHAMARSINGH;10;2;2;1;;;1;;;;Gunegaon
+9;DEVSINGH VALAKE;11;;2;1;;;;;;;Gunegaon
+9;KISHORILAL YADHAV;12;;2;2;;;;;;;Gunegaon
+9;ASHOKKUMAR VALAKE;13;3;2;;;;2;;;;Gunegaon
+9;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+10;SURESH YADAV;1;;;;;;;;;;Gunegaon
+10;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+10;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+10;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+10;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+10;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+10;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+10;DHANESHWARI;8;;;;;;;;;;Gunegaon
+10;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+10;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+10;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+10;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+10;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+10;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+11;SURESH YADAV;1;;;;;;;;;;Gunegaon
+11;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+11;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+11;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+11;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+11;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+11;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+11;DHANESHWARI;8;;;;;;;;;;Gunegaon
+11;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+11;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+11;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+11;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+11;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+11;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+12;SURESH YADAV;1;;;;;;;;;;Gunegaon
+12;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+12;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+12;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+12;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+12;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+12;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+12;DHANESHWARI;8;;;;;;;;;;Gunegaon
+12;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+12;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+12;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+12;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+12;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+12;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+13;SURESH YADAV;1;;;;;;;;;;Gunegaon
+13;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+13;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+13;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+13;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+13;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+13;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+13;DHANESHWARI;8;;;;;;;;;;Gunegaon
+13;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+13;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+13;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+13;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+13;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+13;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+14;SURESH YADAV;1;;;;;;;;;;Gunegaon
+14;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+14;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+14;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+14;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+14;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+14;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+14;DHANESHWARI;8;;;;;;;;;;Gunegaon
+14;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+14;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+14;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+14;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+14;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+14;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+15;SURESH YADAV;1;;;;;;;;;;Gunegaon
+15;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+15;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+15;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+15;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+15;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+15;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+15;DHANESHWARI;8;;;;;;;;;;Gunegaon
+15;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+15;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+15;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+15;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+15;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+15;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+16;SURESH YADAV;1;;;;;;;;;;Gunegaon
+16;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+16;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+16;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+16;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+16;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+16;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+16;DHANESHWARI;8;;;;;;;;;;Gunegaon
+16;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+16;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+16;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+16;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+16;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+16;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+17;SURESH YADAV;1;;;;;;;;;;Gunegaon
+17;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+17;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+17;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+17;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+17;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+17;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+17;DHANESHWARI;8;;;;;;;;;;Gunegaon
+17;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+17;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+17;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+17;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+17;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+17;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+18;SURESH YADAV;1;;;;;;;;;;Gunegaon
+18;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+18;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+18;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+18;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+18;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+18;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+18;DHANESHWARI;8;;;;;;;;;;Gunegaon
+18;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+18;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+18;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+18;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+18;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+18;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+19;SURESH YADAV;1;;;;;;;;;;Gunegaon
+19;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+19;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+19;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+19;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+19;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+19;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+19;DHANESHWARI;8;;;;;;;;;;Gunegaon
+19;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+19;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+19;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+19;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+19;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+19;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon
+20;SURESH YADAV;1;;;;;;;;;;Gunegaon
+20;BIHARILAL MARAVI;2;;;;;;;;;;Gunegaon
+20;MOTILAL PARATE;3;;;;;;;;;;Gunegaon
+20;RAJU YADHAV;4;;;;;;;;;;Gunegaon
+20;ARJUN YADAV;5;;;;;;;;;;Gunegaon
+20;LALARAM MARAVI;6;;;;;;;;;;Gunegaon
+20;SANTOSHKUMAR PARATE;7;;;;;;;;;;Gunegaon
+20;DHANESHWARI;8;;;;;;;;;;Gunegaon
+20;PREMLAL PANDRU;9;;;;;;;;;;Gunegaon
+20;CHAMARSINGH;10;;;;;;;;;;Gunegaon
+20;DEVSINGH VALAKE;11;;;;;;;;;;Gunegaon
+20;KISHORILAL YADHAV;12;;;;;;;;;;Gunegaon
+20;ASHOKKUMAR VALAKE;13;;;;;;;;;;Gunegaon
+20;MUNALAL PUSAM;14;;;;;;;;;;Gunegaon

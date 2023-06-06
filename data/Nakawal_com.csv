@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;GYANAL;1;;;;;;;;2;;Nakawal
+6;SATANAND KAWARE;2;;;;1;;;;;;Nakawal
+6;BIHARILAL;3;;;;1;2;;;;;Nakawal
+6;OMPRAKASH;4;;3;;;;;;;;Nakawal
+6;NANDALAL KAWARE;5;;;;;;;2;;;Nakawal
+6;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+6;SUNILKUMAR;7;3;;;;;;;;;Nakawal
+6;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+6;BHAGWAT BHAWARE;9;;4;;;;;;;;Nakawal
+6;TEKARAM ANCHESHWAR;10;;;1;;;;;;;Nakawal
+6;SHIRARAM KAWARE;11;3;;;;;;;;;Nakawal
+6;RUPRAM;12;;;;;;;1;;;Nakawal
+6;GOAPAL;13;;;;;;;;;;Nakawal
+6;VIRENDRA;14;;;;;;;;2;;Nakawal
+7;GYANAL;1;;1;;;;;;;;Nakawal
+7;SATANAND KAWARE;2;3;;;;;;;;;Nakawal
+7;BIHARILAL;3;;;;;;2;;;;Nakawal
+7;OMPRAKASH;4;;6;;;;;;;;Nakawal
+7;NANDALAL KAWARE;5;;;;;2;;;;;Nakawal
+7;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+7;SUNILKUMAR;7;;;;1;;;2;;;Nakawal
+7;DUBELAL BHAVARE;8;;;;2;;;;;;Nakawal
+7;BHAGWAT BHAWARE;9;;3;;;;;;;;Nakawal
+7;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+7;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+7;RUPRAM;12;;;;;;;;;;Nakawal
+7;GOAPAL;13;;;;;;;;;;Nakawal
+7;VIRENDRA;14;;;3;;;;;;;Nakawal
+8;GYANAL;1;;;;;;;3;;;Nakawal
+8;SATANAND KAWARE;2;;;;;1;;;;;Nakawal
+8;BIHARILAL;3;3;;;;;;;;;Nakawal
+8;OMPRAKASH;4;;;;;;;;2;;Nakawal
+8;NANDALAL KAWARE;5;;;;2;;;;;;Nakawal
+8;RAMPRASAD KAWARE;6;;5;;;;;;;;Nakawal
+8;SUNILKUMAR;7;2;;;;;;;;;Nakawal
+8;DUBELAL BHAVARE;8;;;1;;;;;;;Nakawal
+8;BHAGWAT BHAWARE;9;5;;;;;;;;;Nakawal
+8;TEKARAM ANCHESHWAR;10;;3;;;;;;;;Nakawal
+8;SHIRARAM KAWARE;11;;;;1;;;;;;Nakawal
+8;RUPRAM;12;;;;;1;;;;;Nakawal
+8;GOAPAL;13;;;;;;;1;;;Nakawal
+8;VIRENDRA;14;;;;;;;;;;Nakawal
+9;GYANAL;1;;;;;2;;;;;Nakawal
+9;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+9;BIHARILAL;3;;;;;;;;;;Nakawal
+9;OMPRAKASH;4;;;;2;;;;;;Nakawal
+9;NANDALAL KAWARE;5;;2;;;;;;;;Nakawal
+9;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+9;SUNILKUMAR;7;;2;;;;;;;;Nakawal
+9;DUBELAL BHAVARE;8;4;;;;;;;;;Nakawal
+9;BHAGWAT BHAWARE;9;;2;;;;;;;;Nakawal
+9;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+9;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+9;RUPRAM;12;;;;1;;;;;;Nakawal
+9;GOAPAL;13;;;;;;;;;;Nakawal
+9;VIRENDRA;14;;;;;;;;;;Nakawal
+10;GYANAL;1;;;;;;;;;;Nakawal
+10;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+10;BIHARILAL;3;;;;;;;;;;Nakawal
+10;OMPRAKASH;4;;;;;;;;;;Nakawal
+10;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+10;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+10;SUNILKUMAR;7;;;;;;;;;;Nakawal
+10;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+10;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+10;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+10;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+10;RUPRAM;12;;;;;;;;;;Nakawal
+10;GOAPAL;13;;;;;;;;;;Nakawal
+10;VIRENDRA;14;;;;;;;;;;Nakawal
+11;GYANAL;1;;;;;;;;;;Nakawal
+11;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+11;BIHARILAL;3;;;;;;;;;;Nakawal
+11;OMPRAKASH;4;;;;;;;;;;Nakawal
+11;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+11;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+11;SUNILKUMAR;7;;;;;;;;;;Nakawal
+11;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+11;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+11;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+11;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+11;RUPRAM;12;;;;;;;;;;Nakawal
+11;GOAPAL;13;;;;;;;;;;Nakawal
+11;VIRENDRA;14;;;;;;;;;;Nakawal
+12;GYANAL;1;;;;;;;;;;Nakawal
+12;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+12;BIHARILAL;3;;;;;;;;;;Nakawal
+12;OMPRAKASH;4;;;;;;;;;;Nakawal
+12;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+12;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+12;SUNILKUMAR;7;;;;;;;;;;Nakawal
+12;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+12;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+12;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+12;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+12;RUPRAM;12;;;;;;;;;;Nakawal
+12;GOAPAL;13;;;;;;;;;;Nakawal
+12;VIRENDRA;14;;;;;;;;;;Nakawal
+13;GYANAL;1;;;;;;;;;;Nakawal
+13;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+13;BIHARILAL;3;;;;;;;;;;Nakawal
+13;OMPRAKASH;4;;;;;;;;;;Nakawal
+13;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+13;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+13;SUNILKUMAR;7;;;;;;;;;;Nakawal
+13;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+13;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+13;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+13;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+13;RUPRAM;12;;;;;;;;;;Nakawal
+13;GOAPAL;13;;;;;;;;;;Nakawal
+13;VIRENDRA;14;;;;;;;;;;Nakawal
+14;GYANAL;1;;;;;;;;;;Nakawal
+14;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+14;BIHARILAL;3;;;;;;;;;;Nakawal
+14;OMPRAKASH;4;;;;;;;;;;Nakawal
+14;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+14;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+14;SUNILKUMAR;7;;;;;;;;;;Nakawal
+14;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+14;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+14;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+14;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+14;RUPRAM;12;;;;;;;;;;Nakawal
+14;GOAPAL;13;;;;;;;;;;Nakawal
+14;VIRENDRA;14;;;;;;;;;;Nakawal
+15;GYANAL;1;;;;;;;;;;Nakawal
+15;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+15;BIHARILAL;3;;;;;;;;;;Nakawal
+15;OMPRAKASH;4;;;;;;;;;;Nakawal
+15;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+15;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+15;SUNILKUMAR;7;;;;;;;;;;Nakawal
+15;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+15;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+15;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+15;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+15;RUPRAM;12;;;;;;;;;;Nakawal
+15;GOAPAL;13;;;;;;;;;;Nakawal
+15;VIRENDRA;14;;;;;;;;;;Nakawal
+16;GYANAL;1;;;;;;;;;;Nakawal
+16;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+16;BIHARILAL;3;;;;;;;;;;Nakawal
+16;OMPRAKASH;4;;;;;;;;;;Nakawal
+16;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+16;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+16;SUNILKUMAR;7;;;;;;;;;;Nakawal
+16;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+16;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+16;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+16;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+16;RUPRAM;12;;;;;;;;;;Nakawal
+16;GOAPAL;13;;;;;;;;;;Nakawal
+16;VIRENDRA;14;;;;;;;;;;Nakawal
+17;GYANAL;1;;;;;;;;;;Nakawal
+17;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+17;BIHARILAL;3;;;;;;;;;;Nakawal
+17;OMPRAKASH;4;;;;;;;;;;Nakawal
+17;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+17;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+17;SUNILKUMAR;7;;;;;;;;;;Nakawal
+17;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+17;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+17;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+17;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+17;RUPRAM;12;;;;;;;;;;Nakawal
+17;GOAPAL;13;;;;;;;;;;Nakawal
+17;VIRENDRA;14;;;;;;;;;;Nakawal
+18;GYANAL;1;;;;;;;;;;Nakawal
+18;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+18;BIHARILAL;3;;;;;;;;;;Nakawal
+18;OMPRAKASH;4;;;;;;;;;;Nakawal
+18;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+18;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+18;SUNILKUMAR;7;;;;;;;;;;Nakawal
+18;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+18;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+18;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+18;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+18;RUPRAM;12;;;;;;;;;;Nakawal
+18;GOAPAL;13;;;;;;;;;;Nakawal
+18;VIRENDRA;14;;;;;;;;;;Nakawal
+19;GYANAL;1;;;;;;;;;;Nakawal
+19;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+19;BIHARILAL;3;;;;;;;;;;Nakawal
+19;OMPRAKASH;4;;;;;;;;;;Nakawal
+19;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+19;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+19;SUNILKUMAR;7;;;;;;;;;;Nakawal
+19;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+19;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+19;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+19;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+19;RUPRAM;12;;;;;;;;;;Nakawal
+19;GOAPAL;13;;;;;;;;;;Nakawal
+19;VIRENDRA;14;;;;;;;;;;Nakawal
+20;GYANAL;1;;;;;;;;;;Nakawal
+20;SATANAND KAWARE;2;;;;;;;;;;Nakawal
+20;BIHARILAL;3;;;;;;;;;;Nakawal
+20;OMPRAKASH;4;;;;;;;;;;Nakawal
+20;NANDALAL KAWARE;5;;;;;;;;;;Nakawal
+20;RAMPRASAD KAWARE;6;;;;;;;;;;Nakawal
+20;SUNILKUMAR;7;;;;;;;;;;Nakawal
+20;DUBELAL BHAVARE;8;;;;;;;;;;Nakawal
+20;BHAGWAT BHAWARE;9;;;;;;;;;;Nakawal
+20;TEKARAM ANCHESHWAR;10;;;;;;;;;;Nakawal
+20;SHIRARAM KAWARE;11;;;;;;;;;;Nakawal
+20;RUPRAM;12;;;;;;;;;;Nakawal
+20;GOAPAL;13;;;;;;;;;;Nakawal
+20;VIRENDRA;14;;;;;;;;;;Nakawal

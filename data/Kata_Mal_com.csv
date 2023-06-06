@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Shivprasad;1;4;;;;;;;;;Kata_Mal
+6;Raju;2;;;;;;;;;;Kata_Mal
+6;Rajesh Patel;3;;4;;;;;;;;Kata_Mal
+6;Sukharam;4;;;;4;;;;;;Kata_Mal
+6;Laxmi;5;;;;;;2;;;;Kata_Mal
+6;Hajari;6;;;1;;;;1;;;Kata_Mal
+6;Golu;7;;;;;1;;;;;Kata_Mal
+6;Sevakram;8;;1;;;1;;;;;Kata_Mal
+6;Surendra;9;2;3;;;;;;;3;Kata_Mal
+6;Bharatlal;10;;1;1;;;1;;;;Kata_Mal
+6;Balmukund;11;;1;;;;;;1;;Kata_Mal
+6;Ashokkumar Patel;12;1;1;;;;1;;;;Kata_Mal
+6;Abhishek;13;;1;;;;;;;;Kata_Mal
+6;Sajjan;14;;1;;;;;;1;;Kata_Mal
+7;Shivprasad;1;3;;;;;;;;;Kata_Mal
+7;Raju;2;;4;;;;;;;;Kata_Mal
+7;Rajesh Patel;3;;;;4;;;;;;Kata_Mal
+7;Sukharam;4;;;3;;;;;;;Kata_Mal
+7;Laxmi;5;;;;;;5;;;;Kata_Mal
+7;Hajari;6;;;;2;;;;;;Kata_Mal
+7;Golu;7;;;;;2;;;;;Kata_Mal
+7;Sevakram;8;;1;;1;;;;;;Kata_Mal
+7;Surendra;9;1;;1;;1;;;;;Kata_Mal
+7;Bharatlal;10;;4;;1;;1;;;;Kata_Mal
+7;Balmukund;11;;1;;;;;;;;Kata_Mal
+7;Ashokkumar Patel;12;1;;1;;;1;;;2;Kata_Mal
+7;Abhishek;13;;1;;;;;;;;Kata_Mal
+7;Sajjan;14;;1;;1;;;;;;Kata_Mal
+8;Shivprasad;1;;;1;;;;;;;Kata_Mal
+8;Raju;2;;;;;;;;;;Kata_Mal
+8;Rajesh Patel;3;4;;;;;;;;;Kata_Mal
+8;Sukharam;4;;3;;;;;;;;Kata_Mal
+8;Laxmi;5;;;;;1;;;;;Kata_Mal
+8;Hajari;6;;;;5;;;;;;Kata_Mal
+8;Golu;7;;;;;;;1;;;Kata_Mal
+8;Sevakram;8;2;1;;;;1;;;;Kata_Mal
+8;Surendra;9;1;4;;1;;;;;;Kata_Mal
+8;Bharatlal;10;;1;1;;;;;1;;Kata_Mal
+8;Balmukund;11;1;1;;;;1;1;;;Kata_Mal
+8;Ashokkumar Patel;12;;1;1;;;;;;;Kata_Mal
+8;Abhishek;13;;1;;;;;;;;Kata_Mal
+8;Sajjan;14;;1;;;;;;;;Kata_Mal
+9;Shivprasad;1;1;;;;;;;;;Kata_Mal
+9;Raju;2;;;;;;;;;;Kata_Mal
+9;Rajesh Patel;3;;1;;;;;;;;Kata_Mal
+9;Sukharam;4;;;;1;;;;;;Kata_Mal
+9;Laxmi;5;;;;;;;;;;Kata_Mal
+9;Hajari;6;;;3;;;;;;;Kata_Mal
+9;Golu;7;;;;;;;;;;Kata_Mal
+9;Sevakram;8;;1;;;1;;;;;Kata_Mal
+9;Surendra;9;;1;;;;;;1;;Kata_Mal
+9;Bharatlal;10;2;1;;;1;1;;;;Kata_Mal
+9;Balmukund;11;;;1;1;;;;1;;Kata_Mal
+9;Ashokkumar Patel;12;;5;;;1;;;;;Kata_Mal
+9;Abhishek;13;;1;;;;;;;;Kata_Mal
+9;Sajjan;14;;1;;;;;;;;Kata_Mal
+10;Shivprasad;1;;;;;;;;;;Kata_Mal
+10;Raju;2;;;;;;;;;;Kata_Mal
+10;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+10;Sukharam;4;;;;;;;;;;Kata_Mal
+10;Laxmi;5;;;;;;;;;;Kata_Mal
+10;Hajari;6;;;;;;;;;;Kata_Mal
+10;Golu;7;;;;;;;;;;Kata_Mal
+10;Sevakram;8;;;;;;;;;;Kata_Mal
+10;Surendra;9;;;;;;;;;;Kata_Mal
+10;Bharatlal;10;;;;;;;;;;Kata_Mal
+10;Balmukund;11;;;;;;;;;;Kata_Mal
+10;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+10;Abhishek;13;;;;;;;;;;Kata_Mal
+10;Sajjan;14;;;;;;;;;;Kata_Mal
+11;Shivprasad;1;;;;;;;;;;Kata_Mal
+11;Raju;2;;;;;;;;;;Kata_Mal
+11;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+11;Sukharam;4;;;;;;;;;;Kata_Mal
+11;Laxmi;5;;;;;;;;;;Kata_Mal
+11;Hajari;6;;;;;;;;;;Kata_Mal
+11;Golu;7;;;;;;;;;;Kata_Mal
+11;Sevakram;8;;;;;;;;;;Kata_Mal
+11;Surendra;9;;;;;;;;;;Kata_Mal
+11;Bharatlal;10;;;;;;;;;;Kata_Mal
+11;Balmukund;11;;;;;;;;;;Kata_Mal
+11;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+11;Abhishek;13;;;;;;;;;;Kata_Mal
+11;Sajjan;14;;;;;;;;;;Kata_Mal
+12;Shivprasad;1;;;;;;;;;;Kata_Mal
+12;Raju;2;;;;;;;;;;Kata_Mal
+12;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+12;Sukharam;4;;;;;;;;;;Kata_Mal
+12;Laxmi;5;;;;;;;;;;Kata_Mal
+12;Hajari;6;;;;;;;;;;Kata_Mal
+12;Golu;7;;;;;;;;;;Kata_Mal
+12;Sevakram;8;;;;;;;;;;Kata_Mal
+12;Surendra;9;;;;;;;;;;Kata_Mal
+12;Bharatlal;10;;;;;;;;;;Kata_Mal
+12;Balmukund;11;;;;;;;;;;Kata_Mal
+12;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+12;Abhishek;13;;;;;;;;;;Kata_Mal
+12;Sajjan;14;;;;;;;;;;Kata_Mal
+13;Shivprasad;1;;;;;;;;;;Kata_Mal
+13;Raju;2;;;;;;;;;;Kata_Mal
+13;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+13;Sukharam;4;;;;;;;;;;Kata_Mal
+13;Laxmi;5;;;;;;;;;;Kata_Mal
+13;Hajari;6;;;;;;;;;;Kata_Mal
+13;Golu;7;;;;;;;;;;Kata_Mal
+13;Sevakram;8;;;;;;;;;;Kata_Mal
+13;Surendra;9;;;;;;;;;;Kata_Mal
+13;Bharatlal;10;;;;;;;;;;Kata_Mal
+13;Balmukund;11;;;;;;;;;;Kata_Mal
+13;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+13;Abhishek;13;;;;;;;;;;Kata_Mal
+13;Sajjan;14;;;;;;;;;;Kata_Mal
+14;Shivprasad;1;;;;;;;;;;Kata_Mal
+14;Raju;2;;;;;;;;;;Kata_Mal
+14;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+14;Sukharam;4;;;;;;;;;;Kata_Mal
+14;Laxmi;5;;;;;;;;;;Kata_Mal
+14;Hajari;6;;;;;;;;;;Kata_Mal
+14;Golu;7;;;;;;;;;;Kata_Mal
+14;Sevakram;8;;;;;;;;;;Kata_Mal
+14;Surendra;9;;;;;;;;;;Kata_Mal
+14;Bharatlal;10;;;;;;;;;;Kata_Mal
+14;Balmukund;11;;;;;;;;;;Kata_Mal
+14;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+14;Abhishek;13;;;;;;;;;;Kata_Mal
+14;Sajjan;14;;;;;;;;;;Kata_Mal
+15;Shivprasad;1;;;;;;;;;;Kata_Mal
+15;Raju;2;;;;;;;;;;Kata_Mal
+15;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+15;Sukharam;4;;;;;;;;;;Kata_Mal
+15;Laxmi;5;;;;;;;;;;Kata_Mal
+15;Hajari;6;;;;;;;;;;Kata_Mal
+15;Golu;7;;;;;;;;;;Kata_Mal
+15;Sevakram;8;;;;;;;;;;Kata_Mal
+15;Surendra;9;;;;;;;;;;Kata_Mal
+15;Bharatlal;10;;;;;;;;;;Kata_Mal
+15;Balmukund;11;;;;;;;;;;Kata_Mal
+15;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+15;Abhishek;13;;;;;;;;;;Kata_Mal
+15;Sajjan;14;;;;;;;;;;Kata_Mal
+16;Shivprasad;1;;;;;;;;;;Kata_Mal
+16;Raju;2;;;;;;;;;;Kata_Mal
+16;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+16;Sukharam;4;;;;;;;;;;Kata_Mal
+16;Laxmi;5;;;;;;;;;;Kata_Mal
+16;Hajari;6;;;;;;;;;;Kata_Mal
+16;Golu;7;;;;;;;;;;Kata_Mal
+16;Sevakram;8;;;;;;;;;;Kata_Mal
+16;Surendra;9;;;;;;;;;;Kata_Mal
+16;Bharatlal;10;;;;;;;;;;Kata_Mal
+16;Balmukund;11;;;;;;;;;;Kata_Mal
+16;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+16;Abhishek;13;;;;;;;;;;Kata_Mal
+16;Sajjan;14;;;;;;;;;;Kata_Mal
+17;Shivprasad;1;;;;;;;;;;Kata_Mal
+17;Raju;2;;;;;;;;;;Kata_Mal
+17;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+17;Sukharam;4;;;;;;;;;;Kata_Mal
+17;Laxmi;5;;;;;;;;;;Kata_Mal
+17;Hajari;6;;;;;;;;;;Kata_Mal
+17;Golu;7;;;;;;;;;;Kata_Mal
+17;Sevakram;8;;;;;;;;;;Kata_Mal
+17;Surendra;9;;;;;;;;;;Kata_Mal
+17;Bharatlal;10;;;;;;;;;;Kata_Mal
+17;Balmukund;11;;;;;;;;;;Kata_Mal
+17;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+17;Abhishek;13;;;;;;;;;;Kata_Mal
+17;Sajjan;14;;;;;;;;;;Kata_Mal
+18;Shivprasad;1;;;;;;;;;;Kata_Mal
+18;Raju;2;;;;;;;;;;Kata_Mal
+18;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+18;Sukharam;4;;;;;;;;;;Kata_Mal
+18;Laxmi;5;;;;;;;;;;Kata_Mal
+18;Hajari;6;;;;;;;;;;Kata_Mal
+18;Golu;7;;;;;;;;;;Kata_Mal
+18;Sevakram;8;;;;;;;;;;Kata_Mal
+18;Surendra;9;;;;;;;;;;Kata_Mal
+18;Bharatlal;10;;;;;;;;;;Kata_Mal
+18;Balmukund;11;;;;;;;;;;Kata_Mal
+18;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+18;Abhishek;13;;;;;;;;;;Kata_Mal
+18;Sajjan;14;;;;;;;;;;Kata_Mal
+19;Shivprasad;1;;;;;;;;;;Kata_Mal
+19;Raju;2;;;;;;;;;;Kata_Mal
+19;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+19;Sukharam;4;;;;;;;;;;Kata_Mal
+19;Laxmi;5;;;;;;;;;;Kata_Mal
+19;Hajari;6;;;;;;;;;;Kata_Mal
+19;Golu;7;;;;;;;;;;Kata_Mal
+19;Sevakram;8;;;;;;;;;;Kata_Mal
+19;Surendra;9;;;;;;;;;;Kata_Mal
+19;Bharatlal;10;;;;;;;;;;Kata_Mal
+19;Balmukund;11;;;;;;;;;;Kata_Mal
+19;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+19;Abhishek;13;;;;;;;;;;Kata_Mal
+19;Sajjan;14;;;;;;;;;;Kata_Mal
+20;Shivprasad;1;;;;;;;;;;Kata_Mal
+20;Raju;2;;;;;;;;;;Kata_Mal
+20;Rajesh Patel;3;;;;;;;;;;Kata_Mal
+20;Sukharam;4;;;;;;;;;;Kata_Mal
+20;Laxmi;5;;;;;;;;;;Kata_Mal
+20;Hajari;6;;;;;;;;;;Kata_Mal
+20;Golu;7;;;;;;;;;;Kata_Mal
+20;Sevakram;8;;;;;;;;;;Kata_Mal
+20;Surendra;9;;;;;;;;;;Kata_Mal
+20;Bharatlal;10;;;;;;;;;;Kata_Mal
+20;Balmukund;11;;;;;;;;;;Kata_Mal
+20;Ashokkumar Patel;12;;;;;;;;;;Kata_Mal
+20;Abhishek;13;;;;;;;;;;Kata_Mal
+20;Sajjan;14;;;;;;;;;;Kata_Mal

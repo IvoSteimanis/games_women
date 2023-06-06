@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Sattish;2;7;1;1;0;m;28;12th;n;n;n;n;n;1;3;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Sattish;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+2;Krapal;2;6;1;2;0;m;51;0;y;Villase Panchayat Management Comittee;4days;n;y;4;1;g;0;0;1;0;0;0;0;0;0;0;0;1;0;0;Krapal;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+3;Komal;2;5;1;3;0;m;36;10th;y;Van Suraksha Comittee Member;6 days;n;y;2;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;1;Komal;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+4;Sanju;1;4;1;4;0;m;23;10th;n;n;n;n;n;1;5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Sanju;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+5;Shyamkali;1;3;1;5;0;f;50;8th;y;Van Suraksha Comittee Member;2 days;n;n;10;7;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Shyamkali;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+6;Prajay;1;2;1;6;0;m;43;12th;n;n;1 day;n;n;6;5;g;0;0;0;0;0;0;0;0;0;1;1;0;0;0;Prajay;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+7;Kishore;1;1;1;7;0;m;36;5th;n;n;1 day;n;n;n;10;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Kishore;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+8;Chaudhari;1;7;2;1;0;m;25;12th;n;n;3 days;n;y (1);1;2;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Chaudhari;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+9;Thansingh;1;6;2;2;0;m;35;5th;n;n;n;n;n;2;2,5;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Thansingh;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+10;Mahadev;1;5;2;3;0;m;43;5th;n;n;y;n;n;5;2;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Mahadev;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+11;Mahesh;2;4;2;4;0;n;42;8th;n;n;7 days;n;y;1;4;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Mahesh;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+12;Balram;2;3;2;5;0;m;45;8th;n;n;4 days;n;n;3;2;g;0;0;0;0;0;1;0;0;0;0;1;0;0;0;Balram;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+13;Sukhcharan;2;2;2;6;0;m;68;5th;y;Geram Saniti Member;n;n;y;connected;3,5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Sukhcharan;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14
+14;Ramesh;2;1;2;7;0;m;40;5th;y;Forrest Comittee Member;y;n;n;4;1,5;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Ramesh;0;0;Bariha;21.4.17;Chandrahas, Duche, Radha, Lara;14

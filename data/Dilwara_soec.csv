@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Ramchand;2;7;1;1;0;M;21;8;NO;NO;NO;0;NO;10;1,5;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Ramchand;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+2;Draopati;2;6;1;2;0;F;30;7;NO;NO;NO;0;NO;3;1;w;0;0;0;0;0;0;0;0;0;0;1;0;0;0;Draopati;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+3;Aghnu;2;5;1;3;0;M;48;5;NO;NO;NO;0;NO;16;5;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Aghnu;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+4;Manisha;1;4;1;4;0;F;19;8;NO;NO;NO;0;NO;8;1;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Manisha;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+5;Ramnath;1;3;1;5;0;M;19;8;NO;NO;NO;0;YES;1;5;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Ramnath;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+6;Mahadev;1;2;1;6;0;M;23;8;NO;NO;NO;0;NO;17;3;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Mahadev;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+7;Phulwati;1;1;1;7;0;F;23;8;NO;NO;NO;0;NO;7;1;w;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Phulwati;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+8;Rajesh;1;7;2;1;0;M;24;8;NO;NO;NO;0;NO;11;2;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Rajesh;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+9;Sukhchand;1;6;2;2;0;M;30;10;NO;NO;NO;0;NO;0;2,5;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Sukhchand;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+10;Panchu;1;5;2;3;0;M;20;8;NO;NO;NO;0;NO;6;1;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Panchu;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+11;Geeta;2;4;2;4;0;F;27;5;NO;NO;NO;0;NO;0;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Geeta;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+12;Subhash;2;3;2;5;0;M;22;9;NO;NO;NO;0;NO;4;1,5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Subhash;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+13;Nokhelal;2;2;2;6;0;M;27;15;NO;NO;NO;0;NO;1;1;w;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Nokhelal;1;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14
+14;Rampayari;2;1;2;7;0;F;25;10;NO;NO;NO;0;NO;0;1;w;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Rampayari;0;0;Dilwara;15/6/2017;Rajesh Shivraj Radha and VD Duche;14

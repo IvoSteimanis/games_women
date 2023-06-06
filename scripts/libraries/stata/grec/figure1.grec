@@ -1,0 +1,26 @@
+StataFileTM:00001:01100:GREC:                          :
+00007:00007:00001:
+*! classname: twowaygraph_g
+*! family: twoway
+*! date: 20 Jun 2022
+*! time: 15:19:37
+*! graph_scheme: _GRSTYLE_
+*! naturallywhite: 1
+*! end
+
+// File created by Graph Editor Recorder.
+// Edit only if you know what you are doing.
+
+.plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+.plotregion1.added_text_new = 1
+.plotregion1.added_text_rec = 1
+.plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(black) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow_pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relative) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+.plotregion1.added_text[1].style.editstyle size(8-pt) editcopy
+.plotregion1.added_text[1].text = {}
+.plotregion1.added_text[1].text.Arrpush Median = 21.43%
+// editor text[1] edits
+
+// editor text[1] edits
+
+
+// <end>

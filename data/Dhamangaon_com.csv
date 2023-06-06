@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Naval ;1;;;1;;;1;;;;Dhamangaon
+6;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+6;Ramu ;3;;;1;;;1;;;;Dhamangaon
+6;Imeshwar ;4;;;;1;;;;;;Dhamangaon
+6;Narendra ;5;;;;;;;;;;Dhamangaon
+6;Trilok Chand ;6;;;1;1;;;;;;Dhamangaon
+6;Indralal;7;;;;;;;;;;Dhamangaon
+6;Mahadev;8;1;1;;1;1;;;;;Dhamangaon
+6;Mangal singh ;9;;2;1;;;;;;;Dhamangaon
+6;nandini;10;1;1;;1;1;;;;;Dhamangaon
+6;Rameshwar ;11;;2;;;;;;;;Dhamangaon
+6;Mahesh;12;;1;;1;;;;;;Dhamangaon
+6;Udaychand ;13;1;;;;1;;;;;Dhamangaon
+6;Manglesh ;14;1;1;;1;1;;;;;Dhamangaon
+7;Naval ;1;;;;;1;;;;;Dhamangaon
+7;Dharam Singh ;2;;;1;;;;;;;Dhamangaon
+7;Ramu ;3;1;1;;;;;;;;Dhamangaon
+7;Imeshwar ;4;;1;;;;;;;;Dhamangaon
+7;Narendra ;5;;;;1;1;;;;;Dhamangaon
+7;Trilok Chand ;6;1;;;;;;;;;Dhamangaon
+7;Indralal;7;1;;1;;;;;;;Dhamangaon
+7;Mahadev;8;1;2;1;;1;;;;;Dhamangaon
+7;Mangal singh ;9;1;2;;1;1;;;;;Dhamangaon
+7;nandini;10;;1;1;;;;;;;Dhamangaon
+7;Rameshwar ;11;1;2;1;;;;;;;Dhamangaon
+7;Mahesh;12;1;1;;1;;;;;;Dhamangaon
+7;Udaychand ;13;1;1;1;;1;;;;;Dhamangaon
+7;Manglesh ;14;1;2;1;;1;;;;;Dhamangaon
+8;Naval ;1;1;;1;1;1;;;;;Dhamangaon
+8;Dharam Singh ;2;;;;;1;;;;;Dhamangaon
+8;Ramu ;3;2;;2;1;;;;;;Dhamangaon
+8;Imeshwar ;4;;2;;1;;;;;;Dhamangaon
+8;Narendra ;5;;1;2;;;1;;;;Dhamangaon
+8;Trilok Chand ;6;2;2;;;;;1;;;Dhamangaon
+8;Indralal;7;;1;1;;;;;;;Dhamangaon
+8;Mahadev;8;1;2;;1;1;;;;;Dhamangaon
+8;Mangal singh ;9;1;1;1;;;;;;;Dhamangaon
+8;nandini;10;1;2;;1;1;;;;;Dhamangaon
+8;Rameshwar ;11;;1;1;;;;;;;Dhamangaon
+8;Mahesh;12;1;1;;1;;;;;;Dhamangaon
+8;Udaychand ;13;1;2;;;;;;;;Dhamangaon
+8;Manglesh ;14;1;1;1;;;;;;;Dhamangaon
+9;Naval ;1;2;1;;;1;;;;;Dhamangaon
+9;Dharam Singh ;2;2;;;;1;;;;;Dhamangaon
+9;Ramu ;3;1;1;;;1;;;;;Dhamangaon
+9;Imeshwar ;4;2;1;1;;;;;;;Dhamangaon
+9;Narendra ;5;2;;1;;;;;;;Dhamangaon
+9;Trilok Chand ;6;1;1;1;;1;;;;;Dhamangaon
+9;Indralal;7;;1;;;1;;;;;Dhamangaon
+9;Mahadev;8;1;3;;1;1;;;;;Dhamangaon
+9;Mangal singh ;9;1;1;1;;1;;;;;Dhamangaon
+9;nandini;10;1;1;;;;;;;;Dhamangaon
+9;Rameshwar ;11;1;3;;1;1;;;;;Dhamangaon
+9;Mahesh;12;1;1;;;;;;;;Dhamangaon
+9;Udaychand ;13;1;1;1;;1;;;;;Dhamangaon
+9;Manglesh ;14;1;2;;1;1;;;;;Dhamangaon
+10;Naval ;1;;;;;;;;;;Dhamangaon
+10;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+10;Ramu ;3;;;;;;;;;;Dhamangaon
+10;Imeshwar ;4;;;;;;;;;;Dhamangaon
+10;Narendra ;5;;;;;;;;;;Dhamangaon
+10;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+10;Indralal;7;;;;;;;;;;Dhamangaon
+10;Mahadev;8;;;;;;;;;;Dhamangaon
+10;Mangal singh ;9;;;;;;;;;;Dhamangaon
+10;nandini;10;;;;;;;;;;Dhamangaon
+10;Rameshwar ;11;;;;;;;;;;Dhamangaon
+10;Mahesh;12;;;;;;;;;;Dhamangaon
+10;Udaychand ;13;;;;;;;;;;Dhamangaon
+10;Manglesh ;14;;;;;;;;;;Dhamangaon
+11;Naval ;1;;;;;;;;;;Dhamangaon
+11;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+11;Ramu ;3;;;;;;;;;;Dhamangaon
+11;Imeshwar ;4;;;;;;;;;;Dhamangaon
+11;Narendra ;5;;;;;;;;;;Dhamangaon
+11;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+11;Indralal;7;;;;;;;;;;Dhamangaon
+11;Mahadev;8;;;;;;;;;;Dhamangaon
+11;Mangal singh ;9;;;;;;;;;;Dhamangaon
+11;nandini;10;;;;;;;;;;Dhamangaon
+11;Rameshwar ;11;;;;;;;;;;Dhamangaon
+11;Mahesh;12;;;;;;;;;;Dhamangaon
+11;Udaychand ;13;;;;;;;;;;Dhamangaon
+11;Manglesh ;14;;;;;;;;;;Dhamangaon
+12;Naval ;1;;;;;;;;;;Dhamangaon
+12;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+12;Ramu ;3;;;;;;;;;;Dhamangaon
+12;Imeshwar ;4;;;;;;;;;;Dhamangaon
+12;Narendra ;5;;;;;;;;;;Dhamangaon
+12;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+12;Indralal;7;;;;;;;;;;Dhamangaon
+12;Mahadev;8;;;;;;;;;;Dhamangaon
+12;Mangal singh ;9;;;;;;;;;;Dhamangaon
+12;nandini;10;;;;;;;;;;Dhamangaon
+12;Rameshwar ;11;;;;;;;;;;Dhamangaon
+12;Mahesh;12;;;;;;;;;;Dhamangaon
+12;Udaychand ;13;;;;;;;;;;Dhamangaon
+12;Manglesh ;14;;;;;;;;;;Dhamangaon
+13;Naval ;1;;;;;;;;;;Dhamangaon
+13;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+13;Ramu ;3;;;;;;;;;;Dhamangaon
+13;Imeshwar ;4;;;;;;;;;;Dhamangaon
+13;Narendra ;5;;;;;;;;;;Dhamangaon
+13;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+13;Indralal;7;;;;;;;;;;Dhamangaon
+13;Mahadev;8;;;;;;;;;;Dhamangaon
+13;Mangal singh ;9;;;;;;;;;;Dhamangaon
+13;nandini;10;;;;;;;;;;Dhamangaon
+13;Rameshwar ;11;;;;;;;;;;Dhamangaon
+13;Mahesh;12;;;;;;;;;;Dhamangaon
+13;Udaychand ;13;;;;;;;;;;Dhamangaon
+13;Manglesh ;14;;;;;;;;;;Dhamangaon
+14;Naval ;1;;;;;;;;;;Dhamangaon
+14;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+14;Ramu ;3;;;;;;;;;;Dhamangaon
+14;Imeshwar ;4;;;;;;;;;;Dhamangaon
+14;Narendra ;5;;;;;;;;;;Dhamangaon
+14;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+14;Indralal;7;;;;;;;;;;Dhamangaon
+14;Mahadev;8;;;;;;;;;;Dhamangaon
+14;Mangal singh ;9;;;;;;;;;;Dhamangaon
+14;nandini;10;;;;;;;;;;Dhamangaon
+14;Rameshwar ;11;;;;;;;;;;Dhamangaon
+14;Mahesh;12;;;;;;;;;;Dhamangaon
+14;Udaychand ;13;;;;;;;;;;Dhamangaon
+14;Manglesh ;14;;;;;;;;;;Dhamangaon
+15;Naval ;1;;;;;;;;;;Dhamangaon
+15;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+15;Ramu ;3;;;;;;;;;;Dhamangaon
+15;Imeshwar ;4;;;;;;;;;;Dhamangaon
+15;Narendra ;5;;;;;;;;;;Dhamangaon
+15;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+15;Indralal;7;;;;;;;;;;Dhamangaon
+15;Mahadev;8;;;;;;;;;;Dhamangaon
+15;Mangal singh ;9;;;;;;;;;;Dhamangaon
+15;nandini;10;;;;;;;;;;Dhamangaon
+15;Rameshwar ;11;;;;;;;;;;Dhamangaon
+15;Mahesh;12;;;;;;;;;;Dhamangaon
+15;Udaychand ;13;;;;;;;;;;Dhamangaon
+15;Manglesh ;14;;;;;;;;;;Dhamangaon
+16;Naval ;1;;;;;;;;;;Dhamangaon
+16;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+16;Ramu ;3;;;;;;;;;;Dhamangaon
+16;Imeshwar ;4;;;;;;;;;;Dhamangaon
+16;Narendra ;5;;;;;;;;;;Dhamangaon
+16;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+16;Indralal;7;;;;;;;;;;Dhamangaon
+16;Mahadev;8;;;;;;;;;;Dhamangaon
+16;Mangal singh ;9;;;;;;;;;;Dhamangaon
+16;nandini;10;;;;;;;;;;Dhamangaon
+16;Rameshwar ;11;;;;;;;;;;Dhamangaon
+16;Mahesh;12;;;;;;;;;;Dhamangaon
+16;Udaychand ;13;;;;;;;;;;Dhamangaon
+16;Manglesh ;14;;;;;;;;;;Dhamangaon
+17;Naval ;1;;;;;;;;;;Dhamangaon
+17;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+17;Ramu ;3;;;;;;;;;;Dhamangaon
+17;Imeshwar ;4;;;;;;;;;;Dhamangaon
+17;Narendra ;5;;;;;;;;;;Dhamangaon
+17;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+17;Indralal;7;;;;;;;;;;Dhamangaon
+17;Mahadev;8;;;;;;;;;;Dhamangaon
+17;Mangal singh ;9;;;;;;;;;;Dhamangaon
+17;nandini;10;;;;;;;;;;Dhamangaon
+17;Rameshwar ;11;;;;;;;;;;Dhamangaon
+17;Mahesh;12;;;;;;;;;;Dhamangaon
+17;Udaychand ;13;;;;;;;;;;Dhamangaon
+17;Manglesh ;14;;;;;;;;;;Dhamangaon
+18;Naval ;1;;;;;;;;;;Dhamangaon
+18;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+18;Ramu ;3;;;;;;;;;;Dhamangaon
+18;Imeshwar ;4;;;;;;;;;;Dhamangaon
+18;Narendra ;5;;;;;;;;;;Dhamangaon
+18;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+18;Indralal;7;;;;;;;;;;Dhamangaon
+18;Mahadev;8;;;;;;;;;;Dhamangaon
+18;Mangal singh ;9;;;;;;;;;;Dhamangaon
+18;nandini;10;;;;;;;;;;Dhamangaon
+18;Rameshwar ;11;;;;;;;;;;Dhamangaon
+18;Mahesh;12;;;;;;;;;;Dhamangaon
+18;Udaychand ;13;;;;;;;;;;Dhamangaon
+18;Manglesh ;14;;;;;;;;;;Dhamangaon
+19;Naval ;1;;;;;;;;;;Dhamangaon
+19;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+19;Ramu ;3;;;;;;;;;;Dhamangaon
+19;Imeshwar ;4;;;;;;;;;;Dhamangaon
+19;Narendra ;5;;;;;;;;;;Dhamangaon
+19;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+19;Indralal;7;;;;;;;;;;Dhamangaon
+19;Mahadev;8;;;;;;;;;;Dhamangaon
+19;Mangal singh ;9;;;;;;;;;;Dhamangaon
+19;nandini;10;;;;;;;;;;Dhamangaon
+19;Rameshwar ;11;;;;;;;;;;Dhamangaon
+19;Mahesh;12;;;;;;;;;;Dhamangaon
+19;Udaychand ;13;;;;;;;;;;Dhamangaon
+19;Manglesh ;14;;;;;;;;;;Dhamangaon
+20;Naval ;1;;;;;;;;;;Dhamangaon
+20;Dharam Singh ;2;;;;;;;;;;Dhamangaon
+20;Ramu ;3;;;;;;;;;;Dhamangaon
+20;Imeshwar ;4;;;;;;;;;;Dhamangaon
+20;Narendra ;5;;;;;;;;;;Dhamangaon
+20;Trilok Chand ;6;;;;;;;;;;Dhamangaon
+20;Indralal;7;;;;;;;;;;Dhamangaon
+20;Mahadev;8;;;;;;;;;;Dhamangaon
+20;Mangal singh ;9;;;;;;;;;;Dhamangaon
+20;nandini;10;;;;;;;;;;Dhamangaon
+20;Rameshwar ;11;;;;;;;;;;Dhamangaon
+20;Mahesh;12;;;;;;;;;;Dhamangaon
+20;Udaychand ;13;;;;;;;;;;Dhamangaon
+20;Manglesh ;14;;;;;;;;;;Dhamangaon

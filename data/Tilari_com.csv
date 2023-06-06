@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;saroj kumar;1;;;;;1;;;;;Tilari
+6;bharat lal;2;;1;;;;;;;;Tilari
+6;bir singh ;3;;;;;;;;;;Tilari
+6;rajjan lal;4;1;1;;;;;;;;Tilari
+6;vinita ;5;;;1;1;;1;;;;Tilari
+6;dev singh ;6;;;;;;;;1;;Tilari
+6;dharmu lal;7;;1;;;;;;;;Tilari
+6;bisan lal;8;;;;;;;;;;Tilari
+6;shivcharan ;9;1;;;;;;;;;Tilari
+6;Chokhe Lal;10;;;;;;1;;;;Tilari
+6;santosh yadav;11;;1;1;;;;;;;Tilari
+6;Bartu Lal;12;;;;;;;;;;Tilari
+6;Hari singh ;13;3;;;;;;;;;Tilari
+6;anjana;14;;;1;;;;;;;Tilari
+7;saroj kumar;1;;;;;;;;;;Tilari
+7;bharat lal;2;1;1;;2;1;;;;;Tilari
+7;bir singh ;3;1;1;;;;;;;;Tilari
+7;rajjan lal;4;;;1;;1;;;;;Tilari
+7;vinita ;5;;1;;;;1;;;;Tilari
+7;dev singh ;6;;;1;;;;;;;Tilari
+7;dharmu lal;7;;;;;1;;;;;Tilari
+7;bisan lal;8;2;;;;;;;;;Tilari
+7;shivcharan ;9;;;;;;;;;;Tilari
+7;Chokhe Lal;10;1;;;;1;;;;;Tilari
+7;santosh yadav;11;1;;;;;;;;;Tilari
+7;Bartu Lal;12;;;;;;;;;;Tilari
+7;Hari singh ;13;;;;;1;;;;;Tilari
+7;anjana;14;;;1;;;;;;;Tilari
+8;saroj kumar;1;;;;;1;;;;;Tilari
+8;bharat lal;2;1;1;;1;1;;;;;Tilari
+8;bir singh ;3;1;;1;;;;;;;Tilari
+8;rajjan lal;4;;;;;1;;;;;Tilari
+8;vinita ;5;1;1;;;;;;;;Tilari
+8;dev singh ;6;;;;;;;;;;Tilari
+8;dharmu lal;7;;1;;;;;;;;Tilari
+8;bisan lal;8;1;;;;;;;;;Tilari
+8;shivcharan ;9;;;;;;;;;;Tilari
+8;Chokhe Lal;10;1;;;;1;;;;;Tilari
+8;santosh yadav;11;2;1;;1;;;;;;Tilari
+8;Bartu Lal;12;;;;;;;;;;Tilari
+8;Hari singh ;13;;;1;;;;;;;Tilari
+8;anjana;14;3;;1;;;;;;;Tilari
+9;saroj kumar;1;;1;;;1;;;;;Tilari
+9;bharat lal;2;;1;;;1;;;;;Tilari
+9;bir singh ;3;;;;;;;;;;Tilari
+9;rajjan lal;4;1;2;;;1;;;;;Tilari
+9;vinita ;5;;;1;;;;;;;Tilari
+9;dev singh ;6;;1;;;;;;;;Tilari
+9;dharmu lal;7;;;;;1;;;;;Tilari
+9;bisan lal;8;2;;;;;;;;;Tilari
+9;shivcharan ;9;;;;;;;1;;;Tilari
+9;Chokhe Lal;10;;1;;;;;;;;Tilari
+9;santosh yadav;11;;1;;;1;;;;;Tilari
+9;Bartu Lal;12;;;;;;;;;;Tilari
+9;Hari singh ;13;1;;;;1;;;;;Tilari
+9;anjana;14;;;;1;;1;;;;Tilari
+10;saroj kumar;1;;;;;;;;;;Tilari
+10;bharat lal;2;;;;;;;;;;Tilari
+10;bir singh ;3;;;;;;;;;;Tilari
+10;rajjan lal;4;;;;;;;;;;Tilari
+10;vinita ;5;;;;;;;;;;Tilari
+10;dev singh ;6;;;;;;;;;;Tilari
+10;dharmu lal;7;;;;;;;;;;Tilari
+10;bisan lal;8;;;;;;;;;;Tilari
+10;shivcharan ;9;;;;;;;;;;Tilari
+10;Chokhe Lal;10;;;;;;;;;;Tilari
+10;santosh yadav;11;;;;;;;;;;Tilari
+10;Bartu Lal;12;;;;;;;;;;Tilari
+10;Hari singh ;13;;;;;;;;;;Tilari
+10;anjana;14;;;;;;;;;;Tilari
+11;saroj kumar;1;;;;;;;;;;Tilari
+11;bharat lal;2;;;;;;;;;;Tilari
+11;bir singh ;3;;;;;;;;;;Tilari
+11;rajjan lal;4;;;;;;;;;;Tilari
+11;vinita ;5;;;;;;;;;;Tilari
+11;dev singh ;6;;;;;;;;;;Tilari
+11;dharmu lal;7;;;;;;;;;;Tilari
+11;bisan lal;8;;;;;;;;;;Tilari
+11;shivcharan ;9;;;;;;;;;;Tilari
+11;Chokhe Lal;10;;;;;;;;;;Tilari
+11;santosh yadav;11;;;;;;;;;;Tilari
+11;Bartu Lal;12;;;;;;;;;;Tilari
+11;Hari singh ;13;;;;;;;;;;Tilari
+11;anjana;14;;;;;;;;;;Tilari
+12;saroj kumar;1;;;;;;;;;;Tilari
+12;bharat lal;2;;;;;;;;;;Tilari
+12;bir singh ;3;;;;;;;;;;Tilari
+12;rajjan lal;4;;;;;;;;;;Tilari
+12;vinita ;5;;;;;;;;;;Tilari
+12;dev singh ;6;;;;;;;;;;Tilari
+12;dharmu lal;7;;;;;;;;;;Tilari
+12;bisan lal;8;;;;;;;;;;Tilari
+12;shivcharan ;9;;;;;;;;;;Tilari
+12;Chokhe Lal;10;;;;;;;;;;Tilari
+12;santosh yadav;11;;;;;;;;;;Tilari
+12;Bartu Lal;12;;;;;;;;;;Tilari
+12;Hari singh ;13;;;;;;;;;;Tilari
+12;anjana;14;;;;;;;;;;Tilari
+13;saroj kumar;1;;;;;;;;;;Tilari
+13;bharat lal;2;;;;;;;;;;Tilari
+13;bir singh ;3;;;;;;;;;;Tilari
+13;rajjan lal;4;;;;;;;;;;Tilari
+13;vinita ;5;;;;;;;;;;Tilari
+13;dev singh ;6;;;;;;;;;;Tilari
+13;dharmu lal;7;;;;;;;;;;Tilari
+13;bisan lal;8;;;;;;;;;;Tilari
+13;shivcharan ;9;;;;;;;;;;Tilari
+13;Chokhe Lal;10;;;;;;;;;;Tilari
+13;santosh yadav;11;;;;;;;;;;Tilari
+13;Bartu Lal;12;;;;;;;;;;Tilari
+13;Hari singh ;13;;;;;;;;;;Tilari
+13;anjana;14;;;;;;;;;;Tilari
+14;saroj kumar;1;;;;;;;;;;Tilari
+14;bharat lal;2;;;;;;;;;;Tilari
+14;bir singh ;3;;;;;;;;;;Tilari
+14;rajjan lal;4;;;;;;;;;;Tilari
+14;vinita ;5;;;;;;;;;;Tilari
+14;dev singh ;6;;;;;;;;;;Tilari
+14;dharmu lal;7;;;;;;;;;;Tilari
+14;bisan lal;8;;;;;;;;;;Tilari
+14;shivcharan ;9;;;;;;;;;;Tilari
+14;Chokhe Lal;10;;;;;;;;;;Tilari
+14;santosh yadav;11;;;;;;;;;;Tilari
+14;Bartu Lal;12;;;;;;;;;;Tilari
+14;Hari singh ;13;;;;;;;;;;Tilari
+14;anjana;14;;;;;;;;;;Tilari
+15;saroj kumar;1;;;;;;;;;;Tilari
+15;bharat lal;2;;;;;;;;;;Tilari
+15;bir singh ;3;;;;;;;;;;Tilari
+15;rajjan lal;4;;;;;;;;;;Tilari
+15;vinita ;5;;;;;;;;;;Tilari
+15;dev singh ;6;;;;;;;;;;Tilari
+15;dharmu lal;7;;;;;;;;;;Tilari
+15;bisan lal;8;;;;;;;;;;Tilari
+15;shivcharan ;9;;;;;;;;;;Tilari
+15;Chokhe Lal;10;;;;;;;;;;Tilari
+15;santosh yadav;11;;;;;;;;;;Tilari
+15;Bartu Lal;12;;;;;;;;;;Tilari
+15;Hari singh ;13;;;;;;;;;;Tilari
+15;anjana;14;;;;;;;;;;Tilari
+16;saroj kumar;1;;;;;;;;;;Tilari
+16;bharat lal;2;;;;;;;;;;Tilari
+16;bir singh ;3;;;;;;;;;;Tilari
+16;rajjan lal;4;;;;;;;;;;Tilari
+16;vinita ;5;;;;;;;;;;Tilari
+16;dev singh ;6;;;;;;;;;;Tilari
+16;dharmu lal;7;;;;;;;;;;Tilari
+16;bisan lal;8;;;;;;;;;;Tilari
+16;shivcharan ;9;;;;;;;;;;Tilari
+16;Chokhe Lal;10;;;;;;;;;;Tilari
+16;santosh yadav;11;;;;;;;;;;Tilari
+16;Bartu Lal;12;;;;;;;;;;Tilari
+16;Hari singh ;13;;;;;;;;;;Tilari
+16;anjana;14;;;;;;;;;;Tilari
+17;saroj kumar;1;;;;;;;;;;Tilari
+17;bharat lal;2;;;;;;;;;;Tilari
+17;bir singh ;3;;;;;;;;;;Tilari
+17;rajjan lal;4;;;;;;;;;;Tilari
+17;vinita ;5;;;;;;;;;;Tilari
+17;dev singh ;6;;;;;;;;;;Tilari
+17;dharmu lal;7;;;;;;;;;;Tilari
+17;bisan lal;8;;;;;;;;;;Tilari
+17;shivcharan ;9;;;;;;;;;;Tilari
+17;Chokhe Lal;10;;;;;;;;;;Tilari
+17;santosh yadav;11;;;;;;;;;;Tilari
+17;Bartu Lal;12;;;;;;;;;;Tilari
+17;Hari singh ;13;;;;;;;;;;Tilari
+17;anjana;14;;;;;;;;;;Tilari
+18;saroj kumar;1;;;;;;;;;;Tilari
+18;bharat lal;2;;;;;;;;;;Tilari
+18;bir singh ;3;;;;;;;;;;Tilari
+18;rajjan lal;4;;;;;;;;;;Tilari
+18;vinita ;5;;;;;;;;;;Tilari
+18;dev singh ;6;;;;;;;;;;Tilari
+18;dharmu lal;7;;;;;;;;;;Tilari
+18;bisan lal;8;;;;;;;;;;Tilari
+18;shivcharan ;9;;;;;;;;;;Tilari
+18;Chokhe Lal;10;;;;;;;;;;Tilari
+18;santosh yadav;11;;;;;;;;;;Tilari
+18;Bartu Lal;12;;;;;;;;;;Tilari
+18;Hari singh ;13;;;;;;;;;;Tilari
+18;anjana;14;;;;;;;;;;Tilari
+19;saroj kumar;1;;;;;;;;;;Tilari
+19;bharat lal;2;;;;;;;;;;Tilari
+19;bir singh ;3;;;;;;;;;;Tilari
+19;rajjan lal;4;;;;;;;;;;Tilari
+19;vinita ;5;;;;;;;;;;Tilari
+19;dev singh ;6;;;;;;;;;;Tilari
+19;dharmu lal;7;;;;;;;;;;Tilari
+19;bisan lal;8;;;;;;;;;;Tilari
+19;shivcharan ;9;;;;;;;;;;Tilari
+19;Chokhe Lal;10;;;;;;;;;;Tilari
+19;santosh yadav;11;;;;;;;;;;Tilari
+19;Bartu Lal;12;;;;;;;;;;Tilari
+19;Hari singh ;13;;;;;;;;;;Tilari
+19;anjana;14;;;;;;;;;;Tilari
+20;saroj kumar;1;;;;;;;;;;Tilari
+20;bharat lal;2;;;;;;;;;;Tilari
+20;bir singh ;3;;;;;;;;;;Tilari
+20;rajjan lal;4;;;;;;;;;;Tilari
+20;vinita ;5;;;;;;;;;;Tilari
+20;dev singh ;6;;;;;;;;;;Tilari
+20;dharmu lal;7;;;;;;;;;;Tilari
+20;bisan lal;8;;;;;;;;;;Tilari
+20;shivcharan ;9;;;;;;;;;;Tilari
+20;Chokhe Lal;10;;;;;;;;;;Tilari
+20;santosh yadav;11;;;;;;;;;;Tilari
+20;Bartu Lal;12;;;;;;;;;;Tilari
+20;Hari singh ;13;;;;;;;;;;Tilari
+20;anjana;14;;;;;;;;;;Tilari

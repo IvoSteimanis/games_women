@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Sukalsingh;2;7;1;1;0;M;45;8;YES;GRAM PARYAVARAN SAMITTEE SECRETARY;YES;0;NO;6;2;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Sukalsingh;0;10;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+2;Sampatiya;2;6;1;2;0;F;48;5;NO;NO;YES;0;NO;8;5;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Sampatiya;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+3;Videsh;2;5;1;3;0;M;30;1;NO;NO;YES;0;NO;11;1;w;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Videsh;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+4;Dayali;1;4;1;4;0;M;38;8;YES;PRESIDENT OF GRAM PARYAVARAN SAMITTEE;YES;0;NO;11;1;w;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Dayali;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+5;Mangaldas;1;3;1;5;0;M;50;5;NO;NO;NO;0;NO;11;5;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Mangaldas;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+6;Chetaram;1;2;1;6;0;M;27;12;YES;FES CRP;YES;0;YES;5;6;g;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Chetaram;0;10;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+7;Roshani;1;1;1;7;0;F;28;4;NO;NO;YES;0;NO;9;1;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Roshani;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+8;Damrulal;1;7;2;1;0;M;38;3;NO;NO;YES;0;YES;2;5;w;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Damrulal;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+9;Gopalsingh;1;6;2;2;0;M;21;8;NO;NO;YES;0;NO;40;6;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Gopalsingh;0;10;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+10;Vismatiya;1;5;2;3;0;F;40;5;NO;NO;YES;0;NO;13;3;w;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Vismatiya;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+11;Anita;2;4;2;4;0;F;32;12;YES;ANGANWADI TEACHER;NO;0;NO;1;5;w;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Anita;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+12;Gulab;2;3;2;5;0;M;42;5;NO;NO;YES;0;NO;10;2,5;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Gulab;1;10;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+13;Leeladhar;2;2;2;6;0;M;19;10;NO;NO;YES;0;NO;25;1,25;w;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Leeladhar;0;20;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12
+14;Premabai;2;1;2;7;0;F;47;1;YES;SHG MEMBER;NO;0;NO;3;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Premabai;0;10;Sarhi;24/5/2017;Radha, Rajesh, Sumit, Duche;12

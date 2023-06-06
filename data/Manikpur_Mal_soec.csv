@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Shankar lal ;2;7;1;1;0;M;40;10;YES;COMMUNITY PRESIDENT;YES;0;NO;12;3;g;0;0;0;0;0;0;0;1;1;0;0;0;0;0;Shankar lal ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+2;Sitaram ;2;6;1;2;0;M;32;8;NO;NO;YES;0;NO;25;2;g;0;0;0;0;1;0;1;0;0;0;0;0;0;0;Sitaram ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+3;Subbe lal ;2;5;1;3;0;M;60;8;YES;COMMUNITY MEMBER;YES;0;NO;25;4;g;1;0;0;0;0;0;0;0;1;0;0;0;0;0;Subbe lal ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+4;Bhadulal ;1;4;1;4;0;M;26;8;NO;NO;YES;0;NO;25;2,5;g;1;0;0;0;0;0;0;1;0;0;0;0;0;0;Bhadulal ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+5;Ramsingh ;1;3;1;5;0;M;23;10;NO;NO;YES;0;NO;25;1,5;g;1;0;0;0;0;0;0;0;1;0;0;0;0;0;Ramsingh ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+6;rajesh ;1;2;1;6;0;M;31;10;YES;COMMUNITY MEMBER;YES;0;NO;30;6;g;1;0;0;0;0;0;0;0;1;0;0;0;0;0;rajesh ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+7;Sukhram ;1;1;1;7;0;M;22;9;NO;NO;YES;0;NO;5;8;g;1;0;0;0;0;0;0;0;1;0;0;0;0;0;Sukhram ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+8;Ramprasad Uike ;1;7;2;1;0;M;36;12;YES;COMMUNITY MEMBER;YES;0;NO;15;5;g;1;0;1;0;0;0;0;0;0;0;0;0;0;0;Ramprasad Uike ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+9;Sanjay ;1;6;2;2;0;M;27;12;YES;MEMBER;NO;0;YES;5;5;g;1;0;1;0;0;0;0;0;0;0;0;0;0;0;Sanjay ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+10;Devki uike ;1;5;2;3;0;F;28;8;YES;VILLAGE FRIEND;YES;0;NO;1;10;g;1;0;0;0;0;0;0;1;1;0;1;0;0;0;Devki uike ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+11;Sevpyari uike;2;4;2;4;0;F;45;5;YES;COMMUNITY MEMBER;YES;0;NO;4;2,5;g;1;0;1;0;0;0;0;0;1;1;0;0;0;0;Sevpyari uike;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+12;Son Singh ;2;3;2;5;0;M;22;10;NO;NO;YES;0;NO;5;1;g;0;0;0;1;1;0;0;0;0;0;0;0;0;0;Son Singh ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+13;Murari lal;2;2;2;6;0;M;45;8;NO;NO;YES;0;NO;8;1;g;1;0;1;0;0;0;0;0;0;0;0;0;0;0;Murari lal;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14
+14;Prem lal ;2;1;2;7;0;M;33;8;YES;COMMUNITY MEMBER;YES;0;NO;25;7,5;w;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Prem lal ;0;0;Manikpur_Mal;22.04.2017;Prasoon, Sonja, Shivraj;14

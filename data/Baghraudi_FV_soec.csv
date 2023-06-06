@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Shivkumar;2;7;1;1;0;M;25;3;NO;NO;NO;0;YES;15;1,5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Shivkumar;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+2;Pradeep;2;6;1;2;0;M;20;9;NO;NO;NO;0;YES;1;3;g;0;0;0;0;0;0;1;1;0;0;0;0;0;0;Pradeep;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+3;Antaram;2;5;1;3;0;M;35;9;NO;NO;NO;0;YES;15;1,5;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Antaram;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+4;Pappi;1;4;1;4;0;F;26;5;YES;SAMITTEE MEMBER;NO;0;YES;3;0,5;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Pappi;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+5;Fundilal;1;3;1;5;0;M;27;15;NO;NO;NO;0;YES;1;1,5;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Fundilal;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+6;Sundarlal;1;2;1;6;0;M;46;2;NO;NO;NO;0;YES;2;1,5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Sundarlal;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+7;Mangalsingh;1;1;1;7;0;M;30;15;NO;NO;NO;0;YES;12;1;g;0;1;0;0;0;0;0;1;0;0;0;0;0;0;Mangalsingh;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+8;Samrat;1;7;2;1;0;M;36;15;YES;COMMUNITY MEMBER;YES;0;YES;1;1,5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Samrat;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+9;Ramlal;1;6;2;2;0;M;51;7;NO;NO;NO;0;YES;6;6,5;w;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Ramlal;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+10;Chatrusingh;1;5;2;3;0;M;43;8;NO;NO;NO;0;YES;10;2,5;w;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Chatrusingh;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+11;Mamta;2;4;2;4;0;F;18;8;YES;SHG MEMBER;NO;0;YES;2;6;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Mamta;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+12;Gunjabai;2;3;2;5;0;F;25;8;NO;NO;NO;0;NO;16;2,5;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Gunjabai;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+13;Madhu;2;2;2;6;0;F;21;10;YES;SAMITTE SECRETARY;NO;0;YES;1;3;g;0;0;0;0;0;0;0;1;0;0;1;0;0;0;Madhu;1;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14
+14;Vinodkumar;2;1;2;7;0;M;45;8;NO;NO;NO;0;NO;3;2;w;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Vinodkumar;0;0;Baghraudi_FV;21.05.2017;Shivraj, Rajesh, Duche;14

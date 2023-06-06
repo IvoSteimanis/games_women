@@ -1,0 +1,3619 @@
+----------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2022.09.29-09.07.40.log.txt
+  log type:  text
+ opened on:  29 Sep 2022, 09:07:40
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 29 Sep 2022 09:07:40
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmat
+> apostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx
+>  yy zz%50" reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+. 
+. *--------------------------------------------------
+. * Run processing and analysis scripts
+. *--------------------------------------------------
+. //TODO: update with finale cleaning / analysis files
+. do "$working_ANALYSIS/scripts/01_cleangen.do"
+
+. *--------------------------------------------------------------------------
+. * SCRIPT: 01_cleangen.do
+. * PURPOSE: cleans data from the surveys
+. *--------------------------------------------------------------------------
+. 
+. *----------------------------
+. * 1) Load dataset downloaded from SoSci
+. use "$working_ANALYSIS/data/data_merged.dta", clear
+
+. 
+. *----------------------------
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. *----------------------------
+. * 1. GENERATE
+. {
+. *Create share of females in village and census data (variables indicated with census_*)
+. gen census_pop_females_share = census_population_females/census_population_total
+(11 missing values generated)
+. gen census_caste_females_share = census_caste_females/census_caste_total
+(52 missing values generated)
+. gen census_tribes_females_share = census_tribes_females/census_tribes_total
+(12 missing values generated)
+. label var census_pop_females_share "Share of females in the village based on census data"
+. label var census_caste_females_share "Share of female scheduled castes population in the village based on census data"
+. label var census_tribes_females_share "Share of female scheduled tribes population in the village based on census data"
+. 
+. *Share of women and men in sessions
+. gen share_leader_female_vill = leader_female_vill/14
+(27 missing values generated)
+. gen share_no_leader_female_vill = no_leader_female_vill/14 
+(27 missing values generated)
+. gen share_leader_male_vill = leader_male_vill/14
+(27 missing values generated)
+. gen share_no_leader_male_vill = no_leader_male_vill/14
+(27 missing values generated)
+. label var share_leader_female_vill "Share of female leaders per session"
+. label var share_no_leader_female_vill "Share of women per session"
+. label var share_leader_male_vill "Share of male leaders per session"
+. label var share_no_leader_male_vill "Share of men per session"
+. 
+. * Games were discussed outside the workshop?
+. gen com_outside_game =.
+(83 missing values generated)
+. replace  com_outside_game = 0 if FS_Shar_exp_oth_mem_oth==1
+(4 real changes made)
+. replace  com_outside_game = 0 if FS_Shar_exp_inf_family==1 
+(34 real changes made)
+. replace  com_outside_game = 1 if FS_Shar_exp_oth_mem_Comm_meet==1 
+(18 real changes made)
+. replace  com_outside_game = 1 if FS_Shar_exp_oth_mem_VC_meet==1 
+(1 real change made)
+. label var com_outside_game "=1 if games were discussed in formal or informal meetings in the village"
+. 
+. *recode shares to either dummies () or percent
+. *share of women participating in games
+. gen share_female_percent = share_female_village*100
+(27 missing values generated)
+. *presence of illiterate participants
+. gen d_illiterate = 0 if share_illiterate_village==0
+(50 missing values generated)
+. replace d_illiterate = 1 if share_illiterate_village>0 & share_illiterate_village!=.
+(23 real changes made)
+. *share of leaders present in games
+. gen share_leader_percent = share_leader_vill*100
+(27 missing values generated)
+. gen share_leader_opt_percent = share_lead_opt_r9_10*100
+(27 missing values generated)
+. 
+. *replace missing values with median values
+. replace game_lead_facil = 0 if village_id==13 // who was lead facilitator in Dhamangoan?
+(1 real change made)
+. replace com_outside_game = 0 if village_id==17
+(1 real change made)
+. replace count_intervention = 26 if village_id==13 // when were the games played in Dhamangoan?
+(1 real change made)
+. 
+. 
+. egen bs_any_conflict = rowmax(BS_Confl_dam_ BS_Confl_distr_ BS_Confl_maint_ BS_Confl_oper_)
+. 
+. replace come_back_dummy = . if treatment==0
+(27 real changes made, 27 to missing)
+. 
+. }
+
+. *----------------------------
+. 
+. 
+. 
+. *----------------------------
+. * 2. ORDER & KEEP
+. {
+. 
+. *** Order
+. 
+. 
+. 
+. 
+. *** Keep
+. 
+. }
+
+. *----------------------------
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. *----------------------------
+. * 3. SAVE
+. 
+. save "$working_ANALYSIS/processed/games_clean.dta", replace
+file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/processed/games_clean.dta saved
+
+. 
+. *----------------------------
+. 
+. 
+. 
+. 
+. 
+. 
+. ** EOF
+. 
+end of do-file
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 02_analysis.do
+. * PURPOSE: replicates most tables and figures and saves the results
+. *--------------------------------------------------------------------
+. 
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+> 
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> 
+> */
+. *--------------------------------------------------
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean.dta", clear
+
+. 
+end of do-file
+
+.  do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *----------------------------------------------------------------------
+. gen leader_present = 0
+
+. replace leader_present = 1 if leader_female_vill == 1 & leader_male_vill==0
+(11 real changes made)
+
+. replace leader_present = 2 if leader_female_vill == 0 & leader_male_vill==1
+(17 real changes made)
+
+. replace leader_present = 3 if leader_female_vill == 1 & leader_male_vill==1
+(2 real changes made)
+
+. replace leader_present = . if treatment==0
+(27 real changes made, 27 to missing)
+
+. lab def leader_lab 0 "None" 1 "Female" 2 "Male" 3 "Both", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |         26       46.43       46.43
+     Female |         11       19.64       66.07
+       Male |         17       30.36       96.43
+       Both |          2        3.57      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. 
+. gen leader_present2 = 0 if leader_present==0
+(57 missing values generated)
+
+. replace leader_present2 = 1 if leader_present==2
+(17 real changes made)
+
+. replace leader_present2 = 2 if leader_present==1 | leader_present==3
+(13 real changes made)
+
+. lab def leader_lab2 0 "None" 1 "Only male" 2 "Only female or both", replace
+
+. lab val leader_present2 leader_lab2
+
+. tab leader_present2, gen(leader2_)
+
+    leader_present2 |      Freq.     Percent        Cum.
+--------------------+-----------------------------------
+               None |         26       46.43       46.43
+          Only male |         17       30.36       76.79
+Only female or both |         13       23.21      100.00
+--------------------+-----------------------------------
+              Total |         56      100.00
+
+. 
+. gen share_female_percent2 = share_no_leader_female_vill*100
+(27 missing values generated)
+
+. 
+.  
+. * Setting globals
+. {
+. global control                          No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new 
+. global session_composition      share_female_percent2 leader2_2 leader2_3 d_illiterate
+. global ingame_behavior          total_com_male total_com_female game_almost_opt_invest_r9_10
+. global facilitation                     game_lead_facil count_intervention come_back_dummy com_outside_game             
+. }
+
+. *----------------------------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *dam maintenance
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition, robust
+
+Iteration 0:   log pseudolikelihood = -32.542487  
+Iteration 1:   log pseudolikelihood = -25.984584  
+Iteration 2:   log pseudolikelihood = -25.593172  
+Iteration 3:   log pseudolikelihood = -25.588984  
+Iteration 4:   log pseudolikelihood = -25.588983  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      13.36
+                                                Prob > chi2       =     0.2044
+Log pseudolikelihood = -25.588983               Pseudo R2         =     0.2137
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0870289    .431325     0.20   0.840    -.7583526    .9324104
+                  No_HH |   .0031772   .0026263     1.21   0.226    -.0019701    .0083246
+               FES_site |   .8498988   .4518964     1.88   0.060    -.0358018    1.735599
+               Shar_Lit |   .0326581   .0269368     1.21   0.225     -.020137    .0854532
+              Shar_SCST |  -.0115717   .0152878    -0.76   0.449    -.0415352    .0183919
+fs_dam_used_farming_new |   .4207145   .3908315     1.08   0.282    -.3453012     1.18673
+  share_female_percent2 |   .0385709   .0173661     2.22   0.026     .0045341    .0726078
+              leader2_2 |   .2671443   .4861174     0.55   0.583    -.6856284    1.219917
+              leader2_3 |  -.3085892   .5456724    -0.57   0.572    -1.378087     .760909
+           d_illiterate |   .4971537    .418359     1.19   0.235    -.3228148    1.317122
+                  _cons |  -2.420145   2.158114    -1.12   0.262     -6.64997     1.80968
+-----------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_maintenance_12m_new]No_HH = 0
+ ( 2)  [fs_maintenance_12m_new]FES_site = 0
+ ( 3)  [fs_maintenance_12m_new]Shar_Lit = 0
+ ( 4)  [fs_maintenance_12m_new]Shar_SCST = 0
+ ( 5)  [fs_maintenance_12m_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    8.67
+         Prob > chi2 =    0.1229
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_maintenance_12m_new]share_female_percent2 = 0
+ ( 2)  [fs_maintenance_12m_new]leader2_2 = 0
+ ( 3)  [fs_maintenance_12m_new]leader2_3 = 0
+ ( 4)  [fs_maintenance_12m_new]d_illiterate = 0
+
+           chi2(  4) =    5.98
+         Prob > chi2 =    0.2003
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+dy/dx w.r.t. : bs_maintenance_12m_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+-----------------------------------------------------------------------------------------
+                        |            Delta-method
+                        |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |     .02238   .1108641     0.20   0.840    -.1949096    .2396697
+                  No_HH |    .000817   .0006686     1.22   0.222    -.0004933    .0021274
+               FES_site |   .2185569   .1026978     2.13   0.033     .0172729    .4198408
+               Shar_Lit |   .0083982   .0066169     1.27   0.204    -.0045706    .0213671
+              Shar_SCST |  -.0029757   .0038921    -0.76   0.445    -.0106042    .0046527
+fs_dam_used_farming_new |   .1081894   .1005144     1.08   0.282    -.0888152     .305194
+  share_female_percent2 |   .0099188   .0041307     2.40   0.016     .0018228    .0180147
+              leader2_2 |   .0686978   .1240654     0.55   0.580    -.1744659    .3118616
+              leader2_3 |  -.0793557   .1399133    -0.57   0.571    -.3535807    .1948693
+           d_illiterate |   .1278462   .1062114     1.20   0.229    -.0803243    .3360168
+-----------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Tes
+> t: Session composition", `F2') adec(2) word dec(2) replace
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $ingame_behavior, robust
+
+Iteration 0:   log pseudolikelihood = -32.542487  
+Iteration 1:   log pseudolikelihood = -26.189373  
+Iteration 2:   log pseudolikelihood = -26.009041  
+Iteration 3:   log pseudolikelihood = -26.008641  
+Iteration 4:   log pseudolikelihood = -26.008641  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(9)      =      10.45
+                                                Prob > chi2       =     0.3152
+Log pseudolikelihood = -26.008641               Pseudo R2         =     0.2008
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+      fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+      bs_maintenance_12m_new |   .1183327   .4113968     0.29   0.774    -.6879901    .9246556
+                       No_HH |   .0014628   .0023734     0.62   0.538     -.003189    .0061146
+                    FES_site |   1.006965   .4974271     2.02   0.043     .0320256    1.981904
+                    Shar_Lit |   .0209853   .0281395     0.75   0.456    -.0341672    .0761378
+                   Shar_SCST |  -.0161576   .0154085    -1.05   0.294    -.0463577    .0140424
+     fs_dam_used_farming_new |   .5451509   .4084077     1.33   0.182    -.2553135    1.345615
+              total_com_male |  -.0120093   .0060428    -1.99   0.047    -.0238529   -.0001657
+            total_com_female |   .0139155   .0121236     1.15   0.251    -.0098463    .0376774
+game_almost_opt_invest_r9_10 |   .5469346   .5909888     0.93   0.355    -.6113821    1.705251
+                       _cons |  -.0738122   2.444111    -0.03   0.976    -4.864181    4.716557
+----------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_maintenance_12m_new]No_HH = 0
+ ( 2)  [fs_maintenance_12m_new]FES_site = 0
+ ( 3)  [fs_maintenance_12m_new]Shar_Lit = 0
+ ( 4)  [fs_maintenance_12m_new]Shar_SCST = 0
+ ( 5)  [fs_maintenance_12m_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    7.71
+         Prob > chi2 =    0.1731
+
+. local F1 = r(p)
+
+. testparm $ingame_behavior
+
+ ( 1)  [fs_maintenance_12m_new]total_com_male = 0
+ ( 2)  [fs_maintenance_12m_new]total_com_female = 0
+ ( 3)  [fs_maintenance_12m_new]game_almost_opt_invest_r9_10 = 0
+
+           chi2(  3) =    4.99
+         Prob > chi2 =    0.1728
+
+. local F3 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+dy/dx w.r.t. : bs_maintenance_12m_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new total_com_male total_com_female
+               game_almost_opt_invest_r9_10
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+      bs_maintenance_12m_new |   .0310508   .1077777     0.29   0.773    -.1801895    .2422911
+                       No_HH |   .0003838   .0006198     0.62   0.536     -.000831    .0015987
+                    FES_site |     .26423   .1131205     2.34   0.020     .0425179    .4859421
+                    Shar_Lit |   .0055066   .0071468     0.77   0.441    -.0085009     .019514
+                   Shar_SCST |  -.0042398   .0039661    -1.07   0.285    -.0120133    .0035337
+     fs_dam_used_farming_new |   .1430489   .1034373     1.38   0.167    -.0596844    .3457822
+              total_com_male |  -.0031513   .0014919    -2.11   0.035    -.0060752   -.0002273
+            total_com_female |   .0036515   .0030571     1.19   0.232    -.0023403    .0096432
+game_almost_opt_invest_r9_10 |    .143517   .1494987     0.96   0.337     -.149495     .436529
+----------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2',"F-Test: Village characteristics", `F1', "F-Test
+> : Ingame behavior", `F3') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $facilitation, robust
+
+Iteration 0:   log pseudolikelihood = -32.542487  
+Iteration 1:   log pseudolikelihood = -25.617651  
+Iteration 2:   log pseudolikelihood =  -25.33908  
+Iteration 3:   log pseudolikelihood = -25.337695  
+Iteration 4:   log pseudolikelihood = -25.337695  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      16.06
+                                                Prob > chi2       =     0.0979
+Log pseudolikelihood = -25.337695               Pseudo R2         =     0.2214
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .1188021   .4163177     0.29   0.775    -.6971656    .9347698
+                  No_HH |   .0010016   .0026661     0.38   0.707    -.0042237     .006227
+               FES_site |   .5305549   .4920478     1.08   0.281     -.433841    1.494951
+               Shar_Lit |     .06575   .0273687     2.40   0.016     .0121084    .1193916
+              Shar_SCST |  -.0105702   .0127673    -0.83   0.408    -.0355937    .0144532
+fs_dam_used_farming_new |    .265977   .5248426     0.51   0.612    -.7626956     1.29465
+        game_lead_facil |  -.9867551   .5670744    -1.74   0.082    -2.098201    .1246903
+     count_intervention |   .0161204   .0166759     0.97   0.334    -.0165637    .0488045
+        come_back_dummy |   .5014441   .7841232     0.64   0.522    -1.035409    2.038297
+       com_outside_game |   .1073931   .4804725     0.22   0.823    -.8343157    1.049102
+                  _cons |  -3.174595   2.078512    -1.53   0.127    -7.248404    .8992137
+-----------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_maintenance_12m_new]No_HH = 0
+ ( 2)  [fs_maintenance_12m_new]FES_site = 0
+ ( 3)  [fs_maintenance_12m_new]Shar_Lit = 0
+ ( 4)  [fs_maintenance_12m_new]Shar_SCST = 0
+ ( 5)  [fs_maintenance_12m_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    8.02
+         Prob > chi2 =    0.1552
+
+. local F1 = r(p)
+
+. testparm $facilitation
+
+ ( 1)  [fs_maintenance_12m_new]game_lead_facil = 0
+ ( 2)  [fs_maintenance_12m_new]count_intervention = 0
+ ( 3)  [fs_maintenance_12m_new]come_back_dummy = 0
+ ( 4)  [fs_maintenance_12m_new]com_outside_game = 0
+
+           chi2(  4) =    7.58
+         Prob > chi2 =    0.1082
+
+. local F4 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+dy/dx w.r.t. : bs_maintenance_12m_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new game_lead_facil count_intervention
+               come_back_dummy com_outside_game
+
+-----------------------------------------------------------------------------------------
+                        |            Delta-method
+                        |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0298567    .104615     0.29   0.775    -.1751849    .2348983
+                  No_HH |   .0002517   .0006656     0.38   0.705    -.0010527    .0015562
+               FES_site |   .1333362   .1190472     1.12   0.263    -.0999919    .3666644
+               Shar_Lit |   .0165239   .0065943     2.51   0.012     .0035994    .0294485
+              Shar_SCST |  -.0026565   .0031843    -0.83   0.404    -.0088975    .0035846
+fs_dam_used_farming_new |   .0668439   .1304658     0.51   0.608    -.1888644    .3225523
+        game_lead_facil |   -.247986   .1410766    -1.76   0.079    -.5244911     .028519
+     count_intervention |   .0040513   .0041103     0.99   0.324    -.0040048    .0121074
+        come_back_dummy |   .1260203   .1955696     0.64   0.519     -.257289    .5093295
+       com_outside_game |   .0269895   .1202423     0.22   0.822    -.2086811      .26266
+-----------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2',"F-Test: Village characteristics", `F1', "F-Test
+> : Facilitation", `F4') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+. *management rules
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition, robust
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -28.288569  
+Iteration 2:   log pseudolikelihood = -28.126051  
+Iteration 3:   log pseudolikelihood = -28.125714  
+Iteration 4:   log pseudolikelihood = -28.125714  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      18.55
+                                                Prob > chi2       =     0.0463
+Log pseudolikelihood = -28.125714               Pseudo R2         =     0.2002
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |  -.0659772   .5554589    -0.12   0.905    -1.154657    1.022702
+                      No_HH |  -.0015973   .0028955    -0.55   0.581    -.0072724    .0040779
+                   FES_site |   .5857444   .4359941     1.34   0.179    -.2687883    1.440277
+                   Shar_Lit |  -.0262382   .0232432    -1.13   0.259     -.071794    .0193177
+                  Shar_SCST |  -.0106216   .0134569    -0.79   0.430    -.0369967    .0157535
+    fs_dam_used_farming_new |  -.4731477   .4152509    -1.14   0.255    -1.287024     .340729
+      share_female_percent2 |   .0356374   .0116496     3.06   0.002     .0128046    .0584701
+                  leader2_2 |   .3595024   .4112809     0.87   0.382    -.4465933    1.165598
+                  leader2_3 |  -.0480816    .528328    -0.09   0.927    -1.083586    .9874224
+               d_illiterate |   .3922933    .405527     0.97   0.333     -.402525    1.187112
+                      _cons |   .5379007   1.844966     0.29   0.771    -3.078166    4.153967
+---------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_dam_maintenance_rule_new]No_HH = 0
+ ( 2)  [fs_dam_maintenance_rule_new]FES_site = 0
+ ( 3)  [fs_dam_maintenance_rule_new]Shar_Lit = 0
+ ( 4)  [fs_dam_maintenance_rule_new]Shar_SCST = 0
+ ( 5)  [fs_dam_maintenance_rule_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    6.92
+         Prob > chi2 =    0.2264
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_dam_maintenance_rule_new]share_female_percent2 = 0
+ ( 2)  [fs_dam_maintenance_rule_new]leader2_2 = 0
+ ( 3)  [fs_dam_maintenance_rule_new]leader2_3 = 0
+ ( 4)  [fs_dam_maintenance_rule_new]d_illiterate = 0
+
+           chi2(  4) =   11.44
+         Prob > chi2 =    0.0220
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+dy/dx w.r.t. : bs_dam_maintenance_rule_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+---------------------------------------------------------------------------------------------
+                            |            Delta-method
+                            |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   -.018694   .1574539    -0.12   0.905     -.327298      .28991
+                      No_HH |  -.0004526   .0008015    -0.56   0.572    -.0020235    .0011184
+                   FES_site |   .1659649   .1188109     1.40   0.162    -.0669002      .39883
+                   Shar_Lit |  -.0074343   .0065936    -1.13   0.260    -.0203575    .0054889
+                  Shar_SCST |  -.0030095      .0038    -0.79   0.428    -.0104574    .0044383
+    fs_dam_used_farming_new |  -.1340618   .1148326    -1.17   0.243    -.3591296     .091006
+      share_female_percent2 |   .0100975   .0028079     3.60   0.000     .0045941    .0156009
+                  leader2_2 |   .1018615   .1151107     0.88   0.376    -.1237513    .3274742
+                  leader2_3 |  -.0136234   .1495217    -0.09   0.927    -.3066806    .2794338
+               d_illiterate |   .1111525   .1162188     0.96   0.339    -.1166322    .3389372
+---------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Tes
+> t: Session composition", `F2') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $ingame_behavior, robust
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -29.667778  
+Iteration 2:   log pseudolikelihood = -29.623491  
+Iteration 3:   log pseudolikelihood = -29.623464  
+Iteration 4:   log pseudolikelihood = -29.623464  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(9)      =       9.75
+                                                Prob > chi2       =     0.3709
+Log pseudolikelihood = -29.623464               Pseudo R2         =     0.1576
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+ fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+ bs_dam_maintenance_rule_new |   .0648892   .5378878     0.12   0.904    -.9893516     1.11913
+                       No_HH |  -.0019464   .0026911    -0.72   0.470    -.0072208     .003328
+                    FES_site |   .7143297   .4409878     1.62   0.105    -.1499906     1.57865
+                    Shar_Lit |  -.0312905    .024289    -1.29   0.198     -.078896     .016315
+                   Shar_SCST |  -.0116808   .0128807    -0.91   0.364    -.0369265    .0135649
+     fs_dam_used_farming_new |  -.3771514   .4203721    -0.90   0.370    -1.201065    .4467627
+              total_com_male |  -.0096924   .0059683    -1.62   0.104      -.02139    .0020052
+            total_com_female |   .0107563   .0130457     0.82   0.410    -.0148127    .0363254
+game_almost_opt_invest_r9_10 |   .7911401   .5644182     1.40   0.161    -.3150991    1.897379
+                       _cons |   1.820177   2.085917     0.87   0.383    -2.268145    5.908499
+----------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_dam_maintenance_rule_new]No_HH = 0
+ ( 2)  [fs_dam_maintenance_rule_new]FES_site = 0
+ ( 3)  [fs_dam_maintenance_rule_new]Shar_Lit = 0
+ ( 4)  [fs_dam_maintenance_rule_new]Shar_SCST = 0
+ ( 5)  [fs_dam_maintenance_rule_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    7.05
+         Prob > chi2 =    0.2171
+
+. local F1 = r(p)
+
+. testparm $ingame_behavior
+
+ ( 1)  [fs_dam_maintenance_rule_new]total_com_male = 0
+ ( 2)  [fs_dam_maintenance_rule_new]total_com_female = 0
+ ( 3)  [fs_dam_maintenance_rule_new]game_almost_opt_invest_r9_10 = 0
+
+           chi2(  3) =    5.23
+         Prob > chi2 =    0.1556
+
+. local F3 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+dy/dx w.r.t. : bs_dam_maintenance_rule_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new total_com_male total_com_female
+               game_almost_opt_invest_r9_10
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+ bs_dam_maintenance_rule_new |   .0194543   .1610845     0.12   0.904    -.2962654    .3351741
+                       No_HH |  -.0005835   .0007816    -0.75   0.455    -.0021154    .0009483
+                    FES_site |   .2141623   .1219969     1.76   0.079    -.0249473    .4532719
+                    Shar_Lit |  -.0093812   .0072732    -1.29   0.197    -.0236364    .0048741
+                   Shar_SCST |   -.003502   .0037732    -0.93   0.353    -.0108972    .0038933
+     fs_dam_used_farming_new |  -.1130733   .1222221    -0.93   0.355    -.3526242    .1264776
+              total_com_male |  -.0029059   .0017406    -1.67   0.095    -.0063173    .0005056
+            total_com_female |   .0032248   .0038088     0.85   0.397    -.0042402    .0106899
+game_almost_opt_invest_r9_10 |   .2371908    .161761     1.47   0.143    -.0798549    .5542365
+----------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2',"F-Test: Village characteristics", `F1', "F-Test
+> : Ingame behavior", `F3') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $facilitation, robust
+
+note: come_back_dummy != 1 predicts failure perfectly
+      come_back_dummy dropped and 6 obs not used
+
+Iteration 0:   log pseudolikelihood =  -32.67091  
+Iteration 1:   log pseudolikelihood = -29.791615  
+Iteration 2:   log pseudolikelihood = -29.779474  
+Iteration 3:   log pseudolikelihood = -29.779474  
+
+Probit regression                               Number of obs     =         50
+                                                Wald chi2(9)      =       5.45
+                                                Prob > chi2       =     0.7936
+Log pseudolikelihood = -29.779474               Pseudo R2         =     0.0885
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |     .40764   .5798321     0.70   0.482      -.72881     1.54409
+                      No_HH |  -.0020054   .0026355    -0.76   0.447    -.0071709    .0031602
+                   FES_site |   .4628324   .4054766     1.14   0.254    -.3318872    1.257552
+                   Shar_Lit |   .0027193   .0266108     0.10   0.919    -.0494368    .0548754
+                  Shar_SCST |  -.0078133   .0118991    -0.66   0.511    -.0311351    .0155085
+    fs_dam_used_farming_new |  -.3762761   .4407018    -0.85   0.393    -1.240036    .4874836
+            game_lead_facil |   .3877998    .601544     0.64   0.519    -.7912048    1.566804
+         count_intervention |    .010227   .0154605     0.66   0.508     -.020075     .040529
+            come_back_dummy |          0  (omitted)
+           com_outside_game |   .2000676   .4165578     0.48   0.631    -.6163707    1.016506
+                      _cons |  -.2313873   1.875744    -0.12   0.902    -3.907778    3.445003
+---------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_dam_maintenance_rule_new]No_HH = 0
+ ( 2)  [fs_dam_maintenance_rule_new]FES_site = 0
+ ( 3)  [fs_dam_maintenance_rule_new]Shar_Lit = 0
+ ( 4)  [fs_dam_maintenance_rule_new]Shar_SCST = 0
+ ( 5)  [fs_dam_maintenance_rule_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    3.10
+         Prob > chi2 =    0.6844
+
+. local F1 = r(p)
+
+. testparm $facilitation
+
+ ( 1)  [fs_dam_maintenance_rule_new]game_lead_facil = 0
+ ( 2)  [fs_dam_maintenance_rule_new]count_intervention = 0
+ ( 3)  [fs_dam_maintenance_rule_new]com_outside_game = 0
+
+           chi2(  3) =    0.84
+         Prob > chi2 =    0.8388
+
+. local F4 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         50
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+dy/dx w.r.t. : bs_dam_maintenance_rule_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new game_lead_facil
+               count_intervention come_back_dummy com_outside_game
+
+---------------------------------------------------------------------------------------------
+                            |            Delta-method
+                            |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |    .138979   .1941381     0.72   0.474    -.2415247    .5194826
+                      No_HH |  -.0006837   .0008697    -0.79   0.432    -.0023883    .0010209
+                   FES_site |    .157796   .1358367     1.16   0.245     -.108439    .4240311
+                   Shar_Lit |   .0009271    .009065     0.10   0.919    -.0168401    .0186943
+                  Shar_SCST |  -.0026638    .003996    -0.67   0.505    -.0104959    .0051682
+    fs_dam_used_farming_new |  -.1282859   .1456363    -0.88   0.378    -.4137278    .1571559
+            game_lead_facil |   .1322147   .2065712     0.64   0.522    -.2726573    .5370868
+         count_intervention |   .0034868   .0052121     0.67   0.504    -.0067287    .0137023
+            come_back_dummy |          0  (omitted)
+           com_outside_game |   .0682102    .141149     0.48   0.629    -.2084369    .3448572
+---------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableSXXX", addstat("Pseudo R2", `R2',"F-Test: Village characteristics", `F1', "F-Test
+> : Facilitation", `F4') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf
+dir : seeout
+
+. 
+end of do-file
+
+. shellout using `"C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableSXXX.rtf"'
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition , robust
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -28.288569  
+Iteration 2:   log pseudolikelihood = -28.126051  
+Iteration 3:   log pseudolikelihood = -28.125714  
+Iteration 4:   log pseudolikelihood = -28.125714  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      18.55
+                                                Prob > chi2       =     0.0463
+Log pseudolikelihood = -28.125714               Pseudo R2         =     0.2002
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |  -.0659772   .5554589    -0.12   0.905    -1.154657    1.022702
+                      No_HH |  -.0015973   .0028955    -0.55   0.581    -.0072724    .0040779
+                   FES_site |   .5857444   .4359941     1.34   0.179    -.2687883    1.440277
+                   Shar_Lit |  -.0262382   .0232432    -1.13   0.259     -.071794    .0193177
+                  Shar_SCST |  -.0106216   .0134569    -0.79   0.430    -.0369967    .0157535
+    fs_dam_used_farming_new |  -.4731477   .4152509    -1.14   0.255    -1.287024     .340729
+      share_female_percent2 |   .0356374   .0116496     3.06   0.002     .0128046    .0584701
+                  leader2_2 |   .3595024   .4112809     0.87   0.382    -.4465933    1.165598
+                  leader2_3 |  -.0480816    .528328    -0.09   0.927    -1.083586    .9874224
+               d_illiterate |   .3922933    .405527     0.97   0.333     -.402525    1.187112
+                      _cons |   .5379007   1.844966     0.29   0.771    -3.078166    4.153967
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1067676   .0570869     1.87   0.061    -.0051206    .2186558
+          2  |   .1748024   .0596955     2.93   0.003     .0578013    .2918035
+          3  |   .2647646   .0575409     4.60   0.000     .1519866    .3775426
+          4  |   .3731598   .0616785     6.05   0.000     .2522721    .4940475
+          5  |   .4924098   .0798037     6.17   0.000     .3359974    .6488222
+          6  |   .6123331   .1023734     5.98   0.000      .411685    .8129813
+          7  |   .7225846   .1168241     6.19   0.000     .4936136    .9515556
+          8  |   .8151532   .1167903     6.98   0.000     .5862485    1.044058
+          9  |   .8859952   .1026858     8.63   0.000     .6847347    1.087256
+         10  |   .9352803   .0797617    11.73   0.000     .7789502     1.09161
+         11  |   .9663565   .0548775    17.61   0.000     .8587985    1.073914
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)100, notick) yla(0(0.2)1, notick) title("{bf:B } Games villages only: Female participation", span pos(11) size()
+> ) xtitle("Share of women participating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt lcolor() axis(2)) ytitle("Per
+> cent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition , robust
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -28.288569  
+Iteration 2:   log pseudolikelihood = -28.126051  
+Iteration 3:   log pseudolikelihood = -28.125714  
+Iteration 4:   log pseudolikelihood = -28.125714  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      18.55
+                                                Prob > chi2       =     0.0463
+Log pseudolikelihood = -28.125714               Pseudo R2         =     0.2002
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |  -.0659772   .5554589    -0.12   0.905    -1.154657    1.022702
+                      No_HH |  -.0015973   .0028955    -0.55   0.581    -.0072724    .0040779
+                   FES_site |   .5857444   .4359941     1.34   0.179    -.2687883    1.440277
+                   Shar_Lit |  -.0262382   .0232432    -1.13   0.259     -.071794    .0193177
+                  Shar_SCST |  -.0106216   .0134569    -0.79   0.430    -.0369967    .0157535
+    fs_dam_used_farming_new |  -.4731477   .4152509    -1.14   0.255    -1.287024     .340729
+      share_female_percent2 |   .0356374   .0116496     3.06   0.002     .0128046    .0584701
+                  leader2_2 |   .3595024   .4112809     0.87   0.382    -.4465933    1.165598
+                  leader2_3 |  -.0480816    .528328    -0.09   0.927    -1.083586    .9874224
+               d_illiterate |   .3922933    .405527     0.97   0.333     -.402525    1.187112
+                      _cons |   .5379007   1.844966     0.29   0.771    -3.078166    4.153967
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1067676   .0570869     1.87   0.061    -.0051206    .2186558
+          2  |   .1748024   .0596955     2.93   0.003     .0578013    .2918035
+          3  |   .2647646   .0575409     4.60   0.000     .1519866    .3775426
+          4  |   .3731598   .0616785     6.05   0.000     .2522721    .4940475
+          5  |   .4924098   .0798037     6.17   0.000     .3359974    .6488222
+          6  |   .6123331   .1023734     5.98   0.000      .411685    .8129813
+          7  |   .7225846   .1168241     6.19   0.000     .4936136    .9515556
+          8  |   .8151532   .1167903     6.98   0.000     .5862485    1.044058
+          9  |   .8859952   .1026858     8.63   0.000     .6847347    1.087256
+         10  |   .9352803   .0797617    11.73   0.000     .7789502     1.09161
+         11  |   .9663565   .0548775    17.61   0.000     .8587985    1.073914
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)100, notick) yla(0(0.2)1, notick) title("{bf:B } Games villages only: Female participation", span pos(11) size()
+> ) xtitle("Share of women participating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt lcolor() axis(2)) ytitle("Per
+> cent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition , robust
+
+Iteration 0:   log pseudolikelihood = -35.164729  
+Iteration 1:   log pseudolikelihood = -28.288569  
+Iteration 2:   log pseudolikelihood = -28.126051  
+Iteration 3:   log pseudolikelihood = -28.125714  
+Iteration 4:   log pseudolikelihood = -28.125714  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      18.55
+                                                Prob > chi2       =     0.0463
+Log pseudolikelihood = -28.125714               Pseudo R2         =     0.2002
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |  -.0659772   .5554589    -0.12   0.905    -1.154657    1.022702
+                      No_HH |  -.0015973   .0028955    -0.55   0.581    -.0072724    .0040779
+                   FES_site |   .5857444   .4359941     1.34   0.179    -.2687883    1.440277
+                   Shar_Lit |  -.0262382   .0232432    -1.13   0.259     -.071794    .0193177
+                  Shar_SCST |  -.0106216   .0134569    -0.79   0.430    -.0369967    .0157535
+    fs_dam_used_farming_new |  -.4731477   .4152509    -1.14   0.255    -1.287024     .340729
+      share_female_percent2 |   .0356374   .0116496     3.06   0.002     .0128046    .0584701
+                  leader2_2 |   .3595024   .4112809     0.87   0.382    -.4465933    1.165598
+                  leader2_3 |  -.0480816    .528328    -0.09   0.927    -1.083586    .9874224
+               d_illiterate |   .3922933    .405527     0.97   0.333     -.402525    1.187112
+                      _cons |   .5379007   1.844966     0.29   0.771    -3.078166    4.153967
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1067676   .0570869     1.87   0.061    -.0051206    .2186558
+          2  |   .1748024   .0596955     2.93   0.003     .0578013    .2918035
+          3  |   .2647646   .0575409     4.60   0.000     .1519866    .3775426
+          4  |   .3731598   .0616785     6.05   0.000     .2522721    .4940475
+          5  |   .4924098   .0798037     6.17   0.000     .3359974    .6488222
+          6  |   .6123331   .1023734     5.98   0.000      .411685    .8129813
+          7  |   .7225846   .1168241     6.19   0.000     .4936136    .9515556
+          8  |   .8151532   .1167903     6.98   0.000     .5862485    1.044058
+          9  |   .8859952   .1026858     8.63   0.000     .6847347    1.087256
+         10  |   .9352803   .0797617    11.73   0.000     .7789502     1.09161
+         11  |   .9663565   .0548775    17.61   0.000     .8587985    1.073914
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition , robust
+
+Iteration 0:   log pseudolikelihood = -32.542487  
+Iteration 1:   log pseudolikelihood = -25.984584  
+Iteration 2:   log pseudolikelihood = -25.593172  
+Iteration 3:   log pseudolikelihood = -25.588984  
+Iteration 4:   log pseudolikelihood = -25.588983  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      13.36
+                                                Prob > chi2       =     0.2044
+Log pseudolikelihood = -25.588983               Pseudo R2         =     0.2137
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0870289    .431325     0.20   0.840    -.7583526    .9324104
+                  No_HH |   .0031772   .0026263     1.21   0.226    -.0019701    .0083246
+               FES_site |   .8498988   .4518964     1.88   0.060    -.0358018    1.735599
+               Shar_Lit |   .0326581   .0269368     1.21   0.225     -.020137    .0854532
+              Shar_SCST |  -.0115717   .0152878    -0.76   0.449    -.0415352    .0183919
+fs_dam_used_farming_new |   .4207145   .3908315     1.08   0.282    -.3453012     1.18673
+  share_female_percent2 |   .0385709   .0173661     2.22   0.026     .0045341    .0726078
+              leader2_2 |   .2671443   .4861174     0.55   0.583    -.6856284    1.219917
+              leader2_3 |  -.3085892   .5456724    -0.57   0.572    -1.378087     .760909
+           d_illiterate |   .4971537    .418359     1.19   0.235    -.3228148    1.317122
+                  _cons |  -2.420145   2.158114    -1.12   0.262     -6.64997     1.80968
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .467856   .1272335     3.68   0.000     .2184829    .7172291
+          2  |   .5909126    .085153     6.94   0.000     .4240157    .7578095
+          3  |   .7060441   .0571872    12.35   0.000     .5939592    .8181291
+          4  |   .8041368   .0562712    14.29   0.000     .6938473    .9144263
+          5  |   .8799598   .0606909    14.50   0.000     .7610079    .9989118
+          6  |   .9328615   .0556124    16.77   0.000     .8238631     1.04186
+          7  |   .9659868   .0425981    22.68   0.000     .8824961    1.049478
+          8  |   .9844976   .0276249    35.64   0.000     .9303538    1.038641
+          9  |   .9936815   .0153056    64.92   0.000     .9636831     1.02368
+         10  |   .9977089   .0072816   137.02   0.000     .9834371    1.011981
+         11  |   .9992642   .0029827   335.02   0.000     .9934183     1.00511
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. di  .7060441 -.467856
+.2381881
+
+. di .2647646-.1067676
+.157997
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. 
+. * MEDIATION ANALYSIS
+. medeff (regress no_leader_female_vill leader2_3 $control)  (regress fs_maintenance_12m_new leader2_3 no_leader_female_vill $control) ,
+>  seed(12345)  vce(robust) treat(leader2_3) mediate(no_leader_female_vill) sims(1000)
+Using 0 and 1 as treatment values
+
+Linear regression                               Number of obs     =         56
+                                                F(6, 49)          =       2.78
+                                                Prob > F          =     0.0207
+                                                R-squared         =     0.2511
+                                                Root MSE          =     2.2517
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+  no_leader_female_vill |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+              leader2_3 |   2.371895   .7287675     3.25   0.002     .9073818    3.836408
+                  No_HH |   .0008958   .0034216     0.26   0.795    -.0059801    .0077718
+               FES_site |    .055712   .6894985     0.08   0.936    -1.329887    1.441311
+               Shar_Lit |   .0428325   .0390639     1.10   0.278    -.0356693    .1213343
+              Shar_SCST |   .0074103   .0238451     0.31   0.757    -.0405082    .0553287
+fs_dam_used_farming_new |  -.8458624   .5859795    -1.44   0.155    -2.023432    .3317074
+                  _cons |   .2773028   3.031692     0.09   0.927    -5.815111    6.369716
+-----------------------------------------------------------------------------------------
+
+Linear regression                               Number of obs     =         56
+                                                F(7, 48)          =       2.26
+                                                Prob > F          =     0.0450
+                                                R-squared         =     0.1848
+                                                Root MSE          =     .43187
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+              leader2_3 |  -.0673027   .1417374    -0.47   0.637    -.3522847    .2176794
+  no_leader_female_vill |   .0467567   .0221241     2.11   0.040     .0022732    .0912402
+                  No_HH |    .000612    .000731     0.84   0.407    -.0008579    .0020818
+               FES_site |   .2808811   .1452728     1.93   0.059    -.0112095    .5729717
+               Shar_Lit |   .0079975   .0077259     1.04   0.306    -.0075365    .0235315
+              Shar_SCST |  -.0016948   .0041798    -0.41   0.687    -.0100989    .0067092
+fs_dam_used_farming_new |   .1164805   .1127709     1.03   0.307    -.1102606    .3432216
+                  _cons |  -.0358011   .6538732    -0.05   0.957    -1.350501    1.278899
+-----------------------------------------------------------------------------------------
+The number of observations in the data is less than the number of simulations. Expanding the data to the number of simulations
+------------------------------------------------------------------------------------
+        Effect                 |  Mean           [95% Conf. Interval]
+-------------------------------+----------------------------------------------------
+        ACME                   |  .1102906       .008568      .2463687
+        Direct Effect          | -.0746748     -.3332169      .2025087
+        Total Effect           |  .0356158     -.2123281      .2860863
+        % of Tot Eff mediated  |  .5590301      -13.7656      11.48342
+------------------------------------------------------------------------------------
+
+. mat a1 = r(delta0)
+
+. mat b1 = r(zeta0)
+
+. mat c1 = r(tau)
+
+. mat a2 = r(delta0 lo)
+
+. mat b2 = r(zeta0 lo)
+
+. mat c2 = r(tau lo)
+
+. mat a3 = r(delta0 hi)
+
+. mat b3 = r(zeta0 hi)
+
+. mat c3 = r(tau hi)
+
+. matrix med = a1,a2,a3\b1,b2,b3\c1,c2,c3
+
+. matrix coln med = mean ll95 ul95
+
+. matrix rown med = ACME ADE ATE
+
+. 
+. * Effekte gehen nicht über regeln
+. coefplot (matrix(med[.,1]), ci((med[.,2] med[.,3]))),xline(0, lpattern(dash) lcolor(gs3))  xtitle("Estimate female leader effect in pp
+>  relative") msymbol(d) xla(-.1(0.1).5) levels(95) ciopts(lwidth(0.3 1)  msize()  lcolor(*.8 *.2) recast(rcap)) mlabel(string(@b, "%5.2
+> f")) mlabposition(12) mlabsize(6pt) xsize(3.465) ysize(3)
+
+. gr save "$working_ANALYSIS\results\intermediate\figure2.gph", replace
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure2.gph not found)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figure2.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figure2.tif", replace width(3465)
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figure2.tif not found)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figure2.tif written in TIFF format)
+
+. 
+end of do-file
+
+. tab share_female_percent2
+
+share_femal |
+ e_percent2 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          7       12.50       12.50
+   7.142858 |          5        8.93       21.43
+   14.28572 |          8       14.29       35.71
+   21.42857 |         11       19.64       55.36
+   28.57143 |          7       12.50       67.86
+   35.71429 |         10       17.86       85.71
+   42.85714 |          4        7.14       92.86
+         50 |          2        3.57       96.43
+   64.28571 |          1        1.79       98.21
+   92.85714 |          1        1.79      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2 <60, robust
+
+Iteration 0:   log pseudolikelihood = -31.905481  
+Iteration 1:   log pseudolikelihood = -25.748744  
+Iteration 2:   log pseudolikelihood = -25.587021  
+Iteration 3:   log pseudolikelihood = -25.586794  
+Iteration 4:   log pseudolikelihood = -25.586794  
+
+Probit regression                               Number of obs     =         54
+                                                Wald chi2(10)     =      12.98
+                                                Prob > chi2       =     0.2246
+Log pseudolikelihood = -25.586794               Pseudo R2         =     0.1980
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0875885   .4319113     0.20   0.839    -.7589421    .9341192
+                  No_HH |   .0031705   .0026258     1.21   0.227     -.001976     .008317
+               FES_site |   .8494191   .4522521     1.88   0.060    -.0369787    1.735817
+               Shar_Lit |   .0326467   .0269389     1.21   0.226    -.0201526    .0854459
+              Shar_SCST |  -.0115202   .0153717    -0.75   0.454    -.0416483    .0186078
+fs_dam_used_farming_new |   .4205035   .3907742     1.08   0.282    -.3453999    1.186407
+  share_female_percent2 |   .0384165   .0177975     2.16   0.031      .003534    .0732991
+              leader2_2 |   .2677646   .4857785     0.55   0.581    -.6843438    1.219873
+              leader2_3 |  -.3056822   .5482699    -0.56   0.577    -1.380271     .768907
+           d_illiterate |   .4952402   .4199892     1.18   0.238    -.3279235    1.318404
+                  _cons |  -2.419811   2.157603    -1.12   0.262    -6.648636    1.809014
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         54
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .4634479   .1287774     3.60   0.000     .2110489    .7158469
+          2  |   .5855984   .0861294     6.80   0.000      .416788    .7544089
+          3  |   .7006556   .0576131    12.16   0.000     .5877361    .8135751
+          4  |   .7994293   .0574919    13.91   0.000     .6867472    .9121113
+          5  |   .8763678   .0630419    13.90   0.000     .7528079    .9999277
+          6  |   .9304478   .0584234    15.93   0.000       .81594    1.044956
+          7  |   .9645518   .0451508    21.36   0.000     .8760578    1.053046
+          8  |   .9837413   .0295135    33.33   0.000     .9258959    1.041587
+          9  |    .993328   .0164784    60.28   0.000      .961031    1.025625
+         10  |   .9975627   .0079021   126.24   0.000     .9820749    1.013051
+         11  |   .9992108   .0032644   306.10   0.000     .9928127    1.005609
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)100, notick) yla(0(0.2)1, notick) title("{bf:B } Games villages only: Female participation", span pos(11) size()
+> ) xtitle("Share of women participating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt lcolor() axis(2)) ytitle("Per
+> cent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2 <60, robust
+
+Iteration 0:   log pseudolikelihood = -31.905481  
+Iteration 1:   log pseudolikelihood = -25.748744  
+Iteration 2:   log pseudolikelihood = -25.587021  
+Iteration 3:   log pseudolikelihood = -25.586794  
+Iteration 4:   log pseudolikelihood = -25.586794  
+
+Probit regression                               Number of obs     =         54
+                                                Wald chi2(10)     =      12.98
+                                                Prob > chi2       =     0.2246
+Log pseudolikelihood = -25.586794               Pseudo R2         =     0.1980
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0875885   .4319113     0.20   0.839    -.7589421    .9341192
+                  No_HH |   .0031705   .0026258     1.21   0.227     -.001976     .008317
+               FES_site |   .8494191   .4522521     1.88   0.060    -.0369787    1.735817
+               Shar_Lit |   .0326467   .0269389     1.21   0.226    -.0201526    .0854459
+              Shar_SCST |  -.0115202   .0153717    -0.75   0.454    -.0416483    .0186078
+fs_dam_used_farming_new |   .4205035   .3907742     1.08   0.282    -.3453999    1.186407
+  share_female_percent2 |   .0384165   .0177975     2.16   0.031      .003534    .0732991
+              leader2_2 |   .2677646   .4857785     0.55   0.581    -.6843438    1.219873
+              leader2_3 |  -.3056822   .5482699    -0.56   0.577    -1.380271     .768907
+           d_illiterate |   .4952402   .4199892     1.18   0.238    -.3279235    1.318404
+                  _cons |  -2.419811   2.157603    -1.12   0.262    -6.648636    1.809014
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         54
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .4634479   .1287774     3.60   0.000     .2110489    .7158469
+          2  |   .5855984   .0861294     6.80   0.000      .416788    .7544089
+          3  |   .7006556   .0576131    12.16   0.000     .5877361    .8135751
+          4  |   .7994293   .0574919    13.91   0.000     .6867472    .9121113
+          5  |   .8763678   .0630419    13.90   0.000     .7528079    .9999277
+          6  |   .9304478   .0584234    15.93   0.000       .81594    1.044956
+          7  |   .9645518   .0451508    21.36   0.000     .8760578    1.053046
+          8  |   .9837413   .0295135    33.33   0.000     .9258959    1.041587
+          9  |    .993328   .0164784    60.28   0.000      .961031    1.025625
+         10  |   .9975627   .0079021   126.24   0.000     .9820749    1.013051
+         11  |   .9992108   .0032644   306.10   0.000     .9928127    1.005609
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(10)50, notick) yla(0(0.2)1, notick) title("{bf:B } Games villages only: Female participation", span pos(11) size())
+>  xtitle("Share of women participating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2 if share_female_percent2 <60, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. 
+end of do-file
+
+. tab share_female_percent2
+
+share_femal |
+ e_percent2 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          7       12.50       12.50
+   7.142858 |          5        8.93       21.43
+   14.28572 |          8       14.29       35.71
+   21.42857 |         11       19.64       55.36
+   28.57143 |          7       12.50       67.86
+   35.71429 |         10       17.86       85.71
+   42.85714 |          4        7.14       92.86
+         50 |          2        3.57       96.43
+   64.28571 |          1        1.79       98.21
+   92.85714 |          1        1.79      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Table S4. Robustness check female participation effects in treatment communities
+. *dam maintenance
+. *only communities where female share was below 60%
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<60, robust
+
+Iteration 0:   log pseudolikelihood = -31.905481  
+Iteration 1:   log pseudolikelihood = -25.748744  
+Iteration 2:   log pseudolikelihood = -25.587021  
+Iteration 3:   log pseudolikelihood = -25.586794  
+Iteration 4:   log pseudolikelihood = -25.586794  
+
+Probit regression                               Number of obs     =         54
+                                                Wald chi2(10)     =      12.98
+                                                Prob > chi2       =     0.2246
+Log pseudolikelihood = -25.586794               Pseudo R2         =     0.1980
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0875885   .4319113     0.20   0.839    -.7589421    .9341192
+                  No_HH |   .0031705   .0026258     1.21   0.227     -.001976     .008317
+               FES_site |   .8494191   .4522521     1.88   0.060    -.0369787    1.735817
+               Shar_Lit |   .0326467   .0269389     1.21   0.226    -.0201526    .0854459
+              Shar_SCST |  -.0115202   .0153717    -0.75   0.454    -.0416483    .0186078
+fs_dam_used_farming_new |   .4205035   .3907742     1.08   0.282    -.3453999    1.186407
+  share_female_percent2 |   .0384165   .0177975     2.16   0.031      .003534    .0732991
+              leader2_2 |   .2677646   .4857785     0.55   0.581    -.6843438    1.219873
+              leader2_3 |  -.3056822   .5482699    -0.56   0.577    -1.380271     .768907
+           d_illiterate |   .4952402   .4199892     1.18   0.238    -.3279235    1.318404
+                  _cons |  -2.419811   2.157603    -1.12   0.262    -6.648636    1.809014
+-----------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_maintenance_12m_new]No_HH = 0
+ ( 2)  [fs_maintenance_12m_new]FES_site = 0
+ ( 3)  [fs_maintenance_12m_new]Shar_Lit = 0
+ ( 4)  [fs_maintenance_12m_new]Shar_SCST = 0
+ ( 5)  [fs_maintenance_12m_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    8.58
+         Prob > chi2 =    0.1269
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_maintenance_12m_new]share_female_percent2 = 0
+ ( 2)  [fs_maintenance_12m_new]leader2_2 = 0
+ ( 3)  [fs_maintenance_12m_new]leader2_3 = 0
+ ( 4)  [fs_maintenance_12m_new]d_illiterate = 0
+
+           chi2(  4) =    5.65
+         Prob > chi2 =    0.2267
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         54
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+dy/dx w.r.t. : bs_maintenance_12m_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+-----------------------------------------------------------------------------------------
+                        |            Delta-method
+                        |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0233636   .1151638     0.20   0.839    -.2023532    .2490804
+                  No_HH |   .0008457   .0006929     1.22   0.222    -.0005124    .0022038
+               FES_site |   .2265763   .1065795     2.13   0.034     .0176843    .4354683
+               Shar_Lit |   .0087083   .0068643     1.27   0.205    -.0047455     .022162
+              Shar_SCST |  -.0030729   .0040569    -0.76   0.449    -.0110243    .0048784
+fs_dam_used_farming_new |   .1121662   .1042446     1.08   0.282    -.0921495    .3164819
+  share_female_percent2 |   .0102473   .0043841     2.34   0.019     .0016546    .0188401
+              leader2_2 |   .0714242   .1286166     0.56   0.579    -.1806597    .3235082
+              leader2_3 |  -.0815385   .1457154    -0.56   0.576    -.3671355    .2040585
+           d_illiterate |   .1321017   .1104665     1.20   0.232    -.0844087    .3486122
+-----------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableS4", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Test:
+>  Session composition", `F2') adec(2) word dec(2) replace
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS4.rtf
+dir : seeout
+
+. 
+. *only communities where female share was below 50%
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_maintenance_12m_new]No_HH = 0
+ ( 2)  [fs_maintenance_12m_new]FES_site = 0
+ ( 3)  [fs_maintenance_12m_new]Shar_Lit = 0
+ ( 4)  [fs_maintenance_12m_new]Shar_SCST = 0
+ ( 5)  [fs_maintenance_12m_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    7.71
+         Prob > chi2 =    0.1729
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_maintenance_12m_new]share_female_percent2 = 0
+ ( 2)  [fs_maintenance_12m_new]leader2_2 = 0
+ ( 3)  [fs_maintenance_12m_new]leader2_3 = 0
+ ( 4)  [fs_maintenance_12m_new]d_illiterate = 0
+
+           chi2(  4) =    5.44
+         Prob > chi2 =    0.2454
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+dy/dx w.r.t. : bs_maintenance_12m_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+-----------------------------------------------------------------------------------------
+                        |            Delta-method
+                        |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0256545   .1186545     0.22   0.829    -.2069041    .2582131
+                  No_HH |   .0008841   .0007392     1.20   0.232    -.0005647    .0023328
+               FES_site |   .2292642   .1118067     2.05   0.040      .010127    .4484014
+               Shar_Lit |   .0085358   .0072919     1.17   0.242    -.0057561    .0228276
+              Shar_SCST |  -.0031547   .0041501    -0.76   0.447    -.0112887    .0049793
+fs_dam_used_farming_new |   .1089445   .1102697     0.99   0.323    -.1071801    .3250691
+  share_female_percent2 |   .0102702   .0046191     2.22   0.026      .001217    .0193234
+              leader2_2 |   .0730233   .1326529     0.55   0.582    -.1869716    .3330182
+              leader2_3 |  -.0971113   .1567379    -0.62   0.536     -.404312    .2100894
+           d_illiterate |   .1426139   .1150223     1.24   0.215    -.0828257    .3680535
+-----------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableS4", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Test:
+>  Session composition", `F2') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS4.rtf
+dir : seeout
+
+. 
+. 
+. *Rule existence
+. *only communities where female share was below 60%
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<60, robust
+
+Iteration 0:   log pseudolikelihood = -32.815445  
+Iteration 1:   log pseudolikelihood = -27.796427  
+Iteration 2:   log pseudolikelihood = -27.727324  
+Iteration 3:   log pseudolikelihood = -27.727182  
+Iteration 4:   log pseudolikelihood = -27.727182  
+
+Probit regression                               Number of obs     =         54
+                                                Wald chi2(10)     =      11.35
+                                                Prob > chi2       =     0.3306
+Log pseudolikelihood = -27.727182               Pseudo R2         =     0.1551
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .0081969   .5522614     0.01   0.988    -1.074216    1.090609
+                      No_HH |  -.0015709   .0028661    -0.55   0.584    -.0071884    .0040466
+                   FES_site |   .6245995   .4346436     1.44   0.151    -.2272862    1.476485
+                   Shar_Lit |  -.0279756   .0233471    -1.20   0.231    -.0737351    .0177839
+                  Shar_SCST |  -.0063905   .0137682    -0.46   0.643    -.0333756    .0205946
+    fs_dam_used_farming_new |  -.4343231   .4107661    -1.06   0.290     -1.23941    .3707637
+      share_female_percent2 |   .0265762   .0145971     1.82   0.069    -.0020336    .0551861
+                  leader2_2 |   .2936604   .3987187     0.74   0.461    -.4878139    1.075135
+                  leader2_3 |  -.0067609   .5442273    -0.01   0.990    -1.073427    1.059905
+               d_illiterate |   .3603231   .4135197     0.87   0.384    -.4501606    1.170807
+                      _cons |    .459683   1.833312     0.25   0.802    -3.133543    4.052909
+---------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_dam_maintenance_rule_new]No_HH = 0
+ ( 2)  [fs_dam_maintenance_rule_new]FES_site = 0
+ ( 3)  [fs_dam_maintenance_rule_new]Shar_Lit = 0
+ ( 4)  [fs_dam_maintenance_rule_new]Shar_SCST = 0
+ ( 5)  [fs_dam_maintenance_rule_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =    6.84
+         Prob > chi2 =    0.2328
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_dam_maintenance_rule_new]share_female_percent2 = 0
+ ( 2)  [fs_dam_maintenance_rule_new]leader2_2 = 0
+ ( 3)  [fs_dam_maintenance_rule_new]leader2_3 = 0
+ ( 4)  [fs_dam_maintenance_rule_new]d_illiterate = 0
+
+           chi2(  4) =    4.68
+         Prob > chi2 =    0.3219
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         54
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+dy/dx w.r.t. : bs_dam_maintenance_rule_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+---------------------------------------------------------------------------------------------
+                            |            Delta-method
+                            |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .0023818   .1604503     0.01   0.988     -.312095    .3168587
+                      No_HH |  -.0004565   .0008134    -0.56   0.575    -.0020507    .0011378
+                   FES_site |   .1814954   .1206112     1.50   0.132    -.0548981     .417889
+                   Shar_Lit |  -.0081291   .0067559    -1.20   0.229    -.0213703    .0051121
+                  Shar_SCST |  -.0018569   .0040083    -0.46   0.643    -.0097131    .0059992
+    fs_dam_used_farming_new |  -.1262051   .1166278    -1.08   0.279    -.3547914    .1023812
+      share_female_percent2 |   .0077225   .0040846     1.89   0.059    -.0002832    .0157282
+                  leader2_2 |   .0853315   .1147658     0.74   0.457    -.1396054    .3102684
+                  leader2_3 |  -.0019646   .1581134    -0.01   0.990    -.3118611     .307932
+               d_illiterate |   .1047023   .1214881     0.86   0.389    -.1334101    .3428147
+---------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableS4", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Test:
+>  Session composition", `F2') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS4.rtf
+dir : seeout
+
+. 
+. *only communities where female share was below 50%
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. local R2 = e(r2_p)
+
+. testparm $control
+
+ ( 1)  [fs_dam_maintenance_rule_new]No_HH = 0
+ ( 2)  [fs_dam_maintenance_rule_new]FES_site = 0
+ ( 3)  [fs_dam_maintenance_rule_new]Shar_Lit = 0
+ ( 4)  [fs_dam_maintenance_rule_new]Shar_SCST = 0
+ ( 5)  [fs_dam_maintenance_rule_new]fs_dam_used_farming_new = 0
+
+           chi2(  5) =   11.73
+         Prob > chi2 =    0.0386
+
+. local F1 = r(p)
+
+. testparm $session_composition
+
+ ( 1)  [fs_dam_maintenance_rule_new]share_female_percent2 = 0
+ ( 2)  [fs_dam_maintenance_rule_new]leader2_2 = 0
+ ( 3)  [fs_dam_maintenance_rule_new]leader2_3 = 0
+ ( 4)  [fs_dam_maintenance_rule_new]d_illiterate = 0
+
+           chi2(  4) =    4.62
+         Prob > chi2 =    0.3291
+
+. local F2 = r(p)
+
+. margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+dy/dx w.r.t. : bs_dam_maintenance_rule_new No_HH FES_site Shar_Lit Shar_SCST fs_dam_used_farming_new share_female_percent2 leader2_2
+               leader2_3 d_illiterate
+
+---------------------------------------------------------------------------------------------
+                            |            Delta-method
+                            |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .0511938   .1684042     0.30   0.761    -.2788723    .3812598
+                      No_HH |   .0002943   .0008214     0.36   0.720    -.0013157    .0019043
+                   FES_site |   .2075533   .1190584     1.74   0.081     -.025797    .4409036
+                   Shar_Lit |   -.012619   .0068759    -1.84   0.066    -.0260955    .0008575
+                  Shar_SCST |  -.0011364   .0035684    -0.32   0.750    -.0081304    .0058576
+    fs_dam_used_farming_new |  -.2034532   .1092342    -1.86   0.063    -.4175483    .0106419
+      share_female_percent2 |   .0076913   .0043191     1.78   0.075    -.0007739    .0161566
+                  leader2_2 |   .1026257   .1123805     0.91   0.361     -.117636    .3228874
+                  leader2_3 |  -.0845352    .169959    -0.50   0.619    -.4176487    .2485784
+               d_illiterate |   .1680749   .1311238     1.28   0.200    -.0889231    .4250728
+---------------------------------------------------------------------------------------------
+
+. est store main1
+
+. outreg2 using "$working_ANALYSIS/results/tables/tableS4", addstat("Pseudo R2", `R2', "F-Test: Village characteristics", `F1', "F-Test:
+>  Session composition", `F2') adec(2) word dec(2) append
+C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS4.rtf
+dir : seeout
+
+. 
+end of do-file
+
+. shellout using `"C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS4.rtf"'
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. sum share_female_percent2 if share_female_percent2<50, detail
+
+                    share_female_percent2
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                  52
+25%     14.28572              0       Sum of Wgt.          52
+
+50%     21.42857                      Mean           21.42857
+                        Largest       Std. Dev.      13.19355
+75%     35.71429       42.85714
+90%     35.71429       42.85714       Variance       174.0696
+95%     42.85714       42.85714       Skewness      -.1319554
+99%     42.85714       42.85714       Kurtosis       1.968292
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. sum share_female_percent20, detail
+variable share_female_percent20 not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. sum share_female_percent2, detail
+
+                    share_female_percent2
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                  56
+25%     14.28572              0       Sum of Wgt.          56
+
+50%     21.42857                      Mean            24.4898
+                        Largest       Std. Dev.      17.54174
+75%     35.71429             50
+90%     42.85714             50       Variance       307.7127
+95%           50       64.28571       Skewness       1.078988
+99%     92.85714       92.85714       Kurtosis       5.645698
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. sum share_female_percent2  if share_female_percent2<50, detail
+
+                    share_female_percent2
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                  52
+25%     14.28572              0       Sum of Wgt.          52
+
+50%     21.42857                      Mean           21.42857
+                        Largest       Std. Dev.      13.19355
+75%     35.71429       42.85714
+90%     35.71429       42.85714       Variance       174.0696
+95%     42.85714       42.85714       Skewness      -.1319554
+99%     42.85714       42.85714       Kurtosis       1.968292
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt lcolor() axis(2)) ytitle("Per
+> cent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_a.gph", replace
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph not found
+> )
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_a.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 10
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_a.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph saved)
+
+. *around the median value of women share we estimate an increased likelihood of maintenance of about 16pp compared to sessions with no 
+> female participants
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion2.plot3.bar_size = 3
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. 
+. *Panel A: Maintenance
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:B } Rule existence", span pos(11) size()) xtitle("Share of women par
+> ticipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_b.gph", replace
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_b.gph not found
+> )
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_b.gph saved)
+
+. *around the median value of women share we estimate an increased likelihood of maintenance of about 16pp compared to sessions with no 
+> female participants
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:B } Rule existence", span pos(11) size()) xtitle("Share of women par
+> ticipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:B } Rule existence", span pos(11) size()) xtitle("Share of women par
+> ticipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion1.added_text[1].DragBy .0042701931536245 .228181777083843
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_b.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_b.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:B } Rule existence", span pos(11) size()) xtitle("Share of women par
+> ticipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion1.added_text[1].DragBy 
+invalid syntax
+invalid syntax
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_b.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_b.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:B } Rule existence", span pos(11) size()) xtitle("Share of women par
+> ticipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted rule existence") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted rule existence" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion1.added_text[1].DragBy .7700581653703878 -1.003999819168964
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_b.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_b.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(3.465) ysize(1.7) iscale(1.05)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph not found)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. grc1leg  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) savi
+> ng("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(3.465) ysize(1.7) iscale(1.05)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(3.465) ysize(1.7) iscale(1.05)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(4) ysize(2)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy .1535730123805444 -.638908975399561
+
+. gr_edit plotregion1.added_text[1].DragBy .7964051792477791 -.4563635538568562
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_a.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph saved)
+
+. *around the median value of women share we estimate an increased likelihood of maintenance of about 16pp compared to sessions with no 
+> female participants
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(4) ysize(2)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr display
+
+. gr_edit style.editstyle margin(zero) editcopy
+
+. gr_edit gmetric_mult = 1.05
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(6-pt) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(small) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].DragBy .0192344756311785 .3714312066533156
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy .1083514229419924 -8.234708143591391
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy 0 3.033839842375797
+
+. gr_edit plotregion1.graph2.style.editstyle boxstyle(shadestyle(color(none))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(4) ysize(2)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr display
+
+. gr_edit style.editstyle margin(zero) editcopy
+
+. gr_edit gmetric_mult = 1.05
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(small) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].DragBy .0192344756311785 .3714312066533156
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy .1083514229419924 -8.234708143591391
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy 0 3.033839842375797
+
+. gr_edit plotregion1.graph2.style.editstyle boxstyle(shadestyle(color(none))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. *Panel A: Maintenance
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. marginsplot, xla(0(20)50, notick) yla(0(0.2)1, notick) title("{bf:A } Maintenance", span pos(11) size()) xtitle("Share of women partic
+> ipating in games (percent)")  ///
+>                 xline(21.43, lpattern(dash))  ytitle("Predicted maintenance") ///
+>                 recastci(rarea) ciopts(fcolor(%60) lwidth(none)) legend(pos(6) ring(1) rows(2)) ///
+>                 addplot(hist share_female_percent2  if share_female_percent2<50, fcolor(%30) lwidth(none) percent yaxis(2) yscale(alt 
+> lcolor() axis(2)) ytitle("Percent", axis(2)) legend(order(2 "Predicted maintenance" 3 "Distribution women participation")))
+
+  Variables that uniquely identify margins: share_female_percent2
+
+. gr_edit plotregion1.AddTextBox added_text editor .0767792533911014 22.90604527651298
+
+. gr_edit plotregion1.added_text_new = 1
+
+. gr_edit plotregion1.added_text_rec = 1
+
+. gr_edit plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(2.777777777777778) allow_pct(1)) color(bl
+> ack) horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(
+> 1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow
+> _pct(1)) drawbox(no) boxmargin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztyp
+> e(relative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relati
+> ve) val(.15) allow_pct(1)) color(black) pattern(solid) align(inside)) box_alignment(east) editcopy
+
+. gr_edit plotregion1.added_text[1].style.editstyle size(medsmall) editcopy
+
+. gr_edit plotregion1.added_text[1].text = {}
+
+. gr_edit plotregion1.added_text[1].text.Arrpush Median = 21.43%
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("120 94 240"))) editcopy
+
+. gr_edit plotregion2.plot3.bar_size = 5
+
+. gr_edit plotregion2.plot3.style.editstyle area(shadestyle(color("%50"))) editcopy
+
+. gr_edit plotregion1.added_text[1].DragBy 1.001138756966564 -.9127271083354187
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS1_a.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/figureS1_a.gph saved)
+
+. *around the median value of women share we estimate an increased likelihood of maintenance of about 16pp compared to sessions with no 
+> female participants
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. 
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(4) ysize(2)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr display
+
+. gr_edit style.editstyle margin(zero) editcopy
+
+. gr_edit gmetric_mult = 1.05
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(small) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].DragBy .0192344756311785 .3714312066533156
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy .1083514229419924 -8.234708143591391
+
+. gr_edit plotregion1.graph1.xaxis1.title.DragBy 0 3.033839842375797
+
+. gr_edit plotregion1.graph2.style.editstyle boxstyle(shadestyle(color(none))) editcopy
+
+. gr save "$working_ANALYSIS\results\intermediate\figureS1.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figureS1.tif", replace width(3465)
+(note: file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS1.tif not found)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS1.tif written in TIFF format
+> )
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion1.graph1.plotregion1.added_text[1].style.editstyle size(small) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr_edit plotregion1.graph1.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. 
+. gr combine  "$working_ANALYSIS/results/intermediate/figureS1_a.gph" "$working_ANALYSIS/results/intermediate/figureS1_b.gph", rows(1) s
+> aving("$working_ANALYSIS\results\intermediate\figureS1.gph", replace) xsize(4) ysize(2)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr display
+
+. gr_edit style.editstyle margin(zero) editcopy
+
+. gr_edit gmetric_mult = 1.05
+
+. gr_edit plotregion1.graph1.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+
+. gr_edit plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(4-pt) editcopy
+
+. gr_edit plotregion1.graph2.style.editstyle boxstyle(shadestyle(color(none))) editcopy
+
+. gr save "$working_ANALYSIS\results\intermediate\figureS1.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figureS1.tif", replace width(3465)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS1.tif written in TIFF format
+> )
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. gr save "$working_ANALYSIS\results\intermediate\figureS1.gph", replace
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS1.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figureS1.tif", replace width(3465)
+(file C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS1.tif written in TIFF format
+> )
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.618163  
+Iteration 2:   log pseudolikelihood = -25.486241  
+Iteration 3:   log pseudolikelihood = -25.486066  
+Iteration 4:   log pseudolikelihood = -25.486066  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      12.17
+                                                Prob > chi2       =     0.2738
+Log pseudolikelihood = -25.486066               Pseudo R2         =     0.1842
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0928415   .4295659     0.22   0.829    -.7490922    .9347752
+                  No_HH |   .0031993   .0027036     1.18   0.237    -.0020995    .0084982
+               FES_site |   .8296876   .4570662     1.82   0.069    -.0661458    1.725521
+               Shar_Lit |   .0308902   .0275554     1.12   0.262    -.0231173    .0848977
+              Shar_SCST |  -.0114165    .015187    -0.75   0.452    -.0411825    .0183494
+fs_dam_used_farming_new |   .3942608   .3998294     0.99   0.324    -.3893904    1.177912
+  share_female_percent2 |    .037167   .0181512     2.05   0.041     .0015913    .0727428
+              leader2_2 |   .2642652   .4837907     0.55   0.585    -.6839472    1.212478
+              leader2_3 |  -.3514375   .5681896    -0.62   0.536    -1.465069    .7621936
+           d_illiterate |   .5161076   .4209623     1.23   0.220    -.3089634    1.341179
+                  _cons |  -2.306701   2.182025    -1.06   0.290     -6.58339    1.969989
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .468861   .1246955     3.76   0.000     .2244623    .7132597
+          2  |   .5866431   .0822752     7.13   0.000     .4253866    .7478995
+          3  |   .6976787    .057154    12.21   0.000      .585659    .8096984
+          4  |   .7937607    .060921    13.03   0.000     .6743577    .9131637
+          5  |    .869763   .0682767    12.74   0.000     .7359432    1.003583
+          6  |   .9244318   .0645993    14.31   0.000     .7978195    1.051044
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. di  .468861 -.6976787
+-.2288177
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_maintenance_12m_new bs_maintenance_12m_new $control $session_composition , robust
+
+Iteration 0:   log pseudolikelihood = -32.542487  
+Iteration 1:   log pseudolikelihood = -25.984584  
+Iteration 2:   log pseudolikelihood = -25.593172  
+Iteration 3:   log pseudolikelihood = -25.588984  
+Iteration 4:   log pseudolikelihood = -25.588983  
+
+Probit regression                               Number of obs     =         56
+                                                Wald chi2(10)     =      13.36
+                                                Prob > chi2       =     0.2044
+Log pseudolikelihood = -25.588983               Pseudo R2         =     0.2137
+
+-----------------------------------------------------------------------------------------
+                        |               Robust
+ fs_maintenance_12m_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+------------------------+----------------------------------------------------------------
+ bs_maintenance_12m_new |   .0870289    .431325     0.20   0.840    -.7583526    .9324104
+                  No_HH |   .0031772   .0026263     1.21   0.226    -.0019701    .0083246
+               FES_site |   .8498988   .4518964     1.88   0.060    -.0358018    1.735599
+               Shar_Lit |   .0326581   .0269368     1.21   0.225     -.020137    .0854532
+              Shar_SCST |  -.0115717   .0152878    -0.76   0.449    -.0415352    .0183919
+fs_dam_used_farming_new |   .4207145   .3908315     1.08   0.282    -.3453012     1.18673
+  share_female_percent2 |   .0385709   .0173661     2.22   0.026     .0045341    .0726078
+              leader2_2 |   .2671443   .4861174     0.55   0.583    -.6856284    1.219917
+              leader2_3 |  -.3085892   .5456724    -0.57   0.572    -1.378087     .760909
+           d_illiterate |   .4971537    .418359     1.19   0.235    -.3228148    1.317122
+                  _cons |  -2.420145   2.158114    -1.12   0.262     -6.64997     1.80968
+-----------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)100))  vsquish
+
+Predictive margins                              Number of obs     =         56
+Model VCE    : Robust
+
+Expression   : Pr(fs_maintenance_12m_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+7._at        : share_fema~2    =          60
+8._at        : share_fema~2    =          70
+9._at        : share_fema~2    =          80
+10._at       : share_fema~2    =          90
+11._at       : share_fema~2    =         100
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |    .467856   .1272335     3.68   0.000     .2184829    .7172291
+          2  |   .5909126    .085153     6.94   0.000     .4240157    .7578095
+          3  |   .7060441   .0571872    12.35   0.000     .5939592    .8181291
+          4  |   .8041368   .0562712    14.29   0.000     .6938473    .9144263
+          5  |   .8799598   .0606909    14.50   0.000     .7610079    .9989118
+          6  |   .9328615   .0556124    16.77   0.000     .8238631     1.04186
+          7  |   .9659868   .0425981    22.68   0.000     .8824961    1.049478
+          8  |   .9844976   .0276249    35.64   0.000     .9303538    1.038641
+          9  |   .9936815   .0153056    64.92   0.000     .9636831     1.02368
+         10  |   .9977089   .0072816   137.02   0.000     .9834371    1.011981
+         11  |   .9992642   .0029827   335.02   0.000     .9934183     1.00511
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. probit fs_dam_maintenance_rule_new bs_dam_maintenance_rule_new $control $session_composition if share_female_percent2<50, robust
+
+Iteration 0:   log pseudolikelihood = -31.239958  
+Iteration 1:   log pseudolikelihood = -25.478343  
+Iteration 2:   log pseudolikelihood =  -25.25202  
+Iteration 3:   log pseudolikelihood = -25.251111  
+Iteration 4:   log pseudolikelihood = -25.251111  
+
+Probit regression                               Number of obs     =         52
+                                                Wald chi2(10)     =      14.44
+                                                Prob > chi2       =     0.1538
+Log pseudolikelihood = -25.251111               Pseudo R2         =     0.1917
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+fs_dam_maintenance_rule_new |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+----------------------------+----------------------------------------------------------------
+bs_dam_maintenance_rule_new |   .1883049   .6227225     0.30   0.762    -1.032209    1.408819
+                      No_HH |   .0010825   .0029825     0.36   0.717    -.0047631    .0069281
+                   FES_site |   .7634389   .4568338     1.67   0.095    -.1319388    1.658817
+                   Shar_Lit |  -.0464162   .0254636    -1.82   0.068    -.0963238    .0034914
+                  Shar_SCST |  -.0041801   .0131365    -0.32   0.750    -.0299271    .0215669
+    fs_dam_used_farming_new |  -.7483576   .4170916    -1.79   0.073    -1.565842    .0691268
+      share_female_percent2 |   .0282909    .016421     1.72   0.085    -.0038936    .0604754
+                  leader2_2 |    .377486   .4164992     0.91   0.365    -.4388375    1.193809
+                  leader2_3 |  -.3109439   .6292079    -0.49   0.621    -1.544169    .9222809
+               d_illiterate |   .6182261   .4798172     1.29   0.198    -.3221983    1.558651
+                      _cons |   .6125801   1.932468     0.32   0.751    -3.174988    4.400148
+---------------------------------------------------------------------------------------------
+
+. margins, at(share_female_percent2==(0(10)50))  vsquish
+
+Predictive margins                              Number of obs     =         52
+Model VCE    : Robust
+
+Expression   : Pr(fs_dam_maintenance_rule_new), predict()
+1._at        : share_fema~2    =           0
+2._at        : share_fema~2    =          10
+3._at        : share_fema~2    =          20
+4._at        : share_fema~2    =          30
+5._at        : share_fema~2    =          40
+6._at        : share_fema~2    =          50
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         _at |
+          1  |   .1389518   .0769843     1.80   0.071    -.0119346    .2898383
+          2  |   .1975848   .0653204     3.02   0.002     .0695592    .3256104
+          3  |   .2681938   .0548441     4.89   0.000     .1607014    .3756861
+          4  |   .3487108   .0691822     5.04   0.000     .2131161    .4843054
+          5  |   .4358774   .1075361     4.05   0.000     .2251105    .6466444
+          6  |   .5256696   .1516829     3.47   0.001     .2283765    .8229627
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2f10_000000.tmp"
+
+. di  .2681938-.1389518 
+.129242
+
+. 
+end of do-file
+
+. exit, clear

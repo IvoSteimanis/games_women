@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Ashis Veky;1;4;;;;;;;;;Sarasdoli
+6;Rajjan Singh;2;;4;;;;;;;;Sarasdoli
+6;Sanjay;3;;;;;;;;;;Sarasdoli
+6;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+6;Parbati;5;;;;1;;;1;;;Sarasdoli
+6;Phutvati;6;;;1;;;;;;;Sarasdoli
+6;Manish;7;;;;;;;;;;Sarasdoli
+6;Sharda;8;;;;;;;;;;Sarasdoli
+6;Navin;9;2;;;;;;;;;Sarasdoli
+6;Hemraj ;10;;;;;;;;;;Sarasdoli
+6;Daulo;11;;;;;;;;;1;Sarasdoli
+6;Ratanlal;12;;5;;;;;;;;Sarasdoli
+6;Zam Singh;13;;;;;;;;;;Sarasdoli
+6;Ram Kumar;14;;;;;2;;;;;Sarasdoli
+7;Ashis Veky;1;;;;;;;;;1;Sarasdoli
+7;Rajjan Singh;2;6;;;;;;;;;Sarasdoli
+7;Sanjay;3;;;;;;;;1;;Sarasdoli
+7;Bhagat Singh;4;;;;;;;1;;;Sarasdoli
+7;Parbati;5;;;6;;;;;;;Sarasdoli
+7;Phutvati;6;;;;;1;;;;;Sarasdoli
+7;Manish;7;;;;;;2;;;;Sarasdoli
+7;Sharda;8;;;;;;;;;;Sarasdoli
+7;Navin;9;2;;;;;;;;;Sarasdoli
+7;Hemraj ;10;;;;;;;;;;Sarasdoli
+7;Daulo;11;;;;;;;;;1;Sarasdoli
+7;Ratanlal;12;;5;;;;;;;;Sarasdoli
+7;Zam Singh;13;;;;;;;;;;Sarasdoli
+7;Ram Kumar;14;;;;;2;;;;;Sarasdoli
+8;Ashis Veky;1;;;;;;;;;1;Sarasdoli
+8;Rajjan Singh;2;;;;;;;1;;;Sarasdoli
+8;Sanjay;3;;;;2;;;;;;Sarasdoli
+8;Bhagat Singh;4;;3;;;;;;;;Sarasdoli
+8;Parbati;5;2;;;;;;;;;Sarasdoli
+8;Phutvati;6;;;;;;;;;;Sarasdoli
+8;Manish;7;;;;;;;;;;Sarasdoli
+8;Sharda;8;;;;;;;;;;Sarasdoli
+8;Navin;9;;;;;;;;;2;Sarasdoli
+8;Hemraj ;10;;;;;;;;;;Sarasdoli
+8;Daulo;11;;;;;;;;;;Sarasdoli
+8;Ratanlal;12;2;;;;;;;;;Sarasdoli
+8;Zam Singh;13;;;;;;;;;;Sarasdoli
+8;Ram Kumar;14;;;;;;;;;;Sarasdoli
+9;Ashis Veky;1;;;;;2;;;;;Sarasdoli
+9;Rajjan Singh;2;5;;;;;;;;;Sarasdoli
+9;Sanjay;3;;6;;;;;;;;Sarasdoli
+9;Bhagat Singh;4;;;;;;1;;;;Sarasdoli
+9;Parbati;5;;;;;;;;1;;Sarasdoli
+9;Phutvati;6;;;;;;;1;;;Sarasdoli
+9;Manish;7;;;;1;;;;;;Sarasdoli
+9;Sharda;8;;;;;;;;;;Sarasdoli
+9;Navin;9;;;5;;;;1;;;Sarasdoli
+9;Hemraj ;10;;;;;;;;;;Sarasdoli
+9;Daulo;11;;;;;;;;;;Sarasdoli
+9;Ratanlal;12;2;;;;;;;;;Sarasdoli
+9;Zam Singh;13;;;;;;;;;;Sarasdoli
+9;Ram Kumar;14;;;;;2;;;;;Sarasdoli
+10;Ashis Veky;1;;;;;;;;;;Sarasdoli
+10;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+10;Sanjay;3;;;;;;;;;;Sarasdoli
+10;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+10;Parbati;5;;;;;;;;;;Sarasdoli
+10;Phutvati;6;;;;;;;;;;Sarasdoli
+10;Manish;7;;;;;;;;;;Sarasdoli
+10;Sharda;8;;;;;;;;;;Sarasdoli
+10;Navin;9;;;;;;;;;;Sarasdoli
+10;Hemraj ;10;;;;;;;;;;Sarasdoli
+10;Daulo;11;;;;;;;;;;Sarasdoli
+10;Ratanlal;12;;;;;;;;;;Sarasdoli
+10;Zam Singh;13;;;;;;;;;;Sarasdoli
+10;Ram Kumar;14;;;;;;;;;;Sarasdoli
+11;Ashis Veky;1;;;;;;;;;;Sarasdoli
+11;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+11;Sanjay;3;;;;;;;;;;Sarasdoli
+11;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+11;Parbati;5;;;;;;;;;;Sarasdoli
+11;Phutvati;6;;;;;;;;;;Sarasdoli
+11;Manish;7;;;;;;;;;;Sarasdoli
+11;Sharda;8;;;;;;;;;;Sarasdoli
+11;Navin;9;;;;;;;;;;Sarasdoli
+11;Hemraj ;10;;;;;;;;;;Sarasdoli
+11;Daulo;11;;;;;;;;;;Sarasdoli
+11;Ratanlal;12;;;;;;;;;;Sarasdoli
+11;Zam Singh;13;;;;;;;;;;Sarasdoli
+11;Ram Kumar;14;;;;;;;;;;Sarasdoli
+12;Ashis Veky;1;;;;;;;;;;Sarasdoli
+12;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+12;Sanjay;3;;;;;;;;;;Sarasdoli
+12;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+12;Parbati;5;;;;;;;;;;Sarasdoli
+12;Phutvati;6;;;;;;;;;;Sarasdoli
+12;Manish;7;;;;;;;;;;Sarasdoli
+12;Sharda;8;;;;;;;;;;Sarasdoli
+12;Navin;9;;;;;;;;;;Sarasdoli
+12;Hemraj ;10;;;;;;;;;;Sarasdoli
+12;Daulo;11;;;;;;;;;;Sarasdoli
+12;Ratanlal;12;;;;;;;;;;Sarasdoli
+12;Zam Singh;13;;;;;;;;;;Sarasdoli
+12;Ram Kumar;14;;;;;;;;;;Sarasdoli
+13;Ashis Veky;1;;;;;;;;;;Sarasdoli
+13;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+13;Sanjay;3;;;;;;;;;;Sarasdoli
+13;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+13;Parbati;5;;;;;;;;;;Sarasdoli
+13;Phutvati;6;;;;;;;;;;Sarasdoli
+13;Manish;7;;;;;;;;;;Sarasdoli
+13;Sharda;8;;;;;;;;;;Sarasdoli
+13;Navin;9;;;;;;;;;;Sarasdoli
+13;Hemraj ;10;;;;;;;;;;Sarasdoli
+13;Daulo;11;;;;;;;;;;Sarasdoli
+13;Ratanlal;12;;;;;;;;;;Sarasdoli
+13;Zam Singh;13;;;;;;;;;;Sarasdoli
+13;Ram Kumar;14;;;;;;;;;;Sarasdoli
+14;Ashis Veky;1;;;;;;;;;;Sarasdoli
+14;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+14;Sanjay;3;;;;;;;;;;Sarasdoli
+14;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+14;Parbati;5;;;;;;;;;;Sarasdoli
+14;Phutvati;6;;;;;;;;;;Sarasdoli
+14;Manish;7;;;;;;;;;;Sarasdoli
+14;Sharda;8;;;;;;;;;;Sarasdoli
+14;Navin;9;;;;;;;;;;Sarasdoli
+14;Hemraj ;10;;;;;;;;;;Sarasdoli
+14;Daulo;11;;;;;;;;;;Sarasdoli
+14;Ratanlal;12;;;;;;;;;;Sarasdoli
+14;Zam Singh;13;;;;;;;;;;Sarasdoli
+14;Ram Kumar;14;;;;;;;;;;Sarasdoli
+15;Ashis Veky;1;;;;;;;;;;Sarasdoli
+15;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+15;Sanjay;3;;;;;;;;;;Sarasdoli
+15;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+15;Parbati;5;;;;;;;;;;Sarasdoli
+15;Phutvati;6;;;;;;;;;;Sarasdoli
+15;Manish;7;;;;;;;;;;Sarasdoli
+15;Sharda;8;;;;;;;;;;Sarasdoli
+15;Navin;9;;;;;;;;;;Sarasdoli
+15;Hemraj ;10;;;;;;;;;;Sarasdoli
+15;Daulo;11;;;;;;;;;;Sarasdoli
+15;Ratanlal;12;;;;;;;;;;Sarasdoli
+15;Zam Singh;13;;;;;;;;;;Sarasdoli
+15;Ram Kumar;14;;;;;;;;;;Sarasdoli
+16;Ashis Veky;1;;;;;;;;;;Sarasdoli
+16;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+16;Sanjay;3;;;;;;;;;;Sarasdoli
+16;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+16;Parbati;5;;;;;;;;;;Sarasdoli
+16;Phutvati;6;;;;;;;;;;Sarasdoli
+16;Manish;7;;;;;;;;;;Sarasdoli
+16;Sharda;8;;;;;;;;;;Sarasdoli
+16;Navin;9;;;;;;;;;;Sarasdoli
+16;Hemraj ;10;;;;;;;;;;Sarasdoli
+16;Daulo;11;;;;;;;;;;Sarasdoli
+16;Ratanlal;12;;;;;;;;;;Sarasdoli
+16;Zam Singh;13;;;;;;;;;;Sarasdoli
+16;Ram Kumar;14;;;;;;;;;;Sarasdoli
+17;Ashis Veky;1;;;;;;;;;;Sarasdoli
+17;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+17;Sanjay;3;;;;;;;;;;Sarasdoli
+17;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+17;Parbati;5;;;;;;;;;;Sarasdoli
+17;Phutvati;6;;;;;;;;;;Sarasdoli
+17;Manish;7;;;;;;;;;;Sarasdoli
+17;Sharda;8;;;;;;;;;;Sarasdoli
+17;Navin;9;;;;;;;;;;Sarasdoli
+17;Hemraj ;10;;;;;;;;;;Sarasdoli
+17;Daulo;11;;;;;;;;;;Sarasdoli
+17;Ratanlal;12;;;;;;;;;;Sarasdoli
+17;Zam Singh;13;;;;;;;;;;Sarasdoli
+17;Ram Kumar;14;;;;;;;;;;Sarasdoli
+18;Ashis Veky;1;;;;;;;;;;Sarasdoli
+18;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+18;Sanjay;3;;;;;;;;;;Sarasdoli
+18;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+18;Parbati;5;;;;;;;;;;Sarasdoli
+18;Phutvati;6;;;;;;;;;;Sarasdoli
+18;Manish;7;;;;;;;;;;Sarasdoli
+18;Sharda;8;;;;;;;;;;Sarasdoli
+18;Navin;9;;;;;;;;;;Sarasdoli
+18;Hemraj ;10;;;;;;;;;;Sarasdoli
+18;Daulo;11;;;;;;;;;;Sarasdoli
+18;Ratanlal;12;;;;;;;;;;Sarasdoli
+18;Zam Singh;13;;;;;;;;;;Sarasdoli
+18;Ram Kumar;14;;;;;;;;;;Sarasdoli
+19;Ashis Veky;1;;;;;;;;;;Sarasdoli
+19;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+19;Sanjay;3;;;;;;;;;;Sarasdoli
+19;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+19;Parbati;5;;;;;;;;;;Sarasdoli
+19;Phutvati;6;;;;;;;;;;Sarasdoli
+19;Manish;7;;;;;;;;;;Sarasdoli
+19;Sharda;8;;;;;;;;;;Sarasdoli
+19;Navin;9;;;;;;;;;;Sarasdoli
+19;Hemraj ;10;;;;;;;;;;Sarasdoli
+19;Daulo;11;;;;;;;;;;Sarasdoli
+19;Ratanlal;12;;;;;;;;;;Sarasdoli
+19;Zam Singh;13;;;;;;;;;;Sarasdoli
+19;Ram Kumar;14;;;;;;;;;;Sarasdoli
+20;Ashis Veky;1;;;;;;;;;;Sarasdoli
+20;Rajjan Singh;2;;;;;;;;;;Sarasdoli
+20;Sanjay;3;;;;;;;;;;Sarasdoli
+20;Bhagat Singh;4;;;;;;;;;;Sarasdoli
+20;Parbati;5;;;;;;;;;;Sarasdoli
+20;Phutvati;6;;;;;;;;;;Sarasdoli
+20;Manish;7;;;;;;;;;;Sarasdoli
+20;Sharda;8;;;;;;;;;;Sarasdoli
+20;Navin;9;;;;;;;;;;Sarasdoli
+20;Hemraj ;10;;;;;;;;;;Sarasdoli
+20;Daulo;11;;;;;;;;;;Sarasdoli
+20;Ratanlal;12;;;;;;;;;;Sarasdoli
+20;Zam Singh;13;;;;;;;;;;Sarasdoli
+20;Ram Kumar;14;;;;;;;;;;Sarasdoli

@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Pardeshi;2;7;1;1;0;M;60;2;NO;NO;YES;0;NO;2;2,5;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Pardeshi;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+2;Bhagwati;2;6;1;2;0;F;24;8;YES;SHG MEMBER;NO;0;NO;12;5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Bhagwati;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+3;Ramkumar;2;5;1;3;0;M;28;8;NO;NO;YES;0;NO;12;2,5;g;0;0;0;0;0;0;0;0;0;0;1;0;0;0;Ramkumar;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+4;Rampyari;1;4;1;4;0;F;26;5;NO;NO;YES;0;NO;12;2;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Rampyari;0;20;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+5;Ravishankar;1;3;1;5;0;M;18;9;NO;NO;NO;0;NO;5;2;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Ravishankar;0;20;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+6;Navalsingh;1;2;1;6;0;M;30;7;NO;NO;YES;0;NO;3;5;w;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Navalsingh;0;20;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+7;Mukesh;1;1;1;7;0;M;24;8;NO;NO;NO;0;NO;3;1;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Mukesh;0;20;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+8;Rajeshkumar;1;7;2;1;0;M;20;8;NO;NO;NO;0;NO;10;1;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Rajeshkumar;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+9;Yashoda;1;6;2;2;0;F;26;8;YES;VILLAGE RESOURSE PERSON;NO;0;YES;6;1,5;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Yashoda;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+10;Premlal;1;5;2;3;0;M;47;8;YES;FES CRP;YES;0;NO;15;3;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Premlal;1;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+11;Jagat;2;4;2;4;0;M;32;8;YES;Forest Commiittee member;YES;0;YES;3;2;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Jagat;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+12;Bhagsingh;2;3;2;5;0;M;36;8;YES;SHG MEMBER;NO;0;NO;3;2,5;w;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Bhagsingh;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+13;Bhaiyalal;2;2;2;6;0;M;42;12;NO;NO;NO;0;NO;2;2;g;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Bhaiyalal;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14
+14;Sunil;2;1;2;7;0;M;18;8;NO;NO;NO;0;NO;1;1;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Sunil;0;30;Umariya_FV;13.05.2017;Radha Rajesh Shivraj and VD Duche;14

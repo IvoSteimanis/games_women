@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Kalabai;2;7;1;1;0;F;22;5;YES;SHG MEMBER;NO;0;NO;4;3;w;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Kalabai;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+2;Punibai;2;6;1;2;0;F;35;8;YES;ASHA WORKER;NO;0;NO;5;0,5;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Punibai;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+3;Ramkumari;2;5;1;3;0;F;20;9;NO;NO;NO;0;NO;23;2;w;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Ramkumari;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+4;Sarojani;1;4;1;4;0;F;21;10;NO;NO;NO;0;NO;21;1;w;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Sarojani;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+5;Anita;1;3;1;5;0;F;40;10;YES;ANGANWADI TEACHER;NO;0;YES;1;2;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Anita;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+6;Surekha;1;2;1;6;0;F;30;8;YES;SHG MEMBER;NO;0;NO;8;1;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Surekha;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+7;Jyoti;1;1;1;7;0;F;29;10;YES;SHG MEMBER;NO;0;YES;9;3;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Jyoti;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+8;Chhaya;1;7;2;1;0;F;40;8;YES;SHG MEMBER;NO;0;NO;13;2;g;0;0;0;0;0;0;0;0;0;0;1;0;0;0;Chhaya;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+9;Manju;1;6;2;2;0;F;30;8;YES;SHG MEMBER;NO;0;NO;5;1;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Manju;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+10;Madhu;1;5;2;3;0;F;21;9;YES;SHG MEMBER;NO;0;NO;16;3;w;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Madhu;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+11;Heera;2;4;2;4;0;F;36;5;YES;SHG MEMBER;NO;0;NO;17;1;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Heera;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+12;Asha;2;3;2;5;0;F;40;10;YES;SHG PRESDIENT;NO;0;NO;2;3;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Asha;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+13;Arati;2;2;2;6;0;F;30;10;YES;SHG SECRETARY;NO;0;NO;7;2;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Arati;0;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14
+14;Siyabai;2;1;2;7;0;F;45;3;NO;NO;NO;0;NO;5;1;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Siyabai;1;0;Khirahani;07.09.2017;Shivraj Rajesh Radha and VD Duche;14

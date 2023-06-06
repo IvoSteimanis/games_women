@@ -1,0 +1,3 @@
+24 Oct 2022
+using `"C:\Users\istei\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/tableS5.txt"'
+addstat("Pseudo R2", .2001725870700655, "F-Test: Controls", .226362199197203, "F-Test: Session composition", .0220451332219747) adec(2) word dec(2) append

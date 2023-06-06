@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Surendra;2;7;1;1;0;M;30;4;NO;NO;NO;0;NO;20;2;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Surendra;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+2;Ramkrapal;2;6;1;2;0;M;32;8;NO;NO;NO;0;NO;20;1,5;w;0;0;0;0;0;0;0;0;0;0;1;0;0;0;Ramkrapal;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+3;Santoh;2;5;1;3;0;M;30;4;NO;NO;NO;0;NO;6;2;g;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Santoh;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+4;Bharatlal;1;4;1;4;0;M;32;10;NO;NO;YES;0;NO;4;2;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Bharatlal;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+5;Tejlal;1;3;1;5;0;M;35;7;NO;NO;NO;0;NO;25;2;w;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Tejlal;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+6;Kalawati;1;2;1;6;0;F;28;0;YES;SHG MEMBER;NO;0;NO;4;1;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Kalawati;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+7;Sushila;1;1;1;7;0;F;35;4;YES;SHG PRESIDENT;NO;0;NO;2;1;g;0;0;0;0;0;1;0;0;0;0;0;0;0;0;Sushila;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+8;Singhram;1;7;2;1;0;M;52;5;NO;NO;YES;0;NO;11;2;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Singhram;1;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+9;Kamlesh;1;6;2;2;0;M;23;9;NO;NO;NO;0;NO;8;1,5;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Kamlesh;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+10;Rasmi;1;5;2;3;0;F;20;12;YES;VILLAGE FRIEND;NO;0;NO;4;2;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Rasmi;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+11;Shreechand;2;4;2;4;0;M;38;10;NO;NO;NO;0;NO;12;1,5;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Shreechand;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+12;Sushila Tekam;2;3;2;5;0;F;21;10;NO;NO;NO;0;NO;3;1;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Sushila Tekam;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+13;Dalpat;2;2;2;6;0;M;35;8;NO;NO;YES;0;NO;5;6;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Dalpat;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13
+14;Arvindkumar;2;1;2;7;0;M;32;8;NO;NO;NO;0;YES;2;2,5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Arvindkumar;0;0;Jhulup;14/6/2017;Shivraj Rajesh Premlal and VD Duche;13

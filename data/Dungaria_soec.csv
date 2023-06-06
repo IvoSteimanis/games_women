@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Jageshwar M;2;7;1;1;0;M;27;10;N;N;N;N;N;5;7;0;0;0;0;0;0;0;1;1;0;0;0;0;0;0;Laxman V;0;0;Dungaria;23/03/17;0;0
+2;Ganesh M;2;6;1;2;0;M;25;8;N;N;N;N;N;1;6;0;0;0;0;0;0;0;1;1;0;0;0;0;0;0;Ganesh M;0;0;Dungaria;23/03/17;0;0
+3;Bihari M;2;5;1;3;0;M;42;8;N;N;N;N;N;2;5;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Bihari M;0;0;Dungaria;23/03/17;0;0
+4;Jagatsingh U;1;4;1;4;0;M;44;8;Y;Smithi secretary;N;N;N;6;7,5;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;Jagatsingh U;0;0;Dungaria;23/03/17;0;0
+5;Vishnu M ;1;3;1;5;0;M;26;12;N;N;N;N;N;12;3;0;0;0;0;1;0;0;0;0;0;0;0;0;1;0;Vishnu M ;0;0;Dungaria;23/03/17;0;0
+6;Laxman V;1;2;1;6;0;M;22;12;N;N;N;N;N;6;6;0;0;0;0;1;0;0;0;0;1;0;0;0;0;0;#BEZUG!;0;0;Dungaria;23/03/17;0;0
+7;Satish U;1;1;1;7;0;M;26;B SC ;N;N;N;N;N;8;5;0;0;0;0;1;0;0;0;1;0;0;0;0;0;0;Satish U;0;0;Dungaria;23/03/17;0;0
+8;Khoobchand M;1;7;2;1;0;M;30;B A;N;N;N;N;N;20;6;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Khoobchand M;0;0;Dungaria;23/03/17;0;0
+9;Suresh U;1;6;2;2;0;M;45;10;N;N;N;N;N;5;5;0;0;0;0;0;0;0;1;1;0;0;0;0;0;0;Suresh U;0;0;Dungaria;23/03/17;0;0
+10;Radha P;1;5;2;3;0;F;35;8 CLASS;N;N;Y;N;N;15;5;0;0;0;1;1;0;0;0;0;0;0;0;0;0;0;Radha P;0;0;Dungaria;23/03/17;0;0
+11;Rita;2;4;2;4;0;F;24;8 CLASS;N;N;N;N;0;9;5;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Rita;0;0;Dungaria;23/03/17;0;0
+12;Pardeshi M;2;3;2;5;0;M;35;8;N;N;N;N;N;12;4,5;0;0;0;0;1;0;0;0;0;1;0;0;0;0;0;Pardeshi M;0;0;Dungaria;23/03/17;0;0
+13;Ramlal S;2;2;2;6;0;M;54;7;Y;Samiti  Presiedent;N;N;N;3;10;0;0;0;1;1;0;0;0;0;0;0;0;0;0;0;Ramlal S;0;0;Dungaria;23/03/17;0;0
+14;Lakshamaniya U;2;1;2;7;0;F;32;5;N;N;Y;N;N;7;5;0;0;0;1;1;0;0;0;0;0;0;0;0;0;0;Lakshamaniya U;0;0;Dungaria;23/03/17;0;0

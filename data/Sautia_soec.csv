@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Shivkali;2;7;1;1;0;F;30;8;YES;AGANWADI TEACHER;NO;0;YES;6;2;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Shivkali;Sanotabai;10;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+2;Amarlal Markam;2;6;1;2;0;M;33;10;No;No;No;0;No;15;0,5;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Amarlal Markam;Sanotabai;20;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+3;Saraswati Markam;2;5;1;3;0;F;32;4;YES;SHG MEMBER;YES;0;NO;10;3;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Saraswati Markam;Sanotabai;10;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+4;Sattobai;1;4;1;4;0;F;40;6;No;No;No;0;No;10;5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Sattobai;Sanotabai;10;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+5;Arjunsigh;1;3;1;5;0;M;35;12;NO;NO;YES;0;NO;12;1,5;g;0;0;0;0;0;1;0;0;0;0;0;1;0;0;Arjunsigh;Sanotabai;30;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+6;Laxman;1;2;1;6;0;M;32;6;NO;NO;NO;0;NO;16;2;g;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Laxman;Sanotabai;20;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+7;Nainasingh markam;1;1;1;7;0;M;21;12;No;No;No;0;Yes;1;2;g;0;0;1;0;0;0;0;0;0;0;0;0;1;0;Nainasingh markam;Sanotabai;30;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+8;Ramkumari;1;7;2;1;0;F;26;8;YES;PANCHAYAT MEMBER;NO;0;NO;15;1;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Ramkumari;Sanotabai;10;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+9;Vasudev Ueke;1;6;2;2;0;M;30;10;No;No;No;0;No;15;4;g;0;0;0;0;0;0;1;0;0;0;0;0;0;0;Vasudev Ueke;Sanotabai;20;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+10;Anjana Markam;1;5;2;3;0;F;27;10;yes;MEMBER;YES;0;yes;15;1;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Anjana Markam;Sanotabai;10;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+11;Sanotabai;2;4;2;4;0;F;45;7;NO;NO;YES;0;NO;0;2;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Sanotabai;Sanotabai;20;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+12;Budharam Markam;2;3;2;5;0;M;32;10;NO;NO;YES;0;NO;6;4;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Budharam Markam;Sanotabai;20;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+13;Tularam Markam;2;2;2;6;0;M;45;0;No;No;No;0;No;2;12;w;0;0;0;0;0;0;0;0;0;0;0;0;0;1;Tularam Markam;Sanotabai;30;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14
+14;Narsingh Markam;2;1;2;7;0;M;42;5;No;No;No;0;No;7;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Narsingh Markam;Sanotabai;40;Sautia;11.04.2017;Radha, Chandrahas, Duche and Soniya;14

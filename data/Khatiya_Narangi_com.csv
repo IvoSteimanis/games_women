@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Lachhi;1;;;;1;;;;;;Khatiya_Narangi
+6;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+6;Champa;3;;;;;;;2;;;Khatiya_Narangi
+6;Sohan;4;;5;;;;;;;;Khatiya_Narangi
+6;Jasoda;5;2;;;;;;;;;Khatiya_Narangi
+6;Manju;6;;;;;;;;;;Khatiya_Narangi
+6;Ankit;7;;;;;;;;;;Khatiya_Narangi
+6;Rajesh;8;1;3;;1;2;;;;;Khatiya_Narangi
+6;Mohan Lal;9;1;;1;1;;;;;;Khatiya_Narangi
+6;Visakha;10;2;4;;;2;;;;;Khatiya_Narangi
+6;Ramcharam;11;;1;;;;;;;;Khatiya_Narangi
+6;Jeevan;12;2;1;1;1;;;;;;Khatiya_Narangi
+6;Mona;13;1;;;;;;;;;Khatiya_Narangi
+6;Ram Prasad;14;1;2;;;1;;;;;Khatiya_Narangi
+7;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+7;Sasikanta;2;;4;;;;;;;;Khatiya_Narangi
+7;Champa;3;;;;;;;;;;Khatiya_Narangi
+7;Sohan;4;2;;;;;;;;;Khatiya_Narangi
+7;Jasoda;5;;;;;2;;;;;Khatiya_Narangi
+7;Manju;6;;;;;;;;;;Khatiya_Narangi
+7;Ankit;7;;;;;;;;;;Khatiya_Narangi
+7;Rajesh;8;1;3;;2;1;;;;;Khatiya_Narangi
+7;Mohan Lal;9;1;2;;;1;;;;;Khatiya_Narangi
+7;Visakha;10;1;2;;;1;;;;;Khatiya_Narangi
+7;Ramcharam;11;;1;1;1;1;;;;;Khatiya_Narangi
+7;Jeevan;12;2;1;;;;;;;;Khatiya_Narangi
+7;Mona;13;1;1;;1;2;;;;;Khatiya_Narangi
+7;Ram Prasad;14;1;2;;;1;;;;;Khatiya_Narangi
+8;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+8;Sasikanta;2;;;;;;;2;;;Khatiya_Narangi
+8;Champa;3;;;;;;;;;;Khatiya_Narangi
+8;Sohan;4;2;;;;;;;;;Khatiya_Narangi
+8;Jasoda;5;;;;1;;;;;;Khatiya_Narangi
+8;Manju;6;;;;;;;;;;Khatiya_Narangi
+8;Ankit;7;;3;;;;;;;;Khatiya_Narangi
+8;Rajesh;8;1;1;;;;;;;;Khatiya_Narangi
+8;Mohan Lal;9;2;3;;1;1;;;;;Khatiya_Narangi
+8;Visakha;10;1;3;1;;;;;;;Khatiya_Narangi
+8;Ramcharam;11;1;2;;;;;;;;Khatiya_Narangi
+8;Jeevan;12;;2;;2;1;;;;;Khatiya_Narangi
+8;Mona;13;2;1;;;;;;;;Khatiya_Narangi
+8;Ram Prasad;14;1;1;;1;;;;;;Khatiya_Narangi
+9;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+9;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+9;Champa;3;;4;;;;;;;;Khatiya_Narangi
+9;Sohan;4;;;;;;;;;;Khatiya_Narangi
+9;Jasoda;5;2;;;;;;;;;Khatiya_Narangi
+9;Manju;6;;;;;;;;;;Khatiya_Narangi
+9;Ankit;7;;;;;;;1;;;Khatiya_Narangi
+9;Rajesh;8;1;1;;;1;;;;;Khatiya_Narangi
+9;Mohan Lal;9;;3;;2;1;;;;;Khatiya_Narangi
+9;Visakha;10;1;1;;;1;;;;;Khatiya_Narangi
+9;Ramcharam;11;;4;;2;;;;;;Khatiya_Narangi
+9;Jeevan;12;1;1;;;1;;;;;Khatiya_Narangi
+9;Mona;13;;2;;;1;;;;;Khatiya_Narangi
+9;Ram Prasad;14;1;1;;1;1;;;;;Khatiya_Narangi
+10;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+10;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+10;Champa;3;;;;;;;;;;Khatiya_Narangi
+10;Sohan;4;;;;;;;;;;Khatiya_Narangi
+10;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+10;Manju;6;;;;;;;;;;Khatiya_Narangi
+10;Ankit;7;;;;;;;;;;Khatiya_Narangi
+10;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+10;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+10;Visakha;10;;;;;;;;;;Khatiya_Narangi
+10;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+10;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+10;Mona;13;;;;;;;;;;Khatiya_Narangi
+10;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+11;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+11;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+11;Champa;3;;;;;;;;;;Khatiya_Narangi
+11;Sohan;4;;;;;;;;;;Khatiya_Narangi
+11;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+11;Manju;6;;;;;;;;;;Khatiya_Narangi
+11;Ankit;7;;;;;;;;;;Khatiya_Narangi
+11;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+11;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+11;Visakha;10;;;;;;;;;;Khatiya_Narangi
+11;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+11;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+11;Mona;13;;;;;;;;;;Khatiya_Narangi
+11;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+12;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+12;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+12;Champa;3;;;;;;;;;;Khatiya_Narangi
+12;Sohan;4;;;;;;;;;;Khatiya_Narangi
+12;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+12;Manju;6;;;;;;;;;;Khatiya_Narangi
+12;Ankit;7;;;;;;;;;;Khatiya_Narangi
+12;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+12;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+12;Visakha;10;;;;;;;;;;Khatiya_Narangi
+12;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+12;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+12;Mona;13;;;;;;;;;;Khatiya_Narangi
+12;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+13;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+13;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+13;Champa;3;;;;;;;;;;Khatiya_Narangi
+13;Sohan;4;;;;;;;;;;Khatiya_Narangi
+13;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+13;Manju;6;;;;;;;;;;Khatiya_Narangi
+13;Ankit;7;;;;;;;;;;Khatiya_Narangi
+13;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+13;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+13;Visakha;10;;;;;;;;;;Khatiya_Narangi
+13;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+13;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+13;Mona;13;;;;;;;;;;Khatiya_Narangi
+13;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+14;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+14;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+14;Champa;3;;;;;;;;;;Khatiya_Narangi
+14;Sohan;4;;;;;;;;;;Khatiya_Narangi
+14;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+14;Manju;6;;;;;;;;;;Khatiya_Narangi
+14;Ankit;7;;;;;;;;;;Khatiya_Narangi
+14;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+14;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+14;Visakha;10;;;;;;;;;;Khatiya_Narangi
+14;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+14;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+14;Mona;13;;;;;;;;;;Khatiya_Narangi
+14;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+15;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+15;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+15;Champa;3;;;;;;;;;;Khatiya_Narangi
+15;Sohan;4;;;;;;;;;;Khatiya_Narangi
+15;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+15;Manju;6;;;;;;;;;;Khatiya_Narangi
+15;Ankit;7;;;;;;;;;;Khatiya_Narangi
+15;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+15;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+15;Visakha;10;;;;;;;;;;Khatiya_Narangi
+15;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+15;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+15;Mona;13;;;;;;;;;;Khatiya_Narangi
+15;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+16;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+16;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+16;Champa;3;;;;;;;;;;Khatiya_Narangi
+16;Sohan;4;;;;;;;;;;Khatiya_Narangi
+16;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+16;Manju;6;;;;;;;;;;Khatiya_Narangi
+16;Ankit;7;;;;;;;;;;Khatiya_Narangi
+16;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+16;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+16;Visakha;10;;;;;;;;;;Khatiya_Narangi
+16;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+16;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+16;Mona;13;;;;;;;;;;Khatiya_Narangi
+16;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+17;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+17;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+17;Champa;3;;;;;;;;;;Khatiya_Narangi
+17;Sohan;4;;;;;;;;;;Khatiya_Narangi
+17;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+17;Manju;6;;;;;;;;;;Khatiya_Narangi
+17;Ankit;7;;;;;;;;;;Khatiya_Narangi
+17;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+17;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+17;Visakha;10;;;;;;;;;;Khatiya_Narangi
+17;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+17;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+17;Mona;13;;;;;;;;;;Khatiya_Narangi
+17;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+18;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+18;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+18;Champa;3;;;;;;;;;;Khatiya_Narangi
+18;Sohan;4;;;;;;;;;;Khatiya_Narangi
+18;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+18;Manju;6;;;;;;;;;;Khatiya_Narangi
+18;Ankit;7;;;;;;;;;;Khatiya_Narangi
+18;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+18;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+18;Visakha;10;;;;;;;;;;Khatiya_Narangi
+18;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+18;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+18;Mona;13;;;;;;;;;;Khatiya_Narangi
+18;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+19;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+19;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+19;Champa;3;;;;;;;;;;Khatiya_Narangi
+19;Sohan;4;;;;;;;;;;Khatiya_Narangi
+19;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+19;Manju;6;;;;;;;;;;Khatiya_Narangi
+19;Ankit;7;;;;;;;;;;Khatiya_Narangi
+19;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+19;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+19;Visakha;10;;;;;;;;;;Khatiya_Narangi
+19;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+19;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+19;Mona;13;;;;;;;;;;Khatiya_Narangi
+19;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi
+20;Lachhi;1;;;;;;;;;;Khatiya_Narangi
+20;Sasikanta;2;;;;;;;;;;Khatiya_Narangi
+20;Champa;3;;;;;;;;;;Khatiya_Narangi
+20;Sohan;4;;;;;;;;;;Khatiya_Narangi
+20;Jasoda;5;;;;;;;;;;Khatiya_Narangi
+20;Manju;6;;;;;;;;;;Khatiya_Narangi
+20;Ankit;7;;;;;;;;;;Khatiya_Narangi
+20;Rajesh;8;;;;;;;;;;Khatiya_Narangi
+20;Mohan Lal;9;;;;;;;;;;Khatiya_Narangi
+20;Visakha;10;;;;;;;;;;Khatiya_Narangi
+20;Ramcharam;11;;;;;;;;;;Khatiya_Narangi
+20;Jeevan;12;;;;;;;;;;Khatiya_Narangi
+20;Mona;13;;;;;;;;;;Khatiya_Narangi
+20;Ram Prasad;14;;;;;;;;;;Khatiya_Narangi

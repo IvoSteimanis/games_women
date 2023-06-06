@@ -1,0 +1,279 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2023.03.31-17.10.32.log.txt
+  log type:  text
+ opened on:  31 Mar 2023, 17:10:32
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 31 Mar 2023 17:10:32
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;
+> lmatasp;lmatasvy;lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50" reduces transpar
+> ency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/2023_03_Survey&Game_Wide.dta", clear
+
+. 
+. *drop variables with all missings
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. sort game_date_intervention
+
+. gen sequence=[_n]
+
+. gen seq_split= 0
+
+. replace seq_split=1 if sequence>28
+(56 real changes made)
+
+. 
+. 
+. lab var FES_site "NGO active in village (=1)"
+
+. lab var share_female_percent3_BS "Non-leader female participants (in 10%)"
+
+. lab var leader2_2_BS "Only male leader participated (=1)"
+
+. lab var leader2_3_BS "Female leader participated (=1)"
+
+. lab var sequence "Sequence of game interventions (1 to 56)"
+
+. lab var survey_dam_for_irrigation_FS "Dam used for irrigation (=1)"
+
+. lab var survey_maint_2017_FS "Endline: Maintenance (=1)"
+
+. lab var survey_maint_12m_BS "Baseline: Maintenance (=1)"
+
+. lab var survey_maint_rule_FS "Endline: Maintenance rule (=1)"
+
+. lab var survey_maint_rule_BS "Baseline: Maintenance rule (=1)"
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. probit survey_maint_2017_FS survey_maint_12m_BS survey_maint_rule_FS $village, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -54.747551  
+Iteration 1:   log pseudolikelihood = -51.368783  
+Iteration 2:   log pseudolikelihood = -51.352817  
+Iteration 3:   log pseudolikelihood = -51.352815  
+
+Probit regression                               Number of obs     =         84
+                                                Wald chi2(2)      =       6.80
+                                                Prob > chi2       =     0.0334
+Log pseudolikelihood = -51.352815               Pseudo R2         =     0.0620
+
+--------------------------------------------------------------------------------------
+                     |               Robust
+survey_maint_2017_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+---------------------+----------------------------------------------------------------
+ survey_maint_12m_BS |   .5781132   .2912209     1.99   0.047     .0073307    1.148896
+survey_maint_rule_FS |   .4699535   .3242831     1.45   0.147    -.1656297    1.105537
+               _cons |  -.0527978   .2155474    -0.24   0.806    -.4752629    .3696674
+--------------------------------------------------------------------------------------
+
+. local r2_p= e(r2_p)
+
+. test $village
+
+ ( 1)  [survey_maint_2017_FS]survey_maint_12m_BS = 0
+ ( 2)  [survey_maint_2017_FS]survey_maint_rule_FS = 0
+
+           chi2(  2) =    6.80
+         Prob > chi2 =    0.0334
+
+
+. local F= r(p)  
+
+. eststo maint1:  margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         84
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_2017_FS), predict()
+dy/dx w.r.t. : survey_maint_12m_BS survey_maint_rule_FS
+
+--------------------------------------------------------------------------------------
+                     |            Delta-method
+                     |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+---------------------+----------------------------------------------------------------
+ survey_maint_12m_BS |   .2011637   .0943799     2.13   0.033     .0161826    .3861449
+survey_maint_rule_FS |   .1635278   .1093549     1.50   0.135    -.0508038    .3778594
+--------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. global village  No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. 
+. probit survey_maint_2017_FS survey_maint_12m_BS survey_maint_rule_FS $village, vce(robust)
+
+Iteration 0:   log pseudolikelihood = -54.302378  
+Iteration 1:   log pseudolikelihood = -48.822293  
+Iteration 2:   log pseudolikelihood = -48.794563  
+Iteration 3:   log pseudolikelihood = -48.794563  
+
+Probit regression                               Number of obs     =         83
+                                                Wald chi2(7)      =      11.41
+                                                Prob > chi2       =     0.1217
+Log pseudolikelihood = -48.794563               Pseudo R2         =     0.1014
+
+----------------------------------------------------------------------------------------------
+                             |               Robust
+        survey_maint_2017_FS |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .5325607   .3048817     1.75   0.081    -.0649964    1.130118
+        survey_maint_rule_FS |   .4509035   .3310317     1.36   0.173    -.1979066    1.099714
+                       No_HH |   -.000969    .001502    -0.65   0.519    -.0039129    .0019749
+                    FES_site |   .1580975   .3349918     0.47   0.637    -.4984742    .8146693
+                    Shar_Lit |   .0170862   .0194882     0.88   0.381      -.02111    .0552824
+                   Shar_SCST |  -.0144562   .0091025    -1.59   0.112    -.0322968    .0033845
+survey_dam_for_irrigation_FS |   .2221304   .3068065     0.72   0.469    -.3791993    .8234601
+                       _cons |   .2137546   1.413593     0.15   0.880    -2.556837    2.984347
+----------------------------------------------------------------------------------------------
+
+. local r2_p= e(r2_p)
+
+. test $village
+
+ ( 1)  [survey_maint_2017_FS]No_HH = 0
+ ( 2)  [survey_maint_2017_FS]FES_site = 0
+ ( 3)  [survey_maint_2017_FS]Shar_Lit = 0
+ ( 4)  [survey_maint_2017_FS]Shar_SCST = 0
+ ( 5)  [survey_maint_2017_FS]survey_dam_for_irrigation_FS = 0
+
+           chi2(  5) =    4.31
+         Prob > chi2 =    0.5052
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STDd30_000000.tmp"
+
+. local F= r(p)  
+
+. eststo maint1:  margins, dydx(*) post
+
+Average marginal effects                        Number of obs     =         83
+Model VCE    : Robust
+
+Expression   : Pr(survey_maint_2017_FS), predict()
+dy/dx w.r.t. : survey_maint_12m_BS survey_maint_rule_FS No_HH FES_site Shar_Lit Shar_SCST survey_dam_for_irrigation_FS
+
+----------------------------------------------------------------------------------------------
+                             |            Delta-method
+                             |      dy/dx   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------------+----------------------------------------------------------------
+         survey_maint_12m_BS |   .1774564   .0967768     1.83   0.067    -.0122227    .3671355
+        survey_maint_rule_FS |   .1502471   .1082577     1.39   0.165     -.061934    .3624283
+                       No_HH |  -.0003229   .0004944    -0.65   0.514     -.001292    .0006462
+                    FES_site |   .0526802   .1111747     0.47   0.636    -.1652183    .2705787
+                    Shar_Lit |   .0056934   .0064271     0.89   0.376    -.0069035    .0182903
+                   Shar_SCST |   -.004817   .0028861    -1.67   0.095    -.0104736    .0008396
+survey_dam_for_irrigation_FS |   .0740168   .1007728     0.73   0.463    -.1234941    .2715278
+----------------------------------------------------------------------------------------------
+
+. estadd scalar r2_p= `r2_p'
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. exit, clear

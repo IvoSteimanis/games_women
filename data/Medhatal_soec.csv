@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;Motilal;2;7;1;1;0;M;40;5;NO;NO;NO;0;NO;10;3;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Motilal;1;40;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+2;Mulchand;2;6;1;2;0;M;25;10;NO;NO;NO;0;NO;2;2;g;1;0;0;0;0;0;0;0;0;0;0;0;0;0;Mulchand;0;30;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+3;Subhelal;2;5;1;3;0;M;23;12;NO;NO;NO;0;NO;1;2;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;Subhelal;0;20;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+4;Ramdulari;1;4;1;4;0;F;45;0;NO;NO;NO;0;NO;12;2;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;Ramdulari;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+5;Jungal;1;3;1;5;0;m;26;9;NO;NO;NO;0;NO;12;0,5;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Jungal;0;20;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+6;Pachalu;1;2;1;6;0;M;29;9;NO;NO;NO;0;NO;5;1,5;w;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Pachalu;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+7;Saroj;1;1;1;7;0;F;40;0;NO;NO;NO;0;NO;8;1;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;Saroj;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+8;Lalaram;1;7;2;1;0;M;22;10;NO;NO;NO;0;NO;7;1;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;Lalaram;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+9;Yashoda;1;6;2;2;0;F;24;5;NO;NO;NO;0;NO;4;2;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;Yashoda;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+10;Kushama;1;5;2;3;0;F;34;10;YES;ANGANWADI TEACHER;NO;0;NO;10;2;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Kushama;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+11;Devidin;2;4;2;4;0;M;29;9;NO;NO;NO;0;NO;3;2;w;0;0;0;0;1;0;0;0;0;0;0;0;0;0;Devidin;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+12;Santlal;2;3;2;5;0;M;31;7;NO;NO;NO;0;NO;13;1;g;0;1;0;0;0;0;0;0;0;0;0;0;0;0;Santlal;0;40;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+13;Sona;2;2;2;6;0;F;35;5;YES;PANCHYAT MEMBER;YES;0;NO;7;1;g;0;0;0;0;0;0;0;0;0;0;0;1;0;0;Sona;0;20;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11
+14;Somati;2;1;2;7;0;F;40;1;YES;SHG MEMBER;NO;0;NO;5;1;g;0;0;0;1;0;0;0;0;0;0;0;0;0;0;Somati;0;10;Medhatal;27/04/2017;Radha Chandrahas Sunit and VD Duche;11

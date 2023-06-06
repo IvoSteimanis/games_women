@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Shivkali;1;;;;;;;;;;Sautia
+6;Amarlal Markam;2;;;;;;;;;;Sautia
+6;Saraswati Markam;3;;;;;;;2;;;Sautia
+6;Sattobai;4;;;;;;;;;;Sautia
+6;Arjunsigh;5;;;;;;;;;;Sautia
+6;Laxman;6;3;;;;;;;;;Sautia
+6;Nainasingh markam;7;;4;;;;;;;;Sautia
+6;Ramkumari;8;4;;;;;;;;;Sautia
+6;Vasudev Ueke;9;;5;;;;;;;;Sautia
+6;Anjana Markam;10;;;;1;;;;;;Sautia
+6;Sanotabai;11;;;;;3;;;;;Sautia
+6;Budharam Markam;12;;;;;;;2;;;Sautia
+6;Tularam Markam;13;;;;;;;;;1;Sautia
+6;Narsingh Markam;14;;;;;;;;;;Sautia
+7;Shivkali;1;;;;;;;;;;Sautia
+7;Amarlal Markam;2;;;;;;;;;;Sautia
+7;Saraswati Markam;3;5;;;;;;;;;Sautia
+7;Sattobai;4;;;;;;;;;1;Sautia
+7;Arjunsigh;5;;4;;;;;;;;Sautia
+7;Laxman;6;;;;1;;;;;;Sautia
+7;Nainasingh markam;7;;;;;;;;;;Sautia
+7;Ramkumari;8;5;;;;;;;;;Sautia
+7;Vasudev Ueke;9;;5;;;;;;;;Sautia
+7;Anjana Markam;10;;;;;;;;1;;Sautia
+7;Sanotabai;11;;;;1;;;;;;Sautia
+7;Budharam Markam;12;;;;;1;;;;;Sautia
+7;Tularam Markam;13;;;;1;;;;;;Sautia
+7;Narsingh Markam;14;;;;;;;1;;;Sautia
+8;Shivkali;1;;;;;;;;;;Sautia
+8;Amarlal Markam;2;;3;;;;;;;;Sautia
+8;Saraswati Markam;3;;;;1;;;;;;Sautia
+8;Sattobai;4;;;;;;;;;;Sautia
+8;Arjunsigh;5;4;;;;;;;;;Sautia
+8;Laxman;6;;;;;2;;;;;Sautia
+8;Nainasingh markam;7;;;;;;;2;;;Sautia
+8;Ramkumari;8;4;;;;;;;;;Sautia
+8;Vasudev Ueke;9;;;;;;;;1;;Sautia
+8;Anjana Markam;10;;5;;;;;;;;Sautia
+8;Sanotabai;11;;;;1;;;;;;Sautia
+8;Budharam Markam;12;;;;;1;;;;;Sautia
+8;Tularam Markam;13;;;;;;;2;;;Sautia
+8;Narsingh Markam;14;;;;;;;;;1;Sautia
+9;Shivkali;1;;;;;;;;;;Sautia
+9;Amarlal Markam;2;3;;;;;;;;;Sautia
+9;Saraswati Markam;3;;;;;;;;;;Sautia
+9;Sattobai;4;;5;;;3;;;;;Sautia
+9;Arjunsigh;5;;;;;;;;;;Sautia
+9;Laxman;6;;;;;;;;;;Sautia
+9;Nainasingh markam;7;;;;;;;2;;;Sautia
+9;Ramkumari;8;3;;;;;;;;;Sautia
+9;Vasudev Ueke;9;;;;;1;;;;;Sautia
+9;Anjana Markam;10;;;;;;;1;;;Sautia
+9;Sanotabai;11;;5;;;;;;;;Sautia
+9;Budharam Markam;12;;;;;1;;;;;Sautia
+9;Tularam Markam;13;;;;;;;;1;;Sautia
+9;Narsingh Markam;14;;;;;;;;;;Sautia
+10;Shivkali;1;;;;;;;;;;Sautia
+10;Amarlal Markam;2;;;;;;;;;;Sautia
+10;Saraswati Markam;3;;;;;;;;;;Sautia
+10;Sattobai;4;;;;;;;;;;Sautia
+10;Arjunsigh;5;;;;;;;;;;Sautia
+10;Laxman;6;;;;;;;;;;Sautia
+10;Nainasingh markam;7;;;;;;;;;;Sautia
+10;Ramkumari;8;;;;;;;;;;Sautia
+10;Vasudev Ueke;9;;;;;;;;;;Sautia
+10;Anjana Markam;10;;;;;;;;;;Sautia
+10;Sanotabai;11;;;;;;;;;;Sautia
+10;Budharam Markam;12;;;;;;;;;;Sautia
+10;Tularam Markam;13;;;;;;;;;;Sautia
+10;Narsingh Markam;14;;;;;;;;;;Sautia
+11;Shivkali;1;;;;;;;;;;Sautia
+11;Amarlal Markam;2;;;;;;;;;;Sautia
+11;Saraswati Markam;3;;;;;;;;;;Sautia
+11;Sattobai;4;;;;;;;;;;Sautia
+11;Arjunsigh;5;;;;;;;;;;Sautia
+11;Laxman;6;;;;;;;;;;Sautia
+11;Nainasingh markam;7;;;;;;;;;;Sautia
+11;Ramkumari;8;;;;;;;;;;Sautia
+11;Vasudev Ueke;9;;;;;;;;;;Sautia
+11;Anjana Markam;10;;;;;;;;;;Sautia
+11;Sanotabai;11;;;;;;;;;;Sautia
+11;Budharam Markam;12;;;;;;;;;;Sautia
+11;Tularam Markam;13;;;;;;;;;;Sautia
+11;Narsingh Markam;14;;;;;;;;;;Sautia
+12;Shivkali;1;;;;;;;;;;Sautia
+12;Amarlal Markam;2;;;;;;;;;;Sautia
+12;Saraswati Markam;3;;;;;;;;;;Sautia
+12;Sattobai;4;;;;;;;;;;Sautia
+12;Arjunsigh;5;;;;;;;;;;Sautia
+12;Laxman;6;;;;;;;;;;Sautia
+12;Nainasingh markam;7;;;;;;;;;;Sautia
+12;Ramkumari;8;;;;;;;;;;Sautia
+12;Vasudev Ueke;9;;;;;;;;;;Sautia
+12;Anjana Markam;10;;;;;;;;;;Sautia
+12;Sanotabai;11;;;;;;;;;;Sautia
+12;Budharam Markam;12;;;;;;;;;;Sautia
+12;Tularam Markam;13;;;;;;;;;;Sautia
+12;Narsingh Markam;14;;;;;;;;;;Sautia
+13;Shivkali;1;;;;;;;;;;Sautia
+13;Amarlal Markam;2;;;;;;;;;;Sautia
+13;Saraswati Markam;3;;;;;;;;;;Sautia
+13;Sattobai;4;;;;;;;;;;Sautia
+13;Arjunsigh;5;;;;;;;;;;Sautia
+13;Laxman;6;;;;;;;;;;Sautia
+13;Nainasingh markam;7;;;;;;;;;;Sautia
+13;Ramkumari;8;;;;;;;;;;Sautia
+13;Vasudev Ueke;9;;;;;;;;;;Sautia
+13;Anjana Markam;10;;;;;;;;;;Sautia
+13;Sanotabai;11;;;;;;;;;;Sautia
+13;Budharam Markam;12;;;;;;;;;;Sautia
+13;Tularam Markam;13;;;;;;;;;;Sautia
+13;Narsingh Markam;14;;;;;;;;;;Sautia
+14;Shivkali;1;;;;;;;;;;Sautia
+14;Amarlal Markam;2;;;;;;;;;;Sautia
+14;Saraswati Markam;3;;;;;;;;;;Sautia
+14;Sattobai;4;;;;;;;;;;Sautia
+14;Arjunsigh;5;;;;;;;;;;Sautia
+14;Laxman;6;;;;;;;;;;Sautia
+14;Nainasingh markam;7;;;;;;;;;;Sautia
+14;Ramkumari;8;;;;;;;;;;Sautia
+14;Vasudev Ueke;9;;;;;;;;;;Sautia
+14;Anjana Markam;10;;;;;;;;;;Sautia
+14;Sanotabai;11;;;;;;;;;;Sautia
+14;Budharam Markam;12;;;;;;;;;;Sautia
+14;Tularam Markam;13;;;;;;;;;;Sautia
+14;Narsingh Markam;14;;;;;;;;;;Sautia
+15;Shivkali;1;;;;;;;;;;Sautia
+15;Amarlal Markam;2;;;;;;;;;;Sautia
+15;Saraswati Markam;3;;;;;;;;;;Sautia
+15;Sattobai;4;;;;;;;;;;Sautia
+15;Arjunsigh;5;;;;;;;;;;Sautia
+15;Laxman;6;;;;;;;;;;Sautia
+15;Nainasingh markam;7;;;;;;;;;;Sautia
+15;Ramkumari;8;;;;;;;;;;Sautia
+15;Vasudev Ueke;9;;;;;;;;;;Sautia
+15;Anjana Markam;10;;;;;;;;;;Sautia
+15;Sanotabai;11;;;;;;;;;;Sautia
+15;Budharam Markam;12;;;;;;;;;;Sautia
+15;Tularam Markam;13;;;;;;;;;;Sautia
+15;Narsingh Markam;14;;;;;;;;;;Sautia
+16;Shivkali;1;;;;;;;;;;Sautia
+16;Amarlal Markam;2;;;;;;;;;;Sautia
+16;Saraswati Markam;3;;;;;;;;;;Sautia
+16;Sattobai;4;;;;;;;;;;Sautia
+16;Arjunsigh;5;;;;;;;;;;Sautia
+16;Laxman;6;;;;;;;;;;Sautia
+16;Nainasingh markam;7;;;;;;;;;;Sautia
+16;Ramkumari;8;;;;;;;;;;Sautia
+16;Vasudev Ueke;9;;;;;;;;;;Sautia
+16;Anjana Markam;10;;;;;;;;;;Sautia
+16;Sanotabai;11;;;;;;;;;;Sautia
+16;Budharam Markam;12;;;;;;;;;;Sautia
+16;Tularam Markam;13;;;;;;;;;;Sautia
+16;Narsingh Markam;14;;;;;;;;;;Sautia
+17;Shivkali;1;;;;;;;;;;Sautia
+17;Amarlal Markam;2;;;;;;;;;;Sautia
+17;Saraswati Markam;3;;;;;;;;;;Sautia
+17;Sattobai;4;;;;;;;;;;Sautia
+17;Arjunsigh;5;;;;;;;;;;Sautia
+17;Laxman;6;;;;;;;;;;Sautia
+17;Nainasingh markam;7;;;;;;;;;;Sautia
+17;Ramkumari;8;;;;;;;;;;Sautia
+17;Vasudev Ueke;9;;;;;;;;;;Sautia
+17;Anjana Markam;10;;;;;;;;;;Sautia
+17;Sanotabai;11;;;;;;;;;;Sautia
+17;Budharam Markam;12;;;;;;;;;;Sautia
+17;Tularam Markam;13;;;;;;;;;;Sautia
+17;Narsingh Markam;14;;;;;;;;;;Sautia
+18;Shivkali;1;;;;;;;;;;Sautia
+18;Amarlal Markam;2;;;;;;;;;;Sautia
+18;Saraswati Markam;3;;;;;;;;;;Sautia
+18;Sattobai;4;;;;;;;;;;Sautia
+18;Arjunsigh;5;;;;;;;;;;Sautia
+18;Laxman;6;;;;;;;;;;Sautia
+18;Nainasingh markam;7;;;;;;;;;;Sautia
+18;Ramkumari;8;;;;;;;;;;Sautia
+18;Vasudev Ueke;9;;;;;;;;;;Sautia
+18;Anjana Markam;10;;;;;;;;;;Sautia
+18;Sanotabai;11;;;;;;;;;;Sautia
+18;Budharam Markam;12;;;;;;;;;;Sautia
+18;Tularam Markam;13;;;;;;;;;;Sautia
+18;Narsingh Markam;14;;;;;;;;;;Sautia
+19;Shivkali;1;;;;;;;;;;Sautia
+19;Amarlal Markam;2;;;;;;;;;;Sautia
+19;Saraswati Markam;3;;;;;;;;;;Sautia
+19;Sattobai;4;;;;;;;;;;Sautia
+19;Arjunsigh;5;;;;;;;;;;Sautia
+19;Laxman;6;;;;;;;;;;Sautia
+19;Nainasingh markam;7;;;;;;;;;;Sautia
+19;Ramkumari;8;;;;;;;;;;Sautia
+19;Vasudev Ueke;9;;;;;;;;;;Sautia
+19;Anjana Markam;10;;;;;;;;;;Sautia
+19;Sanotabai;11;;;;;;;;;;Sautia
+19;Budharam Markam;12;;;;;;;;;;Sautia
+19;Tularam Markam;13;;;;;;;;;;Sautia
+19;Narsingh Markam;14;;;;;;;;;;Sautia
+20;Shivkali;1;;;;;;;;;;Sautia
+20;Amarlal Markam;2;;;;;;;;;;Sautia
+20;Saraswati Markam;3;;;;;;;;;;Sautia
+20;Sattobai;4;;;;;;;;;;Sautia
+20;Arjunsigh;5;;;;;;;;;;Sautia
+20;Laxman;6;;;;;;;;;;Sautia
+20;Nainasingh markam;7;;;;;;;;;;Sautia
+20;Ramkumari;8;;;;;;;;;;Sautia
+20;Vasudev Ueke;9;;;;;;;;;;Sautia
+20;Anjana Markam;10;;;;;;;;;;Sautia
+20;Sanotabai;11;;;;;;;;;;Sautia
+20;Budharam Markam;12;;;;;;;;;;Sautia
+20;Tularam Markam;13;;;;;;;;;;Sautia
+20;Narsingh Markam;14;;;;;;;;;;Sautia

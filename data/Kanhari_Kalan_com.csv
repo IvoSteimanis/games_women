@@ -1,0 +1,211 @@
+round;name;play_no;propose_rule;agree_rule;reject_rule;argue;praises;complains;propose_punish;propose_reward;unconected;site
+6;Rangilal;1;;;1;;;;;;;Kanhari_Kalan
+6;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+6;Susheela M Yadav;3;;1;;;;;;;;Kanhari_Kalan
+6;Mamta;4;;1;;;;;;;;Kanhari_Kalan
+6;Jagarsingh;5;1;;;;;;;;;Kanhari_Kalan
+6;Suresh;6;2;;;;;;;;;Kanhari_Kalan
+6;Shreechand;7;1;;;;;1;;;;Kanhari_Kalan
+6;Dayalulal;8;;1;;;;;;;;Kanhari_Kalan
+6;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+6;Payaralal;10;1;2;;;;;;;;Kanhari_Kalan
+6;Dansingh;11;;1;;;;;;;;Kanhari_Kalan
+6;Susheela;12;;;;;;;;;;Kanhari_Kalan
+6;Virendra;13;2;1;;;1;;;;;Kanhari_Kalan
+6;Jaisingh;14;1;;;;;;;;;Kanhari_Kalan
+7;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+7;Rangilal Yadav;2;2;1;1;;;;;;;Kanhari_Kalan
+7;Susheela M Yadav;3;;1;;;;;;;;Kanhari_Kalan
+7;Mamta;4;;;;;;;;;;Kanhari_Kalan
+7;Jagarsingh;5;;1;;;;;;;;Kanhari_Kalan
+7;Suresh;6;1;1;;;;;;;;Kanhari_Kalan
+7;Shreechand;7;1;;;;;;;;;Kanhari_Kalan
+7;Dayalulal;8;;1;;;;;;;;Kanhari_Kalan
+7;Sukhcharan;9;1;;;;;;;;;Kanhari_Kalan
+7;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+7;Dansingh;11;;1;;;;;;;;Kanhari_Kalan
+7;Susheela;12;;1;;;;;;;;Kanhari_Kalan
+7;Virendra;13;2;;;;;;;;;Kanhari_Kalan
+7;Jaisingh;14;;1;;;;;;;;Kanhari_Kalan
+8;Rangilal;1;1;;;1;;1;;;;Kanhari_Kalan
+8;Rangilal Yadav;2;1;1;;1;;1;;;;Kanhari_Kalan
+8;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+8;Mamta;4;;;;;;;;;;Kanhari_Kalan
+8;Jagarsingh;5;;1;;;;;;;;Kanhari_Kalan
+8;Suresh;6;;1;;;;;;;;Kanhari_Kalan
+8;Shreechand;7;1;2;;;;;;;;Kanhari_Kalan
+8;Dayalulal;8;;1;;;;;;;;Kanhari_Kalan
+8;Sukhcharan;9;1;;;;;;;;;Kanhari_Kalan
+8;Payaralal;10;;1;;;;;;;;Kanhari_Kalan
+8;Dansingh;11;;1;;;;;;;;Kanhari_Kalan
+8;Susheela;12;;1;;;;;;;;Kanhari_Kalan
+8;Virendra;13;2;3;;;1;;;;;Kanhari_Kalan
+8;Jaisingh;14;1;;;;;;;;;Kanhari_Kalan
+9;Rangilal;1;;1;;;;;;;;Kanhari_Kalan
+9;Rangilal Yadav;2;1;1;;;;;;;;Kanhari_Kalan
+9;Susheela M Yadav;3;;1;;;;;;;;Kanhari_Kalan
+9;Mamta;4;;1;;;1;;;;;Kanhari_Kalan
+9;Jagarsingh;5;;1;;;;1;;;;Kanhari_Kalan
+9;Suresh;6;1;1;;;1;;;;;Kanhari_Kalan
+9;Shreechand;7;1;1;;;;;;;;Kanhari_Kalan
+9;Dayalulal;8;1;1;;;;;;;;Kanhari_Kalan
+9;Sukhcharan;9;;1;;;;;;;;Kanhari_Kalan
+9;Payaralal;10;;1;;;;;;;;Kanhari_Kalan
+9;Dansingh;11;;2;;;;;;;;Kanhari_Kalan
+9;Susheela;12;;1;;;;;;;;Kanhari_Kalan
+9;Virendra;13;2;1;;;1;;;;;Kanhari_Kalan
+9;Jaisingh;14;1;2;;;1;;;;;Kanhari_Kalan
+10;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+10;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+10;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+10;Mamta;4;;;;;;;;;;Kanhari_Kalan
+10;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+10;Suresh;6;;;;;;;;;;Kanhari_Kalan
+10;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+10;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+10;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+10;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+10;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+10;Susheela;12;;;;;;;;;;Kanhari_Kalan
+10;Virendra;13;;;;;;;;;;Kanhari_Kalan
+10;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+11;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+11;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+11;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+11;Mamta;4;;;;;;;;;;Kanhari_Kalan
+11;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+11;Suresh;6;;;;;;;;;;Kanhari_Kalan
+11;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+11;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+11;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+11;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+11;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+11;Susheela;12;;;;;;;;;;Kanhari_Kalan
+11;Virendra;13;;;;;;;;;;Kanhari_Kalan
+11;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+12;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+12;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+12;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+12;Mamta;4;;;;;;;;;;Kanhari_Kalan
+12;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+12;Suresh;6;;;;;;;;;;Kanhari_Kalan
+12;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+12;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+12;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+12;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+12;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+12;Susheela;12;;;;;;;;;;Kanhari_Kalan
+12;Virendra;13;;;;;;;;;;Kanhari_Kalan
+12;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+13;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+13;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+13;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+13;Mamta;4;;;;;;;;;;Kanhari_Kalan
+13;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+13;Suresh;6;;;;;;;;;;Kanhari_Kalan
+13;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+13;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+13;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+13;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+13;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+13;Susheela;12;;;;;;;;;;Kanhari_Kalan
+13;Virendra;13;;;;;;;;;;Kanhari_Kalan
+13;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+14;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+14;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+14;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+14;Mamta;4;;;;;;;;;;Kanhari_Kalan
+14;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+14;Suresh;6;;;;;;;;;;Kanhari_Kalan
+14;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+14;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+14;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+14;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+14;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+14;Susheela;12;;;;;;;;;;Kanhari_Kalan
+14;Virendra;13;;;;;;;;;;Kanhari_Kalan
+14;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+15;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+15;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+15;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+15;Mamta;4;;;;;;;;;;Kanhari_Kalan
+15;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+15;Suresh;6;;;;;;;;;;Kanhari_Kalan
+15;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+15;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+15;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+15;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+15;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+15;Susheela;12;;;;;;;;;;Kanhari_Kalan
+15;Virendra;13;;;;;;;;;;Kanhari_Kalan
+15;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+16;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+16;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+16;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+16;Mamta;4;;;;;;;;;;Kanhari_Kalan
+16;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+16;Suresh;6;;;;;;;;;;Kanhari_Kalan
+16;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+16;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+16;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+16;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+16;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+16;Susheela;12;;;;;;;;;;Kanhari_Kalan
+16;Virendra;13;;;;;;;;;;Kanhari_Kalan
+16;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+17;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+17;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+17;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+17;Mamta;4;;;;;;;;;;Kanhari_Kalan
+17;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+17;Suresh;6;;;;;;;;;;Kanhari_Kalan
+17;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+17;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+17;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+17;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+17;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+17;Susheela;12;;;;;;;;;;Kanhari_Kalan
+17;Virendra;13;;;;;;;;;;Kanhari_Kalan
+17;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+18;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+18;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+18;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+18;Mamta;4;;;;;;;;;;Kanhari_Kalan
+18;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+18;Suresh;6;;;;;;;;;;Kanhari_Kalan
+18;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+18;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+18;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+18;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+18;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+18;Susheela;12;;;;;;;;;;Kanhari_Kalan
+18;Virendra;13;;;;;;;;;;Kanhari_Kalan
+18;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+19;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+19;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+19;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+19;Mamta;4;;;;;;;;;;Kanhari_Kalan
+19;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+19;Suresh;6;;;;;;;;;;Kanhari_Kalan
+19;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+19;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+19;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+19;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+19;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+19;Susheela;12;;;;;;;;;;Kanhari_Kalan
+19;Virendra;13;;;;;;;;;;Kanhari_Kalan
+19;Jaisingh;14;;;;;;;;;;Kanhari_Kalan
+20;Rangilal;1;;;;;;;;;;Kanhari_Kalan
+20;Rangilal Yadav;2;;;;;;;;;;Kanhari_Kalan
+20;Susheela M Yadav;3;;;;;;;;;;Kanhari_Kalan
+20;Mamta;4;;;;;;;;;;Kanhari_Kalan
+20;Jagarsingh;5;;;;;;;;;;Kanhari_Kalan
+20;Suresh;6;;;;;;;;;;Kanhari_Kalan
+20;Shreechand;7;;;;;;;;;;Kanhari_Kalan
+20;Dayalulal;8;;;;;;;;;;Kanhari_Kalan
+20;Sukhcharan;9;;;;;;;;;;Kanhari_Kalan
+20;Payaralal;10;;;;;;;;;;Kanhari_Kalan
+20;Dansingh;11;;;;;;;;;;Kanhari_Kalan
+20;Susheela;12;;;;;;;;;;Kanhari_Kalan
+20;Virendra;13;;;;;;;;;;Kanhari_Kalan
+20;Jaisingh;14;;;;;;;;;;Kanhari_Kalan

@@ -1,0 +1,15 @@
+Play_No;name;group_b;pos_b;group_c;pos_c;drop_1;sex;age;edu;role_yn;role;cont_lab;cont_money;reci_wat;dist_field;size;hyp_crop;help_P1;help_P2;help_P3;help_P4;help_P5;help_P6;help_P7;help_P8;help_P9;help_P10;help_P11;help_P12;help_P13;help_P14;drop_2;coll_money;donated;site;date;facil;come_back
+1;sohan s;2;7;1;1;0;m;30;10;n;n;n;0;y;1;5;g;0;0;0;0;0;0;1;0;0;0;0;0;1;0;sohan s;;;Jhagul;10.04.2017;0;13
+2;punaram;2;6;1;2;0;m;48;2;n;n;3;0;n;4;1,5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;punaram;;;Jhagul;10.04.2017;0;13
+3;asaram;2;5;1;3;0;m;42;5;y;Secretary, Gram panchayat smithi;n;0;n;1;5;g;0;0;0;0;0;0;0;1;0;0;0;0;1;0;asaram;;;Jhagul;10.04.2017;0;13
+4;chatram;1;4;1;4;0;m;35;5;n;n;n;n;n;n;10;g;0;0;1;0;1;0;0;0;0;0;0;0;0;0;chatram;;;Jhagul;10.04.2017;0;13
+5;lakhan;1;3;1;5;0;m;35;4;n;n;n;n;n;3;4;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;lakhan;;;Jhagul;10.04.2017;0;13
+6;sukhram;1;2;1;6;0;m;45;0;n;n;1;0;n;4;4;g;0;0;0;0;0;0;0;1;0;0;0;0;0;0;sukhram;;;Jhagul;10.04.2017;0;13
+7;RAMKUMAR;1;1;1;7;0;m;25;10;n;n;n;n;n;4;3;g;0;0;0;0;0;0;0;0;1;0;0;0;1;0;RAMKUMAR;;;Jhagul;10.04.2017;0;13
+8;mohan s;1;7;2;1;0;m;26;12;n;n;n;n;y;4;5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;0;mohan s;;;Jhagul;10.04.2017;0;13
+9;topsing;1;6;2;2;0;m;32;10;n;n;n;n;y;4;5;g;0;0;1;0;0;0;0;0;0;0;0;0;0;1;topsing;;;Jhagul;10.04.2017;0;13
+10;sukhdev;1;5;2;3;0;m;27;8;n;n;n;n;n;n;3;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;sukhdev;;;Jhagul;10.04.2017;0;13
+11;sumran;2;4;2;4;0;m;35;0;n;n;2;0;n;4;5;g;0;0;0;0;0;0;0;0;0;0;0;0;1;0;sumran;;;Jhagul;10.04.2017;0;13
+12;ansuiya;2;3;2;5;0;f;32;5;n;n;n;n;n;n;5;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;ansuiya;;;Jhagul;10.04.2017;0;13
+13;bhansing;2;2;2;6;0;m;30;10;n;n;n;n;n;5;5;g;0;0;0;0;0;0;0;0;0;1;0;0;0;0;bhansing;;;Jhagul;10.04.2017;0;13
+14;ramkishor;2;1;2;7;0;m;26;8;n;n;n;n;n;3;1,5;g;0;0;0;0;0;0;0;0;1;0;0;0;0;0;ramkishor;;;Jhagul;10.04.2017;0;13
