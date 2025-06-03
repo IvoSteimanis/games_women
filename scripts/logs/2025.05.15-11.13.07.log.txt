@@ -1,0 +1,887 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2025.05.15-11.13.07.log.txt
+  log type:  text
+ opened on:  15 May 2025, 11:13:07
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 15 May 2025 11:13:07
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;
+> lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace-desktop-r4995g6;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50
+> " reduces transparency)
+. grstyle set color       "100 143 255" "220 38 127" "120 94 240"  "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "220 38 127*0.4" "120 94 240*0.4"  "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "220 38 127*1.7" "120 94 240*1.7"  "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *margins
+. grstyle set compact
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 02_analysis.do
+. * PURPOSE: replicates most tables and figures and saves the results
+. *--------------------------------------------------------------------
+. 
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. 
+. * Types of leaders present
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. 
+. *do our participants differ from average Madhya Pradesh population?
+. * averages taken from 2011 census data 
+. ttest age = 27.1  if sex==0
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |     214    30.21963    .5825456    8.521907    29.07133    31.36792
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t =   5.3552
+Ho: mean = 27.1                                  degrees of freedom =      213
+
+   Ha: mean < 27.1             Ha: mean != 27.1               Ha: mean > 27.1
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 0.0000
+
+. ttest age =  27.43 if sex==1
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |     566    34.37456    .4774361    11.35856    33.43679    35.31232
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t =  14.5455
+Ho: mean = 27.43                                 degrees of freedom =      565
+
+  Ha: mean < 27.43             Ha: mean != 27.43             Ha: mean > 27.43
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 0.0000
+
+. * sample signficantly older, but we also required participants to be atlest 18 years older
+. ttest literacy = 23.1 if sex==0
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+literacy |     215    .9488372    .0150614    .2208439    .9191495     .978525
+------------------------------------------------------------------------------
+    mean = mean(literacy)                                         t = -1.5e+03
+Ho: mean = 23.1                                  degrees of freedom =      214
+
+   Ha: mean < 23.1             Ha: mean != 23.1               Ha: mean > 23.1
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. ttest literacy = 32.1 if sex==1
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+literacy |     569    .9578207    .0084337    .2011748    .9412557    .9743858
+------------------------------------------------------------------------------
+    mean = mean(literacy)                                         t = -3.7e+03
+Ho: mean = 32.1                                  degrees of freedom =      568
+
+   Ha: mean < 32.1             Ha: mean != 32.1               Ha: mean > 32.1
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. * significantly higher, as 95% of our participants were literate
+. 
+. cibar age, over1(participant_type)
+
+. 
+. *Public solution reached
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(title(S
+> ample Age versus district population,  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(1) size(8pt)) yla(0(20)100, nogrid labsize(6pt
+> )) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Age against average district population
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(title("
+> {bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(1) size(8pt)) yla(0(20)100, nogrid l
+> absize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Age against average district population
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(title("
+> {bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(1) size(8pt)) yla(0(10)50, nogrid la
+> bsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(yline(2
+> 7.1 27.43) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(1) size(8pt)) yla(
+> 0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(yline(2
+> 7, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) 
+> rows(1) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick
+> ))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Age against average district population
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(lcolor(none))  graphopts(yline(2
+> 7, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) 
+> rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick
+> ))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Age against average district population
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt)  baropts(fcolor(%60) lcolor(none))  graph
+> opts(yline(27, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring
+>  (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwi
+> dth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2) baropts(fcolor(%60) lcolor(none)
+> )  graphopts(yline(27, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  leg
+> end(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(
+> gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Age against average district population
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%60) lcolor(non
+> e))  graphopts(yline(27, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  l
+> egend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolo
+> r(gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(text(27.5 10 "Mandla district average 2011", placement(e) justification(left) size(medium))yline(27, lwidth(medium) lpattern(das
+> h)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50
+> , nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(text(27.5  "Mandla district average 2011", placement(e) justification(left) size(medium))yline(27, lwidth(medium) lpattern(dash)
+> ) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, 
+> nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+invalid point, Mandla district average 2011 27.5
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(text(27.5  "Mandla district average 2011", placement(e) justification(left) size(medium))yline(27 2, lwidth(medium) lpattern(das
+> h)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50
+> , nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+invalid point, Mandla district average 2011 27.5
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(text(27.5  "Mandla district average 2011", placement(e) justification(left) size(medium))yline(27 12, lwidth(medium) lpattern(da
+> sh)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)5
+> 0, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lcolor(gs6) lwidth(medthick))
+invalid point, Mandla district average 2011 27.5
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(yline(27 12, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)
+>   legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lc
+> olor(gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(yline(27.1 27.43, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysi
+> ze(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciop
+> ts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar age, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(non
+> e))  graphopts(yline(27.25, lwidth(medium) lpattern(dash)) title("{bf: A} Sample Age versus district population",  size(8pt)) xsize(3) ysize(2)
+>   legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Mean Age in years", size(6pt)))  ciopts(lc
+> olor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_a.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_a.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar literacy, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolo
+> r(none))  graphopts(yline(23.1 32.1, lwidth(medium) lpattern(dash)) title("{bf: B} Sample literacy versus district population",  size(8pt)) xsi
+> ze(3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(10)50, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Literacy in %", size(6pt))) 
+>  ciopts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gen lit100 = literacy*100
+
+. cibar lit100, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(12) blsize(8pt) blgap(2.5) baropts(fcolor(%70) lcolor(
+> none))  graphopts(yline(23.1 32.1, lwidth(medium) lpattern(dash)) title("{bf: B} Sample literacy versus district population",  size(8pt)) xsize
+> (3) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(20)100, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Literacy in %", size(6pt)))  
+> ciopts(lcolor(gs6) lwidth(medthick))
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_b.gph", replace 
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_b.gph not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_b.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gen lit100 = literacy*100
+variable lit100 already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar lit100, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(6) blsize(8pt) blgap(-3) baropts(fcolor(%70) lcolor(no
+> ne))  graphopts(yline(23.1 32.1, lwidth(medium) lpattern(dash)) title("{bf: B} Sample literacy versus district population",  size(8pt)) xsize(3
+> ) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(20)100, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Literacy in %", size(6pt)))  ci
+> opts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *Literacy against average district population
+. gen lit100 = literacy*100
+variable lit100 already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. cibar lit100, over1(participant_type) gap(50) bargap(20) barlabel(on) blfmt(%8.0f) blpos(6) blsize(8pt) blgap(-4) baropts(fcolor(%70) lcolor(no
+> ne))  graphopts(yline(23.1 32.1, lwidth(medium) lpattern(dash)) title("{bf: B} Sample literacy versus district population",  size(8pt)) xsize(3
+> ) ysize(2)  legend(ring (1) pos(6) rows(2) size(8pt)) yla(0(20)100, nogrid labsize(6pt)) xla(, nogrid)  ytitle("Literacy in %", size(6pt)))  ci
+> opts(lcolor(gs6) lwidth(medthick))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gr save  "$working_ANALYSIS/results/intermediate/sample_census_comparison_b.gph", replace 
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/intermediate/sample_census_comparison_b.gph saved)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. grc1leg2  "$working_ANALYSIS\results\intermediate\sample_census_comparison_a" "$working_ANALYSIS\results\intermediate\sample_census_comparison_
+> a"  , scale(1.1) graphregion(margin(0 0 0 0)) xsize(3) ysize(2) rows(1) legendfrom("$working_ANALYSIS\results\intermediate\sample_census_compar
+> ison_a") 
+command grc1leg2 is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. grc1leg  "$working_ANALYSIS\results\intermediate\sample_census_comparison_a" "$working_ANALYSIS\results\intermediate\sample_census_comparison_a
+> "  , scale(1.1) graphregion(margin(0 0 0 0)) xsize(3) ysize(2) rows(1) legendfrom("$working_ANALYSIS\results\intermediate\sample_census_compari
+> son_a") 
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. gr save  "$working_ANALYSIS\results\intermediate\sample_vs_district.gph", replace
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. grc1leg  "$working_ANALYSIS\results\intermediate\sample_census_comparison_a" "$working_ANALYSIS\results\intermediate\sample_census_comparison_b
+> "  , scale(1.1) graphregion(margin(0 0 0 0)) xsize(3) ysize(2) rows(1) legendfrom("$working_ANALYSIS\results\intermediate\sample_census_compari
+> son_a") 
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. gr save  "$working_ANALYSIS\results\intermediate\sample_vs_district.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph saved)
+
+. 
+end of do-file
+
+. ssc install grc1leg2
+checking grc1leg2 consistency and verifying not already installed...
+
+the following files already exist and are different:
+    c:\ado\plus\g\grc1leg2.ado
+    c:\ado\plus\g\grc1leg2.sthlp
+    c:\ado\plus\g\grc1leg2_examples.ado
+    c:\ado\plus\g\grc1leg2.dlg
+
+no files installed or copied
+(no action taken)
+r(602);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. *******
+. 
+. * Create and define a local installation directory for the packages
+. cap mkdir "$working_ANALYSIS/scripts/libraries"
+
+. cap mkdir "$working_ANALYSIS/scripts/libraries/stata"
+
+. net set ado "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. foreach p in balancetable betterbar catplot cibar coefplot distplot estout geo2xy grstyle grc1leg2 kobo2stata mif2dta missings moss mylabels ou
+> treg2 psmatch2 schemepack seq shp2dta spmap stripplot winsor2 wtp {
+  2.         local ltr = substr(`"`p'"',1,1)
+  3.         qui net from "http://fmwww.bc.edu/repec/bocode/`ltr'"
+  4.         net install `p', replace
+  5. }
+checking balancetable consistency and verifying not already installed...
+all files already exist and are up to date.
+checking betterbar consistency and verifying not already installed...
+all files already exist and are up to date.
+checking catplot consistency and verifying not already installed...
+
+the following files will be replaced:
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\c\catplot.ado
+
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+checking cibar consistency and verifying not already installed...
+all files already exist and are up to date.
+checking coefplot consistency and verifying not already installed...
+
+the following files will be replaced:
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\c\coefplot.ado
+
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+checking distplot consistency and verifying not already installed...
+all files already exist and are up to date.
+checking estout consistency and verifying not already installed...
+
+the following files will be replaced:
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\e\estout.ado
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\e\estpost.ado
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\e\estpost.hlp
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\e\esttab.ado
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\e\esttab.hlp
+
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+checking geo2xy consistency and verifying not already installed...
+all files already exist and are up to date.
+checking grstyle consistency and verifying not already installed...
+all files already exist and are up to date.
+checking grc1leg2 consistency and verifying not already installed...
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+checking kobo2stata consistency and verifying not already installed...
+all files already exist and are up to date.
+checking mif2dta consistency and verifying not already installed...
+all files already exist and are up to date.
+checking missings consistency and verifying not already installed...
+all files already exist and are up to date.
+checking moss consistency and verifying not already installed...
+all files already exist and are up to date.
+checking mylabels consistency and verifying not already installed...
+all files already exist and are up to date.
+checking outreg2 consistency and verifying not already installed...
+all files already exist and are up to date.
+checking psmatch2 consistency and verifying not already installed...
+all files already exist and are up to date.
+checking schemepack consistency and verifying not already installed...
+
+the following files will be replaced:
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\schemepack.sthlp
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_brbg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_cividis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_hue.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_jet.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_piyg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_ptol.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_set3.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_tableau.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_viridis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-black_w3d.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_brbg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_cividis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_hue.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_jet.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_piyg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_ptol.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_set3.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_tableau.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_viridis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-gg_w3d.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-neon.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-rainbow.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-swift_red.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_brbg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_cividis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_hue.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_jet.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_piyg.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_ptol.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_set3.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_tableau.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_viridis.scheme
+    D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\s\scheme-white_w3d.scheme
+
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+checking seq consistency and verifying not already installed...
+all files already exist and are up to date.
+checking shp2dta consistency and verifying not already installed...
+could not copy http://fmwww.bc.edu/repec/bocode/s/shp2dta.dlg
+(no action taken)
+--Break--
+r(1);
+
+end of do-file
+
+--Break--
+r(1);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. 
+. grc1leg2 "$working_ANALYSIS\results\intermediate\sample_census_comparison_a" "$working_ANALYSIS\results\intermediate\sample_census_comparison_b
+> ", scale(1.1) graphregion(margin(0 0 0 0)) xsize(3) ysize(2) rows(1) legendfrom("$working_ANALYSIS\results\intermediate\sample_census_compariso
+> n_a") 
+-grc1leg2- working...
+(note:  named style thin not found in class linestyle, default attributes used)
+(note:  named style thin not found in class linestyle, default attributes used)
+
+. gr save  "$working_ANALYSIS\results\intermediate\sample_vs_district.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. grc1leg2 "$working_ANALYSIS\results\intermediate\sample_census_comparison_a" "$working_ANALYSIS\results\intermediate\sample_census_comparison_b
+> ", title("Sample vs. Mandal district population", size(10pt)) scale(1.1) graphregion(margin(0 0 0 0)) xsize(3) ysize(2) rows(1) legendfrom("$wo
+> rking_ANALYSIS\results\intermediate\sample_census_comparison_a") 
+-grc1leg2- working...
+(note:  named style thin not found in class linestyle, default attributes used)
+(note:  named style thin not found in class linestyle, default attributes used)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gr save  "$working_ANALYSIS\results\intermediate\sample_vs_district.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph saved)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gr export "$working_ANALYSIS\results\figures\sample_vs_district.png", replace width(3800)
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\sample_vs_district.png not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\sample_vs_district.png written in PNG format)
+
+. 
+end of do-file
+
+. graph use "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph"
+(note:  named style thin not found in class linestyle, default attributes used)
+(note:  named style thin not found in class linestyle, default attributes used)
+
+. invalid '37' 
+(note:  named style thin not found in class linestyle, default attributes used)
+(note:  named style thin not found in class linestyle, default attributes used)
+do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. gr save  "$working_ANALYSIS\results\intermediate\sample_vs_district.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\sample_vs_district.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\sample_vs_district.png", replace width(3800)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\sample_vs_district.png written in PNG format)
+
+. 
+end of do-file
+
+. tab participant_type
+
+participant_typ |
+              e |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+    Male leader |         66        8.42        8.42
+  Female leader |         23        2.93       11.35
+  Male villager |        503       64.16       75.51
+Female villager |        192       24.49      100.00
+----------------+-----------------------------------
+          Total |        784      100.00
+
+. tab participant_type, nola
+
+participant |
+      _type |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         66        8.42        8.42
+          2 |         23        2.93       11.35
+          3 |        503       64.16       75.51
+          4 |        192       24.49      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD4b78_000000.tmp"
+
+. ttest age = 37  if participant_type==1
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |      66    39.92424    1.318385    10.71061    37.29124    42.55724
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t =   2.2180
+Ho: mean = 37                                    degrees of freedom =       65
+
+    Ha: mean < 37               Ha: mean != 37                 Ha: mean > 37
+ Pr(T < t) = 0.9850         Pr(|T| > |t|) = 0.0301          Pr(T > t) = 0.0150
+
+. ttest age = 37 if participant_type==3
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |     500      33.642    .5030445    11.24842    32.65365    34.63035
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t =  -6.6754
+Ho: mean = 37                                    degrees of freedom =      499
+
+    Ha: mean < 37               Ha: mean != 37                 Ha: mean > 37
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. ttest age = 38  if participant_type==2
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |      23    30.69565     1.38945     6.66357    27.81411     33.5772
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t =  -5.2570
+Ho: mean = 38                                    degrees of freedom =       22
+
+    Ha: mean < 38               Ha: mean != 38                 Ha: mean > 38
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. ttest age = 38  if participant_type==4
+
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+     age |     191     30.1623     .631801    8.731663    28.91606    31.40855
+------------------------------------------------------------------------------
+    mean = mean(age)                                              t = -12.4053
+Ho: mean = 38                                    degrees of freedom =      190
+
+    Ha: mean < 38               Ha: mean != 38                 Ha: mean > 38
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+
+. 
+end of do-file
+
+. exit, clear

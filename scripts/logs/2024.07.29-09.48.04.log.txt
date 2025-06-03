@@ -1,0 +1,650 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2024.07.29-09.48.04.log.txt
+  log type:  text
+ opened on:  29 Jul 2024, 09:48:04
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 29 Jul 2024 09:48:04
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lm
+> atatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50" reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. 
+. use "$working_ANALYSIS/processed/games_SHG.dta"
+
+. merge 1:1 site_ID using "$working_ANALYSIS/data/road_distances.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            98
+        from master                        98  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                                90  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. *all information ON SHG for 56 treatment communities matched
+. 
+. 
+. *Generate progressiveness index
+. pwcorr  Shar_Lit Shar_SCST n_school_gov n_school_priv distance_mandla distance_bychhiya
+
+             | Shar_Lit Shar_S~T n_sch~ov n_sch~iv dista~la dista~ya
+-------------+------------------------------------------------------
+    Shar_Lit |   1.0000 
+   Shar_SCST |  -0.1618   1.0000 
+n_school_gov |  -0.0100  -0.2955   1.0000 
+n_school_p~v |  -0.0056   0.0946  -0.0774   1.0000 
+distance_m~a |  -0.2362  -0.1183   0.1012   0.0323   1.0000 
+distance_b~a |   0.0866   0.0801  -0.2170   0.2269  -0.2986   1.0000 
+
+. alpha Shar_Lit Shar_SCST n_school_gov n_school_priv distance_mandla distance_bychhiya
+
+Test scale = mean(unstandardized items)
+Reversed items:  n_school_gov distance_mandla
+
+Average interitem covariance:     9.307324
+Number of items in the scale:            6
+Scale reliability coefficient:      0.2948
+
+. 
+. 
+. 
+. pca Shar_Lit Shar_SCST n_school_gov n_school_priv distance_mandla distance_bychhiya if treatment_BS==1,factor(1)
+
+Principal components/correlation                 Number of obs    =         56
+                                                 Number of comp.  =          1
+                                                 Trace            =          6
+    Rotation: (unrotated = principal)            Rho              =     0.2706
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |       1.6236      .321093             0.2706       0.2706
+           Comp2 |      1.30251      .354573             0.2171       0.4877
+           Comp3 |      .947934      .135723             0.1580       0.6457
+           Comp4 |      .812211     .0367542             0.1354       0.7810
+           Comp5 |      .775457      .237165             0.1292       0.9103
+           Comp6 |      .538292            .             0.0897       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------
+        Variable |    Comp1 | Unexplained 
+    -------------+----------+-------------
+        Shar_Lit |   0.4293 |       .7008 
+       Shar_SCST |  -0.1345 |       .9706 
+    n_school_gov |  -0.3989 |       .7417 
+    n_school_p~v |   0.3848 |       .7596 
+    distance_m~a |  -0.3597 |       .7899 
+    distance_b~a |   0.6009 |       .4137 
+    --------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. factor Shar_Lit Shar_SCST n_school_gov n_school_priv distance_mandla distance_bychhiya if treatment_BS==1,factor(1)
+(obs=56)
+
+Factor analysis/correlation                      Number of obs    =         56
+    Method: principal factors                    Retained factors =          1
+    Rotation: (unrotated)                        Number of params =          6
+
+    --------------------------------------------------------------------------
+         Factor  |   Eigenvalue   Difference        Proportion   Cumulative
+    -------------+------------------------------------------------------------
+        Factor1  |      0.76859      0.36251            1.0927       1.0927
+        Factor2  |      0.40608      0.36311            0.5773       1.6701
+        Factor3  |      0.04297      0.11733            0.0611       1.7312
+        Factor4  |     -0.07436      0.05134           -0.1057       1.6255
+        Factor5  |     -0.12570      0.18852           -0.1787       1.4467
+        Factor6  |     -0.31422            .           -0.4467       1.0000
+    --------------------------------------------------------------------------
+    LR test: independent vs. saturated:  chi2(15) =   20.53 Prob>chi2 = 0.1525
+
+Factor loadings (pattern matrix) and unique variances
+
+    ---------------------------------------
+        Variable |  Factor1 |   Uniqueness 
+    -------------+----------+--------------
+        Shar_Lit |   0.3384 |      0.8855  
+       Shar_SCST |  -0.0915 |      0.9916  
+    n_school_gov |  -0.3721 |      0.8615  
+    n_school_p~v |   0.3192 |      0.8981  
+    distance_m~a |  -0.2882 |      0.9169  
+    distance_b~a |   0.5677 |      0.6777  
+    ---------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. factor Shar_Lit Shar_SCST n_school_gov n_school_priv distance_mandla distance_bychhiya if treatment_BS==1
+(obs=56)
+
+Factor analysis/correlation                      Number of obs    =         56
+    Method: principal factors                    Retained factors =          3
+    Rotation: (unrotated)                        Number of params =         15
+
+    --------------------------------------------------------------------------
+         Factor  |   Eigenvalue   Difference        Proportion   Cumulative
+    -------------+------------------------------------------------------------
+        Factor1  |      0.76859      0.36251            1.0927       1.0927
+        Factor2  |      0.40608      0.36311            0.5773       1.6701
+        Factor3  |      0.04297      0.11733            0.0611       1.7312
+        Factor4  |     -0.07436      0.05134           -0.1057       1.6255
+        Factor5  |     -0.12570      0.18852           -0.1787       1.4467
+        Factor6  |     -0.31422            .           -0.4467       1.0000
+    --------------------------------------------------------------------------
+    LR test: independent vs. saturated:  chi2(15) =   20.53 Prob>chi2 = 0.1525
+
+Factor loadings (pattern matrix) and unique variances
+
+    -----------------------------------------------------------
+        Variable |  Factor1   Factor2   Factor3 |   Uniqueness 
+    -------------+------------------------------+--------------
+        Shar_Lit |   0.3384   -0.2136    0.0398 |      0.8383  
+       Shar_SCST |  -0.0915    0.4014   -0.0321 |      0.8294  
+    n_school_gov |  -0.3721   -0.3195    0.0719 |      0.7543  
+    n_school_p~v |   0.3192    0.1114    0.1581 |      0.8607  
+    distance_m~a |  -0.2882    0.2840    0.0988 |      0.8265  
+    distance_b~a |   0.5677    0.0641   -0.0206 |      0.6732  
+    -----------------------------------------------------------
+
+. 
+end of do-file
+
+. help factor
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. 
+. *define program to export direct, indirect and total effects
+. capture program drop te_direct
+
+. program te_direct, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(direct)
+  3.     mat V = r(V_direct)
+  4.     local N = e(N)
+  5.     ereturn post b V, obs(`N')
+  6.     ereturn local cmd te_direct 
+  7. end
+
+. 
+. capture program drop te_indirect
+
+. program te_indirect, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(indirect)
+  3.     mat V = r(V_indirect)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_indirect 
+  6. end
+
+. 
+. capture program drop te_total
+
+. program te_total, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(total)
+  3.     mat V = r(V_total)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_total 
+  6. end
+
+. 
+. 
+. prtest leader_comp1_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .0357143   .0350707                     -.0330231    .1044517
+           1 |   .2857143   .0853735                      .1183854    .4530432
+-------------+----------------------------------------------------------------
+        diff |       -.25   .0922962                     -.4308972   -.0691028
+             |  under Ho:   .0981563    -2.55   0.011
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =  -2.5470
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.0054         Pr(|Z| > |z|) = 0.0109          Pr(Z > z) = 0.9946
+
+. prtest leader_comp2_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .6071429   .0922962                      .4262457    .7880401
+           1 |   .3571429   .0905522                      .1796637     .534622
+-------------+----------------------------------------------------------------
+        diff |        .25   .1292992                     -.0034219    .5034219
+             |  under Ho:   .1335454     1.87   0.061
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =   1.8720
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.9694         Pr(|Z| > |z|) = 0.0612          Pr(Z > z) = 0.0306
+
+. prtest leader_comp3_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .1785714   .0723789                      .0367114    .3204314
+           1 |   .1071429   .0584512                     -.0074194    .2217051
+-------------+----------------------------------------------------------------
+        diff |   .0714286   .0930336                     -.1109139     .253771
+             |  under Ho:    .093522     0.76   0.445
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =   0.7638
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.7775         Pr(|Z| > |z|) = 0.4450          Pr(Z > z) = 0.2225
+
+. prtest leader_comp4_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .1785714   .0723789                      .0367114    .3204314
+           1 |        .25   .0818317                      .0896128    .4103872
+-------------+----------------------------------------------------------------
+        diff |  -.0714286    .109248                     -.2855508    .1426936
+             |  under Ho:   .1096642    -0.65   0.515
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =  -0.6513
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.2574         Pr(|Z| > |z|) = 0.5148          Pr(Z > z) = 0.7426
+
+. ttest game_no_leader_fem_vill, by(seq_split)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      28    2.535714    .3654458    1.933757    1.785881    3.285547
+       1 |      28    4.321429    .4961587    2.625425    3.303395    5.339462
+---------+--------------------------------------------------------------------
+combined |      56    3.428571    .3281759    2.455844    2.770892    4.086251
+---------+--------------------------------------------------------------------
+    diff |           -1.785714    .6162176               -3.021156   -.5502724
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -2.8979
+Ho: diff = 0                                     degrees of freedom =       54
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0027         Pr(|T| > |t|) = 0.0054          Pr(T > t) = 0.9973
+
+. 
+. bys seq_split: tab game_sum_leader_SHG if female_leader_present_BS==1 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          9       90.00       90.00
+          1 |          1       10.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       40.00       40.00
+          1 |          6       60.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+no observations
+
+
+. bys seq_split: tab game_sum_leader_SHG if female_leader_present_BS==1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          9       90.00       90.00
+          1 |          1       10.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       40.00       40.00
+          1 |          6       60.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+no observations
+
+
+. bys seq_split: tab1 SHG_before2017 if treatment_BS==1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+
+SHG_before2 |
+        017 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       14.29       14.29
+          1 |         24       85.71      100.00
+------------+-----------------------------------
+      Total |         28      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+
+SHG_before2 |
+        017 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          2        7.14        7.14
+          1 |         26       92.86      100.00
+------------+-----------------------------------
+      Total |         28      100.00
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+no observations
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. *REVISIONS
+. *Globals#
+. egen z_VP_control = std(VP_control)
+(162 missing values generated)
+
+. egen z_VP = std(VP)
+(132 missing values generated)
+
+. egen z_HH = std(No_HH)
+(105 missing values generated)
+
+. egen z_SHG_before2017 = std(n_SHG_before2017)
+(99 missing values generated)
+
+. global village z_VP z_SHG_before2017 z_HH FES_site 
+
+. global village2 VP n_SHG_before2017 No_HH FES_site 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD2910_000000.tmp"
+
+. gen leader_composition = leader_present_BS +1
+(132 missing values generated)
+
+. gsem ($village sequence -> leader_present_BS, mlogit)  (i.leader_present_BS total_leaders $village sequence -> share_female_percent3_BS , )  (i.leader_present_BS total_leaders shar
+> e_female_percent3_BS survey_maint_rule_BS $village survey_dam_for_irrigation_FS sequence -> survey_maint_rule_FS, probit) (i.leader_present_BS  total_leaders share_female_percent3_
+> BS survey_maint_12m_BS survey_maint_rule_FS $village survey_dam_for_irrigation_FS sequence -> survey_maint_2017_FS , probit), vce(robust) nocapslatent
+
+Iteration 0:   log pseudolikelihood = -208.00247  
+Iteration 1:   log pseudolikelihood = -186.22301  
+Iteration 2:   log pseudolikelihood = -180.06231  
+Iteration 3:   log pseudolikelihood = -178.99441  
+Iteration 4:   log pseudolikelihood = -178.94991  
+Iteration 5:   log pseudolikelihood = -178.94962  
+Iteration 6:   log pseudolikelihood = -178.94962  
+
+Generalized structural equation model           Number of obs     =         56
+
+Response       : leader_present_BS
+Base outcome   : 0
+Family         : multinomial
+Link           : logit
+
+Response       : share_female_pe~3_BS
+Family         : Gaussian
+Link           : identity
+
+Response       : survey_maint_rule_FS
+Family         : Bernoulli
+Link           : probit
+
+Response       : survey_maint_2017_FS
+Family         : Bernoulli
+Link           : probit
+
+Log pseudolikelihood = -178.94962
+
+-------------------------------------------------------------------------------------------------
+                                |               Robust
+                                |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------------------------+----------------------------------------------------------------
+0.leader_present_BS             |  (base outcome)
+--------------------------------+----------------------------------------------------------------
+1.leader_present_BS             |
+                           z_VP |  -.2296097   .6152921    -0.37   0.709     -1.43556    .9763406
+               z_SHG_before2017 |   4.203998   1.463892     2.87   0.004     1.334823    7.073174
+                           z_HH |   .1658355   .7416255     0.22   0.823    -1.287724    1.619395
+                       FES_site |   3.432065   1.479231     2.32   0.020     .5328245    6.331305
+                       sequence |   -.197278   .0518618    -3.80   0.000    -.2989253   -.0956308
+                          _cons |   7.367536    2.26036     3.26   0.001     2.937311    11.79776
+--------------------------------+----------------------------------------------------------------
+2.leader_present_BS             |
+                           z_VP |    .558393   .7685227     0.73   0.467    -.9478839     2.06467
+               z_SHG_before2017 |     5.9554   1.593428     3.74   0.000     2.832338    9.078461
+                           z_HH |  -1.879407   1.069597    -1.76   0.079    -3.975779    .2169644
+                       FES_site |   4.653296   1.726102     2.70   0.007     1.270199    8.036393
+                       sequence |  -.1819147   .0595923    -3.05   0.002    -.2987135    -.065116
+                          _cons |   3.862073   2.566113     1.51   0.132    -1.167416    8.891561
+--------------------------------+----------------------------------------------------------------
+3.leader_present_BS             |
+                           z_VP |  -.2759541   .6560795    -0.42   0.674    -1.561846    1.009938
+               z_SHG_before2017 |   3.571711    1.41313     2.53   0.011     .8020267    6.341396
+                           z_HH |   1.181891    .690224     1.71   0.087    -.1709228    2.534706
+                       FES_site |   2.040521   1.289688     1.58   0.114    -.4872216    4.568263
+                       sequence |   -.150466     .05733    -2.62   0.009    -.2628308   -.0381012
+                          _cons |   6.136937   2.481214     2.47   0.013     1.273848    11.00003
+--------------------------------+----------------------------------------------------------------
+share_female_percent3_BS        |
+              leader_present_BS |
+                     Only Male  |    .879558   .7211154     1.22   0.223    -.5338022    2.292918
+                          Both  |   1.021982   .9458671     1.08   0.280    -.8318832    2.875848
+                   Only Female  |   2.174768   .7833714     2.78   0.006     .6393888    3.710148
+                                |
+                  total_leaders |  -.4042786   .1666779    -2.43   0.015    -.7309612   -.0775959
+                           z_VP |   .5331561   .3136015     1.70   0.089    -.0814915    1.147804
+               z_SHG_before2017 |  -.5675688   .2243963    -2.53   0.011    -1.007377   -.1277602
+                           z_HH |    .203265   .2777418     0.73   0.464     -.341099     .747629
+                       FES_site |  -.3958435   .4406409    -0.90   0.369    -1.259484    .4677968
+                       sequence |   .0447183   .0171311     2.61   0.009     .0111419    .0782947
+                          _cons |   1.028767   .7469472     1.38   0.168    -.4352223    2.492757
+--------------------------------+----------------------------------------------------------------
+survey_maint_rule_FS            |
+              leader_present_BS |
+                     Only Male  |    .246605   .7792981     0.32   0.752    -1.280791    1.774001
+                          Both  |  -.3686463   1.158443    -0.32   0.750    -2.639152     1.90186
+                   Only Female  |  -.2676607   .8046385    -0.33   0.739    -1.844723    1.309402
+                                |
+                  total_leaders |   .2216991   .2795359     0.79   0.428    -.3261812    .7695794
+       share_female_percent3_BS |   .6733385   .1703517     3.95   0.000     .3394553    1.007222
+           survey_maint_rule_BS |  -.0736547   .6842414    -0.11   0.914    -1.414743    1.267434
+                           z_VP |   -.146747   .2132226    -0.69   0.491    -.5646557    .2711616
+               z_SHG_before2017 |   1.563474   .4124263     3.79   0.000     .7551337    2.371815
+                           z_HH |  -1.130417   .4080334    -2.77   0.006    -1.930148   -.3306858
+                       FES_site |   1.398629   .4951158     2.82   0.005     .4282197    2.369038
+   survey_dam_for_irrigation_FS |  -.8958335   .4413934    -2.03   0.042    -1.760949   -.0307183
+                       sequence |  -.0278484   .0238766    -1.17   0.243    -.0746456    .0189488
+                          _cons |  -2.656088   1.176115    -2.26   0.024    -4.961231   -.3509451
+--------------------------------+----------------------------------------------------------------
+survey_maint_2017_FS            |
+              leader_present_BS |
+                     Only Male  |   .7075845   .9903229     0.71   0.475    -1.233413    2.648582
+                          Both  |   4.651059   1.695343     2.74   0.006     1.328247    7.973871
+                   Only Female  |  -.7522189   1.303524    -0.58   0.564    -3.307078     1.80264
+                                |
+                  total_leaders |  -.6486693   .2627683    -2.47   0.014    -1.163686   -.1336528
+       share_female_percent3_BS |   .2205029   .2654245     0.83   0.406    -.2997195    .7407253
+            survey_maint_12m_BS |   .6230516   .6927185     0.90   0.368    -.7346518    1.980755
+           survey_maint_rule_FS |   3.298215   1.100837     3.00   0.003     1.140615    5.455816
+                           z_VP |   3.122766   .7374645     4.23   0.000     1.677362     4.56817
+               z_SHG_before2017 |  -.7172768   .6210072    -1.16   0.248    -1.934428    .4998749
+                           z_HH |   2.673459   .7766255     3.44   0.001     1.151301    4.195617
+                       FES_site |  -.9466751   .8817002    -1.07   0.283    -2.674776    .7814256
+   survey_dam_for_irrigation_FS |   3.056233   .7419415     4.12   0.000     1.602054    4.510412
+                       sequence |    .162108   .0483216     3.35   0.001     .0673995    .2568165
+                          _cons |  -4.510938   1.609667    -2.80   0.005    -7.665827   -1.356049
+--------------------------------+----------------------------------------------------------------
+ var(e.share_female_percent3_BS)|   1.663778   .3486625                      1.103359    2.508844
+-------------------------------------------------------------------------------------------------
+
+. * explanation how to get indirect effects https://www.statalist.org/forums/forum/general-stata-discussion/general/1551690-mediation-analysis-in-a-multilevel-model-how-to-bootstrap-
+> indirect-effects-after-gsem
+. eststo SEM2 
+
+. 
+. 
+. esttab SEM2 using "$working_ANALYSIS\results\Tables\TableS8_SEM_robustness_check.rtf",  drop(var(*)) unstack  se transform(ln*: exp(@) exp(@))  b(%4.2f) label stats(N, labels("N") 
+> fmt(%4.0f)) star(* 0.10 ** 0.05 *** 0.01) varlabels(,elist(weight:_cons "{break}{hline @width}"))  nonotes addnotes("Notes: Estimates are from generalized SEM model using probit li
+> nk functions for binary outcomes with robust standard errors in brackets. * p<0.10, ** p<0.05, *** p<0.01") replace 
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\Tables\TableS8_SEM_robustness_check.rtf)
+
+. 
+end of do-file
+
+. exit, clear

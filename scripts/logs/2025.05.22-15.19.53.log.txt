@@ -1,0 +1,681 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2025.05.22-15.19.53.log.txt
+  log type:  text
+ opened on:  22 May 2025, 15:19:53
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 22 May 2025 15:19:53
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;
+> lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace-desktop-r4995g6;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50
+> " reduces transparency)
+. grstyle set color       "100 143 255" "220 38 127" "120 94 240"  "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "220 38 127*0.4" "120 94 240*0.4"  "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "220 38 127*1.7" "120 94 240*1.7"  "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *margins
+. grstyle set compact
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. 
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. ** REVISIONS
+. * discussions within community
+. gen game_discussed_formally = 0 if survey_share_exp_comm_meet_FS==0 & survey_share_exp_vc_meet_FS==0
+(157 missing values generated)
+
+. replace game_discussed_formally = 1 if survey_share_exp_vc_meet_FS==1 | survey_share_exp_comm_meet_FS==1
+(24 real changes made)
+
+. tab game_discussed_formally
+
+game_discus |
+sed_formall |
+          y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         31       56.36       56.36
+          1 |         24       43.64      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. ttest game_discussed_formally, by(female_leader_present_BS)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      35    .4285714    .0848698    .5020964    .2560953    .6010476
+       1 |      20         .45    .1141329    .5104178    .2111171    .6888829
+---------+--------------------------------------------------------------------
+combined |      55    .4363636    .0674881    .5005048    .3010582     .571669
+---------+--------------------------------------------------------------------
+    diff |           -.0214286    .1415812               -.3054046    .2625474
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -0.1514
+Ho: diff = 0                                     degrees of freedom =       53
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.4401         Pr(|T| > |t|) = 0.8803          Pr(T > t) = 0.5599
+
+. 
+. global controls No_HH FES_site n_SHG_before2017 Shar_Lit Shar_SCST n_school_gov
+
+. 
+end of do-file
+
+. tab game_come_back
+
+          0 |
+game_come_b |
+       ack_ |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          7       12.50       12.50
+         11 |          1        1.79       14.29
+         12 |          4        7.14       21.43
+         13 |         12       21.43       42.86
+         14 |         32       57.14      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. tab game_come_back_dummy
+
+  Come back (=1) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+Do not come back |          7       12.50       12.50
+       Come back |         49       87.50      100.00
+-----------------+-----------------------------------
+           Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. eststo game4: reg game_come_back leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.03
+                                                Prob > F          =     0.4362
+                                                R-squared         =     0.2833
+                                                Root MSE          =     4.3733
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+          game_come_back |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -2.499495    1.93862    -1.29   0.204    -6.409096    1.410106
+         leader_comp3_BS |  -1.092344   2.991412    -0.37   0.717    -7.125101    4.940413
+         leader_comp4_BS |    -2.3331   1.977748    -1.18   0.245     -6.32161     1.65541
+           total_leaders |   .0096982   .8232418     0.01   0.991    -1.650527    1.669924
+share_female_percent3_BS |   .7041115   .3454003     2.04   0.048     .0075455    1.400677
+                sequence |  -.0043075    .065428    -0.07   0.948    -.1362556    .1276406
+                   No_HH |    .010934   .0078421     1.39   0.170    -.0048811    .0267492
+                FES_site |   2.078417   1.668139     1.25   0.220    -1.285705    5.442539
+        n_SHG_before2017 |   .2173523   .1195826     1.82   0.076    -.0238089    .4585136
+                Shar_Lit |  -.1592251   .1036361    -1.54   0.132    -.3682271     .049777
+               Shar_SCST |   .0459787   .0324898     1.42   0.164    -.0195432    .1115006
+            n_school_gov |  -.5369829    .755116    -0.71   0.481    -2.059819    .9858537
+                   _cons |   12.81873   7.528878     1.70   0.096      -2.3647    28.00216
+------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. tab game_agree_rule
+
+   Total of |
+     agreed |
+   rules in |
+village for |
+      group |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          5 |          1        1.79        1.79
+         18 |          1        1.79        3.57
+         23 |          1        1.79        5.36
+         25 |          1        1.79        7.14
+         26 |          2        3.57       10.71
+         27 |          1        1.79       12.50
+         30 |          2        3.57       16.07
+         31 |          2        3.57       19.64
+         33 |          2        3.57       23.21
+         36 |          2        3.57       26.79
+         37 |          5        8.93       35.71
+         40 |          1        1.79       37.50
+         41 |          3        5.36       42.86
+         43 |          2        3.57       46.43
+         44 |          4        7.14       53.57
+         45 |          1        1.79       55.36
+         46 |          1        1.79       57.14
+         47 |          1        1.79       58.93
+         48 |          1        1.79       60.71
+         49 |          3        5.36       66.07
+         51 |          2        3.57       69.64
+         52 |          2        3.57       73.21
+         54 |          2        3.57       76.79
+         57 |          1        1.79       78.57
+         58 |          1        1.79       80.36
+         59 |          1        1.79       82.14
+         60 |          2        3.57       85.71
+         63 |          1        1.79       87.50
+         65 |          2        3.57       91.07
+         66 |          1        1.79       92.86
+         68 |          2        3.57       96.43
+         70 |          1        1.79       98.21
+         82 |          1        1.79      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. eststo game2: reg game_agree_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.24
+                                                Prob > F          =     0.2871
+                                                R-squared         =     0.1739
+                                                Root MSE          =     15.135
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+         game_agree_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .8463828   8.815191     0.10   0.924    -16.93114    18.62391
+         leader_comp3_BS |  -2.575785   9.023299    -0.29   0.777      -20.773    15.62143
+         leader_comp4_BS |  -5.660658   8.926399    -0.63   0.529    -23.66246    12.34114
+           total_leaders |   .1126646   2.132114     0.05   0.958    -4.187153    4.412482
+share_female_percent3_BS |   .1043699   1.319389     0.08   0.937    -2.556431    2.765171
+                sequence |   .0304325   .2117083     0.14   0.886    -.3965179    .4573829
+                   No_HH |   .0241272   .0413778     0.58   0.563    -.0593192    .1075736
+                FES_site |  -4.125943    6.47966    -0.64   0.528    -17.19342    8.941536
+        n_SHG_before2017 |  -.0017053   .4796795    -0.00   0.997    -.9690712    .9656606
+                Shar_Lit |  -.6220635    .307766    -2.02   0.050    -1.242733   -.0013941
+               Shar_SCST |  -.0667583   .1213641    -0.55   0.585    -.3115124    .1779958
+            n_school_gov |  -1.510326    3.02646    -0.50   0.620    -7.613764    4.593112
+                   _cons |   83.16187   20.13215     4.13   0.000     42.56153    123.7622
+------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. eststo game2: reg game_propose_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, 
+> r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       2.01
+                                                Prob > F          =     0.0469
+                                                R-squared         =     0.2330
+                                                Root MSE          =     7.9155
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+       game_propose_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -.6116772   4.256758    -0.14   0.886    -9.196247    7.972893
+         leader_comp3_BS |  -3.136622   5.454205    -0.58   0.568    -14.13608    7.862831
+         leader_comp4_BS |  -2.453343   4.400707    -0.56   0.580    -11.32821    6.421528
+           total_leaders |   1.147179   1.307325     0.88   0.385    -1.489293    3.783652
+share_female_percent3_BS |  -.3028403   .6290878    -0.48   0.633    -1.571517    .9658362
+                sequence |  -.0790601   .1164558    -0.68   0.501    -.3139155    .1557953
+                   No_HH |  -.0001518   .0171283    -0.01   0.993    -.0346944    .0343907
+                FES_site |  -1.671993   3.311915    -0.50   0.616    -8.351107    5.007121
+        n_SHG_before2017 |  -.1103144   .2477705    -0.45   0.658    -.6099913    .3893625
+                Shar_Lit |  -.3409096   .1961966    -1.74   0.089    -.7365777    .0547586
+               Shar_SCST |   -.073983   .0704249    -1.05   0.299    -.2160084    .0680423
+            n_school_gov |  -.6067748   1.237397    -0.49   0.626    -3.102224    1.888674
+                   _cons |   56.89514   12.70897     4.48   0.000     31.26507    82.52522
+------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. eststo game1: reg game_total_gamerelated leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $contr
+> ols, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       3.62
+                                                Prob > F          =     0.0009
+                                                R-squared         =     0.3597
+                                                Root MSE          =     30.258
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+  game_total_gamerelated |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   3.275662   16.83499     0.19   0.847    -30.67534    37.22666
+         leader_comp3_BS |  -7.803913   20.37417    -0.38   0.704    -48.89233    33.28451
+         leader_comp4_BS |  -14.75956   16.70841    -0.88   0.382    -48.45527    18.93615
+           total_leaders |   2.348928   4.667493     0.50   0.617    -7.063969    11.76183
+share_female_percent3_BS |  -1.355771   3.001753    -0.45   0.654    -7.409383    4.697841
+                sequence |  -.6922725    .453388    -1.53   0.134    -1.606617    .2220716
+                   No_HH |   .0240194   .0766744     0.31   0.756    -.1306092     .178648
+                FES_site |  -7.895827   11.96973    -0.66   0.513    -32.03509    16.24343
+        n_SHG_before2017 |  -.6548856   .8939132    -0.73   0.468    -2.457633    1.147862
+                Shar_Lit |  -1.311077   .7335689    -1.79   0.081     -2.79046    .1683058
+               Shar_SCST |  -.4444745   .2880954    -1.54   0.130    -1.025474    .1365254
+            n_school_gov |  -2.599257   4.950995    -0.52   0.602    -12.58389    7.385376
+                   _cons |   239.4631     51.995     4.61   0.000     134.6052     344.321
+------------------------------------------------------------------------------------------
+
+. eststo game2: reg game_propose_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, 
+> r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       2.01
+                                                Prob > F          =     0.0469
+                                                R-squared         =     0.2330
+                                                Root MSE          =     7.9155
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+       game_propose_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -.6116772   4.256758    -0.14   0.886    -9.196247    7.972893
+         leader_comp3_BS |  -3.136622   5.454205    -0.58   0.568    -14.13608    7.862831
+         leader_comp4_BS |  -2.453343   4.400707    -0.56   0.580    -11.32821    6.421528
+           total_leaders |   1.147179   1.307325     0.88   0.385    -1.489293    3.783652
+share_female_percent3_BS |  -.3028403   .6290878    -0.48   0.633    -1.571517    .9658362
+                sequence |  -.0790601   .1164558    -0.68   0.501    -.3139155    .1557953
+                   No_HH |  -.0001518   .0171283    -0.01   0.993    -.0346944    .0343907
+                FES_site |  -1.671993   3.311915    -0.50   0.616    -8.351107    5.007121
+        n_SHG_before2017 |  -.1103144   .2477705    -0.45   0.658    -.6099913    .3893625
+                Shar_Lit |  -.3409096   .1961966    -1.74   0.089    -.7365777    .0547586
+               Shar_SCST |   -.073983   .0704249    -1.05   0.299    -.2160084    .0680423
+            n_school_gov |  -.6067748   1.237397    -0.49   0.626    -3.102224    1.888674
+                   _cons |   56.89514   12.70897     4.48   0.000     31.26507    82.52522
+------------------------------------------------------------------------------------------
+
+. eststo game3: reg game_agree_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.24
+                                                Prob > F          =     0.2871
+                                                R-squared         =     0.1739
+                                                Root MSE          =     15.135
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+         game_agree_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .8463828   8.815191     0.10   0.924    -16.93114    18.62391
+         leader_comp3_BS |  -2.575785   9.023299    -0.29   0.777      -20.773    15.62143
+         leader_comp4_BS |  -5.660658   8.926399    -0.63   0.529    -23.66246    12.34114
+           total_leaders |   .1126646   2.132114     0.05   0.958    -4.187153    4.412482
+share_female_percent3_BS |   .1043699   1.319389     0.08   0.937    -2.556431    2.765171
+                sequence |   .0304325   .2117083     0.14   0.886    -.3965179    .4573829
+                   No_HH |   .0241272   .0413778     0.58   0.563    -.0593192    .1075736
+                FES_site |  -4.125943    6.47966    -0.64   0.528    -17.19342    8.941536
+        n_SHG_before2017 |  -.0017053   .4796795    -0.00   0.997    -.9690712    .9656606
+                Shar_Lit |  -.6220635    .307766    -2.02   0.050    -1.242733   -.0013941
+               Shar_SCST |  -.0667583   .1213641    -0.55   0.585    -.3115124    .1779958
+            n_school_gov |  -1.510326    3.02646    -0.50   0.620    -7.613764    4.593112
+                   _cons |   83.16187   20.13215     4.13   0.000     42.56153    123.7622
+------------------------------------------------------------------------------------------
+
+. eststo game4: reg game_almost_opt_inv_r9_10 leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $co
+> ntrols, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.01
+                                                Prob > F          =     0.4542
+                                                R-squared         =     0.2303
+                                                Root MSE          =     .35035
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+game_almost_opt_inv_r9~0 |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .0777879   .1864789     0.42   0.679    -.2982826    .4538585
+         leader_comp3_BS |   .1376535   .2822772     0.49   0.628    -.4316127    .7069198
+         leader_comp4_BS |   .0763063   .2191669     0.35   0.729    -.3656858    .5182984
+           total_leaders |  -.0246947   .0354073    -0.70   0.489    -.0961003     .046711
+share_female_percent3_BS |    .016509   .0313102     0.53   0.601     -.046634     .079652
+                sequence |  -.0065996   .0046136    -1.43   0.160    -.0159039    .0027047
+                   No_HH |  -.0005681   .0007981    -0.71   0.480    -.0021775    .0010414
+                FES_site |  -.1314508   .0955937    -1.38   0.176    -.3242339    .0613323
+        n_SHG_before2017 |   .0128166   .0118751     1.08   0.286    -.0111318    .0367651
+                Shar_Lit |   .0094901   .0069536     1.36   0.179    -.0045332    .0235134
+               Shar_SCST |  -.0017542   .0026224    -0.67   0.507    -.0070428    .0035345
+            n_school_gov |   .0079061   .0686399     0.12   0.909    -.1305195    .1463317
+                   _cons |   .7083756   .4863959     1.46   0.153    -.2725352    1.689286
+------------------------------------------------------------------------------------------
+
+. eststo game5: reg game_come_back leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.03
+                                                Prob > F          =     0.4362
+                                                R-squared         =     0.2833
+                                                Root MSE          =     4.3733
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+          game_come_back |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -2.499495    1.93862    -1.29   0.204    -6.409096    1.410106
+         leader_comp3_BS |  -1.092344   2.991412    -0.37   0.717    -7.125101    4.940413
+         leader_comp4_BS |    -2.3331   1.977748    -1.18   0.245     -6.32161     1.65541
+           total_leaders |   .0096982   .8232418     0.01   0.991    -1.650527    1.669924
+share_female_percent3_BS |   .7041115   .3454003     2.04   0.048     .0075455    1.400677
+                sequence |  -.0043075    .065428    -0.07   0.948    -.1362556    .1276406
+                   No_HH |    .010934   .0078421     1.39   0.170    -.0048811    .0267492
+                FES_site |   2.078417   1.668139     1.25   0.220    -1.285705    5.442539
+        n_SHG_before2017 |   .2173523   .1195826     1.82   0.076    -.0238089    .4585136
+                Shar_Lit |  -.1592251   .1036361    -1.54   0.132    -.3682271     .049777
+               Shar_SCST |   .0459787   .0324898     1.42   0.164    -.0195432    .1115006
+            n_school_gov |  -.5369829    .755116    -0.71   0.481    -2.059819    .9858537
+                   _cons |   12.81873   7.528878     1.70   0.096      -2.3647    28.00216
+------------------------------------------------------------------------------------------
+
+. eststo game6: reg game_discussed_formally leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $cont
+> rols, r
+
+Linear regression                               Number of obs     =         55
+                                                F(12, 42)         =       3.54
+                                                Prob > F          =     0.0011
+                                                R-squared         =     0.2724
+                                                Root MSE          =      .4841
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+ game_discussed_formally |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .1604066   .2375359     0.68   0.503    -.3189603    .6397735
+         leader_comp3_BS |  -.2026523    .356507    -0.57   0.573    -.9221125    .5168079
+         leader_comp4_BS |  -.0059132   .2642046    -0.02   0.982    -.5390996    .5272733
+           total_leaders |   .1704323   .0798139     2.14   0.039     .0093613    .3315033
+share_female_percent3_BS |   .0965491   .0376857     2.56   0.014     .0204963     .172602
+                sequence |   .0024207   .0057323     0.42   0.675    -.0091476    .0139891
+                   No_HH |   .0003273   .0009297     0.35   0.727    -.0015489    .0022034
+                FES_site |   .0754192   .1810249     0.42   0.679    -.2899038    .4407421
+        n_SHG_before2017 |   .0234396   .0158178     1.48   0.146     -.008482    .0553611
+                Shar_Lit |  -.0047505   .0086746    -0.55   0.587    -.0222566    .0127555
+               Shar_SCST |   .0033797   .0044632     0.76   0.453    -.0056274    .0123867
+            n_school_gov |  -.0748738   .0817039    -0.92   0.365    -.2397588    .0900113
+                   _cons |  -.3504544   .6796785    -0.52   0.609    -1.722101    1.021192
+------------------------------------------------------------------------------------------
+
+. *seems to be very similar across female (leader) participation, must be something happening afterwards to have real world impact
+. 
+. 
+. esttab game1 game2 game3 game4 game5 game5 using "$working_ANALYSIS\results\tables\game_outcomes_leader_type.rtf", mtitles("Game related discus
+> sions #" "Proposed rules #" "Agreed rules #" "Cooperative outcome R9/10" "Come back #" "Formal discussions #") se transform(ln*: exp(@) exp(@))
+>   b(%4.2f) label stats(N, labels("N") fmt(%4.0f %4.2f)) star(* 0.10 ** 0.05 *** 0.01) varlabels(,elist(weight:_cons "{break}{hline @width}"))  
+> nonotes addnotes("Notes: Estimates are from OLS regressions using regressions with robust standard errors in brackets. * p<0.10, ** p<0.05, ***
+>  p<0.01") replace 
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\game_outcomes_leader_type.rtf)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. *did female leader participation /general female participation alter the game experience? (discussions, rules proposed, cooperative play, etc.)
+. eststo game1: reg game_total_gamerelated leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $contr
+> ols, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       3.62
+                                                Prob > F          =     0.0009
+                                                R-squared         =     0.3597
+                                                Root MSE          =     30.258
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+  game_total_gamerelated |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   3.275662   16.83499     0.19   0.847    -30.67534    37.22666
+         leader_comp3_BS |  -7.803913   20.37417    -0.38   0.704    -48.89233    33.28451
+         leader_comp4_BS |  -14.75956   16.70841    -0.88   0.382    -48.45527    18.93615
+           total_leaders |   2.348928   4.667493     0.50   0.617    -7.063969    11.76183
+share_female_percent3_BS |  -1.355771   3.001753    -0.45   0.654    -7.409383    4.697841
+                sequence |  -.6922725    .453388    -1.53   0.134    -1.606617    .2220716
+                   No_HH |   .0240194   .0766744     0.31   0.756    -.1306092     .178648
+                FES_site |  -7.895827   11.96973    -0.66   0.513    -32.03509    16.24343
+        n_SHG_before2017 |  -.6548856   .8939132    -0.73   0.468    -2.457633    1.147862
+                Shar_Lit |  -1.311077   .7335689    -1.79   0.081     -2.79046    .1683058
+               Shar_SCST |  -.4444745   .2880954    -1.54   0.130    -1.025474    .1365254
+            n_school_gov |  -2.599257   4.950995    -0.52   0.602    -12.58389    7.385376
+                   _cons |   239.4631     51.995     4.61   0.000     134.6052     344.321
+------------------------------------------------------------------------------------------
+
+. eststo game2: reg game_propose_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, 
+> r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       2.01
+                                                Prob > F          =     0.0469
+                                                R-squared         =     0.2330
+                                                Root MSE          =     7.9155
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+       game_propose_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -.6116772   4.256758    -0.14   0.886    -9.196247    7.972893
+         leader_comp3_BS |  -3.136622   5.454205    -0.58   0.568    -14.13608    7.862831
+         leader_comp4_BS |  -2.453343   4.400707    -0.56   0.580    -11.32821    6.421528
+           total_leaders |   1.147179   1.307325     0.88   0.385    -1.489293    3.783652
+share_female_percent3_BS |  -.3028403   .6290878    -0.48   0.633    -1.571517    .9658362
+                sequence |  -.0790601   .1164558    -0.68   0.501    -.3139155    .1557953
+                   No_HH |  -.0001518   .0171283    -0.01   0.993    -.0346944    .0343907
+                FES_site |  -1.671993   3.311915    -0.50   0.616    -8.351107    5.007121
+        n_SHG_before2017 |  -.1103144   .2477705    -0.45   0.658    -.6099913    .3893625
+                Shar_Lit |  -.3409096   .1961966    -1.74   0.089    -.7365777    .0547586
+               Shar_SCST |   -.073983   .0704249    -1.05   0.299    -.2160084    .0680423
+            n_school_gov |  -.6067748   1.237397    -0.49   0.626    -3.102224    1.888674
+                   _cons |   56.89514   12.70897     4.48   0.000     31.26507    82.52522
+------------------------------------------------------------------------------------------
+
+. eststo game3: reg game_agree_rule leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.24
+                                                Prob > F          =     0.2871
+                                                R-squared         =     0.1739
+                                                Root MSE          =     15.135
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+         game_agree_rule |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .8463828   8.815191     0.10   0.924    -16.93114    18.62391
+         leader_comp3_BS |  -2.575785   9.023299    -0.29   0.777      -20.773    15.62143
+         leader_comp4_BS |  -5.660658   8.926399    -0.63   0.529    -23.66246    12.34114
+           total_leaders |   .1126646   2.132114     0.05   0.958    -4.187153    4.412482
+share_female_percent3_BS |   .1043699   1.319389     0.08   0.937    -2.556431    2.765171
+                sequence |   .0304325   .2117083     0.14   0.886    -.3965179    .4573829
+                   No_HH |   .0241272   .0413778     0.58   0.563    -.0593192    .1075736
+                FES_site |  -4.125943    6.47966    -0.64   0.528    -17.19342    8.941536
+        n_SHG_before2017 |  -.0017053   .4796795    -0.00   0.997    -.9690712    .9656606
+                Shar_Lit |  -.6220635    .307766    -2.02   0.050    -1.242733   -.0013941
+               Shar_SCST |  -.0667583   .1213641    -0.55   0.585    -.3115124    .1779958
+            n_school_gov |  -1.510326    3.02646    -0.50   0.620    -7.613764    4.593112
+                   _cons |   83.16187   20.13215     4.13   0.000     42.56153    123.7622
+------------------------------------------------------------------------------------------
+
+. eststo game4: reg game_almost_opt_inv_r9_10 leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $co
+> ntrols, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.01
+                                                Prob > F          =     0.4542
+                                                R-squared         =     0.2303
+                                                Root MSE          =     .35035
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+game_almost_opt_inv_r9~0 |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .0777879   .1864789     0.42   0.679    -.2982826    .4538585
+         leader_comp3_BS |   .1376535   .2822772     0.49   0.628    -.4316127    .7069198
+         leader_comp4_BS |   .0763063   .2191669     0.35   0.729    -.3656858    .5182984
+           total_leaders |  -.0246947   .0354073    -0.70   0.489    -.0961003     .046711
+share_female_percent3_BS |    .016509   .0313102     0.53   0.601     -.046634     .079652
+                sequence |  -.0065996   .0046136    -1.43   0.160    -.0159039    .0027047
+                   No_HH |  -.0005681   .0007981    -0.71   0.480    -.0021775    .0010414
+                FES_site |  -.1314508   .0955937    -1.38   0.176    -.3242339    .0613323
+        n_SHG_before2017 |   .0128166   .0118751     1.08   0.286    -.0111318    .0367651
+                Shar_Lit |   .0094901   .0069536     1.36   0.179    -.0045332    .0235134
+               Shar_SCST |  -.0017542   .0026224    -0.67   0.507    -.0070428    .0035345
+            n_school_gov |   .0079061   .0686399     0.12   0.909    -.1305195    .1463317
+                   _cons |   .7083756   .4863959     1.46   0.153    -.2725352    1.689286
+------------------------------------------------------------------------------------------
+
+. eststo game5: reg game_come_back leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $controls, r
+
+Linear regression                               Number of obs     =         56
+                                                F(12, 43)         =       1.03
+                                                Prob > F          =     0.4362
+                                                R-squared         =     0.2833
+                                                Root MSE          =     4.3733
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+          game_come_back |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |  -2.499495    1.93862    -1.29   0.204    -6.409096    1.410106
+         leader_comp3_BS |  -1.092344   2.991412    -0.37   0.717    -7.125101    4.940413
+         leader_comp4_BS |    -2.3331   1.977748    -1.18   0.245     -6.32161     1.65541
+           total_leaders |   .0096982   .8232418     0.01   0.991    -1.650527    1.669924
+share_female_percent3_BS |   .7041115   .3454003     2.04   0.048     .0075455    1.400677
+                sequence |  -.0043075    .065428    -0.07   0.948    -.1362556    .1276406
+                   No_HH |    .010934   .0078421     1.39   0.170    -.0048811    .0267492
+                FES_site |   2.078417   1.668139     1.25   0.220    -1.285705    5.442539
+        n_SHG_before2017 |   .2173523   .1195826     1.82   0.076    -.0238089    .4585136
+                Shar_Lit |  -.1592251   .1036361    -1.54   0.132    -.3682271     .049777
+               Shar_SCST |   .0459787   .0324898     1.42   0.164    -.0195432    .1115006
+            n_school_gov |  -.5369829    .755116    -0.71   0.481    -2.059819    .9858537
+                   _cons |   12.81873   7.528878     1.70   0.096      -2.3647    28.00216
+------------------------------------------------------------------------------------------
+
+. eststo game6: reg game_discussed_formally leader_comp2_BS leader_comp3_BS leader_comp4_BS total_leaders share_female_percent3_BS sequence $cont
+> rols, r
+
+Linear regression                               Number of obs     =         55
+                                                F(12, 42)         =       3.54
+                                                Prob > F          =     0.0011
+                                                R-squared         =     0.2724
+                                                Root MSE          =      .4841
+
+------------------------------------------------------------------------------------------
+                         |               Robust
+ game_discussed_formally |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+         leader_comp2_BS |   .1604066   .2375359     0.68   0.503    -.3189603    .6397735
+         leader_comp3_BS |  -.2026523    .356507    -0.57   0.573    -.9221125    .5168079
+         leader_comp4_BS |  -.0059132   .2642046    -0.02   0.982    -.5390996    .5272733
+           total_leaders |   .1704323   .0798139     2.14   0.039     .0093613    .3315033
+share_female_percent3_BS |   .0965491   .0376857     2.56   0.014     .0204963     .172602
+                sequence |   .0024207   .0057323     0.42   0.675    -.0091476    .0139891
+                   No_HH |   .0003273   .0009297     0.35   0.727    -.0015489    .0022034
+                FES_site |   .0754192   .1810249     0.42   0.679    -.2899038    .4407421
+        n_SHG_before2017 |   .0234396   .0158178     1.48   0.146     -.008482    .0553611
+                Shar_Lit |  -.0047505   .0086746    -0.55   0.587    -.0222566    .0127555
+               Shar_SCST |   .0033797   .0044632     0.76   0.453    -.0056274    .0123867
+            n_school_gov |  -.0748738   .0817039    -0.92   0.365    -.2397588    .0900113
+                   _cons |  -.3504544   .6796785    -0.52   0.609    -1.722101    1.021192
+------------------------------------------------------------------------------------------
+
+. *seems to be very similar across female (leader) participation, must be something happening afterwards to have real world impact
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7220_000000.tmp"
+
+. 
+. 
+. esttab game1 game2 game3 game4 game5 game6 using "$working_ANALYSIS\results\tables\game_outcomes_leader_type.rtf", mtitles("Game related discus
+> sions #" "Proposed rules #" "Agreed rules #" "Cooperative outcome R9/10" "Come back #" "Formal discussions #") se transform(ln*: exp(@) exp(@))
+>   b(%4.2f) label stats(N, labels("N") fmt(%4.0f %4.2f)) star(* 0.10 ** 0.05 *** 0.01) varlabels(,elist(weight:_cons "{break}{hline @width}"))  
+> nonotes addnotes("Notes: Estimates are from OLS regressions using regressions with robust standard errors in brackets. * p<0.10, ** p<0.05, ***
+>  p<0.01") replace 
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\game_outcomes_leader_type.rtf)
+
+. 
+end of do-file
+
+. exit, clear

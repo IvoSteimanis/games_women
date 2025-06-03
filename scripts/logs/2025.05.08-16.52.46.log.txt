@@ -1,0 +1,702 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2025.05.08-16.52.46.log.txt
+  log type:  text
+ opened on:   8 May 2025, 16:52:46
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time:  8 May 2025 16:52:46
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;
+> lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace-desktop-r4995g6;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50
+> " reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. ** REVISIONS
+. *difference between FES and non-FES villages in outcome variables
+. 
+. ttest survey_maint_12m_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .4848485    .0883478    .5075192      .30489     .664807
+NGO acti |      51    .5490196      .07037    .5025426    .4076772     .690362
+---------+--------------------------------------------------------------------
+combined |      84    .5238095    .0548199    .5024324     .414775     .632844
+---------+--------------------------------------------------------------------
+    diff |           -.0641711    .1127069               -.2883811    .1600388
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5694
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2853         Pr(|T| > |t|) = 0.5707          Pr(T > t) = 0.7147
+
+. ttest survey_maint_2017_, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .6060606    .0863769    .4961977    .4301166    .7820046
+NGO acti |      51    .6666667    .0666667    .4760952    .5327627    .8005706
+---------+--------------------------------------------------------------------
+combined |      84    .6428571    .0525944    .4820353    .5382491    .7474652
+---------+--------------------------------------------------------------------
+    diff |           -.0606061     .108138                -.275727    .1545149
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5605
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2883         Pr(|T| > |t|) = 0.5767          Pr(T > t) = 0.7117
+
+. 
+. ttest survey_maint_rule_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .1818182    .0681818    .3916747    .0429364       .3207
+NGO acti |      51    .1372549    .0486654    .3475404    .0395076    .2350022
+---------+--------------------------------------------------------------------
+combined |      84    .1547619    .0396993    .3638498    .0758017    .2337222
+---------+--------------------------------------------------------------------
+    diff |            .0445633    .0816327               -.1178302    .2069567
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =   0.5459
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.7067         Pr(|T| > |t|) = 0.5866          Pr(T > t) = 0.2933
+
+. ttest survey_maint_rule_FS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .2727273    .0787296     .452267    .1123604    .4330942
+NGO acti |      51    .3333333    .0666667    .4760952    .1994294    .4672373
+---------+--------------------------------------------------------------------
+combined |      84    .3095238    .0507437    .4650739    .2085966     .410451
+---------+--------------------------------------------------------------------
+    diff |           -.0606061    .1043181                -.268128    .1469159
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5810
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2814         Pr(|T| > |t|) = 0.5629          Pr(T > t) = 0.7186
+
+. 
+. 
+. 
+. * discussions within community
+. 
+. 
+end of do-file
+
+. tab survey_com_outside_game
+
+Interventio |
+n discussed |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         32       57.14       57.14
+          1 |         24       42.86      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. tab survey_share_exp_comm_meet_FS
+
+   FS: Game |
+  discussed |
+         in |
+  community |
+    meeting |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         36       65.45       65.45
+          1 |         19       34.55      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_share_exp_family_FS
+
+   FS: Game |
+  discussed |
+with family |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         27       49.09       49.09
+          1 |         28       50.91      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_share_exp_friends_FS
+
+   FS: Game |
+  discussed |
+       with |
+    friends |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         29       52.73       52.73
+          1 |         26       47.27      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_share_exp_others_FS
+
+   FS: Game |
+  discussed |
+ with other |
+    members |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         48       87.27       87.27
+          1 |          7       12.73      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_share_exp_vc_meet_FS
+
+   FS: Game |
+  discussed |
+       with |
+  Panchayat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         49       89.09       89.09
+          1 |          6       10.91      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_com_outside_game
+
+Interventio |
+n discussed |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         32       57.14       57.14
+          1 |         24       42.86      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. sum survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_others_FS survey_share_exp_vc_meet_FS
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+su~m_meet_FS |         55    .3454545     .479899          0          1
+survey_~y_FS |         55    .5090909     .504525          0          1
+survey~ds_FS |         55    .4727273    .5038572          0          1
+survey~rs_FS |         55    .1272727      .33635          0          1
+su~c_meet_FS |         55    .1090909    .3146266          0          1
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. egen any_outside_discussion = rowmax(survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_othe
+> rs_FS survey_share_exp_vc_meet_FS)
+(133 missing values generated)
+
+. 
+end of do-file
+
+. tab any_outside_discussion
+
+any_outside |
+_discussion |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         55      100.00      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. egen any_outside_discussion = rowtotal(survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_ot
+> hers_FS survey_share_exp_vc_meet_FS)
+variable any_outside_discussion already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 02_analysis.do
+. * PURPOSE: replicates most tables and figures and saves the results
+. *--------------------------------------------------------------------
+. 
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. ** REVISIONS
+. *difference between FES and non-FES villages in outcome variables
+. 
+. ttest survey_maint_12m_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .4848485    .0883478    .5075192      .30489     .664807
+NGO acti |      51    .5490196      .07037    .5025426    .4076772     .690362
+---------+--------------------------------------------------------------------
+combined |      84    .5238095    .0548199    .5024324     .414775     .632844
+---------+--------------------------------------------------------------------
+    diff |           -.0641711    .1127069               -.2883811    .1600388
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5694
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2853         Pr(|T| > |t|) = 0.5707          Pr(T > t) = 0.7147
+
+. ttest survey_maint_2017_, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .6060606    .0863769    .4961977    .4301166    .7820046
+NGO acti |      51    .6666667    .0666667    .4760952    .5327627    .8005706
+---------+--------------------------------------------------------------------
+combined |      84    .6428571    .0525944    .4820353    .5382491    .7474652
+---------+--------------------------------------------------------------------
+    diff |           -.0606061     .108138                -.275727    .1545149
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5605
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2883         Pr(|T| > |t|) = 0.5767          Pr(T > t) = 0.7117
+
+. 
+. ttest survey_maint_rule_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .1818182    .0681818    .3916747    .0429364       .3207
+NGO acti |      51    .1372549    .0486654    .3475404    .0395076    .2350022
+---------+--------------------------------------------------------------------
+combined |      84    .1547619    .0396993    .3638498    .0758017    .2337222
+---------+--------------------------------------------------------------------
+    diff |            .0445633    .0816327               -.1178302    .2069567
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =   0.5459
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.7067         Pr(|T| > |t|) = 0.5866          Pr(T > t) = 0.2933
+
+. ttest survey_maint_rule_FS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .2727273    .0787296     .452267    .1123604    .4330942
+NGO acti |      51    .3333333    .0666667    .4760952    .1994294    .4672373
+---------+--------------------------------------------------------------------
+combined |      84    .3095238    .0507437    .4650739    .2085966     .410451
+---------+--------------------------------------------------------------------
+    diff |           -.0606061    .1043181                -.268128    .1469159
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5810
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2814         Pr(|T| > |t|) = 0.5629          Pr(T > t) = 0.7186
+
+. 
+. 
+. 
+. * discussions within community
+. sum survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_others_FS survey_share_exp_vc_meet_FS
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+su~m_meet_FS |         55    .3454545     .479899          0          1
+survey_~y_FS |         55    .5090909     .504525          0          1
+survey~ds_FS |         55    .4727273    .5038572          0          1
+survey~rs_FS |         55    .1272727      .33635          0          1
+su~c_meet_FS |         55    .1090909    .3146266          0          1
+
+. egen any_outside_discussion = rowtotal(survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_ot
+> hers_FS survey_share_exp_vc_meet_FS)
+
+. 
+end of do-file
+
+. tab any_outside_discussion
+
+any_outside |
+_discussion |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        133       70.74       70.74
+          1 |         28       14.89       85.64
+          2 |         23       12.23       97.87
+          3 |          4        2.13      100.00
+------------+-----------------------------------
+      Total |        188      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. replace any_outside_discussion = . if treatmebt_BS==0
+treatmebt_BS not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. replace any_outside_discussion = . if treatment_BS==0
+(28 real changes made, 28 to missing)
+
+. 
+end of do-file
+
+. tab any_outside_discussion
+
+any_outside |
+_discussion |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        105       65.63       65.63
+          1 |         28       17.50       83.13
+          2 |         23       14.38       97.50
+          3 |          4        2.50      100.00
+------------+-----------------------------------
+      Total |        160      100.00
+
+. help summarize
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. tab1 survey_share_exp_comm_meet_FS survey_share_exp_family_FS survey_share_exp_friends_FS survey_share_exp_others_FS survey_share_exp_vc_meet_F
+> S
+
+-> tabulation of survey_share_exp_comm_meet_FS  
+
+   FS: Game |
+  discussed |
+         in |
+  community |
+    meeting |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         36       65.45       65.45
+          1 |         19       34.55      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+-> tabulation of survey_share_exp_family_FS  
+
+   FS: Game |
+  discussed |
+with family |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         27       49.09       49.09
+          1 |         28       50.91      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+-> tabulation of survey_share_exp_friends_FS  
+
+   FS: Game |
+  discussed |
+       with |
+    friends |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         29       52.73       52.73
+          1 |         26       47.27      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+-> tabulation of survey_share_exp_others_FS  
+
+   FS: Game |
+  discussed |
+ with other |
+    members |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         48       87.27       87.27
+          1 |          7       12.73      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+-> tabulation of survey_share_exp_vc_meet_FS  
+
+   FS: Game |
+  discussed |
+       with |
+  Panchayat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         49       89.09       89.09
+          1 |          6       10.91      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. ttest survey_share_exp_comm_meet_FS, by(female_leader_present_BS)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      35    .3142857    .0796149    .4710082    .1524887    .4760827
+       1 |      20          .4    .1123903    .5026247    .1647644    .6352356
+---------+--------------------------------------------------------------------
+combined |      55    .3454545    .0647096     .479899    .2157197    .4751894
+---------+--------------------------------------------------------------------
+    diff |           -.0857143    .1352702                -.357032    .1856034
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -0.6337
+Ho: diff = 0                                     degrees of freedom =       53
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2645         Pr(|T| > |t|) = 0.5290          Pr(T > t) = 0.7355
+
+. 
+end of do-file
+
+. tab survey_com_outside_game
+
+Interventio |
+n discussed |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         32       57.14       57.14
+          1 |         24       42.86      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. tab survey_com_outside_game survey_share_exp_comm_meet_FS
+
+Interventi | FS: Game discussed in
+        on |   community meeting
+ discussed |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        31          0 |        31 
+         1 |         5         19 |        24 
+-----------+----------------------+----------
+     Total |        36         19 |        55 
+
+. tab survey_com_outside_game survey_share_exp_vc_meet_FS
+
+Interventi |  FS: Game discussed
+        on |    with Panchayat
+ discussed |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        31          0 |        31 
+         1 |        18          6 |        24 
+-----------+----------------------+----------
+     Total |        49          6 |        55 
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. gen game_discussed_formally = 0 if survey_share_exp_comm_meet_FS==0 & survey_share_exp_vc_meet_FS==0
+(157 missing values generated)
+
+. replace game_discussed_formally 1 if survey_share_exp_vc_meet_FS==1 | survey_share_exp_comm_meet_FS==1
+1 invalid name
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. replace game_discussed_formally = 1 if survey_share_exp_vc_meet_FS==1 | survey_share_exp_comm_meet_FS==1
+(24 real changes made)
+
+. 
+end of do-file
+
+. tab game_discussed_formally
+
+game_discus |
+sed_formall |
+          y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         31       56.36       56.36
+          1 |         24       43.64      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. tab survey_share_exp_comm_meet_FS survey_share_exp_vc_meet_FS
+
+  FS: Game |
+ discussed |
+        in |  FS: Game discussed
+ community |    with Panchayat
+   meeting |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        31          5 |        36 
+         1 |        18          1 |        19 
+-----------+----------------------+----------
+     Total |        49          6 |        55 
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. tab game_discussed_formally
+
+game_discus |
+sed_formall |
+          y |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         31       56.36       56.36
+          1 |         24       43.64      100.00
+------------+-----------------------------------
+      Total |         55      100.00
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. ttest game_discussed_formally, by(female_leader_present_BS)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      35    .4285714    .0848698    .5020964    .2560953    .6010476
+       1 |      20         .45    .1141329    .5104178    .2111171    .6888829
+---------+--------------------------------------------------------------------
+combined |      55    .4363636    .0674881    .5005048    .3010582     .571669
+---------+--------------------------------------------------------------------
+    diff |           -.0214286    .1415812               -.3054046    .2625474
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -0.1514
+Ho: diff = 0                                     degrees of freedom =       53
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.4401         Pr(|T| > |t|) = 0.8803          Pr(T > t) = 0.5599
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7d78_000000.tmp"
+
+. reg game_discussed_formally share_female_percent3_BS
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =      0.51
+       Model |  .128512164         1  .128512164   Prob > F        =    0.4790
+    Residual |  13.3987606        53  .252806803   R-squared       =    0.0095
+-------------+----------------------------------   Adj R-squared   =   -0.0092
+       Total |  13.5272727        54  .250505051   Root MSE        =     .5028
+
+------------------------------------------------------------------------------------------
+ game_discussed_formally |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------------------+----------------------------------------------------------------
+share_female_percent3_BS |   .0275639   .0386601     0.71   0.479    -.0499784    .1051062
+                   _cons |   .3687068    .116624     3.16   0.003     .1347887    .6026249
+------------------------------------------------------------------------------------------
+
+. 
+end of do-file
+
+. exit, clear

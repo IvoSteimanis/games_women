@@ -1,0 +1,766 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2024.07.17-15.12.03.log.txt
+  log type:  text
+ opened on:  17 Jul 2024, 15:12:03
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time: 17 Jul 2024 15:12:03
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;
+> lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50" reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. tab leader_type
+
+     leader_type |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+       no leader |        695       88.65       88.65
+Political office |         36        4.59       93.24
+           CBNRM |         43        5.48       98.72
+ Self-help group |          7        0.89       99.62
+  Cultural group |          3        0.38      100.00
+-----------------+-----------------------------------
+           Total |        784      100.00
+
+. 
+end of do-file
+
+. tab leader_fem_vill
+
+     Sum of |
+     female |
+    leaders |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        504       64.29       64.29
+          1 |        238       30.36       94.64
+          2 |         42        5.36      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. tab leader_fem_vill
+
+     Sum of |
+     female |
+    leaders |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        504       64.29       64.29
+          1 |        238       30.36       94.64
+          2 |         42        5.36      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. replace male_leader_present = . if treatment==0
+treatment not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. tab male_leader_present
+
+male_leader |
+   _present |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        294       37.50       37.50
+          1 |        490       62.50      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. keep if female_leader_present!=0 | male_leader_present = 1 if leader_male_vill!=0
+=exp not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. keep if female_leader_present!=0 | male_leader_present!=0
+(126 observations deleted)
+
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |         0        378 |       378 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       168        490 |       658 
+
+. 
+end of do-file
+
+. tab round
+
+      Round |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |        658      100.00      100.00
+------------+-----------------------------------
+      Total |        658      100.00
+
+. tab leader_male_vill
+
+Sum of male |
+ leaders in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        168       25.53       25.53
+          1 |        266       40.43       65.96
+          2 |        126       19.15       85.11
+          3 |         28        4.26       89.36
+          4 |         42        6.38       95.74
+          5 |         14        2.13       97.87
+          6 |         14        2.13      100.00
+------------+-----------------------------------
+      Total |        658      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. replace leader_present = . if treatment==0
+treatment not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. global socio_economic age literacy edu_primary edu_secondary edu_university total_help  dam_contribution
+
+. 
+end of do-file
+
+. tab leader_no
+
+  No leader |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         89       11.35       11.35
+          1 |        695       88.65      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. iebaltab $socio_economic , grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_villager_differences.xlsx") replace
+    Balance table saved to: D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+nothing to restore
+r(622);
+
+end of do-file
+
+r(622);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary edu_university total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. iebaltab $socio_economic , grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_villager_differences.xlsx") replace
+    Balance table saved to: D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+
+. 
+end of do-file
+
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic , grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_villager_differences.xlsx") replace
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    Stata issued one or more warnings in relation to the tests in this balance table. Read the warning(s) below carefully before using the values generated for this table.
+
+        Difference-in-Means Tests: The variance in both groups listed below is zero for the variable indicated and a difference-in-means test between the two groups is therefore
+        not valid. Tests are reported as N/A in the table.
+
+        +--------------------------------------------------------------+
+        |   Test    |   Group    |    Balance Variable                 |
+        |-----------+------------+-------------------------------------|
+        | t-test    | (1)-(2)    |  edu_university                     |
+        +--------------------------------------------------------------+
+
+    Stata issued one or more warnings in relation to the tests in this balance table. Read the warning(s) above carefully before using the values generated for this table.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/leader_villager_differences.xlsx could not be saved
+r(603);
+
+end of do-file
+
+r(603);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(0 real changes made)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(0 real changes made)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(0 real changes made)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(0 real changes made)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic , grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_villager_differences.xlsx") replace
+file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/leader_villager_differences.xlsx could not be saved
+r(603);
+
+end of do-file
+
+r(603);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD541c_000000.tmp"
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic , grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_villager_differences.xlsx") replace
+    Balance table saved to: D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+
+. 
+. mylabels 0(10)60, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 10 "10%" 20 "20%" 30 "30%" 40 "40%" 50 "50%" 60 "60%"
+
+. 
+end of do-file
+
+. exit, clear

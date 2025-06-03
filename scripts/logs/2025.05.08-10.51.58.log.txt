@@ -1,0 +1,320 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2025.05.08-10.51.58.log.txt
+  log type:  text
+ opened on:   8 May 2025, 10:51:58
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time:  8 May 2025 10:51:58
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;
+> lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace-desktop-r4995g6;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50
+> " reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. 
+. 
+. 
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. winsor2 n_SHG_before2017, cuts(0 95) replace
+
+. winsor2 n_SHG_after2017, cuts(0 95) replace
+
+. 
+. *define program to export direct, indirect and total effects
+. capture program drop te_direct
+
+. program te_direct, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(direct)
+  3.     mat V = r(V_direct)
+  4.     local N = e(N)
+  5.     ereturn post b V, obs(`N')
+  6.     ereturn local cmd te_direct 
+  7. end
+
+. 
+. capture program drop te_indirect
+
+. program te_indirect, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(indirect)
+  3.     mat V = r(V_indirect)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_indirect 
+  6. end
+
+. 
+. capture program drop te_total
+
+. program te_total, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(total)
+  3.     mat V = r(V_total)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_total 
+  6. end
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. 
+. *drop variables with all missings and generate some additional variabels and labels
+. global village No_HH FES_site n_SHG_before2017 d_public_school d_private_school Shar_Lit Shar_SCST
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. 
+. ttest survey_maint_2017_, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .6060606    .0863769    .4961977    .4301166    .7820046
+NGO acti |      51    .6666667    .0666667    .4760952    .5327627    .8005706
+---------+--------------------------------------------------------------------
+combined |      84    .6428571    .0525944    .4820353    .5382491    .7474652
+---------+--------------------------------------------------------------------
+    diff |           -.0606061     .108138                -.275727    .1545149
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5605
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2883         Pr(|T| > |t|) = 0.5767          Pr(T > t) = 0.7117
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. ttest survey_maint_2017_ if treatment_BS==0, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      16        .625        .125          .5    .3585688    .8914312
+NGO acti |      12    .3333333    .1421338     .492366    .0204989    .6461677
+---------+--------------------------------------------------------------------
+combined |      28          .5     .096225    .5091751    .3025625    .6974375
+---------+--------------------------------------------------------------------
+    diff |            .2916667    .1897127               -.0982934    .6816268
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =   1.5374
+Ho: diff = 0                                     degrees of freedom =       26
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9319         Pr(|T| > |t|) = 0.1363          Pr(T > t) = 0.0681
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. ttest survey_maint_2017_ if treatment_BS==1, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      17    .5882353    .1230382    .5072997    .3274059    .8490647
+NGO acti |      39    .7692308    .0683479    .4268328    .6308676     .907594
+---------+--------------------------------------------------------------------
+combined |      56    .7142857    .0609145    .4558423    .5922103    .8363611
+---------+--------------------------------------------------------------------
+    diff |           -.1809955    .1314132               -.4444632    .0824722
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -1.3773
+Ho: diff = 0                                     degrees of freedom =       54
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0871         Pr(|T| > |t|) = 0.1741          Pr(T > t) = 0.9129
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. ttest survey_maint_12m_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .4848485    .0883478    .5075192      .30489     .664807
+NGO acti |      51    .5490196      .07037    .5025426    .4076772     .690362
+---------+--------------------------------------------------------------------
+combined |      84    .5238095    .0548199    .5024324     .414775     .632844
+---------+--------------------------------------------------------------------
+    diff |           -.0641711    .1127069               -.2883811    .1600388
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5694
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2853         Pr(|T| > |t|) = 0.5707          Pr(T > t) = 0.7147
+
+. ttest survey_maint_2017_, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .6060606    .0863769    .4961977    .4301166    .7820046
+NGO acti |      51    .6666667    .0666667    .4760952    .5327627    .8005706
+---------+--------------------------------------------------------------------
+combined |      84    .6428571    .0525944    .4820353    .5382491    .7474652
+---------+--------------------------------------------------------------------
+    diff |           -.0606061     .108138                -.275727    .1545149
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5605
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2883         Pr(|T| > |t|) = 0.5767          Pr(T > t) = 0.7117
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD7aac_000000.tmp"
+
+. ttest survey_maint_rule_BS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .1818182    .0681818    .3916747    .0429364       .3207
+NGO acti |      51    .1372549    .0486654    .3475404    .0395076    .2350022
+---------+--------------------------------------------------------------------
+combined |      84    .1547619    .0396993    .3638498    .0758017    .2337222
+---------+--------------------------------------------------------------------
+    diff |            .0445633    .0816327               -.1178302    .2069567
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =   0.5459
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.7067         Pr(|T| > |t|) = 0.5866          Pr(T > t) = 0.2933
+
+. ttest survey_maint_rule_FS, by(FES_site)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+ NGO not |      33    .2727273    .0787296     .452267    .1123604    .4330942
+NGO acti |      51    .3333333    .0666667    .4760952    .1994294    .4672373
+---------+--------------------------------------------------------------------
+combined |      84    .3095238    .0507437    .4650739    .2085966     .410451
+---------+--------------------------------------------------------------------
+    diff |           -.0606061    .1043181                -.268128    .1469159
+------------------------------------------------------------------------------
+    diff = mean(NGO not) - mean(NGO acti)                         t =  -0.5810
+Ho: diff = 0                                     degrees of freedom =       82
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.2814         Pr(|T| > |t|) = 0.5629          Pr(T > t) = 0.7186
+
+. 
+end of do-file
+
+. exit, clear

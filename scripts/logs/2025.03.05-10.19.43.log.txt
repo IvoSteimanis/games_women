@@ -1,0 +1,2892 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/logs/2025.03.05-10.19.43.log.txt
+  log type:  text
+ opened on:   5 Mar 2025, 10:19:43
+
+. 
+. di "Begin date and time: $S_DATE $S_TIME"
+Begin date and time:  5 Mar 2025 10:19:43
+
+. di "Stata version: `c(stata_version)'"
+Stata version: 16.1
+
+. di "Updated as of: `c(born_date)'"
+Updated as of: 19 Nov 2020
+
+. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+Variant:       MP
+
+. di "Processors:    `c(processors)'"
+Processors:    2
+
+. di "OS:            `c(os)' `c(osdtl)'"
+OS:            Windows 64-bit
+
+. di "Machine type:  `c(machine_type)'"
+Machine type:  PC (64-bit x86-64)
+
+. 
+. *   Analyses were run on Windows using Stata version 16
+. version 16              // Set Version number for backward compatibility
+
+. 
+. * All required Stata packages are available in the /libraries/stata folder
+. tokenize `"$S_ADO"', parse(";")
+
+. while `"`1'"' != "" {
+  2.   if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  3.   macro shift
+  4. }
+
+. adopath ++ "$working_ANALYSIS/scripts/libraries/stata"
+  [1]              "D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata"
+  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+
+. mata: mata mlib index
+.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;
+> lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lcolrspace
+
+. sysdir set PERSONAL "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. * Create directories for output files
+. cap mkdir "$working_ANALYSIS/processed"
+
+. cap mkdir "$working_ANALYSIS/results"
+
+. cap mkdir "$working_ANALYSIS/results/tables"
+
+. cap mkdir "$working_ANALYSIS/results/intermediate"
+
+. cap mkdir "$working_ANALYSIS/results/figures"
+
+. 
+. * Set general graph style
+. set scheme swift_red //select one scheme as reference scheme to work with
+
+. grstyle init 
+
+. {
+. *Background color
+. grstyle set color white: background plotregion graphregion legend box textbox //
+. 
+. *Main colors (note: swift_red only defines 8 colors. Multiplying the color, that is "xx yy zz*0.5" reduces/increases intensity and "xx yy zz%50
+> " reduces transparency)
+. grstyle set color       "100 143 255" "120 94 240" "220 38 127" "254 97 0" "255 176 0" /// 5 main colors
+>                                         "100 143 255*0.4" "120 94 240*0.4" "220 38 127*0.4" "254 97 0*0.4" "255 176 0*0.4" ///
+>                                         "100 143 255*1.7" "120 94 240*1.7" "220 38 127*1.7" "254 97 0*1.7" "255 176 0*1.7" ///
+>                                         : p# p#line p#lineplot p#bar p#area p#arealine p#pie histogram 
+. 
+. *Font size
+. grstyle set size 10pt: heading //titles
+. grstyle set size 8pt: subheading axis_title //axis titles
+. grstyle set size 8pt: p#label p#boxlabel body small_body text_option axis_label tick_label minortick_label key_label //all other text
+. 
+. }
+
+. * -------------------------------------------------
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. *LOAD DATASET
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. 
+. *define program to export direct, indirect and total effects
+. capture program drop te_direct
+
+. program te_direct, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(direct)
+  3.     mat V = r(V_direct)
+  4.     local N = e(N)
+  5.     ereturn post b V, obs(`N')
+  6.     ereturn local cmd te_direct 
+  7. end
+
+. 
+. capture program drop te_indirect
+
+. program te_indirect, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(indirect)
+  3.     mat V = r(V_indirect)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_indirect 
+  6. end
+
+. 
+. capture program drop te_total
+
+. program te_total, eclass
+  1.     quietly estat teffects
+  2.     mat b = r(total)
+  3.     mat V = r(V_total)
+  4.     ereturn post b V
+  5.     ereturn local cmd te_total 
+  6. end
+
+. 
+. 
+. prtest leader_comp1_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .0357143   .0350707                     -.0330231    .1044517
+           1 |   .2857143   .0853735                      .1183854    .4530432
+-------------+----------------------------------------------------------------
+        diff |       -.25   .0922962                     -.4308972   -.0691028
+             |  under Ho:   .0981563    -2.55   0.011
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =  -2.5470
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.0054         Pr(|Z| > |z|) = 0.0109          Pr(Z > z) = 0.9946
+
+. prtest leader_comp2_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .6071429   .0922962                      .4262457    .7880401
+           1 |   .3571429   .0905522                      .1796637     .534622
+-------------+----------------------------------------------------------------
+        diff |        .25   .1292992                     -.0034219    .5034219
+             |  under Ho:   .1335454     1.87   0.061
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =   1.8720
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.9694         Pr(|Z| > |z|) = 0.0612          Pr(Z > z) = 0.0306
+
+. prtest leader_comp3_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .1785714   .0723789                      .0367114    .3204314
+           1 |   .1071429   .0584512                     -.0074194    .2217051
+-------------+----------------------------------------------------------------
+        diff |   .0714286   .0930336                     -.1109139     .253771
+             |  under Ho:    .093522     0.76   0.445
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =   0.7638
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.7775         Pr(|Z| > |z|) = 0.4450          Pr(Z > z) = 0.2225
+
+. prtest leader_comp4_BS, by(seq_split)
+
+Two-sample test of proportions                     0: Number of obs =       28
+                                                   1: Number of obs =       28
+------------------------------------------------------------------------------
+       Group |       Mean   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           0 |   .1785714   .0723789                      .0367114    .3204314
+           1 |        .25   .0818317                      .0896128    .4103872
+-------------+----------------------------------------------------------------
+        diff |  -.0714286    .109248                     -.2855508    .1426936
+             |  under Ho:   .1096642    -0.65   0.515
+------------------------------------------------------------------------------
+        diff = prop(0) - prop(1)                                  z =  -0.6513
+    Ho: diff = 0
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(Z < z) = 0.2574         Pr(|Z| > |z|) = 0.5148          Pr(Z > z) = 0.7426
+
+. ttest game_no_leader_fem_vill, by(seq_split)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |      28    2.535714    .3654458    1.933757    1.785881    3.285547
+       1 |      28    4.321429    .4961587    2.625425    3.303395    5.339462
+---------+--------------------------------------------------------------------
+combined |      56    3.428571    .3281759    2.455844    2.770892    4.086251
+---------+--------------------------------------------------------------------
+    diff |           -1.785714    .6162176               -3.021156   -.5502724
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =  -2.8979
+Ho: diff = 0                                     degrees of freedom =       54
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0027         Pr(|T| > |t|) = 0.0054          Pr(T > t) = 0.9973
+
+. 
+. bys seq_split: tab game_sum_leader_SHG if female_leader_present_BS==1 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          9       90.00       90.00
+          1 |          1       10.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       40.00       40.00
+          1 |          6       60.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+no observations
+
+
+. bys seq_split: tab game_sum_leader_SHG if female_leader_present_BS==1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          9       90.00       90.00
+          1 |          1       10.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+     Sum of |
+ leaders in |
+  self help |
+   group in |
+    village |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       40.00       40.00
+          1 |          6       60.00      100.00
+------------+-----------------------------------
+      Total |         10      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+no observations
+
+
+. bys seq_split: tab1 SHG_before2017 if treatment_BS==1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 0
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+
+SHG_before2 |
+        017 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          4       14.29       14.29
+          1 |         24       85.71      100.00
+------------+-----------------------------------
+      Total |         28      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = 1
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+
+SHG_before2 |
+        017 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          2        7.14        7.14
+          1 |         26       92.86      100.00
+------------+-----------------------------------
+      Total |         28      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> seq_split = .
+
+-> tabulation of SHG_before2017 if treatment_BS==1 
+no observations
+
+. 
+. 
+. *REVISIONS
+. gen school = 1-no_school
+(104 missing values generated)
+
+. winsor2 n_SHG_before2017, cuts(0 95) replace
+
+. egen z_SHG_before2017 = std(n_SHG_before2017)
+(99 missing values generated)
+
+. 
+. *Globals
+. global village No_HH FES_site n_SHG_before2017 d_public_school d_private_school Shar_Lit Shar_SCST
+
+. 
+. 
+end of do-file
+
+. tab female_leader_present_BS
+
+          0 |
+female_lead |
+er_present_ |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         36       64.29       64.29
+          1 |         20       35.71      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. tab leader_present_BS
+
+          0 |
+leader_pres |
+       ent_ |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |          9       16.07       16.07
+  Only Male |         27       48.21       64.29
+       Both |          8       14.29       78.57
+Only Female |         12       21.43      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. gsem ($village  sequence -> leader_present_BS, mlogit)  (i.leader_present_BS total_leaders $village  sequence -> share_female_percent3_BS , )  
+> (i.leader_present_BS total_leaders share_female_percent3_BS survey_maint_rule_BS $village  survey_dam_for_irrigation_FS sequence -> survey_main
+> t_rule_FS, probit) (i.leader_present_BS  total_leaders share_female_percent3_BS survey_maint_12m_BS survey_maint_rule_FS $village  survey_dam_f
+> or_irrigation_FS sequence -> survey_maint_2017_FS , probit), vce(robust) nocapslatent
+
+Iteration 0:   log pseudolikelihood = -210.21939  
+Iteration 1:   log pseudolikelihood =  -185.1351  
+Iteration 2:   log pseudolikelihood = -179.14907  
+Iteration 3:   log pseudolikelihood = -178.15955  
+Iteration 4:   log pseudolikelihood = -178.07365  
+Iteration 5:   log pseudolikelihood = -178.06529  
+Iteration 6:   log pseudolikelihood =  -178.0638  
+Iteration 7:   log pseudolikelihood = -178.06347  
+Iteration 8:   log pseudolikelihood =  -178.0634  
+Iteration 9:   log pseudolikelihood = -178.06338  
+
+Generalized structural equation model           Number of obs     =         56
+
+Response       : leader_present_BS
+Base outcome   : 0
+Family         : multinomial
+Link           : logit
+
+Response       : share_female_pe~3_BS
+Family         : Gaussian
+Link           : identity
+
+Response       : survey_maint_rule_FS
+Family         : Bernoulli
+Link           : probit
+
+Response       : survey_maint_2017_FS
+Family         : Bernoulli
+Link           : probit
+
+Log pseudolikelihood = -178.06338
+
+-------------------------------------------------------------------------------------------------
+                                |               Robust
+                                |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------------------------+----------------------------------------------------------------
+0.leader_present_BS             |  (base outcome)
+--------------------------------+----------------------------------------------------------------
+1.leader_present_BS             |
+                          No_HH |   .0003748   .0073857     0.05   0.960    -.0141009    .0148504
+                       FES_site |    2.80584    1.63307     1.72   0.086    -.3949181    6.006599
+               n_SHG_before2017 |   .7113604   .3031881     2.35   0.019     .1171226    1.305598
+                d_public_school |  -10.31674   1.596874    -6.46   0.000    -13.44656   -7.186926
+               d_private_school |  -3.348844   1.482123    -2.26   0.024    -6.253751   -.4439368
+                       Shar_Lit |   .0613706   .0664164     0.92   0.355    -.0688032    .1915444
+                      Shar_SCST |   .0183203   .0314892     0.58   0.561    -.0433974    .0800379
+                       sequence |  -.1774004    .061028    -2.91   0.004     -.297013   -.0577877
+                          _cons |   8.242484    4.84939     1.70   0.089    -1.262146    17.74711
+--------------------------------+----------------------------------------------------------------
+2.leader_present_BS             |
+                          No_HH |  -.0193714   .0110628    -1.75   0.080     -.041054    .0023113
+                       FES_site |   3.786254   1.796656     2.11   0.035     .2648721    7.307636
+               n_SHG_before2017 |   .9023463   .3032926     2.98   0.003     .3079038    1.496789
+                d_public_school |    3.74717   1.652976     2.27   0.023     .5073958    6.986944
+               d_private_school |   -2.30866   1.407792    -1.64   0.101    -5.067882    .4505625
+                       Shar_Lit |   .0879525   .0738564     1.19   0.234    -.0568035    .2327084
+                      Shar_SCST |  -.0235227   .0397044    -0.59   0.554    -.1013419    .0542964
+                       sequence |  -.1739601   .0646677    -2.69   0.007    -.3007064   -.0472138
+                          _cons |  -4.683796   5.179638    -0.90   0.366     -14.8357    5.468109
+--------------------------------+----------------------------------------------------------------
+3.leader_present_BS             |
+                          No_HH |   .0101962   .0059497     1.71   0.087    -.0014649    .0218574
+                       FES_site |    1.71149   1.477897     1.16   0.247    -1.185134    4.608115
+               n_SHG_before2017 |   .6215047   .3112958     2.00   0.046     .0113762    1.231633
+                d_public_school |   2.766677   1.547803     1.79   0.074    -.2669616    5.800316
+               d_private_school |   -2.51512   2.006437    -1.25   0.210    -6.447664    1.417424
+                       Shar_Lit |   .0969213   .0861466     1.13   0.261     -.071923    .2657656
+                      Shar_SCST |   .0548013   .0489716     1.12   0.263    -.0411813    .1507839
+                       sequence |  -.1232508   .0689957    -1.79   0.074      -.25848    .0119784
+                          _cons |  -12.34966   8.751123    -1.41   0.158    -29.50155    4.802225
+--------------------------------+----------------------------------------------------------------
+share_female_percent3_BS        |
+              leader_present_BS |
+                     Only Male  |   .9183725    .724062     1.27   0.205    -.5007629    2.337508
+                          Both  |   1.069118   .8711123     1.23   0.220     -.638231    2.776466
+                   Only Female  |   2.072379   .8144054     2.54   0.011     .4761735    3.668584
+                                |
+                  total_leaders |  -.3931455   .1768062    -2.22   0.026    -.7396792   -.0466118
+                          No_HH |   .0003344   .0025382     0.13   0.895    -.0046404    .0053092
+                       FES_site |  -.2931013   .4936896    -0.59   0.553    -1.260715    .6745125
+               n_SHG_before2017 |  -.0780455   .0400542    -1.95   0.051    -.1565502    .0004592
+                d_public_school |   .1960433   .5838913     0.34   0.737    -.9483626    1.340449
+               d_private_school |   1.011476    .646586     1.56   0.118    -.2558091    2.278762
+                       Shar_Lit |   .0330156   .0298255     1.11   0.268    -.0254414    .0914726
+                      Shar_SCST |  -.0019659   .0162501    -0.12   0.904    -.0338155    .0298836
+                       sequence |   .0371809   .0164165     2.26   0.024     .0050051    .0693567
+                          _cons |   -.154204   2.461094    -0.06   0.950     -4.97786    4.669452
+--------------------------------+----------------------------------------------------------------
+survey_maint_rule_FS            |
+              leader_present_BS |
+                     Only Male  |   .3987673   .8748762     0.46   0.649    -1.315958    2.113493
+                          Both  |  -.2709076    1.20254    -0.23   0.822    -2.627843    2.086028
+                   Only Female  |  -.0808162   .8989758    -0.09   0.928    -1.842776    1.681144
+                                |
+                  total_leaders |   .1315149   .2823694     0.47   0.641     -.421919    .6849488
+       share_female_percent3_BS |   .6946875   .1674242     4.15   0.000      .366542    1.022833
+           survey_maint_rule_BS |  -.3120569   .7018915    -0.44   0.657    -1.687739    1.063625
+                          No_HH |   -.010475   .0039416    -2.66   0.008    -.0182004   -.0027497
+                       FES_site |   1.402061   .5337212     2.63   0.009     .3559869    2.448135
+               n_SHG_before2017 |   .2461286   .0694026     3.55   0.000      .110102    .3821552
+                d_public_school |   .4293769   1.090526     0.39   0.694    -1.708015    2.566769
+               d_private_school |  -.4121818   .7232205    -0.57   0.569    -1.829668    1.005304
+                       Shar_Lit |  -.0017278   .0242596    -0.07   0.943    -.0492758    .0458201
+                      Shar_SCST |  -.0096808   .0144966    -0.67   0.504    -.0380935     .018732
+   survey_dam_for_irrigation_FS |  -.8885898   .4600202    -1.93   0.053    -1.790213    .0130333
+                       sequence |   -.031921    .023142    -1.38   0.168    -.0772786    .0134365
+                          _cons |  -1.976333   2.194471    -0.90   0.368    -6.277417     2.32475
+--------------------------------+----------------------------------------------------------------
+survey_maint_2017_FS            |
+              leader_present_BS |
+                     Only Male  |  -.3172088   .8070817    -0.39   0.694     -1.89906    1.264642
+                          Both  |   2.696094   1.526109     1.77   0.077    -.2950248    5.687213
+                   Only Female  |  -2.168619   1.266884    -1.71   0.087    -4.651667    .3144291
+                                |
+                  total_leaders |  -.0697984   .3133636    -0.22   0.824    -.6839798    .5443831
+       share_female_percent3_BS |   .1486429   .2120741     0.70   0.483    -.2670146    .5643005
+            survey_maint_12m_BS |  -.4195967    .603479    -0.70   0.487    -1.602394    .7632005
+           survey_maint_rule_FS |   3.141483   .9953022     3.16   0.002     1.190727     5.09224
+                          No_HH |   .0065032   .0038689     1.68   0.093    -.0010798    .0140862
+                       FES_site |   .0112426   .6357132     0.02   0.986    -1.234732    1.257218
+               n_SHG_before2017 |  -.0405089   .0674794    -0.60   0.548    -.1727661    .0917482
+                d_public_school |  -1.864311   1.160823    -1.61   0.108    -4.139483      .41086
+               d_private_school |   8.901407   1.532812     5.81   0.000     5.897151    11.90566
+                       Shar_Lit |   .0797023    .043749     1.82   0.068    -.0060442    .1654488
+                      Shar_SCST |   .0167409   .0169122     0.99   0.322    -.0164064    .0498881
+   survey_dam_for_irrigation_FS |   2.152031   .5867154     3.67   0.000      1.00209    3.301972
+                       sequence |   .0851697    .035498     2.40   0.016     .0155948    .1547446
+                          _cons |  -7.477572   3.765907    -1.99   0.047    -14.85861   -.0965303
+--------------------------------+----------------------------------------------------------------
+ var(e.share_female_percent3_BS)|   1.738346   .4343546                      1.065244    2.836763
+-------------------------------------------------------------------------------------------------
+
+. * explanation how to get indirect effects https://www.statalist.org/forums/forum/general-stata-discussion/general/1551690-mediation-analysis-in
+> -a-multilevel-model-how-to-bootstrap-indirect-effects-after-gsem
+. eststo SEM2 
+
+. gsem i.chosen <- i.location L[suspect]@1
+variable chosen not found;
+Perhaps you meant 'chosen' to specify a latent variable.
+For 'chosen' to be a valid latent variable specification, 'chosen' must begin with a capital letter.
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. esttab SEM2 using "$working_ANALYSIS\results\Tables\TableS10_SEM_robustness_check.rtf",  drop(var(*)) unstack  se transform(ln*: exp(@) exp(@))
+>   b(%4.2f) label stats(N, labels("N") fmt(%4.0f)) star(* 0.10 ** 0.05 *** 0.01) varlabels(,elist(weight:_cons "{break}{hline @width}"))  nonote
+> s addnotes("Notes: Estimates are from generalized SEM model using probit link functions for binary outcomes with robust standard errors in brac
+> kets. * p<0.10, ** p<0.05, *** p<0.01") replace 
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\Tables\TableS10_SEM_robustness_check.rtf not found)
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\Tables\TableS10_SEM_robustness_check.rtf)
+
+. 
+end of do-file
+
+. tab leader_comp1_BS
+
+  No leader |
+participate |
+     d (=1) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         47       83.93       83.93
+          1 |          9       16.07      100.00
+------------+-----------------------------------
+      Total |         56      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. global summary survey_maint_12m_BS survey_maint_2017_FS survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS survey_dam_for_irrigatio
+> n_BS survey_dam_for_irrigation_FS No_HH  Shar_Lit Shar_SCST FES_site share_female_percent2_BS leader_comp1_BS leader_comp2_BS leader_comp3_BS l
+> eader_comp4_BS SHG_before2017 SHG_after2017
+
+. 
+. estpost tabstat $summary, statistics(min max count mean sd p50) columns(statistics)
+
+Summary statistics: min max count mean sd p50
+     for variables: survey_maint_12m_BS survey_maint_2017_FS survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS survey_dam_for_irriga
+> tion_BS survey_dam_for_irrigation_FS No_HH Shar_Lit Shar_SCST FES_site share_female_percent2_BS leader_comp1_BS leader_comp2_BS leader_comp3_BS
+>  leader_comp4_BS SHG_before2017 SHG_after2017
+
+             |    e(min)     e(max)   e(count)    e(mean)      e(sd)     e(p50) 
+-------------+------------------------------------------------------------------
+survey~2m_BS |         0          1         84   .5238095   .5024324          1 
+survey_~7_FS |         0          1         84   .6428571   .4820353          1 
+survey~le_FS |         0          1         84   .3095238   .4650739          0 
+survey~le_BS |         0          1         84   .1547619   .3638498          0 
+survey~le_FS |         0          1         84   .3095238   .4650739          0 
+survey_da~BS |         0          1         83   .4216867    .496831          0 
+survey_da~FS |         0          1         84   .4047619    .493794          0 
+       No_HH |        24        633         83   175.2651   123.4358        149 
+    Shar_Lit |  33.55556   73.15914         83   51.42858   8.370013   52.07469 
+   Shar_SCST |  16.90491        100         83    77.7139   19.35809   81.36882 
+    FES_site |         0          1         84   .6071429   .4913188          1 
+share_f~2_BS |         0   92.85714         56    24.4898   17.54174   21.42857 
+leader_~1_BS |         0          1         56   .1607143    .370591          0 
+leader_~2_BS |         0          1         56   .4821429   .5042031          0 
+leader_~3_BS |         0          1         56   .1428571   .3530939          0 
+leader_~4_BS |         0          1         56   .2142857   .4140393          0 
+SHG_bef~2017 |         0         79         90   1.777778   8.236365          1 
+SHG_aft~2017 |         0         53         90   1.177778   5.545679          1 
+
+. esttab . using "$working_ANALYSIS\results\tables\tableS6_village_characteristics.rtf", cells("min(fmt(0)) max(fmt(0)) count(fmt(0)) mean(fmt(%9
+> .2fc)) sd(fmt(%9.2fc)) p50(fmt(0)) ")  not nostar unstack nomtitle nonumber nonote label replace
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\tableS6_village_characteristics.rtf)
+
+.  
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. winsor2 n_SHG_before2017, cuts(0 95) replace
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. winsor2 n_SHG_before2017, cuts(0 95) replace
+
+. winsor2 n_SHG_after2017, cuts(0 95) replace
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. global summary survey_maint_12m_BS survey_maint_2017_FS survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS survey_dam_for_irrigatio
+> n_BS survey_dam_for_irrigation_FS No_HH  Shar_Lit Shar_SCST FES_site share_female_percent2_BS leader_comp1_BS leader_comp2_BS leader_comp3_BS l
+> eader_comp4_BS n_SHG_before2017 n_SHG_after2017
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. estpost tabstat $summary, statistics(min max count mean sd p50) columns(statistics)
+
+Summary statistics: min max count mean sd p50
+     for variables: survey_maint_12m_BS survey_maint_2017_FS survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS survey_dam_for_irriga
+> tion_BS survey_dam_for_irrigation_FS No_HH Shar_Lit Shar_SCST FES_site share_female_percent2_BS leader_comp1_BS leader_comp2_BS leader_comp3_BS
+>  leader_comp4_BS n_SHG_before2017 n_SHG_after2017
+
+             |    e(min)     e(max)   e(count)    e(mean)      e(sd)     e(p50) 
+-------------+------------------------------------------------------------------
+survey~2m_BS |         0          1         84   .5238095   .5024324          1 
+survey_~7_FS |         0          1         84   .6428571   .4820353          1 
+survey~le_FS |         0          1         84   .3095238   .4650739          0 
+survey~le_BS |         0          1         84   .1547619   .3638498          0 
+survey~le_FS |         0          1         84   .3095238   .4650739          0 
+survey_da~BS |         0          1         83   .4216867    .496831          0 
+survey_da~FS |         0          1         84   .4047619    .493794          0 
+       No_HH |        24        633         83   175.2651   123.4358        149 
+    Shar_Lit |  33.55556   73.15914         83   51.42858   8.370013   52.07469 
+   Shar_SCST |  16.90491        100         83    77.7139   19.35809   81.36882 
+    FES_site |         0          1         84   .6071429   .4913188          1 
+share_f~2_BS |         0   92.85714         56    24.4898   17.54174   21.42857 
+leader_~1_BS |         0          1         56   .1607143    .370591          0 
+leader_~2_BS |         0          1         56   .4821429   .5042031          0 
+leader_~3_BS |         0          1         56   .1428571   .3530939          0 
+leader_~4_BS |         0          1         56   .2142857   .4140393          0 
+n_SHG_b~2017 |         0         20         89   6.898876    5.66698          5 
+n_SHG_a~2017 |         0          9         89   2.101124   2.641646          1 
+
+. esttab . using "$working_ANALYSIS\results\tables\tableS8_village_characteristics.rtf", cells("min(fmt(0)) max(fmt(0)) count(fmt(0)) mean(fmt(%9
+> .2fc)) sd(fmt(%9.2fc)) p50(fmt(0)) ")  not nostar unstack nomtitle nonumber nonote label replace
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\tableS8_village_characteristics.rtf not found)
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\tableS8_village_characteristics.rtf)
+
+.  
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. estpost tabstat $summary if treatment==1, statistics(min max count mean sd p50) columns(statistics)
+
+Summary statistics: min max count mean sd p50
+     for variables: survey_maint_12m_BS survey_maint_2017_FS survey_maint_rule_FS survey_maint_rule_BS survey_maint_rule_FS survey_dam_for_irriga
+> tion_BS survey_dam_for_irrigation_FS No_HH Shar_Lit Shar_SCST FES_site share_female_percent2_BS leader_comp1_BS leader_comp2_BS leader_comp3_BS
+>  leader_comp4_BS n_SHG_before2017 n_SHG_after2017
+
+             |    e(min)     e(max)   e(count)    e(mean)      e(sd)     e(p50) 
+-------------+------------------------------------------------------------------
+survey~2m_BS |         0          1         56   .5357143   .5032363          1 
+survey_~7_FS |         0          1         56   .7142857   .4558423          1 
+survey~le_FS |         0          1         56   .3214286   .4712514          0 
+survey~le_BS |         0          1         56   .1428571   .3530939          0 
+survey~le_FS |         0          1         56   .3214286   .4712514          0 
+survey_da~BS |         0          1         55   .4363636   .5005048          0 
+survey_da~FS |         0          1         56   .4285714   .4993502          0 
+       No_HH |        24        418         56   164.1964   98.70736      149.5 
+    Shar_Lit |  35.53299   69.11977         56   51.27821   8.432409    52.1243 
+   Shar_SCST |  34.62658        100         56    78.3905   17.44676   81.35342 
+    FES_site |         0          1         56   .6964286   .4639609          1 
+share_f~2_BS |         0   92.85714         56    24.4898   17.54174   21.42857 
+leader_~1_BS |         0          1         56   .1607143    .370591          0 
+leader_~2_BS |         0          1         56   .4821429   .5042031          0 
+leader_~3_BS |         0          1         56   .1428571   .3530939          0 
+leader_~4_BS |         0          1         56   .2142857   .4140393          0 
+n_SHG_b~2017 |         0         20         56   6.660714   5.444853          5 
+n_SHG_a~2017 |         0          9         56   2.285714   2.787728          1 
+
+. esttab . using "$working_ANALYSIS\results\tables\tableS8_village_characteristics.rtf", cells("min(fmt(0)) max(fmt(0)) count(fmt(0)) mean(fmt(%9
+> .2fc)) sd(fmt(%9.2fc)) p50(fmt(0)) ")  not nostar unstack nomtitle nonumber nonote label replace
+(output written to D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\tables\tableS8_village_characteristics.rtf)
+
+.  
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. cibar game_share_fem_vill, over1(leader_present_BS) over2(seq_split)  gap(30) bargap(10) barlabel(on) blpos(10) blsize(6pt) blgap(0.02) graphop
+> ts(xsize(4) ysize(2.5)  legend(ring (1) pos(6) rows(1) size(8pt))  yla(0(0.1)0.6, nogrid) xla(, nogrid) ytitle("Share of women in games (in %)"
+> , size(8pt))) ciopts(lcolor(black) lpattern(dash))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. cibar game_share_fem_vill, over1(leader_present_BS)   gap(30) bargap(10) barlabel(on) blpos(10) blsize(6pt) blgap(0.02) graphopts(xsize(4) ysiz
+> e(2.5)  legend(ring (1) pos(6) rows(1) size(8pt))  yla(0(0.1)0.6, nogrid) xla(, nogrid) ytitle("Share of women in games (in %)", size(8pt))) ci
+> opts(lcolor(black) lpattern(dash))
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. gr save "$working_ANALYSIS\results\intermediate\figureS5_gendered_participation.gph", replace
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS5_gendered_participation.gph not found
+> )
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS5_gendered_participation.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figureS5_gendered_participation.png", replace width(4000)
+could not find Graph window
+r(693);
+
+end of do-file
+
+r(693);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. cibar game_share_fem_vill, over1(leader_present_BS)   gap(30) bargap(10) barlabel(on) blpos(10) blsize(6pt) blgap(0.02) graphopts(xsize(4) ysiz
+> e(2.5)  legend(ring (1) pos(6) rows(1) size(8pt))  yla(0(0.1)0.6, nogrid) xla(, nogrid) ytitle("Share of women in games (in %)", size(8pt))) ci
+> opts(lcolor(black) lpattern(dash))
+
+. gr_edit xaxis1.style.editstyle majorstyle(tickstyle(textstyle(size(6-pt)))) editcopy
+
+. gr_edit yaxis1.style.editstyle majorstyle(tickstyle(textstyle(size(6-pt)))) editcopy
+
+. gr_edit style.editstyle margin(vsmall) editcopy
+
+. gr save "$working_ANALYSIS\results\intermediate\figureS5_gendered_participation.gph", replace
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\intermediate\figureS5_gendered_participation.gph saved)
+
+. gr export "$working_ANALYSIS\results\figures\figureS5_gendered_participation.png", replace width(4000)
+(note: file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS5_gendered_participation.png not found)
+(file D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis\results\figures\figureS5_gendered_participation.png written in PNG forma
+> t)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+. *significant differences between female leaders in only female villages compared to male & female villages
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_vil
+> lager_differences.xlsx") replace
+
+    The options savebrowse, save and browse have been deprecated as of version 7 of iebaltab. See if the options savexlsx, savecsv or browse
+    have the functionality you need. If you still need the old version of iebaltab, for example for reproduction of old code, see this guide
+    for how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+. *significant differences between female leaders in only female villages compared to male & female villages
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote save("$working_ANALYSIS/results/tables/leader_vil
+> lager_differences.xlsx") replace
+
+    The options savebrowse, save and browse have been deprecated as of version 7 of iebaltab. See if the options savexlsx, savecsv or browse
+    have the functionality you need. If you still need the old version of iebaltab, for example for reproduction of old code, see this guide
+    for how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f) stdev ftest fmissok tblnonote savexlsx("$working_ANALYSIS/results/tables/leader
+> _villager_differences.xlsx") replace
+
+    The options balmiss, balmissreg, covmiss, missminmean, covarmissok and fmissok have been deprecated as of version 7 of iebaltab. Instead,
+    if needed and/or desired, you must modify missing values yourself before running the command. If you still need the old version of
+    iebaltab, for example for reproduction of old code, see this guide for how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. *significant differences between female leaders in only female villages compared to male & female villages
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f) stdev ftest  tblnonote savexlsx("$working_ANALYSIS/results/tables/leader_villag
+> er_differences.xlsx") replace
+
+    The options nottest, normdiff, pttest, pftest, pboth and stdev have been deprecated as of version 7 of iebaltab. See if the option stats()
+    has the functionality you need. If you still need the old version of iebaltab, for example for reproduction of old code, see this guide for
+    how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+variable total_leaders already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f) stdev ftest  tblnonote savexlsx("$working_ANALYSIS/results/tables/leader_villag
+> er_differences.xlsx") replace
+
+    The options nottest, normdiff, pttest, pftest, pboth and stdev have been deprecated as of version 7 of iebaltab. See if the option stats()
+    has the functionality you need. If you still need the old version of iebaltab, for example for reproduction of old code, see this guide for
+    how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f)  ftest  tblnonote savexlsx("$working_ANALYSIS/results/tables/leader_villager_di
+> fferences.xlsx") replace
+
+    Warning: One or more balance variables were omitted due to no variance in the F-test across all balance variables for group variable values
+        2 and 3.
+.
+    Balance table saved in Excel format to: D:\OneDrive\Promotion\1_Projects\Games for
+        Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. tab leader_fem
+
+    leader is female |
+(=1); leader is male |
+                (=0) |      Freq.     Percent        Cum.
+---------------------+-----------------------------------
+  Male leader (n=66) |         66       74.16       74.16
+Female leader (n=23) |         23       25.84      100.00
+---------------------+-----------------------------------
+               Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+variable total_leaders already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 02_analysis.do
+. * PURPOSE: replicates most tables and figures and saves the results
+. *--------------------------------------------------------------------
+. 
+. *--------------------------------------------------
+. * STRUCTURE OF THE DO-FILE
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+. *significant differences between female leaders in only female villages compared to male & female villages
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f)  ftest  tblnonote savexlsx("$working_ANALYSIS/results/tables/leader_villager_di
+> fferences.xlsx") replace
+
+    Warning: One or more balance variables were omitted due to no variance in the F-test across all balance variables for group variable values
+        2 and 3.
+.
+    Balance table saved in Excel format to: D:\OneDrive\Promotion\1_Projects\Games for
+        Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+
+. 
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. tab leader_fem
+
+    leader is female |
+(=1); leader is male |
+                (=0) |      Freq.     Percent        Cum.
+---------------------+-----------------------------------
+  Male leader (n=66) |         66       74.16       74.16
+Female leader (n=23) |         23       25.84      100.00
+---------------------+-----------------------------------
+               Total |         89      100.00
+
+. tab leader_type
+
+     leader_type |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+       no leader |        695       88.65       88.65
+Political office |         36        4.59       93.24
+           CBNRM |         43        5.48       98.72
+ Self-help group |          7        0.89       99.62
+  Cultural group |          3        0.38      100.00
+-----------------+-----------------------------------
+           Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. catplot leader_fem,  over(leader_type)
+varlist not allowed
+r(101);
+
+. help catplot
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. * Create and define a local installation directory for the packages
+. cap mkdir "$working_ANALYSIS/scripts/libraries"
+
+. cap mkdir "$working_ANALYSIS/scripts/libraries/stata"
+
+. net set ado "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. 
+end of do-file
+
+. ssc install catplot
+checking catplot consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot , over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) format(%9.0f) p
+> os(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_fem, over(leader_type) percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_type, over(leader_fem) percent(leader_fem) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) format
+> (%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. help catplot
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot leader_type leader_fem, percent(leader_type) asyvars  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) format(%9.0
+> f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. cibar leader_fem, over1(leader_type)
+
+. 
+end of do-file
+
+. tab leader_type
+
+     leader_type |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+       no leader |        695       88.65       88.65
+Political office |         36        4.59       93.24
+           CBNRM |         43        5.48       98.72
+ Self-help group |          7        0.89       99.62
+  Cultural group |          3        0.38      100.00
+-----------------+-----------------------------------
+           Total |        784      100.00
+
+. tab leader_fem
+
+    leader is female |
+(=1); leader is male |
+                (=0) |      Freq.     Percent        Cum.
+---------------------+-----------------------------------
+  Male leader (n=66) |         66       74.16       74.16
+Female leader (n=23) |         23       25.84      100.00
+---------------------+-----------------------------------
+               Total |         89      100.00
+
+. tab leader_type, nola
+
+leader_type |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |        695       88.65       88.65
+          2 |         36        4.59       93.24
+          3 |         43        5.48       98.72
+          4 |          7        0.89       99.62
+          5 |          3        0.38      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. cibar leader_fem if leader_type > 1, over1(leader_type) 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot  leader_fem, ovcer(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) form
+> at(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot  leader_fem, over(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot leader_fem, over(leader_type)  asyvar  vertical yla(0(100)600, nogrid)  title("{bf: A} Consumer surveys") bargap(20) blabel(bar, format
+> (%9.0f)  pos(top))  l1title("")  b1title("") legend(rows(1) pos(6) ring(1))  ytitle("")
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. /*
+>         1) Analysis Main Manuscript
+>         2) Analysis Supplementary Online Materials
+> */
+. *--------------------------------------------------
+. clear all
+
+. use "$working_ANALYSIS/data/2022_06_Mandla_Game.dta", clear
+
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+. *significant differences between female leaders in only female villages compared to male & female villages
+. preserve
+
+. drop if leader_no==1
+(695 observations deleted)
+
+. keep if leader_fem==1
+(66 observations deleted)
+
+. iebaltab $socio_economic, grpvar(leader_present)  format(%9.2f)  ftest  tblnonote savexlsx("$working_ANALYSIS/results/tables/leader_villager_di
+> fferences.xlsx") replace
+
+    Warning: One or more balance variables were omitted due to no variance in the F-test across all balance variables for group variable values
+        2 and 3.
+.
+    Balance table saved in Excel format to: D:\OneDrive\Promotion\1_Projects\Games for
+        Sustainability\analysis/results/tables/leader_villager_differences.xlsx
+
+. restore
+
+. 
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot  leader_fem, over(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. tab treatment
+variable treatment not found
+r(111);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. use "$working_ANALYSIS/processed/games_clean_final.dta", clear
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. *Table S4.      Game participants’ characteristics
+. preserve
+
+. clear
+
+. use "$working_ANALYSIS\data\2022_06_Mandla_Game", clear
+
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+(42 missing values generated)
+
+. 
+. global balance age literacy edu_primary edu_secondary edu_university total_help  cont_lab cont_money dam_contribution
+
+. 
+. iebaltab $balance if round ==1 & excluded_villages ==0 & elected_leader ==1, grpvar(sex)  format(%9.2f) stdev ftest fmissok tblnonote save("$wo
+> rking_ANALYSIS/results/tables/tableS4a_balance_gender_leader.xlsx") replace
+
+    The options savebrowse, save and browse have been deprecated as of version 7 of iebaltab. See if the options savexlsx, savecsv or browse
+    have the functionality you need. If you still need the old version of iebaltab, for example for reproduction of old code, see this guide
+    for how to run old versions of any command in the ietoolkit package.
+invalid syntax
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. preserve
+
+. clear
+
+. use "$working_ANALYSIS\data\2022_06_Mandla_Game", clear
+
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+(42 missing values generated)
+
+. 
+. global balance age literacy edu_primary edu_secondary edu_university total_help  cont_lab cont_money dam_contribution
+
+. 
+. iebaltab $balance if round ==1 & excluded_villages ==0 & elected_leader ==1, grpvar(sex)  format(%9.2f) tblnonote savexlsx("$working_ANALYSIS/r
+> esults/tables/tableS4a_balance_gender_leader.xlsx") replace
+
+    Balance table saved in Excel format to: D:\OneDrive\Promotion\1_Projects\Games for
+        Sustainability\analysis/results/tables/tableS4a_balance_gender_leader.xlsx
+
+. 
+. iebaltab $balance if round ==1 & excluded_villages ==0 & elected_leader ==0, grpvar(sex)  format(%9.2f) tblnonote savexlsx("$working_ANALYSIS/r
+> esults/tables/tableS4b_balance_gender_villagers.xlsx") replace
+
+    Balance table saved in Excel format to: D:\OneDrive\Promotion\1_Projects\Games for
+        Sustainability\analysis/results/tables/tableS4b_balance_gender_villagers.xlsx
+
+. restore
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. *Figure S4: Types of leaders by gender
+. preserve
+
+. clear
+
+. use "$working_ANALYSIS\data\2022_06_Mandla_Game", clear
+
+. 
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+. 
+. 
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+. 
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot  leader_fem, over(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. clear
+
+. use "$working_ANALYSIS\data\2022_06_Mandla_Game", clear
+
+. 
+. sort site_ID round
+
+. drop if round!=1 
+(7,560 observations deleted)
+
+. drop if excluded_villages==1
+(56 observations deleted)
+
+. 
+. egen dam_contribution = rowmax (cont_lab  cont_money)
+
+. 
+. *leader composition in games
+. *dummy for male leader presence
+. gen male_leader_present = 0 if leader_male_vill==0
+(490 missing values generated)
+
+. replace male_leader_present = 1 if leader_male_vill>0
+(490 real changes made)
+
+. 
+. 
+. *dummy for female leader presence
+. gen female_leader_present= 0 if leader_fem_vill==0
+(280 missing values generated)
+
+. replace female_leader_present = 1 if leader_fem_vill>0
+(280 real changes made)
+
+. 
+. tab female_leader_present male_leader_present
+
+female_lea |
+der_presen |  male_leader_present
+         t |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       126        378 |       504 
+         1 |       168        112 |       280 
+-----------+----------------------+----------
+     Total |       294        490 |       784 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. *composition of leader presence
+. gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+(658 missing values generated)
+
+. replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+(378 real changes made)
+
+. replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+(112 real changes made)
+
+. replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+(168 real changes made)
+
+. 
+. lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+
+. lab val leader_present leader_lab
+
+. tab leader_present, gen(leader_comp)
+
+leader_pres |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       None |        126       16.07       16.07
+  Only Male |        378       48.21       64.29
+       Both |        112       14.29       78.57
+Only Female |        168       21.43      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. gen participant_type = 1 if leader_fem==0
+(718 missing values generated)
+
+. replace participant_type = 2 if leader_fem==1
+(23 real changes made)
+
+. replace participant_type = 3 if leader_type==1 & sex==1
+(503 real changes made)
+
+. replace participant_type = 4 if leader_type==1 & sex==0
+(192 real changes made)
+
+. lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+
+. lab val participant_type party
+
+. 
+. gen party_type = sex*leader_no
+
+. 
+. global socio_economic age literacy edu_primary edu_secondary  total_help  dam_contribution
+
+. 
+. foreach x of varlist leader_state leader_CR leader_SHG leader_culture {
+  2.         replace `x'=. if leader_type==1
+  3.         ttest `x', by(leader_fem)
+  4. }
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .4090909    .0609837    .4954337    .2872981    .5308837
+Leader i |      23    .3913043     .104051    .4990109    .1755159    .6070928
+---------+--------------------------------------------------------------------
+combined |      89    .4044944    .0523188    .4935746    .3005217     .508467
+---------+--------------------------------------------------------------------
+    diff |            .0177866    .1201819               -.2210879    .2566611
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   0.1480
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.5587         Pr(|T| > |t|) = 0.8827          Pr(T > t) = 0.4413
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .5454545    .0617606    .5017452    .4221102    .6687989
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .4831461    .0532699    .5025471    .3772834    .5890088
+---------+--------------------------------------------------------------------
+    diff |            .2411067    .1196209                .0033471    .4788663
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   2.0156
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9765         Pr(|T| > |t|) = 0.0469          Pr(T > t) = 0.0235
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66           0           0           0           0           0
+Leader i |      23    .3043478    .0981002     .470472    .1009005    .5077952
+---------+--------------------------------------------------------------------
+combined |      89    .0786517    .0286962    .2707195     .021624    .1356794
+---------+--------------------------------------------------------------------
+    diff |           -.3043478    .0572855               -.4182089   -.1904867
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =  -5.3128
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 1.0000
+(695 real changes made, 695 to missing)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+Leader i |      66    .0454545    .0258363    .2098951   -.0061441    .0970532
+Leader i |      23           0           0           0           0           0
+---------+--------------------------------------------------------------------
+combined |      89    .0337079    .0192388    .1814987   -.0045253     .071941
+---------+--------------------------------------------------------------------
+    diff |            .0454545    .0439297               -.0418605    .1327696
+------------------------------------------------------------------------------
+    diff = mean(Leader i) - mean(Leader i)                        t =   1.0347
+Ho: diff = 0                                     degrees of freedom =       87
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.8482         Pr(|T| > |t|) = 0.3037          Pr(T > t) = 0.1518
+
+. global types leader_state leader_CR leader_SHG leader_culture
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. tab leader_fem
+
+leader is female |
+ (=1); leader is |
+       male (=0) |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  Leader is male |         66       74.16       74.16
+Leader is female |         23       25.84      100.00
+-----------------+-----------------------------------
+           Total |         89      100.00
+
+. lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+
+. lab val leader_fem lead_fem
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+. 
+end of do-file
+
+. tab total_leaders
+
+total_leade |
+         rs |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        126       16.07       16.07
+          1 |        392       50.00       66.07
+          2 |        126       16.07       82.14
+          3 |         56        7.14       89.29
+          4 |         28        3.57       92.86
+          5 |         28        3.57       96.43
+          6 |         14        1.79       98.21
+          7 |         14        1.79      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. catplot  leader_fem, over(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) forma
+> t(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. 
+. bys leader_fem: tab leader_SHG
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> leader_fem = Male leader (n=66)
+
+  Leader in |
+  self help |
+      group |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         66      100.00      100.00
+------------+-----------------------------------
+      Total |         66      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> leader_fem = Female leader (n=23)
+
+  Leader in |
+  self help |
+      group |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         16       69.57       69.57
+          1 |          7       30.43      100.00
+------------+-----------------------------------
+      Total |         23      100.00
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-> leader_fem = .
+no observations
+
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tab leader_fem leader_type
+
+    leader is female |
+(=1); leader is male |                 leader_type
+                (=0) | Political      CBNRM  Self-help  Cultural  |     Total
+---------------------+--------------------------------------------+----------
+  Male leader (n=66) |        27         36          0          3 |        66 
+Female leader (n=23) |         9          7          7          0 |        23 
+---------------------+--------------------------------------------+----------
+               Total |        36         43          7          3 |        89 
+
+. 
+end of do-file
+
+. ssc install mylabels, replace
+checking mylabels consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. ssc install catplot, replace
+checking catplot consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot  leader_fem, over(leader_type) percent(leader_type) asyvars recast(bar) yla(, nogrid)  bargap(10) blabel(bar, size(6pt) format(%9.0f) p
+> os(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. tab leader_fem
+
+    leader is female |
+(=1); leader is male |
+                (=0) |      Freq.     Percent        Cum.
+---------------------+-----------------------------------
+  Male leader (n=66) |         66       74.16       74.16
+Female leader (n=23) |         23       25.84      100.00
+---------------------+-----------------------------------
+               Total |         89      100.00
+
+. tab leader_fem, nola
+
+  leader is |
+     female |
+      (=1); |
+  leader is |
+  male (=0) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         66       74.16       74.16
+          1 |         23       25.84      100.00
+------------+-----------------------------------
+      Total |         89      100.00
+
+. tab leader_type
+
+     leader_type |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+       no leader |        695       88.65       88.65
+Political office |         36        4.59       93.24
+           CBNRM |         43        5.48       98.72
+ Self-help group |          7        0.89       99.62
+  Cultural group |          3        0.38      100.00
+-----------------+-----------------------------------
+           Total |        784      100.00
+
+. tab leader_type, nola
+
+leader_type |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |        695       88.65       88.65
+          2 |         36        4.59       93.24
+          3 |         43        5.48       98.72
+          4 |          7        0.89       99.62
+          5 |          3        0.38      100.00
+------------+-----------------------------------
+      Total |        784      100.00
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot leader_fem if leader_type>1, over(leader_type) percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar,
+>  size(6pt) format(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. help hbar
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. graph bar leader_fem, over(leader_type) 
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. graph bar leader_fem, over(leader_type) asyvar
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. catplot leader_type if leader_type>1, over(leader_fem) percent(leader_fem) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, 
+> size(6pt) format(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+varlist not allowed
+r(101);
+
+end of do-file
+
+r(101);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. graph bar leader_type, over(leader_fem) asyvar
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. graph bar leader_fem, by(leader_type) asyvar
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. graph bar leader_fem, over(leader_type) asyvar
+
+. 
+end of do-file
+
+. help tabplot
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. cap mkdir "$working_ANALYSIS/scripts/libraries"
+
+. cap mkdir "$working_ANALYSIS/scripts/libraries/stata"
+
+. net set ado "$working_ANALYSIS/scripts/libraries/stata"
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. ssc install tablot
+ssc install: "tablot" not found at SSC, type search tablot
+(To find all packages at SSC that start with t, type ssc describe t)
+r(601);
+
+end of do-file
+
+r(601);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. ssc install tabplot
+checking tabplot consistency and verifying not already installed...
+installing into D:\OneDrive\Promotion\1_Projects\Games for Sustainability\analysis/scripts/libraries/stata\...
+installation complete.
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. 
+. tabplot leader_type leader_fem if leader_type>1, percent(leader_type) asyvars recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(
+> 6pt) format(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+option asyvars not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. mylabels 0(20)100, myscale(@) local(pctlabel) suffix("%") 
+0 "0%" 20 "20%" 40 "40%" 60 "60%" 80 "80%" 100 "100%"
+
+. 
+. tabplot leader_type leader_fem if leader_type>1, percent(leader_type)  recast(bar) yla(`pctlabel', nogrid)  bargap(10) blabel(bar, size(6pt) fo
+> rmat(%9.0f) pos(center)  gap(0.1))  b1title("", size(6pt)) legend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+option blabel() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. help tabplot
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tabplot leader_type leader_fem if leader_type>1, percent(leader_type)  recast(bar) yla(`pctlabel', nogrid)  b  b1title("", size(6pt)) legend(ri
+> ng(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+option b not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tabplot leader_type leader_fem if leader_type>1, percent(leader_type)  recast(bar) yla(`pctlabel', nogrid)  b1title("", size(6pt)) legend(ring(
+> 1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tabplot  leader_fem if leader_type>1, over(leader_type) percent(leader_type)  recast(bar) yla(`pctlabel', nogrid)  b1title("", size(6pt)) legen
+> d(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+option over() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. help tabplot
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tabplot leader_fem leader_type  if leader_type>1, percent(leader_type) vertical  recast(bar) yla(`pctlabel', nogrid)  b1title("", size(6pt)) le
+> gend(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+
+. 
+end of do-file
+
+. do "C:\Users\istei\AppData\Local\Temp\STD18e0_000000.tmp"
+
+. tabplot leader_fem leader_type  if leader_type>1, percent(leader_fem) vertical  recast(bar) yla(`pctlabel', nogrid)  b1title("", size(6pt)) leg
+> end(ring(1) pos(6) rows(1) size(6pt)) xsize(3.465) ysize(2)
+
+. 
+end of do-file
+
+. exit, clear

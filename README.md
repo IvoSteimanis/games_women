@@ -1,12 +1,13 @@
 # Replication Package
 This repository contains the raw data and code that replicates tables and figures for the following paper:: <br>
-__Title:__ Changing the Game: The Role of Women in Experiential Learning  <br>
-__Authors:__ Thomas Falk<sup>1,2,*</sup>, Lara Bartels<sup>3</sup> Ivo Steimanis<sup>2</sup>, Vishwambhar Duche<sup>4</sup> & Björn Vollan<sup>2</sup> <br>
-__Affiliations:__ <sup>1</sup> International Food Policy Research Institute, Natural Resources and Resilience Unit, Washington, USA <br>
-<sup>2</sup> Department of Economics, Philipps University Marburg, 35032 Marburg, Germany <br>
-<sup>3</sup> ZEW – Leibniz Centre for European Economic Research, L7, 1, Mannheim, Germany <br>
+__Title:__ The Role of Women in Learning Games and Water Management Outcomes  <br>
+__Authors:__  Ivo Steimanis<sup>1,*</sup>, Thomas Falk<sup>2</sup>, Lara Bartels<sup>3</sup>, Vishwambhar Duche<sup>4</sup> & Björn Vollan<sup>1</sup> <br>
+__Affiliations:__ <sup>1</sup> Department of Economics, Philipps University Marburg, 35032 Marburg, Germany <br>
+<sup>2</sup> International Food Policy Research Institute, Natural Resources and Resilience Unit, Washington, USA <br>
+<sup>3</sup> Max Planck Institute for Research on Collective Goods, Kurt-Schumacher-Straße 10, 53113 Bonn, Germany <br>
 <sup>4</sup> International Crops Research Institute for the Semi-Arid Tropics, Patancheru, India <br>
-__*Correspondence to:__ homas Falk T.Falk@cgiar.org <br>
+<br>
+__*Correspondence to:__ Ivo Steimanis  ivo.steimanis@staff.uni-marburg.de <br>
 __ORCID:__ Falk: 0000-0002-2200-3048, Bartels: 0000-0002-1426-6892, Steimanis: 0000-0002-8550-4675, Vollan: 0000-0002-5592-4185 <br>
 __Classification:__ Social Sciences, Economic Sciences <br>
 __Keywords:__ India, water management, social dilemma, social learning, games <br>

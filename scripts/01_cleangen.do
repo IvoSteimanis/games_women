@@ -1041,7 +1041,7 @@ replace leader_type = 	4	if role == "SHG PRESIDENT"
 replace leader_type = 	5	if role == "BAJIRANG DAL MEMBER"
 replace leader_type = 	5	if role == "NAV YUVAK SAMMITTE MEMBER"
 replace leader_type = 	5	if role == "VOLLEYBALL SAMITTEE MEMBER"
-label define leadertype   1 "no leader" 2 "state leader" 3 "CR leader" 4 "SHG leader" 5 "Social  culture leader" 
+label define leadertype   1 "no leader" 2 "Political office" 3 "CBNRM" 4 "Self-help group" 5 "Cultural group",replace 
 label values leader_type leadertype
 
 ******************************************************************
@@ -2525,6 +2525,50 @@ replace excluded_villages = 1 if site_ID ==34
 replace excluded_villages = 1 if site_ID ==37
 replace excluded_villages = 1 if site_ID ==48
 
+
+
+egen dam_contribution = rowmax (cont_lab  cont_money)
+
+
+*leader composition in games
+*dummy for male leader presence
+gen male_leader_present = 0 if leader_male_vill==0
+replace male_leader_present = 1 if leader_male_vill>0
+
+
+*dummy for female leader presence
+gen female_leader_present= 0 if leader_fem_vill==0
+replace female_leader_present = 1 if leader_fem_vill>0
+
+tab female_leader_present male_leader_present
+
+
+*composition of leader presence
+gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+
+lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+lab val leader_present leader_lab
+tab leader_present, gen(leader_comp)
+
+gen participant_type = 1 if leader_fem==0
+replace participant_type = 2 if leader_fem==1
+replace participant_type = 3 if leader_type==1 & sex==1
+replace participant_type = 4 if leader_type==1 & sex==0
+lab def party 1 "Male leader" 2 "Female leader" 3 "Male villager" 4 "Female villager", replace
+lab val participant_type party
+
+lab def lead_fem 0 "Male leader (n=66)" 1 "Female leader (n=23)", replace
+lab val leader_fem lead_fem
+
+tab leader_type, gen(leader_)
+
+egen total_leaders = rowtotal(sum_leader_state sum_leader_CR sum_leader_SHG sum_leader_culturestate)
+
+
+
 save "$working_ANALYSIS/data/2022_06_Mandla_Game", replace
 
 *##############################
@@ -3221,6 +3265,8 @@ foreach v of global vars {
 
 save "$working_ANALYSIS/data/2023_03_Survey_Endline", replace
 
+
+
 *#########################################
 *----------------- MERGE BASELINE AND ENDLINE DATA -----------------
 use "$working_ANALYSIS/data/2023_03_Survey_Baseline", clear
@@ -3677,21 +3723,34 @@ lab var share_female_percent2 "Share female participants in %"
 gen share_female_percent3 = share_no_leader_female_vill*10
 lab var share_female_percent3 "Share female participants in 10%"
 
-gen leader_present = 0
-replace leader_present = 1 if game_leader_fem_vill == 1 & game_leader_male_vill==0
-replace leader_present = 2 if game_leader_fem_vill == 0 & game_leader_male_vill==1
-replace leader_present = 3 if game_leader_fem_vill == 1 & game_leader_male_vill==1
-replace leader_present = . if treatment==0
-lab def leader_lab 0 "None" 1 "Female" 2 "Male" 3 "Both", replace
-lab val leader_present leader_lab
-tab leader_present, gen(leader_)
 
-gen leader_present2 = 0 if leader_present==0
-replace leader_present2 = 1 if leader_present==2
-replace leader_present2 = 2 if leader_present==1 | leader_present==3
-lab def leader_lab2 0 "None" 1 "Only male" 2 "Only female or both", replace
-lab val leader_present2 leader_lab2
-tab leader_present2, gen(leader2_)
+*leader composition in games
+*dummy for male leader presence
+gen male_leader_present = 0 if game_leader_male_vill==0
+replace male_leader_present = 1 if game_leader_male_vill>0
+replace male_leader_present = . if treatment==0
+
+*dummy for female leader presence
+gen female_leader_present= 0
+replace female_leader_present = 1 if game_leader_fem_vill>0
+replace female_leader_present = . if treatment==0
+
+tab female_leader_present male_leader_present
+
+*composition of leader presence
+gen leader_present = 0 if male_leader_present==0 & female_leader_present==0
+replace leader_present = 1 if male_leader_present == 1 & female_leader_present==0
+replace leader_present = 2 if male_leader_present == 1 & female_leader_present==1
+replace leader_present = 3 if male_leader_present == 0 & female_leader_present==1
+replace leader_present = . if treatment==0
+lab def leader_lab 0 "None" 1 "Only Male" 2 "Both" 3 "Only Female", replace
+lab val leader_present leader_lab
+tab leader_present, gen(leader_comp)
+
+
+*Number of leaders present
+egen total_leaders=rowtotal(game_leader_fem_vill game_leader_male_vill)
+
 
 *----------------------------------------------------------
 *recode shares to either dummies () or percent
@@ -3739,11 +3798,13 @@ save "$working_ANALYSIS/data/2023_03_Survey&Game_Long", replace
 use "$working_ANALYSIS/data/2023_03_Survey&Game_Long", clear
 xtset site_ID BS_FS
 
+
+
 rename game_vill_*  game_*
 rename *_illiterate_* *_illit_*
 
 *1.c. rename with _
-global vars "site_ID game_Village game_played_ site_game game_come_back census_no_hh census_population_total census_population_males census_population_fem census_caste_total census_caste_males census_caste_fem census_tribes_total census_tribes_males census_tribes_fem census_gov_school_prim census_priv_school_prim census_gov_school_middle census_priv_school_middle census_gov_school_sec census_priv_school_sec game_payment_announcement game_sample_vill game_sum_uni_degree_village game_share_uni_degree_village game_sum_illit_village game_share_illit_village game_males game_fem game_share_fem_village game_elected_leader_sum game_leader_present_vill game_sum_leader_no game_sum_leader_state game_sum_leader_CR game_sum_leader_SHG game_sum_leader_culturestate game_share_leader_vill game_share_leader_state_vill game_share_leader_CR_vill game_share_leader_SHG_vill game_share_leader_culture_vill game_come_back_dummy game_overall_earning_village game_damforfarming game_av_inv_vill_R1_5 game_av_inv_vill_R6_10 game_av_inv_vill_R1_10 game_cont_money_vill game_cont_lab_vill game_reci_wat_vill game_dist_field_vill game_argue game_reject_rule game_agree_rule game_propose_rule game_praises game_complains game_punish game_reward game_unconnected game_total_gamerelated game_total_all game_leader_fem_vill game_no_leader_fem_vill game_leader_male_vill game_no_leader_male_vill game_edu_fem_illit_vill game_edu_fem_prim_vill game_edu_fem_sec_vill game_edu_fem_uni_vill game_edu_male_illit_vill game_edu_male_prim_vill game_edu_male_sec_vill game_edu_male_uni_vill game_date_intervention game_count_intervention game_Facilitationteam game_date_count game_lead_facil_ game_with_Radha_ game_total_opt_inv_ game_opt_inv_r8_ game_opt_inv_r9_ game_opt_inv_r10_ game_optimal_inv_r10_ game_optimal_inv_r9_10_ game_optimal_inv_r8_10_ game_almost_opt_inv_r10_ game_almost_opt_inv_r9_10_ game_almost_opt_inv_r8_10_ game_sum_lead_opt_r9_10 game_sum_lead_opt_r8_10 game_share_lead_opt_r9_10 game_share_lead_opt_r8_10 Excluded_sites_old FES_site No_HH_ Sample_variable_ Shar_Lit_ Shar_SCST_ Village_ original_sample_ payment_form_ paymentform survey_CWRgroup_already_ survey_CWRgroup_new_ survey_activity_any_ survey_activity_earthwall_ survey_activity_mainwall_ survey_activity_silt_ survey_activity_sluicegate_ survey_activity_vege_ survey_benefit_agri_ survey_benefit_domuse_ survey_benefit_fish_ survey_benefit_livestock_ survey_benefit_other_ survey_change_benefit_ survey_collact_new_ survey_compay_community_ survey_compay_equal_ survey_compay_leader_ survey_compay_otheruser_ survey_conflict_alloc_ survey_conflict_maint_ survey_conflict_oper_ survey_conflicts_any_ survey_conflicts_other_ survey_cwr_bori_ survey_cwr_dam_ survey_cwr_other_ survey_cwr_pond_ survey_dam_for_irrigation_ survey_game_played_ survey_indipay_comm_ survey_indipay_equally_ survey_indipay_other_ survey_indipayn_notspent_ survey_interview_farmerdam_ survey_interview_lead_ survey_interview_others_ survey_interview_waterua_ survey_maint_12m_ survey_maint_2017_ survey_maint_com_ survey_rating_earthwall_ survey_rating_feederch_ survey_rating_mainwall_ survey_rating_silt_ survey_rating_sluicegate_ survey_rating_vege_ survey_rules_alloc_ survey_rules_extr_alloc_ survey_rules_extr_maint_ survey_rules_extr_opre_ survey_rules_extr_other_ survey_rules_maint_ survey_rules_maint_all_ survey_rules_old_all_ survey_rules_old_alloc_ survey_rules_old_maint_ survey_rules_old_oper_ survey_rules_old_other_ survey_rules_oper_ survey_rules_other_ survey_share_exp_comm_meet_ survey_share_exp_family_ survey_share_exp_friends_ survey_share_exp_others_ survey_share_exp_vc_meet_ BS_FS Excluded_sites treatment survey_maint_rule com_outside_game census_pop_females_share census_caste_females_share census_tribes_females_share share_leader_female_vill share_no_leader_female_vill share_leader_male_vill share_no_leader_male_vill share_female_percent share_female_percent2 share_female_percent3 leader_present leader_1 leader_2 leader_3 leader_4 leader_present2 leader2_1 leader2_2 leader2_3 d_illiterate share_leader_percent share_leader_opt_percent"
+global vars "site_ID game_Village game_played_ site_game game_come_back census_no_hh census_population_total census_population_males census_population_fem census_caste_total census_caste_males census_caste_fem census_tribes_total census_tribes_males census_tribes_fem census_gov_school_prim census_priv_school_prim census_gov_school_middle census_priv_school_middle census_gov_school_sec census_priv_school_sec game_payment_announcement game_sample_vill game_sum_uni_degree_village game_share_uni_degree_village game_sum_illit_village game_share_illit_village game_males game_fem game_share_fem_village game_elected_leader_sum game_leader_present_vill game_sum_leader_no game_sum_leader_state game_sum_leader_CR game_sum_leader_SHG game_sum_leader_culturestate game_share_leader_vill game_share_leader_state_vill game_share_leader_CR_vill game_share_leader_SHG_vill game_share_leader_culture_vill game_come_back_dummy game_overall_earning_village game_damforfarming game_av_inv_vill_R1_5 game_av_inv_vill_R6_10 game_av_inv_vill_R1_10 game_cont_money_vill game_cont_lab_vill game_reci_wat_vill game_dist_field_vill game_argue game_reject_rule game_agree_rule game_propose_rule game_praises game_complains game_punish game_reward game_unconnected game_total_gamerelated game_total_all game_leader_fem_vill game_no_leader_fem_vill game_leader_male_vill game_no_leader_male_vill game_edu_fem_illit_vill game_edu_fem_prim_vill game_edu_fem_sec_vill game_edu_fem_uni_vill game_edu_male_illit_vill game_edu_male_prim_vill game_edu_male_sec_vill game_edu_male_uni_vill game_date_intervention game_count_intervention game_Facilitationteam game_date_count game_lead_facil_ game_with_Radha_ game_total_opt_inv_ game_opt_inv_r8_ game_opt_inv_r9_ game_opt_inv_r10_ game_optimal_inv_r10_ game_optimal_inv_r9_10_ game_optimal_inv_r8_10_ game_almost_opt_inv_r10_ game_almost_opt_inv_r9_10_ game_almost_opt_inv_r8_10_ game_sum_lead_opt_r9_10 game_sum_lead_opt_r8_10 game_share_lead_opt_r9_10 game_share_lead_opt_r8_10 Excluded_sites_old FES_site No_HH_ Sample_variable_ Shar_Lit_ Shar_SCST_ Village_ original_sample_ payment_form_ paymentform survey_CWRgroup_already_ survey_CWRgroup_new_ survey_activity_any_ survey_activity_earthwall_ survey_activity_mainwall_ survey_activity_silt_ survey_activity_sluicegate_ survey_activity_vege_ survey_benefit_agri_ survey_benefit_domuse_ survey_benefit_fish_ survey_benefit_livestock_ survey_benefit_other_ survey_change_benefit_ survey_collact_new_ survey_compay_community_ survey_compay_equal_ survey_compay_leader_ survey_compay_otheruser_ survey_conflict_alloc_ survey_conflict_maint_ survey_conflict_oper_ survey_conflicts_any_ survey_conflicts_other_ survey_cwr_bori_ survey_cwr_dam_ survey_cwr_other_ survey_cwr_pond_ survey_dam_for_irrigation_ survey_game_played_ survey_indipay_comm_ survey_indipay_equally_ survey_indipay_other_ survey_indipayn_notspent_ survey_interview_farmerdam_ survey_interview_lead_ survey_interview_others_ survey_interview_waterua_ survey_maint_12m_ survey_maint_2017_ survey_maint_com_ survey_rating_earthwall_ survey_rating_feederch_ survey_rating_mainwall_ survey_rating_silt_ survey_rating_sluicegate_ survey_rating_vege_ survey_rules_alloc_ survey_rules_extr_alloc_ survey_rules_extr_maint_ survey_rules_extr_opre_ survey_rules_extr_other_ survey_rules_maint_ survey_rules_maint_all_ survey_rules_old_all_ survey_rules_old_alloc_ survey_rules_old_maint_ survey_rules_old_oper_ survey_rules_old_other_ survey_rules_oper_ survey_rules_other_ survey_share_exp_comm_meet_ survey_share_exp_family_ survey_share_exp_friends_ survey_share_exp_others_ survey_share_exp_vc_meet_ BS_FS Excluded_sites treatment survey_maint_rule com_outside_game census_pop_females_share census_caste_females_share census_tribes_females_share share_leader_female_vill share_no_leader_female_vill share_leader_male_vill share_no_leader_male_vill share_female_percent share_female_percent2 share_female_percent3 male_leader_present female_leader_present leader_present leader_comp1 leader_comp2 leader_comp3 leader_comp4  d_illiterate share_leader_percent share_leader_opt_percent"
 
 foreach v of global vars {
 	rename `v' `v'_
@@ -3752,7 +3813,7 @@ rename *__ *_
 
 *1.d RESHAPE
 *variable BS_FS_ contains missing values
-reshape wide  game_Village_ game_played_ site_game_ game_come_back_ census_no_hh_ census_population_total_ census_population_males_ census_population_fem_ census_caste_total_ census_caste_males_ census_caste_fem_ census_tribes_total_ census_tribes_males_ census_tribes_fem_ census_gov_school_prim_ census_priv_school_prim_ census_gov_school_middle_ census_priv_school_middle_ census_gov_school_sec_ census_priv_school_sec_ game_payment_announcement_ game_sample_vill_ game_sum_uni_degree_village_ game_share_uni_degree_village_ game_sum_illit_village_ game_share_illit_village_ game_males_ game_fem_ game_share_fem_village_ game_elected_leader_sum_ game_leader_present_vill_ game_sum_leader_no_ game_sum_leader_state_ game_sum_leader_CR_ game_sum_leader_SHG_ game_sum_leader_culturestate_ game_share_leader_vill_ game_share_leader_state_vill_ game_share_leader_CR_vill_ game_share_leader_SHG_vill_ game_share_leader_culture_vill_ game_come_back_dummy_ game_overall_earning_village_ game_damforfarming_ game_av_inv_vill_R1_5_ game_av_inv_vill_R6_10_ game_av_inv_vill_R1_10_ game_cont_money_vill_ game_cont_lab_vill_ game_reci_wat_vill_ game_dist_field_vill_ game_argue_ game_reject_rule_ game_agree_rule_ game_propose_rule_ game_praises_ game_complains_ game_punish_ game_reward_ game_unconnected_ game_total_gamerelated_ game_total_all_ game_leader_fem_vill_ game_no_leader_fem_vill_ game_leader_male_vill_ game_no_leader_male_vill_ game_edu_fem_illit_vill_ game_edu_fem_prim_vill_ game_edu_fem_sec_vill_ game_edu_fem_uni_vill_ game_edu_male_illit_vill_ game_edu_male_prim_vill_ game_edu_male_sec_vill_ game_edu_male_uni_vill_ game_date_intervention_ game_count_intervention_ game_Facilitationteam_ game_date_count_ game_lead_facil_ game_with_Radha_ game_total_opt_inv_ game_opt_inv_r8_ game_opt_inv_r9_ game_opt_inv_r10_ game_optimal_inv_r10_ game_optimal_inv_r9_10_ game_optimal_inv_r8_10_ game_almost_opt_inv_r10_ game_almost_opt_inv_r9_10_ game_almost_opt_inv_r8_10_ game_sum_lead_opt_r9_10_ game_sum_lead_opt_r8_10_ game_share_lead_opt_r9_10_ game_share_lead_opt_r8_10_ Excluded_sites_old_ FES_site_ No_HH_ Sample_variable_ Shar_Lit_ Shar_SCST_ Village_ original_sample_ payment_form_ paymentform_ survey_CWRgroup_already_ survey_CWRgroup_new_ survey_activity_any_ survey_activity_earthwall_ survey_activity_mainwall_ survey_activity_silt_ survey_activity_sluicegate_ survey_activity_vege_ survey_benefit_agri_ survey_benefit_domuse_ survey_benefit_fish_ survey_benefit_livestock_ survey_benefit_other_ survey_change_benefit_ survey_collact_new_ survey_compay_community_ survey_compay_equal_ survey_compay_leader_ survey_compay_otheruser_ survey_conflict_alloc_ survey_conflict_maint_ survey_conflict_oper_ survey_conflicts_any_ survey_conflicts_other_ survey_cwr_bori_ survey_cwr_dam_ survey_cwr_other_ survey_cwr_pond_ survey_dam_for_irrigation_ survey_game_played_ survey_indipay_comm_ survey_indipay_equally_ survey_indipay_other_ survey_indipayn_notspent_ survey_interview_farmerdam_ survey_interview_lead_ survey_interview_others_ survey_interview_waterua_ survey_maint_12m_ survey_maint_2017_ survey_maint_com_ survey_rating_earthwall_ survey_rating_feederch_ survey_rating_mainwall_ survey_rating_silt_ survey_rating_sluicegate_ survey_rating_vege_ survey_rules_alloc_ survey_rules_extr_alloc_ survey_rules_extr_maint_ survey_rules_extr_opre_ survey_rules_extr_other_ survey_rules_maint_ survey_rules_maint_all_ survey_rules_old_all_ survey_rules_old_alloc_ survey_rules_old_maint_ survey_rules_old_oper_ survey_rules_old_other_ survey_rules_oper_ survey_rules_other_ survey_share_exp_comm_meet_ survey_share_exp_family_ survey_share_exp_friends_ survey_share_exp_others_ survey_share_exp_vc_meet_ Excluded_sites_ treatment_ survey_maint_rule_ com_outside_game_ census_pop_females_share_ census_caste_females_share_ census_tribes_females_share_ share_leader_female_vill_ share_no_leader_female_vill_ share_leader_male_vill_ share_no_leader_male_vill_ share_female_percent_ share_female_percent2_ share_female_percent3_ leader_present_ leader_1_ leader_2_ leader_3_ leader_4_ leader_present2_ leader2_1_ leader2_2_ leader2_3_ d_illiterate_ share_leader_percent_ share_leader_opt_percent_, i(site_ID) j(BS_FS)
+reshape wide  game_Village_ game_played_ site_game_ game_come_back_ census_no_hh_ census_population_total_ census_population_males_ census_population_fem_ census_caste_total_ census_caste_males_ census_caste_fem_ census_tribes_total_ census_tribes_males_ census_tribes_fem_ census_gov_school_prim_ census_priv_school_prim_ census_gov_school_middle_ census_priv_school_middle_ census_gov_school_sec_ census_priv_school_sec_ game_payment_announcement_ game_sample_vill_ game_sum_uni_degree_village_ game_share_uni_degree_village_ game_sum_illit_village_ game_share_illit_village_ game_males_ game_fem_ game_share_fem_village_ game_elected_leader_sum_ game_leader_present_vill_ game_sum_leader_no_ game_sum_leader_state_ game_sum_leader_CR_ game_sum_leader_SHG_ game_sum_leader_culturestate_ game_share_leader_vill_ game_share_leader_state_vill_ game_share_leader_CR_vill_ game_share_leader_SHG_vill_ game_share_leader_culture_vill_ game_come_back_dummy_ game_overall_earning_village_ game_damforfarming_ game_av_inv_vill_R1_5_ game_av_inv_vill_R6_10_ game_av_inv_vill_R1_10_ game_cont_money_vill_ game_cont_lab_vill_ game_reci_wat_vill_ game_dist_field_vill_ game_argue_ game_reject_rule_ game_agree_rule_ game_propose_rule_ game_praises_ game_complains_ game_punish_ game_reward_ game_unconnected_ game_total_gamerelated_ game_total_all_ game_leader_fem_vill_ game_no_leader_fem_vill_ game_leader_male_vill_ game_no_leader_male_vill_ game_edu_fem_illit_vill_ game_edu_fem_prim_vill_ game_edu_fem_sec_vill_ game_edu_fem_uni_vill_ game_edu_male_illit_vill_ game_edu_male_prim_vill_ game_edu_male_sec_vill_ game_edu_male_uni_vill_ game_date_intervention_ game_count_intervention_ game_Facilitationteam_ game_date_count_ game_lead_facil_ game_with_Radha_ game_total_opt_inv_ game_opt_inv_r8_ game_opt_inv_r9_ game_opt_inv_r10_ game_optimal_inv_r10_ game_optimal_inv_r9_10_ game_optimal_inv_r8_10_ game_almost_opt_inv_r10_ game_almost_opt_inv_r9_10_ game_almost_opt_inv_r8_10_ game_sum_lead_opt_r9_10_ game_sum_lead_opt_r8_10_ game_share_lead_opt_r9_10_ game_share_lead_opt_r8_10_ Excluded_sites_old_ FES_site_ No_HH_ Sample_variable_ Shar_Lit_ Shar_SCST_ Village_ original_sample_ payment_form_ paymentform_ survey_CWRgroup_already_ survey_CWRgroup_new_ survey_activity_any_ survey_activity_earthwall_ survey_activity_mainwall_ survey_activity_silt_ survey_activity_sluicegate_ survey_activity_vege_ survey_benefit_agri_ survey_benefit_domuse_ survey_benefit_fish_ survey_benefit_livestock_ survey_benefit_other_ survey_change_benefit_ survey_collact_new_ survey_compay_community_ survey_compay_equal_ survey_compay_leader_ survey_compay_otheruser_ survey_conflict_alloc_ survey_conflict_maint_ survey_conflict_oper_ survey_conflicts_any_ survey_conflicts_other_ survey_cwr_bori_ survey_cwr_dam_ survey_cwr_other_ survey_cwr_pond_ survey_dam_for_irrigation_ survey_game_played_ survey_indipay_comm_ survey_indipay_equally_ survey_indipay_other_ survey_indipayn_notspent_ survey_interview_farmerdam_ survey_interview_lead_ survey_interview_others_ survey_interview_waterua_ survey_maint_12m_ survey_maint_2017_ survey_maint_com_ survey_rating_earthwall_ survey_rating_feederch_ survey_rating_mainwall_ survey_rating_silt_ survey_rating_sluicegate_ survey_rating_vege_ survey_rules_alloc_ survey_rules_extr_alloc_ survey_rules_extr_maint_ survey_rules_extr_opre_ survey_rules_extr_other_ survey_rules_maint_ survey_rules_maint_all_ survey_rules_old_all_ survey_rules_old_alloc_ survey_rules_old_maint_ survey_rules_old_oper_ survey_rules_old_other_ survey_rules_oper_ survey_rules_other_ survey_share_exp_comm_meet_ survey_share_exp_family_ survey_share_exp_friends_ survey_share_exp_others_ survey_share_exp_vc_meet_ Excluded_sites_ treatment_ survey_maint_rule_ com_outside_game_ census_pop_females_share_ census_caste_females_share_ census_tribes_females_share_ share_leader_female_vill_ share_no_leader_female_vill_ share_leader_male_vill_ share_no_leader_male_vill_ share_female_percent_ share_female_percent2_ share_female_percent3_ male_leader_present_ female_leader_present_ leader_present_  leader_comp1_ leader_comp2_ leader_comp3_ leader_comp4_ d_illiterate_ share_leader_percent_ share_leader_opt_percent_, i(site_ID) j(BS_FS)
 
 rename game_share_leader_culture_vill_0 game_share_leader_cult_vill_0
 rename game_share_leader_culture_vill_1 game_share_leader_cult_vill_1
@@ -3766,7 +3827,7 @@ order *, alphabetic
 rename *village* *vill*
 
 *Drop doubled observations from game and census 
-drop census_caste_fem_FS census_caste_males_FS census_caste_total_FS census_gov_school_middle_FS census_gov_school_prim_FS census_gov_school_sec_FS census_no_hh_FS census_population_fem_FS census_population_males_FS census_population_total_FS census_priv_school_middle_FS census_priv_school_prim_FS census_priv_school_sec_FS census_tribes_fem_FS census_tribes_males_FS census_tribes_total_FS game_agree_rule_FS   game_almost_opt_inv_r10_FS game_almost_opt_inv_r8_10_FS game_almost_opt_inv_r9_10_FS game_argue_FS   game_av_inv_vill_R1_10_FS game_av_inv_vill_R1_5_FS game_av_inv_vill_R6_10_FS    game_come_back_dummy_FS  game_complains_FS  game_cont_lab_vill_FS game_cont_money_vill_FS game_count_intervention_FS game_damforfarming_FS game_date_count_FS game_date_intervention_FS game_dist_field_vill_FS game_edu_fem_illit_vill_FS game_edu_fem_prim_vill_FS game_edu_fem_sec_vill_FS game_edu_fem_uni_vill_FS game_edu_male_illit_vill_FS game_edu_male_prim_vill_FS game_edu_male_sec_vill_FS game_edu_male_uni_vill_FS game_elected_leader_sum_FS game_Facilitationteam_FS game_fem_FS game_lead_facil_FS game_leader_fem_vill_FS game_leader_male_vill_FS game_leader_present_vill_FS game_males_FS game_no_leader_fem_vill_FS game_no_leader_male_vill_FS game_opt_inv_r10_FS game_opt_inv_r8_FS game_opt_inv_r9_FS game_optimal_inv_r10_FS game_optimal_inv_r8_10_FS game_optimal_inv_r9_10_FS game_overall_earning_vill_FS game_payment_announcement_FS  game_praises_FS   game_propose_rule_FS  game_punish_FS   game_reci_wat_vill_FS game_reject_rule_FS   game_reward_FS   game_sample_vill_FS game_share_fem_vill_FS game_share_illit_vill_FS game_share_leader_CR_vill_FS game_share_leader_cult_vill_FS game_share_leader_SHG_vill_FS game_share_leader_state_vill_FS game_share_leader_vill_FS game_share_uni_degree_vill_FS game_sum_illit_vill_FS game_sum_leader_CR_FS game_sum_leader_culturestate_FS game_sum_leader_no_FS game_sum_leader_SHG_FS game_sum_leader_state_FS game_sum_uni_degree_vill_FS game_total_all_FS     game_total_gamerelated_FS game_total_opt_inv_FS game_unconnected_FS      game_with_Radha_FS  Village_FS Sample_variable_FS FES_site_FS Excluded_sites_FS payment_form_FS paymentform_FS original_sample_FS game_Village_FS game_come_back_FS  No_HH_FS Shar_SCST_FS Shar_Lit_FS game_share_lead_opt_r8_10_FS game_share_lead_opt_r9_10_FS game_sum_lead_opt_r8_10_FS game_sum_lead_opt_r9_10_FS   treatment_FS   census_pop_females_share_FS census_caste_females_share_FS census_tribes_females_share_FS share_leader_female_vill_FS share_no_leader_female_vill_FS share_leader_male_vill_FS share_no_leader_male_vill_FS share_female_percent_FS share_female_percent2_FS share_female_percent3_FS leader_present_FS leader_1_FS leader_2_FS leader_3_FS leader_4_FS leader_present2_FS leader2_1_FS leader2_2_FS leader2_3_FS d_illiterate_FS share_leader_percent_FS share_leader_opt_percent_FS payment_form_BS com_outside_game_BS census_no_hh_FS census_no_hh_FS census_population_total_FS census_population_males_FS census_population_fem_FS census_caste_total_FS census_caste_males_FS census_caste_fem_FS census_tribes_total_FS census_tribes_males_FS census_tribes_fem_FS census_gov_school_prim_FS census_priv_school_prim_FS census_gov_school_middle_FS census_priv_school_middle_FS census_gov_school_sec_FS census_priv_school_sec_FS census_pop_females_share_FS census_caste_females_share_FS census_tribes_females_share_FS  survey_game_played_BS site_game_FS
+drop census_caste_fem_FS census_caste_males_FS census_caste_total_FS census_gov_school_middle_FS census_gov_school_prim_FS census_gov_school_sec_FS census_no_hh_FS census_population_fem_FS census_population_males_FS census_population_total_FS census_priv_school_middle_FS census_priv_school_prim_FS census_priv_school_sec_FS census_tribes_fem_FS census_tribes_males_FS census_tribes_total_FS game_agree_rule_FS   game_almost_opt_inv_r10_FS game_almost_opt_inv_r8_10_FS game_almost_opt_inv_r9_10_FS game_argue_FS   game_av_inv_vill_R1_10_FS game_av_inv_vill_R1_5_FS game_av_inv_vill_R6_10_FS    game_come_back_dummy_FS  game_complains_FS  game_cont_lab_vill_FS game_cont_money_vill_FS game_count_intervention_FS game_damforfarming_FS game_date_count_FS game_date_intervention_FS game_dist_field_vill_FS game_edu_fem_illit_vill_FS game_edu_fem_prim_vill_FS game_edu_fem_sec_vill_FS game_edu_fem_uni_vill_FS game_edu_male_illit_vill_FS game_edu_male_prim_vill_FS game_edu_male_sec_vill_FS game_edu_male_uni_vill_FS game_elected_leader_sum_FS game_Facilitationteam_FS game_fem_FS game_lead_facil_FS game_leader_fem_vill_FS game_leader_male_vill_FS game_leader_present_vill_FS game_males_FS game_no_leader_fem_vill_FS game_no_leader_male_vill_FS game_opt_inv_r10_FS game_opt_inv_r8_FS game_opt_inv_r9_FS game_optimal_inv_r10_FS game_optimal_inv_r8_10_FS game_optimal_inv_r9_10_FS game_overall_earning_vill_FS game_payment_announcement_FS  game_praises_FS   game_propose_rule_FS  game_punish_FS   game_reci_wat_vill_FS game_reject_rule_FS   game_reward_FS   game_sample_vill_FS game_share_fem_vill_FS game_share_illit_vill_FS game_share_leader_CR_vill_FS game_share_leader_cult_vill_FS game_share_leader_SHG_vill_FS game_share_leader_state_vill_FS game_share_leader_vill_FS game_share_uni_degree_vill_FS game_sum_illit_vill_FS game_sum_leader_CR_FS game_sum_leader_culturestate_FS game_sum_leader_no_FS game_sum_leader_SHG_FS game_sum_leader_state_FS game_sum_uni_degree_vill_FS game_total_all_FS     game_total_gamerelated_FS game_total_opt_inv_FS game_unconnected_FS      game_with_Radha_FS  Village_FS Sample_variable_FS FES_site_FS Excluded_sites_FS payment_form_FS paymentform_FS original_sample_FS game_Village_FS game_come_back_FS  No_HH_FS Shar_SCST_FS Shar_Lit_FS game_share_lead_opt_r8_10_FS game_share_lead_opt_r9_10_FS game_sum_lead_opt_r8_10_FS game_sum_lead_opt_r9_10_FS   treatment_FS   census_pop_females_share_FS census_caste_females_share_FS census_tribes_females_share_FS share_leader_female_vill_FS share_no_leader_female_vill_FS share_leader_male_vill_FS share_no_leader_male_vill_FS share_female_percent_FS share_female_percent2_FS share_female_percent3_FS leader_present_FS  d_illiterate_FS share_leader_percent_FS share_leader_opt_percent_FS payment_form_BS com_outside_game_BS census_no_hh_FS census_no_hh_FS census_population_total_FS census_population_males_FS census_population_fem_FS census_caste_total_FS census_caste_males_FS census_caste_fem_FS census_tribes_total_FS census_tribes_males_FS census_tribes_fem_FS census_gov_school_prim_FS census_priv_school_prim_FS census_gov_school_middle_FS census_priv_school_middle_FS census_gov_school_sec_FS census_priv_school_sec_FS census_pop_females_share_FS census_caste_females_share_FS census_tribes_females_share_FS  survey_game_played_BS site_game_FS
 
 *Drop variables not collected in baseline survey
 drop survey_share_exp_vc_meet_BS survey_share_exp_others_BS survey_share_exp_friends_BS survey_share_exp_family_BS survey_share_exp_comm_meet_BS survey_indipayn_notspent_BS survey_indipay_other_BS survey_indipay_equally_BS survey_indipay_comm_BS  survey_cwr_pond_BS survey_cwr_other_BS survey_cwr_dam_BS survey_cwr_bori_BS      survey_compay_otheruser_BS survey_compay_leader_BS survey_compay_equal_BS survey_compay_community_BS survey_collact_new_BS survey_change_benefit_BS survey_activity_any_BS survey_CWRgroup_new_BS survey_CWRgroup_already_BS survey_maint_2017_BS survey_conflicts_other_BS
@@ -4029,8 +4090,11 @@ label var Village "Name of Village"
 
 lab var FES_site "NGO active in village (=1)"
 lab var share_female_percent3_BS "Non-leader female participants (in 10%)"
-lab var leader2_2_BS "Only male leader participated (=1)"
-lab var leader2_3_BS "Female leader participated (=1)"
+lab var leader_comp1_BS "No leader participated (=1)"
+lab var leader_comp2_BS "Only male leader participated (=1)"
+lab var leader_comp3_BS "Both male and female leader participated (=1)"
+lab var leader_comp4_BS "Only female leader participated (=1)"
+
 lab var survey_dam_for_irrigation_FS "Dam used for irrigation (=1)"
 lab var survey_maint_2017_FS "Endline: Maintenance (=1)"
 lab var survey_maint_12m_BS "Baseline: Maintenance (=1)"
@@ -4048,15 +4112,86 @@ replace survey_maint_2017_FS = 0 if site_ID == 32
 replace survey_maint_12m_BS = 0 if  site_ID == 203
 replace survey_maint_12m_BS = 0 if  site_ID == 216
 
+*Sequence of interventions in treatment villages
+sort game_date_intervention
+gen sequence=[_n]
+gen seq_split= 0
+replace seq_split=1 if sequence>28
+lab var sequence "Sequence of game interventions (1 to 56)"
+
+
+*game related formal discussions
+gen game_discussed_formally = 0 if survey_share_exp_comm_meet_FS==0 & survey_share_exp_vc_meet_FS==0
+replace game_discussed_formally = 1 if survey_share_exp_vc_meet_FS==1 | survey_share_exp_comm_meet_FS==1
+tab game_discussed_formally
+
+
+*Schools in each village
+egen n_school_gov = rowtotal(census_gov_school_middle census_gov_school_prim census_gov_school_sec)
+egen n_school_priv = rowtotal(census_priv_school_middle census_priv_school_prim census_priv_school_sec)
+
+gen d_public_school = 0 if n_school_gov==0
+replace d_public_school = 1 if n_school_gov>0
+
+gen d_private_school = 0 if n_school_priv==0
+replace d_private_school = 1 if n_school_priv>0
+
+gen no_school = 1 if d_public_school==0 & d_private_school==0
+replace no_school = 0 if  d_public_school>0 | d_private_school>0
+
+tab1 d_public_school d_private_school no_school
+
+gen number_schools = n_school_gov+n_school_priv
+
 
 *drop variables with all missings and generate some additional variabels and labels
 dropmiss, force
 
 
+save "$working_ANALYSIS/processed/games_wide.dta", replace
+
+
+
+
+
+*Merge information on SHG in villages
+clear all
+import excel "$working_ANALYSIS/data/SHG_data.xlsx", sheet ("Sample") firstrow
+destring SHG_before2017 SHG_after2017 n_SHG_before2017 n_SHG_after2017, replace
+
+*all information ON SHG for 56 treatment communities matched
+*winsorize extreme outliers in SHGs
+winsor2 n_SHG_before2017, cuts(0 95) replace
+winsor2 n_SHG_after2017, cuts(0 95) replace
+
+
+save "$working_ANALYSIS/data/village_SHG.dta", replace
+
+
+use "$working_ANALYSIS/processed/games_wide.dta"
+merge 1:1 site_ID using "$working_ANALYSIS/data/village_SHG.dta"
+drop _merge
+*all information ON SHG for 56 treatment communities and 27 control sites matched
+
+save "$working_ANALYSIS/processed/games_SHG.dta", replace
+
+
+
+*Merge information on distances to district capital
+clear all
+import excel "$working_ANALYSIS/data/Sample_Locations.xlsx", sheet ("Sheet1") firstrow
+
+save "$working_ANALYSIS/data/road_distances.dta", replace
+
+
+use "$working_ANALYSIS/processed/games_SHG.dta"
+merge 1:1 site_ID using "$working_ANALYSIS/data/road_distances.dta"
+drop _merge
+
 *----------------------------
 * SAVE FINAL DATASET
 *----------------------------
-save "$working_ANALYSIS/processed/games_clean.dta", replace
+save "$working_ANALYSIS/processed/games_clean_final.dta", replace
 
 
 
